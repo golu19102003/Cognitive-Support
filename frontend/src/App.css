@@ -1,0 +1,68 @@
+:root {
+  --civora-primary: #1e40af;
+  --civora-secondary: #3b82f6;
+  --civora-accent: #60a5fa;
+  --civora-dark: #1e293b;
+  --civora-light: #f8fafc;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--civora-light);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.navbar-brand {
+  color: var(--civora-primary) !important;
+  font-weight: 700;
+}
+
+.btn-primary {
+  background-color: var(--civora-primary);
+  border-color: var(--civora-primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--civora-secondary);
+  border-color: var(--civora-secondary);
+}
+
+.card {
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.nav-link {
+  color: var(--civora-dark) !important;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: var(--civora-primary) !important;
+}
+
+.nav-link.active {
+  color: var(--civora-primary) !important;
+  font-weight: 600;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.bg-gradient-to-r {
+  background-image: linear-gradient(to right, var(--tw-gradient-stops));
+}
