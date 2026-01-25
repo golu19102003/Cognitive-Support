@@ -4,10 +4,10 @@ import { ChevronLeft, ChevronRight, ArrowRight, Shield, Zap, Building, Users, Do
 
 const Home = () => {
     const taglines = [
-    "We Provide Learning Resources",
-    "We Provide Community Support", 
-    "We Provide Professional Help",
-    "We Provide Expert Support"
+    { prefix: "We Provide", resource: "Learning Resources" },
+    { prefix: "We Provide", resource: "Community Support" }, 
+    { prefix: "We Provide", resource: "Professional Help" },
+    { prefix: "We Provide", resource: "Expert Support" }
   ];
 
   const [currentTagline, setCurrentTagline] = useState(0);
@@ -297,13 +297,14 @@ const Home = () => {
           </div>
           <h1 className="text-5xl font-bold mb-4" style={{color: '#071426'}}>Welcome to Prihub!</h1>
           <p className="text-xl mb-4" style={{color: '#000000'}}>Support System to Understanding Cognitive Disabilities</p>
-          <p className="text-xl mb-8 font-bold" style={{color: '#16808D'}}>
+          <p className="text-xl mb-8 font-bold">
             <span 
               className={`tagline-animation transition-all duration-1000 ease-out ${
                 isVisible ? 'opacity-100 transform translate-x-0' : 'opacity-0 transform translate-x-4'
               }`}
             >
-              {taglines[currentTagline]}
+              <span style={{ color: '#000000' }}>{taglines[currentTagline].prefix}</span>{' '}
+              <span style={{ color: '#16808D' }}>{taglines[currentTagline].resource}</span>
             </span>
           </p>
           
@@ -314,12 +315,12 @@ const Home = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
               to="/dashboard"
-              className="flex items-center justify-center px-8 py-3 bg-white text-[#1B9AAA] rounded-lg font-semibold hover:bg-[#1B9AAA] hover:text-white transition-colors"
+              className="flex items-center justify-center px-8 py-3 bg-white text-[#1B9AAA] rounded-lg font-semibold hover:bg-gradient-to-r hover:from-[#142C52] hover:to-[#16808D] hover:text-white transition-all transform hover:scale-105 shadow-lg"
             >
               Explore Prihub
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
-            <button className="flex items-center justify-center px-8 py-3 bg-[#16808D] text-white rounded-lg font-semibold hover:bg-[#1B9AAA] hover:text-white transition-colors">
+            <button className="flex items-center justify-center px-8 py-3 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white rounded-lg font-semibold hover:from-[#16808D] hover:to-[#142C52] transition-all transform hover:scale-105 shadow-lg">
               Get Support
               <Users className="ml-2 h-5 w-5" />
             </button>

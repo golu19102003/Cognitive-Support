@@ -41,7 +41,7 @@ const ScrollArrows = () => {
       {showScrollTop && (
         <button
           onClick={scrollToTop}
-          className="bg-white text-[#147783] hover:bg-[#1B9AAA] hover:text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
+          className="bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
           aria-label="Scroll to top"
         >
           <ChevronUp className="h-5 w-5" />
@@ -52,7 +52,7 @@ const ScrollArrows = () => {
       {showScrollDown && (
         <button
           onClick={scrollToBottom}
-          className="bg-white text-[#147783] hover:bg-[#1B9AAA] hover:text-white p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
+          className="bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
           aria-label="Scroll to bottom"
         >
           <ChevronDown className="h-5 w-5" />

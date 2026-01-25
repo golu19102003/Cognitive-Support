@@ -5,6 +5,7 @@ import ScrollArrows from '../ScrollArrows/ScrollArrows';
 import Translate from '../Translate/Translate.js';
 import Chatbot from '../Chatbot/Chatbot.js';
 import Notifications from '../Notifications/Notifications';
+import AccessibilitySidebar from '../AccessibilitySidebar/AccessibilitySidebar';
 import { NotificationsProvider } from '../../contexts/NotificationsContext';
 
 const MainLayout = ({ children }) => {
@@ -303,6 +304,8 @@ const MainLayout = ({ children }) => {
       <Chatbot />
       
       <ScrollArrows />
+      
+      <AccessibilitySidebar />
     </div>
     </NotificationsProvider>
   );

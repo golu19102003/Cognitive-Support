@@ -6,7 +6,15 @@ const Translate = () => {
   const [currentLanguage, setCurrentLanguage] = useState("en");
   const [isTranslateLoaded, setIsTranslateLoaded] = useState(false);
   const [hoverLanguage, setHoverLanguage] = useState("");
+  const [notification, setNotification] = useState({ show: false, message: '' });
   const languageMenuRef = useRef(null);
+
+  const showNotification = (message) => {
+    setNotification({ show: true, message });
+    setTimeout(() => {
+      setNotification({ show: false, message: '' });
+    }, 3000);
+  };
 
   const languages = [
     { code: 'en', name: 'English', nativeName: 'English', flag: '🇺🇸' },
@@ -140,6 +148,10 @@ const Translate = () => {
     setCurrentLanguage(langCode);
     setIsOpen(false);
     
+    // Show notification
+    const languageName = getLanguageFullName(langCode);
+    showNotification(`Language Changed to "${languageName}"`);
+    
     setTimeout(() => {
       const googleTranslateCombo = document.querySelector('.goog-te-combo');
       if (googleTranslateCombo) {
@@ -193,12 +205,12 @@ const Translate = () => {
     <>
       <div id="google_translate_element" style={{ position: 'absolute', top: '-9999px', left: '-9999px', width: '1px', height: '1px' }}></div>
       
-      <div className="fixed bottom-2 left-6 z-50 language-selector-container">
+      <div className="fixed bottom-2 left-4 z-[99999] language-selector-container">
         <AnimatePresence>
           {isOpen && (
             <motion.div 
               ref={languageMenuRef}
-              className="bg-white rounded-2xl shadow-2xl mb-4 p-2 border border-gray-100"
+              className="bg-white rounded-2xl shadow-2xl absolute bottom-full mb-4 p-2 border border-gray-100 z-[99999]"
               initial={{ opacity: 0, y: 20, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.95 }}
@@ -237,14 +249,14 @@ const Translate = () => {
           transition={{ type: "spring", stiffness: 400, damping: 10 }}
         >
           <motion.div 
-            className="relative z-10 bg-white text-gray-600 rounded-full shadow-lg flex flex-col items-center justify-center focus:outline-none text-[#147783] hover:bg-[#1B9AAA] hover:text-white transition-all cursor-pointer font-semibold font-sans"
+            className="relative z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white rounded-full flex flex-col items-center justify-center focus:outline-none font-semibold font-sans hover:from-[#16808D] hover:to-[#142C52] transition-all cursor-pointer"
             animate={{ 
               boxShadow: isOpen 
-                ? "0 10px 25px -5px rgba(27, 154, 170, 0.5)" 
-                : "0 4px 6px -1px rgba(0, 0, 0, 0.1)"
+                ? "none" 
+                : "none"
             }}
             whileHover={{ 
-              boxShadow: "0 20px 25px -5px rgba(27, 154, 170, 0.4)"
+              boxShadow: "none"
             }}
             style={{
               width: isOpen ? "4rem" : "3.5rem",
@@ -267,6 +279,23 @@ const Translate = () => {
             >
               <div className="bg-white rounded-lg shadow-md py-1 px-3 text-sm whitespace-nowrap">
                 <span className="text-gray-600">{getLanguageFullName(currentLanguage)}</span>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        
+        {/* Notification Toast */}
+        <AnimatePresence>
+          {notification.show && (
+            <motion.div
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 100 }}
+              transition={{ duration: 0.55 }}
+              className="fixed bottom-4 right-4 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white px-6 py-3 rounded-lg shadow-lg z-[99999] animate-slide-in-right"
+            >
+              <div className="flex items-center space-x-2">
+                <span className="text-sm font-medium">{notification.message}</span>
               </div>
             </motion.div>
           )}

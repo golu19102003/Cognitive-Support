@@ -499,7 +499,7 @@ const Chatbot = () => {
             ease: "easeInOut"
           }}
         >
-          <div className={`relative ${darkMode ? 'bg-gray-800' : 'bg-white'} text-[#147783] hover:bg-[#1B9AAA] hover:text-white p-4 rounded-full shadow-2xl transition-all duration-300 font-semibold border-2 border-[#1B9AAA]`}>
+          <div className={`relative bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-4 rounded-full shadow-2xl transition-all duration-300 font-semibold border-2 border-[#142C52] hover:border-[#16808D]`}>
             <img src="/logo.svg" alt="PriHub" className="h-8 w-8" />
             {}
             {messages.length > 1 && (
@@ -543,7 +543,7 @@ const Chatbot = () => {
                 <div>
                   <h2 className="font-bold text-lg">PriHub AI</h2>
                   <div className="flex items-center space-x-2 text-xs opacity-90">
-                    <div className="h-2 w-2 bg-green-400 rounded-full animate-pulse"></div>
+                    <div className="h-2 w-2 bg-[#16808D] rounded-full animate-pulse"></div>
                     <span>Online • Advanced AI</span>
                   </div>
                 </div>
@@ -673,100 +673,100 @@ const Chatbot = () => {
                   <div className="grid grid-cols-2 gap-2">
                     <button
                       onClick={() => navigateToService("Dashboard", "/dashboard")}
-                      className={`text-xs p-2 rounded transition-all ${
+                      className={`text-xs p-2 rounded transition-all font-semibold ${
                         darkMode 
                           ? 'bg-gray-700 hover:bg-gray-600 text-white' 
-                          : 'bg-white hover:bg-gray-100 text-gray-800 border border-gray-300'
+                          : 'bg-white hover:bg-gradient-to-r hover:from-[#16808D] hover:to-[#142C52] hover:text-white text-gray-800 border border-gray-300'
                       }`}
                     >
                       📊 Dashboard
                     </button>
                     <button
                       onClick={() => navigateToService("Maintenance", "/maintenance")}
-                      className={`text-xs p-2 rounded transition-all ${
+                      className={`text-xs p-2 rounded transition-all font-semibold ${
                         darkMode 
                           ? 'bg-gray-700 hover:bg-gray-600 text-white' 
-                          : 'bg-white hover:bg-gray-100 text-gray-800 border border-gray-300'
+                          : 'bg-white hover:bg-gradient-to-r hover:from-[#16808D] hover:to-[#142C52] hover:text-white text-gray-800 border border-gray-300'
                       }`}
                     >
                       🔧 Maintenance
                     </button>
                     <button
                       onClick={() => navigateToService("Visitors", "/visitor-management")}
-                      className={`text-xs p-2 rounded transition-all ${
+                      className={`text-xs p-2 rounded transition-all font-semibold ${
                         darkMode 
                           ? 'bg-gray-700 hover:bg-gray-600 text-white' 
-                          : 'bg-white hover:bg-gray-100 text-gray-800 border border-gray-300'
+                          : 'bg-white hover:bg-gradient-to-r hover:from-[#16808D] hover:to-[#142C52] hover:text-white text-gray-800 border border-gray-300'
                       }`}
                     >
                       👥 Visitors
                     </button>
                     <button
                       onClick={() => navigateToService("Finance", "/finance")}
-                      className={`text-xs p-2 rounded transition-all ${
+                      className={`text-xs p-2 rounded transition-all font-semibold ${
                         darkMode 
                           ? 'bg-gray-700 hover:bg-gray-600 text-white' 
-                          : 'bg-white hover:bg-gray-100 text-gray-800 border border-gray-300'
+                          : 'bg-white hover:bg-gradient-to-r hover:from-[#16808D] hover:to-[#142C52] hover:text-white text-gray-800 border border-gray-300'
                       }`}
                     >
                       💳 Finance
                     </button>
                     <button
                       onClick={() => navigateToService("Amenities", "/amenities")}
-                      className={`text-xs p-2 rounded transition-all ${
+                      className={`text-xs p-2 rounded transition-all font-semibold ${
                         darkMode 
                           ? 'bg-gray-700 hover:bg-gray-600 text-white' 
-                          : 'bg-white hover:bg-gray-100 text-gray-800 border border-gray-300'
+                          : 'bg-white hover:bg-gradient-to-r hover:from-[#16808D] hover:to-[#142C52] hover:text-white text-gray-800 border border-gray-300'
                       }`}
                     >
                       🏊 Amenities
                     </button>
                     <button
                       onClick={() => navigateToService("Security", "/security")}
-                      className={`text-xs p-2 rounded transition-all ${
+                      className={`text-xs p-2 rounded transition-all font-semibold ${
                         darkMode 
                           ? 'bg-gray-700 hover:bg-gray-600 text-white' 
-                          : 'bg-white hover:bg-gray-100 text-gray-800 border border-gray-300'
+                          : 'bg-white hover:bg-gradient-to-r hover:from-[#16808D] hover:to-[#142C52] hover:text-white text-gray-800 border border-gray-300'
                       }`}
                     >
                       🔐 Security
                     </button>
                     <button
                       onClick={() => navigateToService("Complaints", "/complaints")}
-                      className={`text-xs p-2 rounded transition-all ${
+                      className={`text-xs p-2 rounded transition-all font-semibold ${
                         darkMode 
                           ? 'bg-gray-700 hover:bg-gray-600 text-white' 
-                          : 'bg-white hover:bg-gray-100 text-gray-800 border border-gray-300'
+                          : 'bg-white hover:bg-gradient-to-r hover:from-[#16808D] hover:to-[#142C52] hover:text-white text-gray-800 border border-gray-300'
                       }`}
                     >
                       📋 Complaints
                     </button>
                     <button
                       onClick={() => navigateToService("Emergency", "/emergency")}
-                      className={`text-xs p-2 rounded transition-all ${
+                      className={`text-xs p-2 rounded transition-all font-semibold ${
                         darkMode 
                           ? 'bg-gray-700 hover:bg-gray-600 text-white' 
-                          : 'bg-white hover:bg-gray-100 text-gray-800 border border-gray-300'
+                          : 'bg-white hover:bg-gradient-to-r hover:from-[#16808D] hover:to-[#142C52] hover:text-white text-gray-800 border border-gray-300'
                       }`}
                     >
                       🆘 Emergency
                     </button>
                     <button
                       onClick={() => navigateToService("Communication", "/communication")}
-                      className={`text-xs p-2 rounded transition-all ${
+                      className={`text-xs p-2 rounded transition-all font-semibold ${
                         darkMode 
                           ? 'bg-gray-700 hover:bg-gray-600 text-white' 
-                          : 'bg-white hover:bg-gray-100 text-gray-800 border border-gray-300'
+                          : 'bg-white hover:bg-gradient-to-r hover:from-[#16808D] hover:to-[#142C52] hover:text-white text-gray-800 border border-gray-300'
                       }`}
                     >
                       📢 Communication
                     </button>
                     <button
                       onClick={() => navigateToService("Administration", "/administration")}
-                      className={`text-xs p-2 rounded transition-all ${
+                      className={`text-xs p-2 rounded transition-all font-semibold ${
                         darkMode 
                           ? 'bg-gray-700 hover:bg-gray-600 text-white' 
-                          : 'bg-white hover:bg-gray-100 text-gray-800 border border-gray-300'
+                          : 'bg-white hover:bg-gradient-to-r hover:from-[#16808D] hover:to-[#142C52] hover:text-white text-gray-800 border border-gray-300'
                       }`}
                     >
                       ⚙️ Administration
@@ -846,23 +846,23 @@ const Chatbot = () => {
                     animate={{ opacity: 1, y: 0 }}
                     className="flex items-start space-x-2"
                   >
-                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-r from-green-500 to-blue-500 text-white flex items-center justify-center">
+                    <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-r from-[#142C52] to-[#16808D] text-white flex items-center justify-center">
                       <Bot className="h-5 w-5" />
                     </div>
                     <div className={`p-3 rounded-2xl ${darkMode ? 'bg-gray-700' : 'bg-white'} border ${darkMode ? 'border-gray-600' : 'border-gray-200'}`}>
                       <div className="flex space-x-1">
                         <motion.div
-                          className="w-2 h-2 bg-blue-500 rounded-full"
+                          className="w-2 h-2 bg-[#16808D] rounded-full"
                           animate={{ scale: [1, 1.2, 1] }}
                           transition={{ duration: 0.8, repeat: Infinity }}
                         />
                         <motion.div
-                          className="w-2 h-2 bg-blue-500 rounded-full"
+                          className="w-2 h-2 bg-[#16808D] rounded-full"
                           animate={{ scale: [1, 1.2, 1] }}
                           transition={{ duration: 0.8, repeat: Infinity, delay: 0.2 }}
                         />
                         <motion.div
-                          className="w-2 h-2 bg-blue-500 rounded-full"
+                          className="w-2 h-2 bg-[#16808D] rounded-full"
                           animate={{ scale: [1, 1.2, 1] }}
                           transition={{ duration: 0.8, repeat: Infinity, delay: 0.4 }}
                         />
