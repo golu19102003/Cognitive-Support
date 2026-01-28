@@ -8,6 +8,35 @@ import {
 } from 'lucide-react';
 
 const Dashboard = () => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  
+  // Check for theme preference
+  useEffect(() => {
+    const checkTheme = () => {
+      const theme = localStorage.getItem('theme') || 
+                   localStorage.getItem('darkMode') || 
+                   localStorage.getItem('isDarkMode');
+      setIsDarkMode(theme === 'dark' || theme === 'true');
+    };
+
+    checkTheme();
+    
+    // Listen for theme changes
+    window.addEventListener('storage', checkTheme);
+    window.addEventListener('themechange', checkTheme);
+    window.addEventListener('darkModeChange', checkTheme);
+    
+    // Poll every 500ms as backup
+    const interval = setInterval(checkTheme, 500);
+    
+    return () => {
+      window.removeEventListener('storage', checkTheme);
+      window.removeEventListener('themechange', checkTheme);
+      window.removeEventListener('darkModeChange', checkTheme);
+      clearInterval(interval);
+    };
+  }, []);
+
   const [showFilters, setShowFilters] = useState(false);
   const [selectedMetric, setSelectedMetric] = useState('revenue');
   const [notifications, setNotifications] = useState([]);
@@ -659,9 +688,9 @@ const Dashboard = () => {
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center">
             <img 
-              src="/short_logo.png" 
+              src={isDarkMode ? "/image.png" : "/short_logo.png"} 
               alt="PriHub Logo" 
-              className="h-12 w-auto mr-3"
+              className="h-12 w-auto mr-3 transition-all duration-300"
             />
             <div>
               <h1 className="text-3xl font-bold" style={{color: colorPalettes.primary.dark}} mb-2="true">PriHub Dashboard</h1>

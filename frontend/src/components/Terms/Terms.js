@@ -1,8 +1,37 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, FileText, Users, Shield, Clock, AlertTriangle, CheckCircle } from 'lucide-react';
 
 const Terms = () => {
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  
+  // Check for theme preference
+  useEffect(() => {
+    const checkTheme = () => {
+      const theme = localStorage.getItem('theme') || 
+                   localStorage.getItem('darkMode') || 
+                   localStorage.getItem('isDarkMode');
+      setIsDarkMode(theme === 'dark' || theme === 'true');
+    };
+
+    checkTheme();
+    
+    // Listen for theme changes
+    window.addEventListener('storage', checkTheme);
+    window.addEventListener('themechange', checkTheme);
+    window.addEventListener('darkModeChange', checkTheme);
+    
+    // Poll every 500ms as backup
+    const interval = setInterval(checkTheme, 500);
+    
+    return () => {
+      window.removeEventListener('storage', checkTheme);
+      window.removeEventListener('themechange', checkTheme);
+      window.removeEventListener('darkModeChange', checkTheme);
+      clearInterval(interval);
+    };
+  }, []);
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -18,7 +47,11 @@ const Terms = () => {
         {/* Header */}
         <div className="bg-white rounded-lg shadow-lg p-8 mb-8">
           <div className="flex items-center mb-6">
-            <img src="/short_logo.png" alt="PriHub Logo" className="h-12 w-auto mr-4" />
+            <img 
+              src={isDarkMode ? "/image.png" : "/short_logo.png"} 
+              alt="PriHub Logo" 
+              className="h-12 w-auto mr-4 transition-all duration-300"
+            />
             <h1 className="text-3xl font-bold text-gray-900">Terms of Service</h1>
           </div>
           <p className="text-gray-600 mb-4">

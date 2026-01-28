@@ -500,7 +500,7 @@ const Chatbot = () => {
           }}
         >
           <div className={`relative bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-4 rounded-full shadow-2xl transition-all duration-300 font-semibold border-2 border-[#142C52] hover:border-[#16808D]`}>
-            <img src="/logo.svg" alt="PriHub" className="h-8 w-8" />
+            <img src="/image.png" alt="PriHub" className="h-8 w-8" />
             {}
             {messages.length > 1 && (
               <motion.div
@@ -540,9 +540,9 @@ const Chatbot = () => {
                 >
                   <Bot className="h-6 w-6" />
                 </motion.div>
-                <div>
-                  <h2 className="font-bold text-lg">PriHub AI</h2>
-                  <div className="flex items-center space-x-2 text-xs opacity-90">
+                <div className="flex flex-col items-start">
+                  <h2 className="font-bold text-lg leading-none">PriHub AI</h2>
+                  <div className="flex items-center space-x-2 text-xs opacity-90 mt-1">
                     <div className="h-2 w-2 bg-[#16808D] rounded-full animate-pulse"></div>
                     <span>Online • Advanced AI</span>
                   </div>

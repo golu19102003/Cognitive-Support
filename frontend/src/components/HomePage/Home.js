@@ -3,6 +3,34 @@ import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, ArrowRight, Shield, Zap, Building, Users, DollarSign, MessageSquare, Calendar, Bell, Wrench, Brain, BookOpen, Target, Heart, Activity, FileText, Clock, AlertTriangle, TrendingUp, CheckCircle, Star, Award, Mail, Phone } from 'lucide-react';
 
 const Home = () => {
+    const [isDarkMode, setIsDarkMode] = useState(false);
+    
+    // Check for theme preference
+    useEffect(() => {
+        const checkTheme = () => {
+            const theme = localStorage.getItem('theme') || 
+                         localStorage.getItem('darkMode') || 
+                         localStorage.getItem('isDarkMode');
+            setIsDarkMode(theme === 'dark' || theme === 'true');
+        };
+
+        checkTheme();
+        
+        // Listen for theme changes
+        window.addEventListener('storage', checkTheme);
+        window.addEventListener('themechange', checkTheme);
+        window.addEventListener('darkModeChange', checkTheme);
+        
+        // Poll every 500ms as backup
+        const interval = setInterval(checkTheme, 500);
+        
+        return () => {
+            window.removeEventListener('storage', checkTheme);
+            window.removeEventListener('themechange', checkTheme);
+            window.removeEventListener('darkModeChange', checkTheme);
+            clearInterval(interval);
+        };
+    }, []);
     const taglines = [
     { prefix: "We Provide", resource: "Learning Resources" },
     { prefix: "We Provide", resource: "Community Support" }, 
@@ -277,7 +305,7 @@ const Home = () => {
         style={{
           backgroundImage: 'url(/back.jpg)',
           backgroundSize: 'cover',
-          backgroundPosition: 'center',
+          backgroundPosition: 'top center',
           backgroundRepeat: 'no-repeat',
           width: '100vw',
           height: '100vh',
@@ -288,12 +316,16 @@ const Home = () => {
           right: '50%',
           marginLeft: '-50vw',
           marginRight: '-50vw',
-          top: '-64px'
+          top: '-35px'
         }}
       >
-        <div className="max-w-4xl mx-auto text-center p-12" style={{ paddingTop: '120px' }}>
+        <div className="max-w-4xl mx-auto text-center p-12" style={{ paddingTop: '100px' }}>
           <div className="flex justify-center mb-6">
-            <img src="/short_logo.png" alt="Prihub Logo" className="h-24 w-12" />
+            <img 
+              src="/short_logo.png" 
+              alt="Prihub Logo" 
+              className="h-24 w-auto"
+            />
           </div>
           <h1 className="text-5xl font-bold mb-4" style={{color: '#071426'}}>Welcome to Prihub!</h1>
           <p className="text-xl mb-4" style={{color: '#000000'}}>Support System to Understanding Cognitive Disabilities</p>
@@ -331,15 +363,23 @@ const Home = () => {
       {/* Platform Highlights Section */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {platformHighlights.map((highlight, index) => (
-          <div key={index} className="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-shadow">
+          <div key={index} className={`rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 ${
+            isDarkMode ? 'bg-gray-800' : 'bg-white'
+          }`}>
             <div className="flex justify-center mb-4">
               <highlight.highlightIcon className="h-12 w-12" style={{ color: highlight.highlightColor }} />
             </div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-3">{highlight.highlightTitle}</h3>
-            <p className="text-gray-600 mb-4">{highlight.highlightDescription}</p>
+            <h3 className={`text-xl font-semibold mb-3 transition-colors duration-300 ${
+              isDarkMode ? 'text-white' : 'text-black'
+            }`}>{highlight.highlightTitle}</h3>
+            <p className={`mb-4 transition-colors duration-300 ${
+              isDarkMode ? 'text-gray-300' : 'text-gray-600'
+            }`}>{highlight.highlightDescription}</p>
             <div className="space-y-2">
               {highlight.features.map((feature, featureIndex) => (
-                <div key={featureIndex} className="flex items-center justify-center text-sm text-gray-500">
+                <div key={featureIndex} className={`flex items-center justify-center text-sm transition-colors duration-300 ${
+                  isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                }`}>
                   <CheckCircle className="h-3 w-3 mr-2" style={{ color: highlight.highlightColor }} />
                   {feature}
                 </div>
@@ -352,8 +392,9 @@ const Home = () => {
       {/* Enhanced PriHub at a Glance Section */}
       <div className="bg-gradient-to-r from-[#E0F7FA] to-[#D4DBE9] rounded-lg shadow-lg p-8">
         <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold mb-2" style={{color: '#071426'}}>
-            Prihub at a glance
+          <h2 className="text-3xl font-bold mb-2">
+            <span style={{color: '#16808D'}}>Prihub</span>
+            <span style={{color: '#000000'}}> at a glance</span>
           </h2>
         </div>
         
@@ -413,7 +454,9 @@ const Home = () => {
       <div className="bg-white rounded-lg shadow-lg p-8">
         <h2 className="text-3xl font-bold text-center mb-8">
           <span style={{color: '#16808D'}}>Cognitive Conditions</span>
-          <span style={{color: '#000000'}}> & Support Features</span>
+          <span className={`transition-colors duration-300 ${
+            isDarkMode ? 'text-white' : ''
+          }`} style={{color: isDarkMode ? '#ffffff' : '#000000'}}> & Support Features</span>
         </h2>
         
         {/* Carousel Container */}
@@ -445,7 +488,11 @@ const Home = () => {
                 onClick={() => window.scrollTo(0, 0)}
               >
                 <div 
-                  className="group relative bg-gradient-to-br from-gray-50 to-white rounded-lg p-6 shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer border border-gray-100 h-full flex flex-col"
+                  className={`group relative rounded-lg p-6 shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer border h-full flex flex-col ${
+                    isDarkMode 
+                      ? 'bg-gradient-to-br from-gray-800 to-gray-900 border-gray-700' 
+                      : 'bg-gradient-to-br from-gray-50 to-white border-gray-100'
+                  }`}
                 >
                   {/* Icon */}
                   <div className="flex justify-center mb-4">
@@ -463,12 +510,16 @@ const Home = () => {
                   {/* Content */}
                   <div className="flex-grow text-center">
                     <h3 
-                      className="text-xl font-bold mb-3 transition-colors group-hover:!text-blue-600"
-                      style={{ color: featureDetail.featureColor }}
+                      className={`text-xl font-bold mb-3 transition-colors group-hover:!text-blue-600 ${
+                        isDarkMode ? 'text-white' : ''
+                      }`}
+                      style={{ color: isDarkMode ? '#ffffff' : featureDetail.featureColor }}
                     >
                       {featureDetail.featureTitle}
                     </h3>
-                    <p className="text-gray-600 text-sm leading-relaxed">
+                    <p className={`text-sm leading-relaxed transition-colors ${
+                      isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                    }`}>
                       {featureDetail.featureDescription}
                     </p>
                   </div>
@@ -476,8 +527,10 @@ const Home = () => {
                   {/* Learn More */}
                   <div className="mt-4 text-center">
                     <span 
-                      className="inline-flex items-center text-sm font-semibold transition-colors group-hover:!text-blue-600"
-                      style={{ color: featureDetail.featureColor }}
+                      className={`inline-flex items-center text-sm font-semibold transition-colors group-hover:!text-blue-600 ${
+                        isDarkMode ? 'text-white' : ''
+                      }`}
+                      style={{ color: isDarkMode ? '#ffffff' : featureDetail.featureColor }}
                     >
                       Learn more
                       <ChevronRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
@@ -534,7 +587,7 @@ const Home = () => {
               stepTitle: "Create Your Account",
               stepDescription: "Sign up and join your community in minutes",
               stepIcon: Users,
-              stepColor: "#142C52"
+              stepColor: isDarkMode ? "#60A5FA" : "#142C52"
             },
             {
               stepNumber: 2,
@@ -558,7 +611,9 @@ const Home = () => {
               stepColor: "#142C52"
             }
           ].map((processStep) => (
-            <div key={processStep.stepNumber} className="bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105">
+            <div key={processStep.stepNumber} className={`rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 ${
+              isDarkMode ? 'bg-gray-800' : 'bg-white'
+            }`}>
               <div className="flex flex-col items-center text-center">
                 <div className="flex justify-center mb-3">
                   <div 
@@ -571,10 +626,14 @@ const Home = () => {
                 <div className="text-xl font-bold mb-2" style={{color: processStep.stepColor}}>
                   {processStep.stepNumber}
                 </div>
-                <h3 className="text-xl font-semibold mb-2" style={{color: '#071426'}}>
+                <h3 className={`text-xl font-semibold mb-2 transition-colors duration-300 ${
+                  isDarkMode ? 'text-white' : 'text-black'
+                }`}>
                   {processStep.stepTitle}
                 </h3>
-                <p className="text-base text-gray-600">{processStep.stepDescription}</p>
+                <p className={`text-base transition-colors duration-300 ${
+                  isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                }`}>{processStep.stepDescription}</p>
               </div>
             </div>
           ))}

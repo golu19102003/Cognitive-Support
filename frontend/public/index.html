@@ -2,7 +2,40 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/image.png" />
+    <link rel="icon" href="%PUBLIC_URL%/image1.png" id="favicon"/>
+    <script>
+      // Function to update favicon based on SYSTEM theme only
+      function updateFavicon() {
+        const favicon = document.getElementById('favicon');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+        
+        // ONLY check system theme, ignore website theme
+        const isSystemDark = prefersDarkScheme.matches;
+        
+        // Update favicon based on SYSTEM theme only
+        if (isSystemDark) {
+          favicon.href = '/image2.png';
+        } else {
+          favicon.href = '/image1.png';
+        }
+        
+        // Force favicon refresh by removing and re-adding
+        const tempFavicon = favicon.cloneNode(true);
+        favicon.parentNode.replaceChild(tempFavicon, favicon);
+      }
+      
+      // Update favicon on page load
+      updateFavicon();
+      
+      // ONLY listen for SYSTEM theme changes
+      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', updateFavicon);
+      
+      // Check for system theme changes every 2 seconds (backup method)
+      setInterval(updateFavicon, 2000);
+      
+      // Manual trigger function for testing
+      window.forceFaviconUpdate = updateFavicon;
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
     <meta

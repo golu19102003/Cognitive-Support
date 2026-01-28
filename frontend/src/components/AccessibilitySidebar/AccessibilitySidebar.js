@@ -343,7 +343,8 @@ const AccessibilitySidebar = () => {
       />
 
       {/* Custom Styles */}
-      <style jsx>{`
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @keyframes slide-in-right {
           from {
             transform: translateX(100%);
@@ -535,7 +536,8 @@ const AccessibilitySidebar = () => {
         .dark .border-gray-200 {
           border-color: #404040 !important;
         }
-      `}</style>
+        `
+      }} />
     </>
   );
 };
