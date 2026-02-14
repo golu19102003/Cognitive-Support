@@ -1,6 +1,5 @@
 import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-
 const Translate = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [currentLanguage, setCurrentLanguage] = useState("en");
@@ -8,14 +7,12 @@ const Translate = () => {
   const [hoverLanguage, setHoverLanguage] = useState("");
   const [notification, setNotification] = useState({ show: false, message: '' });
   const languageMenuRef = useRef(null);
-
   const showNotification = (message) => {
     setNotification({ show: true, message });
     setTimeout(() => {
       setNotification({ show: false, message: '' });
     }, 3000);
   };
-
   const languages = [
     { code: 'en', name: 'English', nativeName: 'English', flag: '🇺🇸' },
     { code: 'hi', name: 'हिंदी', nativeName: 'हिंदी', flag: '🇮🇳' },
@@ -31,7 +28,6 @@ const Translate = () => {
     { code: 'zh-cn', name: 'Chinese (Simplified)', nativeName: '中文', flag: '🇨🇳' },
     { code: 'sa', name: 'Sanskrit', nativeName: 'संस्कृत', flag: '🇮🇳' },
   ];
-
   useEffect(() => {
     const existingElement = document.getElementById('google_translate_element');
     if (existingElement) {

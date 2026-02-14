@@ -7,14 +7,11 @@ import Chatbot from '../Chatbot/Chatbot.js';
 import Notifications from '../Notifications/Notifications';
 import AccessibilitySidebar from '../AccessibilitySidebar/AccessibilitySidebar';
 import { NotificationsProvider } from '../../contexts/NotificationsContext';
-
 const MainLayout = ({ children }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const location = useLocation();
-
   const isAuthPage = location.pathname === '/signin' || location.pathname === '/signup';
-
   // Check for theme preference
   useEffect(() => {
     const checkTheme = () => {
@@ -22,30 +19,24 @@ const MainLayout = ({ children }) => {
                    localStorage.getItem('darkMode') || 
                    localStorage.getItem('isDarkMode');
       const newIsDarkMode = theme === 'dark' || theme === 'true';
-      
       if (newIsDarkMode !== isDarkMode) {
         setIsDarkMode(newIsDarkMode);
         console.log('Theme changed:', newIsDarkMode ? 'dark' : 'light');
       }
     };
-
     checkTheme();
-    
     // Listen for theme changes
     window.addEventListener('storage', checkTheme);
     window.addEventListener('themechange', checkTheme);
     window.addEventListener('darkModeChange', checkTheme);
-    
     // Also check for DOM changes (when accessibility sidebar changes theme)
     const observer = new MutationObserver(() => {
       checkTheme();
     });
-    
     observer.observe(document.documentElement, {
       attributes: true,
       attributeFilter: ['class', 'data-theme']
     });
-    
     // Poll every 500ms as backup
     const interval = setInterval(checkTheme, 500);
     
@@ -361,7 +352,7 @@ const MainLayout = ({ children }) => {
                 <p>&copy; 2026 Support System. All rights reserved.</p>
               </div>
               <div className="flex space-x-6 mt-4 md:mt-0">
-                <Link to="/confidentiality" className="text-sm text-gray-600 hover:text-[#4C97A8] transition-colors" onClick={() => window.scrollTo(0, 0)}>Privacy & Policy</Link>
+                <Link to="/privacy" className="text-sm text-gray-600 hover:text-[#4C97A8] transition-colors" onClick={() => window.scrollTo(0, 0)}>Privacy & Policy</Link>
                 <Link to="/terms" className="text-sm text-gray-600 hover:text-[#4C97A8] transition-colors" onClick={() => window.scrollTo(0, 0)}>Terms of Service</Link>
                 <Link to="/help" className="text-sm text-gray-600 hover:text-[#4C97A8] transition-colors" onClick={() => window.scrollTo(0, 0)}>Support</Link>
               </div>

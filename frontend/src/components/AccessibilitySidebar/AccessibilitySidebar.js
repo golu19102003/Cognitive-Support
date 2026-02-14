@@ -11,7 +11,6 @@ const AccessibilitySidebar = () => {
   const [showMedicationModal, setShowMedicationModal] = useState(false);
   const [notification, setNotification] = useState({ show: false, message: '' });
   const speechRef = useRef(null);
-
   // Theme toggle
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
@@ -20,11 +19,9 @@ const AccessibilitySidebar = () => {
       document.documentElement.classList.add('dark');
     }
   }, []);
-
   const toggleTheme = () => {
     const newTheme = !isDarkMode;
     setIsDarkMode(newTheme);
-    
     if (newTheme) {
       document.documentElement.classList.add('dark');
       localStorage.setItem('theme', 'dark');
@@ -35,12 +32,10 @@ const AccessibilitySidebar = () => {
       showNotification('☀️ Light mode enabled');
     }
   };
-
   // Dyslexia font toggle
   const toggleDyslexiaFont = () => {
     const newState = !isDyslexiaFont;
     setIsDyslexiaFont(newState);
-    
     if (newState) {
       document.body.style.fontFamily = 'Comic Sans MS, cursive, sans-serif';
       localStorage.setItem('dyslexiaFont', 'enabled');

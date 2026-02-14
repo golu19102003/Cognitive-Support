@@ -87,6 +87,216 @@ authRoutes.post('/signup', (req, res) => {
   }
 });
 
+authRoutes.post('/google-signin', (req, res) => {
+  try {
+    console.log('🔍 Google sign-in request received:', req.body);
+    
+    const { uid, email, displayName, photoURL, emailVerified } = req.body;
+    
+    if (!uid || !email) {
+      console.error('❌ Missing UID or email in Google sign-in request');
+      return res.status(400).json({
+        success: false,
+        message: 'Google authentication data is incomplete'
+      });
+    }
+    
+    console.log('✅ Google user data validated:', { uid, email, displayName, emailVerified });
+    
+    // Check if user exists in database (for now, simulate user creation)
+    const userExists = false; // In real app, check database
+    
+    if (!userExists) {
+      // Create new user from Google data
+      const newUser = {
+        id: uid,
+        name: displayName || email.split('@')[0],
+        email: email,
+        photoURL: photoURL || '',
+        role: 'resident',
+        unit: 'TBD', // To be assigned
+        authProvider: 'google',
+        emailVerified: emailVerified,
+        createdAt: new Date().toISOString()
+      };
+      
+      console.log('👤 Created new Google user:', newUser);
+      
+      // In real app, save to database
+      
+      const token = `google-token-${uid}-${Date.now()}`;
+      console.log('🔑 Generated token for Google user');
+      
+      res.json({
+        success: true,
+        message: 'Google sign-in successful',
+        user: newUser,
+        token: token
+      });
+    } else {
+      // Return existing user
+      console.log('🔄 Returning existing Google user');
+      res.json({
+        success: true,
+        message: 'Welcome back!',
+        user: {
+          id: uid,
+          name: displayName || email.split('@')[0],
+          email: email,
+          role: 'resident'
+        },
+        token: `google-token-${uid}-${Date.now()}`
+      });
+    }
+  } catch (error) {
+    console.error('🔥 Google sign-in backend error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Google authentication failed'
+    });
+  }
+});
+
+authRoutes.post('/twitter-signin', (req, res) => {
+  try {
+    console.log('🐦 Twitter sign-in request received:', req.body);
+    
+    const { uid, email, displayName, photoURL, username } = req.body;
+    
+    if (!uid) {
+      console.error('❌ Missing UID in Twitter sign-in request');
+      return res.status(400).json({
+        success: false,
+        message: 'Twitter authentication data is incomplete'
+      });
+    }
+    
+    console.log('✅ Twitter user data validated:', { uid, email, displayName, username });
+    
+    // Check if user exists in database (for now, simulate user creation)
+    const userExists = false; // In real app, check database
+    
+    if (!userExists) {
+      // Create new user from Twitter data
+      const newUser = {
+        id: uid,
+        name: displayName || username || 'Twitter User',
+        email: email || `${username || uid}@twitter.com`,
+        photoURL: photoURL || '',
+        role: 'resident',
+        unit: 'TBD', // To be assigned
+        authProvider: 'twitter',
+        username: username,
+        createdAt: new Date().toISOString()
+      };
+      
+      console.log('👤 Created new Twitter user:', newUser);
+      
+      // In real app, save to database
+      
+      const token = `twitter-token-${uid}-${Date.now()}`;
+      console.log('🔑 Generated token for Twitter user');
+      
+      res.json({
+        success: true,
+        message: 'Twitter sign-in successful',
+        user: newUser,
+        token: token
+      });
+    } else {
+      // Return existing user
+      console.log('🔄 Returning existing Twitter user');
+      res.json({
+        success: true,
+        message: 'Welcome back!',
+        user: {
+          id: uid,
+          name: displayName || username || 'Twitter User',
+          email: email || `${username}@twitter.com`,
+          role: 'resident'
+        },
+        token: `twitter-token-${uid}-${Date.now()}`
+      });
+    }
+  } catch (error) {
+    console.error('🔥 Twitter sign-in backend error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'Twitter authentication failed'
+    });
+  }
+});
+
+authRoutes.post('/github-signin', (req, res) => {
+  try {
+    console.log('🚀 GitHub sign-in request received:', req.body);
+    
+    const { uid, email, displayName, photoURL, username } = req.body;
+    
+    if (!uid) {
+      console.error('❌ Missing UID in GitHub sign-in request');
+      return res.status(400).json({
+        success: false,
+        message: 'GitHub authentication data is incomplete'
+      });
+    }
+    
+    console.log('✅ GitHub user data validated:', { uid, email, displayName, username });
+    
+    // Check if user exists in database (for now, simulate user creation)
+    const userExists = false; // In real app, check database
+    
+    if (!userExists) {
+      // Create new user from GitHub data
+      const newUser = {
+        id: uid,
+        name: displayName || username || 'GitHub User',
+        email: email || `${username || uid}@github.com`,
+        photoURL: photoURL || '',
+        role: 'resident',
+        unit: 'TBD', // To be assigned
+        authProvider: 'github',
+        username: username,
+        createdAt: new Date().toISOString()
+      };
+      
+      console.log('👤 Created new GitHub user:', newUser);
+      
+      // In real app, save to database
+      
+      const token = `github-token-${uid}-${Date.now()}`;
+      console.log('🔑 Generated token for GitHub user');
+      
+      res.json({
+        success: true,
+        message: 'GitHub sign-in successful',
+        user: newUser,
+        token: token
+      });
+    } else {
+      // Return existing user
+      console.log('🔄 Returning existing GitHub user');
+      res.json({
+        success: true,
+        message: 'Welcome back!',
+        user: {
+          id: uid,
+          name: displayName || username || 'GitHub User',
+          email: email || `${username}@github.com`,
+          role: 'resident'
+        },
+        token: `github-token-${uid}-${Date.now()}`
+      });
+    }
+  } catch (error) {
+    console.error('🔥 GitHub sign-in backend error:', error);
+    res.status(500).json({
+      success: false,
+      message: 'GitHub authentication failed'
+    });
+  }
+});
+
 authRoutes.post('/signout', (req, res) => {
   try {
     res.json({

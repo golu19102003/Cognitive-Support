@@ -6,7 +6,9 @@ import {
   GoogleAuthProvider, 
   TwitterAuthProvider, 
   GithubAuthProvider, 
-  signInWithPopup 
+  signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult
 } from "firebase/auth";
 
 // Your web app's Firebase configuration
@@ -31,7 +33,9 @@ export {
   GoogleAuthProvider, 
   TwitterAuthProvider, 
   GithubAuthProvider, 
-  signInWithPopup 
+  signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult
 };
 
 export default app;

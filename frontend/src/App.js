@@ -7,9 +7,9 @@ import ContactPage from './components/ContactPage/Contact';
 import SignInPage from './components/AuthPages/Login';
 import Register from './components/AuthPages/Register';
 import ForgotPassword from './components/AuthPages/ForgotPassword';
-import UserDashboard from './components/UserDashboard/Dashboard';
-import ConfidentialityPolicy from './components/PrivacyPage/Privacy';
+import UserDashboard from './components/UserDashboard/Dashboard'; // Dashboard component for PriHub
 import TermsOfService from './components/TermsPage/Terms';
+import PrivacyPolicy from './components/PrivacyPage/Privacy';
 import HelpCenter from './components/HelpCenter/Support';
 import ConditionsPage from './components/ConditionsPage/Conditions';
 import LearningDisabilities from './components/LearningDisabilities/LearningDisabilities';
@@ -32,8 +32,15 @@ function Application() {
       <MainLayout>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<SignInPage />} />
+          <Route path="/signin" element={<SignInPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/dashboard" element={<UserDashboard />} />
+          <Route path="/residents" element={<UserDashboard />} />
+          <Route path="/therapy" element={<UserDashboard />} />
+          <Route path="/care-plans" element={<UserDashboard />} />
+          <Route path="/ai-assistant" element={<UserDashboard />} />
+          <Route path="/accessibility" element={<UserDashboard />} />
           <Route path="/conditions" element={<ConditionsPage />} />
           <Route path="/conditions/learning-disabilities" element={<LearningDisabilities />} />
           <Route path="/conditions/adhd" element={<ADHD />} />
@@ -48,10 +55,9 @@ function Application() {
           <Route path="/all-features" element={<AllFeatures />} />
           <Route path="/resources" element={<ResourcesPage />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/signin" element={<SignInPage />} />
           <Route path="/signup" element={<Register />} />
           <Route path="/forgotpassword" element={<ForgotPassword />} />
-          <Route path="/confidentiality" element={<ConfidentialityPolicy />} />
+          <Route path="/privacy" element={<PrivacyPolicy />} />
           <Route path="/terms" element={<TermsOfService />} />
           <Route path="/help" element={<HelpCenter />} />
         </Routes>
