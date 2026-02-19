@@ -32,6 +32,10 @@ const Home = () => {
         };
     }, []);
     const taglines = [
+    { prefix: "We Provide Cognitive Support for", resource: "Learning Disabilities" },
+    { prefix: "We Provide Cognitive Support for", resource: "ADHD" }, 
+    { prefix: "We Provide Cognitive Support for", resource: "Autism Spectrum" },
+    { prefix: "We Provide Cognitive Support for", resource: "Memory Disorders" },
     { prefix: "We Provide", resource: "Learning Resources" },
     { prefix: "We Provide", resource: "Community Support" }, 
     { prefix: "We Provide", resource: "Professional Help" },
@@ -41,6 +45,7 @@ const Home = () => {
   const [currentTagline, setCurrentTagline] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const [currentFeatureIndex, setCurrentFeatureIndex] = useState(0);
+  const [currentHighlightIndex, setCurrentHighlightIndex] = useState(0);
 
   // Auto-rotate features every 5 seconds
   useEffect(() => {
@@ -49,6 +54,15 @@ const Home = () => {
         prev === allFeatures.length - 3 ? 0 : prev + 1
       );
     }, 5000); // Change every 5 seconds
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // Auto-rotate platform highlights every 4 seconds
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentHighlightIndex((prev) => (prev + 3) % platformHighlights.length);
+    }, 4000); // Change every 4 seconds
 
     return () => clearInterval(interval);
   }, []);
@@ -189,7 +203,7 @@ const Home = () => {
 
   const communityOverviewData = [
     {
-      metricLabel: "Happy Residents",
+      metricLabel: "Active Users Supported",
       metricValue: "156",
       metricIcon: Users,
       metricColor: "#0C4A50",
@@ -197,19 +211,19 @@ const Home = () => {
       trendDirection: "up"
     },
     {
-      metricLabel: "Active Service Requests", 
+      metricLabel: "AI Assistant Interactions", 
       metricValue: "8",
-      metricIcon: Clock,
+      metricIcon: MessageSquare,
       metricColor: "#22C55E",
-      metricTrend: "Avg 2.5h response",
+      metricTrend: "Avg 2.5min response",
       trendDirection: "stable"
     },
     {
-      metricLabel: "Current Visitors Today",
+      metricLabel: "Daily Active Sessions",
       metricValue: "23", 
       metricIcon: Shield,
       metricColor: "#1B9AAA",
-      metricTrend: "All verified",
+      metricTrend: "All accessibility enabled",
       trendDirection: "safe"
     },
     {
@@ -221,27 +235,19 @@ const Home = () => {
       trendDirection: "excellent"
     },
     {
-      metricLabel: "Total Units",
+      metricLabel: "Tasks Completed",
       metricValue: "192",
-      metricIcon: Building,
+      metricIcon: Target,
       metricColor: "#142C52",
-      metricTrend: "Residential Properties",
-      trendDirection: "properties"
+      metricTrend: "Cognitive support activities",
+      trendDirection: "tasks"
     },
     {
-      metricLabel: "Monthly Revenue",
-      metricValue: "₹28.4L",
-      metricIcon: DollarSign,
-      metricColor: "#178740",
-      metricTrend: "Collection Rate: 98%",
-      trendDirection: "revenue"
-    },
-    {
-      metricLabel: "Satisfaction",
+      metricLabel: "User Satisfaction",
       metricValue: "94%",
       metricIcon: Star,
-      metricColor: "#1B9AAA",
-      metricTrend: "Community Happiness Index",
+      metricColor: "#178740",
+      metricTrend: "Accessibility Experience Index",
       trendDirection: "satisfaction"
     }
   ];
@@ -249,24 +255,87 @@ const Home = () => {
   const platformHighlights = [
     {
       highlightTitle: "Learning Resources", 
-      highlightDescription: "Comprehensive educational materials and learning tools for cognitive development",
+      highlightDescription: "Advanced adaptive educational platform with AI-powered personalized learning paths and cognitive development tools",
       highlightIcon: BookOpen,
       highlightColor: "#0C4A50",
-      features: ["Adaptive Content", "Interactive Learning", "Progress Tracking"]
+      features: ["AI-Driven Adaptive Content", "Interactive Cognitive Exercises", "Real-Time Progress Analytics", "Multi-Sensory Learning"]
+    },
+    {
+      highlightTitle: "Memory Support", 
+      highlightDescription: "Comprehensive memory enhancement system with cognitive exercises and personalized memory training programs",
+      highlightIcon: Brain,
+      highlightColor: "#6B46C1",
+      features: ["Memory Training Exercises", "Cognitive Recall Games", "Personalized Memory Plans", "Memory Performance Tracking"]
     },
     {
       highlightTitle: "Community Support", 
-      highlightDescription: "Building an inclusive community where individuals with cognitive disabilities feel supported and valued",
+      highlightDescription: "Vibrant inclusive ecosystem with peer mentoring, expert-led workshops, and comprehensive support networks",
       highlightIcon: Users,
       highlightColor: "#178740",
-      features: ["Peer Support", "Community Events", "Shared Resources"]
+      features: ["24/7 Peer Support Groups", "Expert-Led Community Events", "Resource Sharing Platform", "Mentorship Programs"]
     },
     {
       highlightTitle: "Professional Help", 
-      highlightDescription: "Expert guidance and professional support services tailored for cognitive disability needs",
+      highlightDescription: "Elite team of cognitive specialists providing evidence-based interventions and personalized care plans",
       highlightIcon: Award,
       highlightColor: "#1B9AAA", 
-      features: ["Expert Staff", "Personalized Support", "Professional Services"]
+      features: ["Board-Certified Experts", "Personalized Care Plans", "Evidence-Based Interventions", "Telehealth Consultations"]
+    },
+    {
+      highlightTitle: "AI Assistant", 
+      highlightDescription: "Next-generation AI companion with emotional intelligence and predictive cognitive support capabilities",
+      highlightIcon: Zap,
+      highlightColor: "#DC2626",
+      features: ["Emotional Intelligence AI", "Predictive Support System", "Multi-Language Processing", "Crisis Detection & Response"]
+    },
+    {
+      highlightTitle: "Task Management", 
+      highlightDescription: "Intelligent cognitive task system with adaptive scheduling and automated assistance for complex daily routines",
+      highlightIcon: Target,
+      highlightColor: "#059669", 
+      features: ["AI-Powered Task Prioritization", "Adaptive Scheduling System", "Voice-Controlled Commands", "Automated Progress Tracking"]
+    },
+    {
+      highlightTitle: "Accessibility Features", 
+      highlightDescription: "Cutting-edge accessibility suite with universal design and advanced assistive technology integration",
+      highlightIcon: Shield,
+      highlightColor: "#7C3AED", 
+      features: ["Advanced Screen Reader", "Dynamic Contrast Adjustment", "Eye-Gaze Tracking", "Switch Device Support"]
+    },
+    {
+      highlightTitle: "Progress Analytics", 
+      highlightDescription: "Comprehensive monitoring system with predictive insights and personalized improvement recommendations",
+      highlightIcon: TrendingUp,
+      highlightColor: "#BE123C", 
+      features: ["Cognitive Performance Metrics", "Predictive Analytics", "Personalized Insights", "Progress Reporting Dashboard"]
+    },
+    {
+      highlightTitle: "Communication Tools", 
+      highlightDescription: "Advanced communication suite with speech-to-text, visual aids, and multi-modal interaction support",
+      highlightIcon: MessageSquare,
+      highlightColor: "#0891B2", 
+      features: ["Real-Time Speech-to-Text", "Visual Communication Aids", "Multi-Language Support", "Gesture Recognition"]
+    },
+    {
+      highlightTitle: "Safety & Security", 
+      highlightDescription: "Enterprise-grade security with emergency response systems and comprehensive safety monitoring",
+      highlightIcon: AlertTriangle,
+      highlightColor: "#EA580C", 
+      features: ["24/7 Safety Monitoring", "Emergency Alert System", "Secure Data Encryption", "Caregiver Notifications"]
+    },
+    {
+      highlightTitle: "Cognitive Exercises", 
+      highlightDescription: "Scientifically-designed brain training activities for memory enhancement and cognitive skill development",
+      highlightIcon: Activity,
+      highlightColor: "#4C97A8", 
+      features: ["Brain Training Games", "Cognitive Skill Development", "Memory Enhancement Exercises", "Neuroplasticity Programs"]
+    },
+    {
+      highlightTitle: "Emotional Support", 
+      highlightDescription: "Comprehensive emotional wellness platform with mood tracking and mental health resources",
+      highlightIcon: Heart,
+      highlightColor: "#22C55E", 
+      features: ["Emotional Regulation Tools", "Mood Tracking System", "Stress Management Resources", "Mental Health Support"]
     }
   ];
 
@@ -327,8 +396,8 @@ const Home = () => {
               className="h-24 w-auto"
             />
           </div>
-          <h1 className="text-5xl font-bold mb-4" style={{color: '#071426'}}>Welcome to Prihub!</h1>
-          <p className="text-xl mb-4" style={{color: '#000000'}}>Support System to Understanding Cognitive Disabilities</p>
+          <h1 className="text-5xl font-bold mb-4" style={{color: '#071426'}}>Welcome to PriHub!</h1>
+          <p className="text-xl mb-4" style={{color: '#000000'}}>Support System for Cognitive Disabilities</p>
           <p className="text-xl mb-8 font-bold">
             <span 
               className={`tagline-animation transition-all duration-1000 ease-out ${
@@ -341,7 +410,7 @@ const Home = () => {
           </p>
           
           <p className="text-lg mb-8 italic" style={{color: '#666666'}}>
-            Supporting individuals with cognitive disabilities through understanding, resources, and community and make a change in their life.
+            Empowering individuals with cognitive disabilities through accessible technology, AI-powered assistance, comprehensive support tools, understanding resources, and inclusive community to make a transformative change in their lives.
           </p>
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -349,6 +418,7 @@ const Home = () => {
               to="/dashboard"
               className="flex items-center justify-center px-8 py-3 bg-white text-[#1B9AAA] rounded-lg font-semibold hover:bg-gradient-to-r hover:from-[#142C52] hover:to-[#16808D] hover:text-white transition-all transform hover:scale-105 shadow-lg"
             >
+              <Brain className="mr-2 h-5 w-5" />
               Explore Prihub
               <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
@@ -361,36 +431,77 @@ const Home = () => {
       </div>
 
       {/* Platform Highlights Section */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {platformHighlights.map((highlight, index) => (
-          <div key={index} className={`rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 ${
-            isDarkMode ? 'bg-gray-800' : 'bg-white'
-          }`}>
-            <div className="flex justify-center mb-4">
-              <highlight.highlightIcon className="h-12 w-12" style={{ color: highlight.highlightColor }} />
-            </div>
-            <h3 className={`text-xl font-semibold mb-3 transition-colors duration-300 ${
-              isDarkMode ? 'text-white' : 'text-black'
-            }`}>{highlight.highlightTitle}</h3>
-            <p className={`mb-4 transition-colors duration-300 ${
-              isDarkMode ? 'text-gray-300' : 'text-gray-600'
-            }`}>{highlight.highlightDescription}</p>
-            <div className="space-y-2">
-              {highlight.features.map((feature, featureIndex) => (
-                <div key={featureIndex} className={`flex items-center justify-center text-sm transition-colors duration-300 ${
-                  isDarkMode ? 'text-gray-400' : 'text-gray-500'
-                }`}>
-                  <CheckCircle className="h-3 w-3 mr-2" style={{ color: highlight.highlightColor }} />
-                  {feature}
+      <div className="bg-white rounded-lg shadow-lg p-8">
+        <h2 className="text-3xl font-bold text-center mb-8">
+          <span style={{color: '#16808D'}}>Platform</span>
+          <span style={{color: '#000000'}}> Highlights</span>
+        </h2>
+        
+        {/* Carousel Container */}
+        <div className="relative">
+          {/* Navigation Arrows */}
+          <button
+            onClick={() => setCurrentHighlightIndex((prev) => prev === 0 ? platformHighlights.length - 3 : prev - 3)}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
+          >
+            <ChevronLeft className="h-5 w-5" />
+          </button>
+          
+          <button
+            onClick={() => setCurrentHighlightIndex((prev) => (prev + 3) % platformHighlights.length)}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </button>
+
+          {/* Features Grid - Show only 3 at a time */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch mx-8">
+            {platformHighlights.slice(currentHighlightIndex, currentHighlightIndex + 3).map((highlight, index) => (
+              <div key={index} className={`rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 ${
+                isDarkMode ? 'bg-gray-800' : 'bg-white'
+              }`}>
+                <div className="flex justify-center mb-4">
+                  <highlight.highlightIcon className="h-12 w-12" style={{ color: highlight.highlightColor }} />
                 </div>
-              ))}
-            </div>
+                <h3 className={`text-xl font-semibold mb-3 transition-colors duration-300 ${
+                  isDarkMode ? 'text-white' : 'text-black'
+                }`}>{highlight.highlightTitle}</h3>
+                <p className={`mb-4 transition-colors duration-300 ${
+                  isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                }`}>{highlight.highlightDescription}</p>
+                <div className="space-y-2">
+                  {highlight.features.map((feature, featureIndex) => (
+                    <div key={featureIndex} className={`flex items-center justify-center text-sm transition-colors duration-300 ${
+                      isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                    }`}>
+                      <CheckCircle className="h-3 w-3 mr-2" style={{ color: highlight.highlightColor }} />
+                      {feature}
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+
+          {/* Carousel Indicators */}
+          <div className="flex justify-center mt-6 space-x-2">
+            {Array.from({ length: Math.ceil(platformHighlights.length / 3) }).map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentHighlightIndex(index * 3)}
+                className={`w-2 h-2 rounded-full transition-colors ${
+                  Math.floor(currentHighlightIndex / 3) === index
+                    ? 'bg-[#142C52]'
+                    : 'bg-gray-300'
+                }`}
+              />
+            ))}
+          </div>
+        </div>
       </div>
 
       {/* Enhanced PriHub at a Glance Section */}
-      <div className="bg-gradient-to-r from-[#E0F7FA] to-[#D4DBE9] rounded-lg shadow-lg p-8">
+      <div className="bg-gradient-to-r from-[#E0F7FA] to-[#D4DBE9] rounded-lg shadow-lg p-8 overflow-hidden">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold mb-2">
             <span style={{color: '#16808D'}}>Prihub</span>
@@ -398,38 +509,89 @@ const Home = () => {
           </h2>
         </div>
         
-        <div className="grid grid-cols-7 gap-2 max-w-9xl mx-auto">
-          {communityOverviewData.map((metric, index) => {
-            const trend = getTrendIndicator(metric.trendDirection);
-            const TrendIcon = trend.icon;
-            
-            return (
-              <div key={index} className="bg-white rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105">
-                <div className="flex flex-col items-center text-center">
-                  <div className="flex justify-center mb-3">
-                    <metric.metricIcon className="h-8 w-8" style={{ color: metric.metricColor }} />
-                  </div>
-                  <div className="text-2xl font-bold mb-2" style={{color: metric.metricColor}}>
-                    {metric.metricValue}
-                  </div>
-                  <div className="text-gray-700 font-medium mb-2 text-xs">{metric.metricLabel}</div>
-                  <div className={`flex items-center ${trend.color}`}>
-                    <TrendIcon className="h-3 w-3 mr-1" />
-                    <span className="text-xs">{metric.metricTrend}</span>
+        {/* Animated Single Line Grid */}
+        <div className="relative overflow-hidden">
+          <div className="flex space-x-4 animate-scroll-x">
+            {/* First set of metrics */}
+            {communityOverviewData.map((metric, index) => {
+              const trend = getTrendIndicator(metric.trendDirection);
+              const TrendIcon = trend.icon;
+              
+              return (
+                <div key={`first-${index}`} className="flex-shrink-0 bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 border border-gray-100">
+                  <div className="flex flex-col items-center text-center min-w-[180px]">
+                    <div className="flex justify-center mb-4">
+                      <div className="p-3 rounded-full bg-gradient-to-br from-gray-50 to-gray-100">
+                        <metric.metricIcon className="h-8 w-8" style={{ color: metric.metricColor }} />
+                      </div>
+                    </div>
+                    <div className="text-3xl font-bold mb-3 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent" style={{color: metric.metricColor}}>
+                      {metric.metricValue}
+                    </div>
+                    <div className="text-gray-700 font-semibold mb-3 text-sm uppercase tracking-wide">{metric.metricLabel}</div>
+                    <div className={`flex items-center px-3 py-1 rounded-full bg-gray-50 ${trend.color}`}>
+                      <TrendIcon className="h-4 w-4 mr-2" />
+                      <span className="text-xs font-medium">{metric.metricTrend}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            );
-          })}
+              );
+            })}
+            
+            {/* Duplicate set for seamless scrolling */}
+            {communityOverviewData.map((metric, index) => {
+              const trend = getTrendIndicator(metric.trendDirection);
+              const TrendIcon = trend.icon;
+              
+              return (
+                <div key={`second-${index}`} className="flex-shrink-0 bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 border border-gray-100">
+                  <div className="flex flex-col items-center text-center min-w-[180px]">
+                    <div className="flex justify-center mb-4">
+                      <div className="p-3 rounded-full bg-gradient-to-br from-gray-50 to-gray-100">
+                        <metric.metricIcon className="h-8 w-8" style={{ color: metric.metricColor }} />
+                      </div>
+                    </div>
+                    <div className="text-3xl font-bold mb-3 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent" style={{color: metric.metricColor}}>
+                      {metric.metricValue}
+                    </div>
+                    <div className="text-gray-700 font-semibold mb-3 text-sm uppercase tracking-wide">{metric.metricLabel}</div>
+                    <div className={`flex items-center px-3 py-1 rounded-full bg-gray-50 ${trend.color}`}>
+                      <TrendIcon className="h-4 w-4 mr-2" />
+                      <span className="text-xs font-medium">{metric.metricTrend}</span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
 
-            {/* Enhanced Call-to-Action Section */}
+      <style jsx>{`
+        @keyframes scroll-x {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+        
+        .animate-scroll-x {
+          animation: scroll-x 2s linear infinite;
+        }
+        
+        .animate-scroll-x:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
+
+      {/* Enhanced Call-to-Action Section */}
       <div className="bg-gradient-to-r from-[#16808D] to-[#142C52] rounded-lg shadow-lg p-8 text-center text-white">
         <div className="max-w-3xl mx-auto">
-          <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Community?</h2>
+          <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Life?</h2>
           <p className="text-xl mb-6 opacity-90">
-            Join thousands of communities already experiencing the Prihub advantage
+            Join thousands of individuals already experiencing the PriHub advantage for cognitive support through accessible technology, AI-powered assistance, and comprehensive disability resources
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -444,7 +606,7 @@ const Home = () => {
               className="flex items-center justify-center px-8 py-3 bg-transparent text-white border-2 border-white rounded-lg font-semibold hover:bg-white hover:text-[#142C52] transition-all"
             >
               <MessageSquare className="mr-2 h-5 w-5" />
-              Schedule Demo
+              Try AI Assistant
             </Link>
           </div>
         </div>
@@ -578,36 +740,36 @@ const Home = () => {
       <div className="bg-gradient-to-br from-[#E0F7FA] to-[#D4DBE9] rounded-lg shadow-lg p-8">
         <h2 className="text-3xl font-bold text-center mb-8">
           <span style={{color: '#16808D'}}>How PriHub</span>
-          <span style={{color: '#000000'}}> Transforms Communities</span>
+          <span style={{color: '#000000'}}> Supports Cognitive Disabilities</span>
         </h2>
         <div className="grid grid-cols-4 gap-4 max-w-9xl mx-auto">
           {[
             {
               stepNumber: 1,
               stepTitle: "Create Your Account",
-              stepDescription: "Sign up and join your community in minutes",
+              stepDescription: "Sign up with accessibility-first registration process",
               stepIcon: Users,
               stepColor: isDarkMode ? "#60A5FA" : "#142C52"
             },
             {
               stepNumber: 2,
-              stepTitle: "Complete Verification",
-              stepDescription: "Secure verification and profile setup process",
+              stepTitle: "Personalize Accessibility",
+              stepDescription: "Configure your preferred accessibility settings",
               stepIcon: Shield,
               stepColor: "#178740"
             },
             {
               stepNumber: 3,
-              stepTitle: "Access All Features",
-              stepDescription: "Unlock comprehensive community management tools",
-              stepIcon: Zap,
+              stepTitle: "Access AI Assistant",
+              stepDescription: "Get personalized cognitive support and guidance",
+              stepIcon: Brain,
               stepColor: "#1B9AAA"
             },
             {
               stepNumber: 4,
-              stepTitle: "Manage Efficiently",
-              stepDescription: "Streamline your residential community operations",
-              stepIcon: Building,
+              stepTitle: "Manage Daily Tasks",
+              stepDescription: "Use structured tools for cognitive support",
+              stepIcon: Target,
               stepColor: "#142C52"
             }
           ].map((processStep) => (
@@ -640,50 +802,50 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Comprehensive Pricing Plans */}
+      {/* Support Plans Section */}
       <div className="bg-gradient-to-br from-[#E0F7FA] to-[#D4DBE9] rounded-lg shadow-lg p-8">
         <h2 className="text-3xl font-bold text-center mb-8" style={{color: '#071426'}}>
-          Choose Your Perfect Plan
+          Choose Your Support Plan
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {[
             {
-              planName: "Starter",
-              monthlyPrice: "$9",
-              billingPeriod: "month",
+              planName: "Basic",
+              monthlyPrice: "Free",
+              billingPeriod: "forever",
               planFeatures: [
-                "Up to 50 residential units",
-                "Essential visitor management",
-                "Basic maintenance tracking",
-                "Email support assistance"
+                "Essential accessibility features",
+                "Basic AI chatbot support",
+                "Task management (up to 10 tasks)",
+                "Community support access"
               ],
               primaryColor: "#142C52",
               isPopular: false
             },
             {
-              planName: "Professional",
-              monthlyPrice: "$29",
+              planName: "Premium",
+              monthlyPrice: "$19",
               billingPeriod: "month",
               planFeatures: [
-                "Up to 200 residential units",
-                "Advanced visitor management system",
-                "Complete maintenance workflow",
-                "Complete autism spectrum support",
-                "Priority customer support"
+                "Full accessibility customization",
+                "Advanced AI assistant",
+                "Unlimited tasks and reminders",
+                "Priority caregiver access",
+                "Progress tracking analytics"
               ],
               primaryColor: "#178740",
               isPopular: true
             },
             {
-              planName: "Enterprise",
-              monthlyPrice: "$79",
+              planName: "Professional",
+              monthlyPrice: "$49",
               billingPeriod: "month",
               planFeatures: [
-                "Unlimited residential units",
                 "All premium features included",
-                "Custom integration options",
-                "Dedicated account manager",
-                "24/7 phone support availability"
+                "Multiple user profiles",
+                "Custom accessibility configurations",
+                "Dedicated support specialist",
+                "Integration with assistive devices"
               ],
               primaryColor: "#1B9AAA",
               isPopular: false
