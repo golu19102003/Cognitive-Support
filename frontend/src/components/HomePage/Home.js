@@ -249,6 +249,54 @@ const Home = () => {
       metricColor: "#178740",
       metricTrend: "Accessibility Experience Index",
       trendDirection: "satisfaction"
+    },
+    {
+      metricLabel: "AI Response Time",
+      metricValue: "1.2s",
+      metricIcon: Brain,
+      metricColor: "#DC2626",
+      metricTrend: "Real-time processing",
+      trendDirection: "fast"
+    },
+    {
+      metricLabel: "Memory Exercises Completed",
+      metricValue: "1,247",
+      metricIcon: Activity,
+      metricColor: "#059669",
+      metricTrend: "+28% this week",
+      trendDirection: "up"
+    },
+    {
+      metricLabel: "Accessibility Features Used",
+      metricValue: "8/12",
+      metricIcon: Shield,
+      metricColor: "#7C3AED",
+      metricTrend: "Full compliance",
+      trendDirection: "compliant"
+    },
+    {
+      metricLabel: "Community Support Groups",
+      metricValue: "45",
+      metricIcon: Users,
+      metricColor: "#0891B2",
+      metricTrend: "Active members",
+      trendDirection: "growing"
+    },
+    {
+      metricLabel: "Professional Consultations",
+      metricValue: "328",
+      metricIcon: Award,
+      metricColor: "#BE123C",
+      metricTrend: "Expert sessions",
+      trendDirection: "professional"
+    },
+    {
+      metricLabel: "Emergency Responses",
+      metricValue: "12",
+      metricIcon: AlertTriangle,
+      metricColor: "#EA580C",
+      metricTrend: "Quick response",
+      trendDirection: "responsive"
     }
   ];
 
@@ -344,7 +392,14 @@ const Home = () => {
       up: { icon: TrendingUp, color: "text-green-600", label: "Growing" },
       stable: { icon: Clock, color: "text-orange-600", label: "Stable" },
       safe: { icon: CheckCircle, color: "text-blue-600", label: "Secure" },
-      excellent: { icon: Star, color: "text-green-600", label: "Excellent" }
+      excellent: { icon: Star, color: "text-green-600", label: "Excellent" },
+      tasks: { icon: Target, color: "text-purple-600", label: "Active" },
+      satisfaction: { icon: Heart, color: "text-pink-600", label: "Happy" },
+      fast: { icon: Zap, color: "text-yellow-600", label: "Fast" },
+      compliant: { icon: Shield, color: "text-indigo-600", label: "Compliant" },
+      growing: { icon: Users, color: "text-teal-600", label: "Growing" },
+      professional: { icon: Award, color: "text-blue-600", label: "Expert" },
+      responsive: { icon: AlertTriangle, color: "text-red-600", label: "Quick" }
     };
     return trendConfig[direction] || trendConfig.stable;
   };
@@ -501,37 +556,41 @@ const Home = () => {
       </div>
 
       {/* Enhanced PriHub at a Glance Section */}
-      <div className="bg-gradient-to-r from-[#E0F7FA] to-[#D4DBE9] rounded-lg shadow-lg p-8 overflow-hidden">
+      <div className="bg-gradient-to-r from-[#E0F7FA] to-[#D4DBE9] rounded-lg shadow-lg p-8 overflow-hidden relative">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold mb-2">
             <span style={{color: '#16808D'}}>Prihub</span>
             <span style={{color: '#000000'}}> at a glance</span>
           </h2>
+          <p className="text-gray-600 text-sm font-medium animate-pulse">Real-time cognitive disability support platform metrics and performance indicators</p>
         </div>
         
         {/* Animated Single Line Grid */}
         <div className="relative overflow-hidden">
-          <div className="flex space-x-4 animate-scroll-x">
+          <div className="flex space-x-4 animate-scroll-x" style={{ width: 'max-content' }}>
             {/* First set of metrics */}
             {communityOverviewData.map((metric, index) => {
               const trend = getTrendIndicator(metric.trendDirection);
               const TrendIcon = trend.icon;
               
               return (
-                <div key={`first-${index}`} className="flex-shrink-0 bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 border border-gray-100">
-                  <div className="flex flex-col items-center text-center min-w-[180px]">
+                <div key={`first-${index}`} className="flex-shrink-0 bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-110 hover:translate-y-2 border border-gray-100 animate-fade-in">
+                  <div className="flex flex-col items-center text-center min-w-[200px]">
                     <div className="flex justify-center mb-4">
-                      <div className="p-3 rounded-full bg-gradient-to-br from-gray-50 to-gray-100">
-                        <metric.metricIcon className="h-8 w-8" style={{ color: metric.metricColor }} />
+                      <div className="p-4 rounded-full bg-gradient-to-br from-gray-50 to-gray-100 shadow-md animate-pulse-slow">
+                        <metric.metricIcon className="h-10 w-10" style={{ color: metric.metricColor }} />
                       </div>
                     </div>
-                    <div className="text-3xl font-bold mb-3 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent" style={{color: metric.metricColor}}>
+                    <div className="text-4xl font-bold mb-3 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent animate-number-grow" style={{color: metric.metricColor}}>
                       {metric.metricValue}
                     </div>
-                    <div className="text-gray-700 font-semibold mb-3 text-sm uppercase tracking-wide">{metric.metricLabel}</div>
-                    <div className={`flex items-center px-3 py-1 rounded-full bg-gray-50 ${trend.color}`}>
+                    <div className="text-gray-700 font-bold mb-3 text-sm uppercase tracking-wide leading-tight">{metric.metricLabel}</div>
+                    <div className={`flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-gray-50 to-gray-100 ${trend.color} shadow-sm animate-glow`}>
                       <TrendIcon className="h-4 w-4 mr-2" />
-                      <span className="text-xs font-medium">{metric.metricTrend}</span>
+                      <span className="text-xs font-bold">{metric.metricTrend}</span>
+                    </div>
+                    <div className="mt-2 text-xs text-gray-500 font-medium">
+                      {trend.label}
                     </div>
                   </div>
                 </div>
@@ -544,20 +603,23 @@ const Home = () => {
               const TrendIcon = trend.icon;
               
               return (
-                <div key={`second-${index}`} className="flex-shrink-0 bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-105 hover:-translate-y-2 border border-gray-100">
-                  <div className="flex flex-col items-center text-center min-w-[180px]">
+                <div key={`second-${index}`} className="flex-shrink-0 bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-110 hover:translate-y-2 border border-gray-100 animate-fade-in">
+                  <div className="flex flex-col items-center text-center min-w-[200px]">
                     <div className="flex justify-center mb-4">
-                      <div className="p-3 rounded-full bg-gradient-to-br from-gray-50 to-gray-100">
-                        <metric.metricIcon className="h-8 w-8" style={{ color: metric.metricColor }} />
+                      <div className="p-4 rounded-full bg-gradient-to-br from-gray-50 to-gray-100 shadow-md animate-pulse-slow">
+                        <metric.metricIcon className="h-10 w-10" style={{ color: metric.metricColor }} />
                       </div>
                     </div>
-                    <div className="text-3xl font-bold mb-3 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent" style={{color: metric.metricColor}}>
+                    <div className="text-4xl font-bold mb-3 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent animate-number-grow" style={{color: metric.metricColor}}>
                       {metric.metricValue}
                     </div>
-                    <div className="text-gray-700 font-semibold mb-3 text-sm uppercase tracking-wide">{metric.metricLabel}</div>
-                    <div className={`flex items-center px-3 py-1 rounded-full bg-gray-50 ${trend.color}`}>
+                    <div className="text-gray-700 font-bold mb-3 text-sm uppercase tracking-wide leading-tight">{metric.metricLabel}</div>
+                    <div className={`flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-gray-50 to-gray-100 ${trend.color} shadow-sm animate-glow`}>
                       <TrendIcon className="h-4 w-4 mr-2" />
-                      <span className="text-xs font-medium">{metric.metricTrend}</span>
+                      <span className="text-xs font-bold">{metric.metricTrend}</span>
+                    </div>
+                    <div className="mt-2 text-xs text-gray-500 font-medium">
+                      {trend.label}
                     </div>
                   </div>
                 </div>
@@ -578,11 +640,80 @@ const Home = () => {
         }
         
         .animate-scroll-x {
-          animation: scroll-x 2s linear infinite;
+          animation: scroll-x 8s linear infinite;
         }
         
         .animate-scroll-x:hover {
           animation-play-state: paused;
+        }
+        
+        @keyframes pulse {
+          0%, 100% {
+            opacity: 1;
+          }
+          50% {
+            opacity: 0.7;
+          }
+        }
+        
+        .animate-pulse {
+          animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse-slow {
+          0%, 100% {
+            transform: scale(1);
+            opacity: 1;
+          }
+          50% {
+            transform: scale(1.05);
+            opacity: 0.9;
+          }
+        }
+        
+        .animate-pulse-slow {
+          animation: pulse-slow 3s ease-in-out infinite;
+        }
+        
+        @keyframes fade-in {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
+        .animate-fade-in {
+          animation: fade-in 0.6s ease-out;
+        }
+        
+        @keyframes number-grow {
+          from {
+            transform: scale(0.8);
+          }
+          to {
+            transform: scale(1);
+          }
+        }
+        
+        .animate-number-grow {
+          animation: number-grow 0.8s ease-out;
+        }
+        
+        @keyframes glow {
+          0%, 100% {
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+          }
+          50% {
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+          }
+        }
+        
+        .animate-glow {
+          animation: glow 2s ease-in-out infinite;
         }
       `}</style>
 
