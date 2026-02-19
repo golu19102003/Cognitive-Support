@@ -206,7 +206,7 @@ const Home = () => {
       metricLabel: "Active Users",
       metricValue: "156",
       metricIcon: Users,
-      metricColor: "#0C4A50",
+      metricColor: "#9333EA",
       metricTrend: "+12% growth",
       trendDirection: "up"
     },
@@ -227,10 +227,18 @@ const Home = () => {
       trendDirection: "safe"
     },
     {
+      metricLabel: "Support Assistance",
+      metricValue: "24/7",
+      metricIcon: Users,
+      metricColor: "#10B981",
+      metricTrend: "Always available",
+      trendDirection: "support"
+    },
+    {
       metricLabel: "Tasks Completed",
       metricValue: "192",
       metricIcon: Target,
-      metricColor: "#142C52",
+      metricColor: "#F97316",
       metricTrend: "Support activities",
       trendDirection: "tasks"
     },
@@ -262,7 +270,7 @@ const Home = () => {
       metricLabel: "Accessibility Used",
       metricValue: "8/12",
       metricIcon: Shield,
-      metricColor: "#7C3AED",
+      metricColor: "#6366F1",
       metricTrend: "Full compliance",
       trendDirection: "compliant"
     },
@@ -297,14 +305,6 @@ const Home = () => {
       metricColor: "#8B5CF6",
       metricTrend: "AI-driven programs",
       trendDirection: "personalized"
-    },
-    {
-      metricLabel: "Support Assistance",
-      metricValue: "24/7",
-      metricIcon: Users,
-      metricColor: "#10B981",
-      metricTrend: "Always available",
-      trendDirection: "support"
     },
     {
       metricLabel: "System Performance",
@@ -354,18 +354,18 @@ const Home = () => {
       features: ["Board-Certified Experts", "Personalized Care Plans", "Evidence-Based Interventions", "Telehealth Consultations"]
     },
     {
-      highlightTitle: "AI Assistant", 
-      highlightDescription: "Next-generation AI companion with emotional intelligence and predictive cognitive support capabilities",
-      highlightIcon: Zap,
-      highlightColor: "#DC2626",
-      features: ["Emotional Intelligence AI", "Predictive Support System", "Multi-Language Processing", "Crisis Detection & Response"]
+      highlightTitle: "AI-Powered Cognitive Assistant",
+      highlightDescription: "Intelligent chatbot with natural language processing, contextual awareness, and personalized support recommendations",
+      highlightIcon: Brain,
+      highlightColor: "#1B9AAA",
+      features: ["Natural Language Processing", "Contextual Awareness", "Personalized Support Recommendations", "Emotional Intelligence"]
     },
     {
-      highlightTitle: "Task Management", 
-      highlightDescription: "Intelligent cognitive task system with adaptive scheduling and automated assistance for complex daily routines",
+      highlightTitle: "Smart Task Management",
+      highlightDescription: "AI-driven task scheduling with cognitive load balancing, priority optimization, and automated reminders",
       highlightIcon: Target,
-      highlightColor: "#059669", 
-      features: ["AI-Powered Task Prioritization", "Adaptive Scheduling System", "Voice-Controlled Commands", "Automated Progress Tracking"]
+      highlightColor: "#142C52",
+      features: ["AI-Driven Task Prioritization", "Cognitive Load Balancing", "Priority Optimization", "Automated Reminders"]
     },
     {
       highlightTitle: "Accessibility Features", 
@@ -538,18 +538,18 @@ const Home = () => {
           </button>
 
           {/* Features Grid - Show only 3 at a time */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch mx-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch mx-8">
             {platformHighlights.slice(currentHighlightIndex, currentHighlightIndex + 3).map((highlight, index) => (
-              <div key={index} className={`rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300 ${
+              <div key={index} className={`rounded-lg shadow-lg p-4 text-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer ${
                 isDarkMode ? 'bg-gray-800' : 'bg-white'
               }`}>
-                <div className="flex justify-center mb-4">
-                  <highlight.highlightIcon className="h-12 w-12" style={{ color: highlight.highlightColor }} />
+                <div className="flex justify-center mb-3">
+                  <highlight.highlightIcon className="h-14 w-14" style={{ color: highlight.highlightColor }} />
                 </div>
-                <h3 className={`text-xl font-semibold mb-3 transition-colors duration-300 ${
+                <h3 className={`text-2xl font-semibold mb-3 transition-colors duration-300 ${
                   isDarkMode ? 'text-white' : 'text-black'
                 }`}>{highlight.highlightTitle}</h3>
-                <p className={`mb-4 transition-colors duration-300 ${
+                <p className={`mb-4 text-base transition-colors duration-300 ${
                   isDarkMode ? 'text-gray-300' : 'text-gray-600'
                 }`}>{highlight.highlightDescription}</p>
                 <div className="space-y-2">
@@ -594,7 +594,7 @@ const Home = () => {
         </div>
         
         {/* Animated Single Line Grid */}
-        <div className="relative overflow-hidden">
+        <div className="relative overflow-visible">
           <div className="flex space-x-4 animate-scroll-x" style={{ width: 'max-content' }}>
             {/* First set of metrics */}
             {communityOverviewData.map((metric, index) => {
@@ -602,25 +602,25 @@ const Home = () => {
               const TrendIcon = trend.icon;
               
               return (
-                <div key={`first-${index}`} className="flex-shrink-0 bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-110 border border-gray-100 animate-fade-in">
-                  <div className="flex flex-col items-center text-center min-w-[220px]">
-                    <div className="flex justify-center mb-4">
-                      <div className="p-5 rounded-full bg-gradient-to-br from-gray-50 to-gray-100 shadow-md animate-pulse-slow">
-                        <metric.metricIcon className="h-12 w-12" style={{ color: metric.metricColor }} />
+                <div key={`first-${index}`} className="flex-shrink-0 bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-125 border border-gray-100 animate-fade-in">
+                  <div className="flex flex-col items-center text-center min-w-[180px]">
+                    <div className="flex justify-center mb-3">
+                      <div className="p-4 rounded-full bg-gradient-to-br from-gray-50 to-gray-100 shadow-md animate-pulse-slow">
+                        <metric.metricIcon className="h-10 w-10" style={{ color: metric.metricColor }} />
                       </div>
                     </div>
-                    <div className="text-5xl font-bold mb-4 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent animate-number-grow" style={{color: metric.metricColor}}>
+                    <div className="text-4xl font-bold mb-3 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent animate-number-grow" style={{color: metric.metricColor}}>
                       {metric.metricValue}
                     </div>
-                    <div className="text-gray-700 font-bold mb-4 text-base uppercase tracking-wide leading-tight">{metric.metricLabel}</div>
-                    <div className={`flex items-center px-5 py-3 rounded-full bg-gradient-to-r from-gray-50 to-gray-100 shadow-sm animate-glow mb-3`} style={{color: metric.metricColor}}>
-                      <TrendIcon className="h-6 w-6 mr-3" />
-                      <span className="text-base font-bold">{metric.metricTrend}</span>
+                    <div className="text-gray-700 font-bold mb-3 text-sm uppercase tracking-wide leading-tight">{metric.metricLabel}</div>
+                    <div className={`flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-gray-50 to-gray-100 shadow-sm animate-glow mb-2`} style={{color: metric.metricColor}}>
+                      <TrendIcon className="h-5 w-5 mr-2" />
+                      <span className="text-sm font-bold">{metric.metricTrend}</span>
                     </div>
-                    <div className="mt-2 text-base text-gray-500 font-medium">
+                    <div className="mt-1 text-sm text-gray-500 font-medium">
                       {trend.label}
                     </div>
-                    <div className="mt-3 text-base text-gray-600 italic">
+                    <div className="mt-2 text-sm text-gray-600 italic">
                       {metric.metricLabel.includes('Training') ? 'AI-powered adaptive learning' : 
                        metric.metricLabel.includes('Support') ? 'Dedicated assistance team' :
                        metric.metricLabel.includes('Security') ? 'End-to-end encryption' :
@@ -648,25 +648,25 @@ const Home = () => {
               const TrendIcon = trend.icon;
               
               return (
-                <div key={`second-${index}`} className="flex-shrink-0 bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-110 border border-gray-100 animate-fade-in">
-                  <div className="flex flex-col items-center text-center min-w-[220px]">
-                    <div className="flex justify-center mb-4">
-                      <div className="p-5 rounded-full bg-gradient-to-br from-gray-50 to-gray-100 shadow-md animate-pulse-slow">
-                        <metric.metricIcon className="h-12 w-12" style={{ color: metric.metricColor }} />
+                <div key={`second-${index}`} className="flex-shrink-0 bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-125 border border-gray-100 animate-fade-in">
+                  <div className="flex flex-col items-center text-center min-w-[180px]">
+                    <div className="flex justify-center mb-3">
+                      <div className="p-4 rounded-full bg-gradient-to-br from-gray-50 to-gray-100 shadow-md animate-pulse-slow">
+                        <metric.metricIcon className="h-10 w-10" style={{ color: metric.metricColor }} />
                       </div>
                     </div>
-                    <div className="text-5xl font-bold mb-4 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent animate-number-grow" style={{color: metric.metricColor}}>
+                    <div className="text-4xl font-bold mb-3 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent animate-number-grow" style={{color: metric.metricColor}}>
                       {metric.metricValue}
                     </div>
-                    <div className="text-gray-700 font-bold mb-4 text-base uppercase tracking-wide leading-tight">{metric.metricLabel}</div>
-                    <div className={`flex items-center px-5 py-3 rounded-full bg-gradient-to-r from-gray-50 to-gray-100 shadow-sm animate-glow mb-3`} style={{color: metric.metricColor}}>
-                      <TrendIcon className="h-6 w-6 mr-3" />
-                      <span className="text-base font-bold">{metric.metricTrend}</span>
+                    <div className="text-gray-700 font-bold mb-3 text-sm uppercase tracking-wide leading-tight">{metric.metricLabel}</div>
+                    <div className={`flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-gray-50 to-gray-100 shadow-sm animate-glow mb-2`} style={{color: metric.metricColor}}>
+                      <TrendIcon className="h-5 w-5 mr-2" />
+                      <span className="text-sm font-bold">{metric.metricTrend}</span>
                     </div>
-                    <div className="mt-2 text-base text-gray-500 font-medium">
+                    <div className="mt-1 text-sm text-gray-500 font-medium">
                       {trend.label}
                     </div>
-                    <div className="mt-3 text-base text-gray-600 italic">
+                    <div className="mt-2 text-sm text-gray-600 italic">
                       {metric.metricLabel.includes('Training') ? 'AI-powered adaptive learning' : 
                        metric.metricLabel.includes('Support') ? 'Dedicated assistance team' :
                        metric.metricLabel.includes('Security') ? 'End-to-end encryption' :
@@ -945,37 +945,38 @@ const Home = () => {
 
       {/* How PriHub Works Section */}
       <div className="bg-gradient-to-br from-[#E0F7FA] to-[#D4DBE9] rounded-lg shadow-lg p-8">
-        <h2 className="text-3xl font-bold text-center mb-8">
-          <span style={{color: '#16808D'}}>How PriHub</span>
-          <span style={{color: '#000000'}}> Supports Cognitive Disabilities</span>
+        <h2 className="text-3xl font-bold text-center mb-4">
+          <span style={{color: '#16808D'}}>Advanced PriHub</span>
+          <span style={{color: '#000000'}}> Cognitive Support System</span>
         </h2>
+        <p className="text-gray-600 text-lg font-medium animate-pulse text-center mb-8">Revolutionary AI-powered platform with comprehensive disability support features and personalized cognitive assistance</p>
         <div className="grid grid-cols-4 gap-4 max-w-9xl mx-auto">
           {[
             {
               stepNumber: 1,
-              stepTitle: "Create Your Account",
-              stepDescription: "Sign up with accessibility-first registration process",
+              stepTitle: "Intelligent Account Setup",
+              stepDescription: "AI-guided accessibility-first registration with biometric authentication and adaptive interface configuration",
               stepIcon: Users,
               stepColor: isDarkMode ? "#60A5FA" : "#142C52"
             },
             {
               stepNumber: 2,
-              stepTitle: "Personalize Accessibility",
-              stepDescription: "Configure your preferred accessibility settings",
+              stepTitle: "Advanced Accessibility Customization",
+              stepDescription: "Personalized WCAG 2.1 compliance with dynamic font sizing, color contrast adjustment, and screen reader optimization",
               stepIcon: Shield,
               stepColor: "#178740"
             },
             {
               stepNumber: 3,
-              stepTitle: "Access AI Assistant",
-              stepDescription: "Get personalized cognitive support and guidance",
+              stepTitle: "AI-Powered Cognitive Assistant",
+              stepDescription: "Intelligent chatbot with natural language processing, contextual awareness, and personalized support recommendations",
               stepIcon: Brain,
               stepColor: "#1B9AAA"
             },
             {
               stepNumber: 4,
-              stepTitle: "Manage Daily Tasks",
-              stepDescription: "Use structured tools for cognitive support",
+              stepTitle: "Smart Task Management",
+              stepDescription: "AI-driven task scheduling with cognitive load balancing, priority optimization, and automated reminders",
               stepIcon: Target,
               stepColor: "#142C52"
             }
@@ -986,7 +987,7 @@ const Home = () => {
               <div className="flex flex-col items-center text-center">
                 <div className="flex justify-center mb-3">
                   <div 
-                    className="p-2 rounded-full shadow-sm"
+                    className="p-2 rounded-full shadow-sm animate-pulse"
                     style={{ backgroundColor: processStep.stepColor }}
                   >
                     <processStep.stepIcon className="h-6 w-6 text-white" />
@@ -997,10 +998,8 @@ const Home = () => {
                 </div>
                 <h3 className={`text-xl font-semibold mb-2 transition-colors duration-300 ${
                   isDarkMode ? 'text-white' : 'text-black'
-                }`}>
-                  {processStep.stepTitle}
-                </h3>
-                <p className={`text-base transition-colors duration-300 ${
+                }`}>{processStep.stepTitle}</h3>
+                <p className={`text-sm leading-relaxed transition-colors ${
                   isDarkMode ? 'text-gray-300' : 'text-gray-600'
                 }`}>{processStep.stepDescription}</p>
               </div>

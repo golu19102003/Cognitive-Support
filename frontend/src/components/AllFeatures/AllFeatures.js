@@ -180,7 +180,6 @@ const AllFeatures = () => {
                 <div className="mt-4 text-center">
                   <span 
                     className="inline-flex items-center text-sm font-semibold group-hover:text-blue-600 transition-colors"
-                    style={{ color: featureDetail.featureColor }}
                   >
                     Learn more
                     <ChevronRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
