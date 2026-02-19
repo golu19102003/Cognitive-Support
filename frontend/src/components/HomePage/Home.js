@@ -297,6 +297,30 @@ const Home = () => {
       metricColor: "#EA580C",
       metricTrend: "Quick response",
       trendDirection: "responsive"
+    },
+    {
+      metricLabel: "Personalized Cognitive Training",
+      metricValue: "24/7",
+      metricIcon: Brain,
+      metricColor: "#8B5CF6",
+      metricTrend: "AI-driven programs",
+      trendDirection: "personalized"
+    },
+    {
+      metricLabel: "Support Assistance",
+      metricValue: "24/7",
+      metricIcon: Users,
+      metricColor: "#10B981",
+      metricTrend: "Always available",
+      trendDirection: "support"
+    },
+    {
+      metricLabel: "Platform Security",
+      metricValue: "100%",
+      metricIcon: Shield,
+      metricColor: "#059669",
+      metricTrend: "Secure & Private Platform Access",
+      trendDirection: "secure"
     }
   ];
 
@@ -399,7 +423,10 @@ const Home = () => {
       compliant: { icon: Shield, color: "text-indigo-600", label: "Compliant" },
       growing: { icon: Users, color: "text-teal-600", label: "Growing" },
       professional: { icon: Award, color: "text-blue-600", label: "Expert" },
-      responsive: { icon: AlertTriangle, color: "text-red-600", label: "Quick" }
+      responsive: { icon: AlertTriangle, color: "text-red-600", label: "Quick" },
+      personalized: { icon: Brain, color: "text-purple-600", label: "Custom" },
+      support: { icon: Users, color: "text-green-600", label: "Available" },
+      secure: { icon: Shield, color: "text-gray-600", label: "Protected" }
     };
     return trendConfig[direction] || trendConfig.stable;
   };
@@ -556,7 +583,7 @@ const Home = () => {
       </div>
 
       {/* Enhanced PriHub at a Glance Section */}
-      <div className="bg-gradient-to-r from-[#E0F7FA] to-[#D4DBE9] rounded-lg shadow-lg p-8 overflow-hidden relative">
+      <div className="bg-gradient-to-r from-[#E0F7FA] to-[#D4DBE9] rounded-lg shadow-lg p-8 overflow-hidden">
         <div className="text-center mb-8">
           <h2 className="text-3xl font-bold mb-2">
             <span style={{color: '#16808D'}}>Prihub</span>
@@ -574,23 +601,40 @@ const Home = () => {
               const TrendIcon = trend.icon;
               
               return (
-                <div key={`first-${index}`} className="flex-shrink-0 bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-110 hover:translate-y-2 border border-gray-100 animate-fade-in">
-                  <div className="flex flex-col items-center text-center min-w-[200px]">
+                <div key={`first-${index}`} className="flex-shrink-0 bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-110 border border-gray-100 animate-fade-in">
+                  <div className="flex flex-col items-center text-center min-w-[220px]">
                     <div className="flex justify-center mb-4">
-                      <div className="p-4 rounded-full bg-gradient-to-br from-gray-50 to-gray-100 shadow-md animate-pulse-slow">
-                        <metric.metricIcon className="h-10 w-10" style={{ color: metric.metricColor }} />
+                      <div className="p-5 rounded-full bg-gradient-to-br from-gray-50 to-gray-100 shadow-md animate-pulse-slow">
+                        <metric.metricIcon className="h-12 w-12" style={{ color: metric.metricColor }} />
                       </div>
                     </div>
-                    <div className="text-4xl font-bold mb-3 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent animate-number-grow" style={{color: metric.metricColor}}>
+                    <div className="text-5xl font-bold mb-4 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent animate-number-grow" style={{color: metric.metricColor}}>
                       {metric.metricValue}
                     </div>
-                    <div className="text-gray-700 font-bold mb-3 text-sm uppercase tracking-wide leading-tight">{metric.metricLabel}</div>
-                    <div className={`flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-gray-50 to-gray-100 ${trend.color} shadow-sm animate-glow`}>
-                      <TrendIcon className="h-4 w-4 mr-2" />
+                    <div className="text-gray-700 font-bold mb-4 text-sm uppercase tracking-wide leading-tight">{metric.metricLabel}</div>
+                    <div className={`flex items-center px-4 py-3 rounded-full bg-gradient-to-r from-gray-50 to-gray-100 ${trend.color} shadow-sm animate-glow mb-3`}>
+                      <TrendIcon className="h-5 w-5 mr-2" />
                       <span className="text-xs font-bold">{metric.metricTrend}</span>
                     </div>
                     <div className="mt-2 text-xs text-gray-500 font-medium">
                       {trend.label}
+                    </div>
+                    <div className="mt-3 text-xs text-gray-400 italic">
+                      {metric.metricLabel.includes('Training') ? 'AI-powered adaptive learning' : 
+                       metric.metricLabel.includes('Support') ? 'Dedicated assistance team' :
+                       metric.metricLabel.includes('Security') ? 'End-to-end encryption' :
+                       metric.metricLabel.includes('Users') ? 'Active community members' :
+                       metric.metricLabel.includes('Performance') ? 'System reliability' :
+                       metric.metricLabel.includes('Satisfaction') ? 'User experience rating' :
+                       metric.metricLabel.includes('Memory') ? 'Cognitive exercises completed' :
+                       metric.metricLabel.includes('Accessibility') ? 'WCAG compliance features' :
+                       metric.metricLabel.includes('Consultations') ? 'Expert sessions conducted' :
+                       metric.metricLabel.includes('Emergency') ? 'Crisis response events' :
+                       metric.metricLabel.includes('Tasks') ? 'Daily activities completed' :
+                       metric.metricLabel.includes('Sessions') ? 'Platform engagement' :
+                       metric.metricLabel.includes('Interactions') ? 'AI conversations' :
+                       metric.metricLabel.includes('Response') ? 'Processing speed' :
+                       'Real-time monitoring'}
                     </div>
                   </div>
                 </div>
@@ -603,23 +647,40 @@ const Home = () => {
               const TrendIcon = trend.icon;
               
               return (
-                <div key={`second-${index}`} className="flex-shrink-0 bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-110 hover:translate-y-2 border border-gray-100 animate-fade-in">
-                  <div className="flex flex-col items-center text-center min-w-[200px]">
+                <div key={`second-${index}`} className="flex-shrink-0 bg-white rounded-xl p-8 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-110 border border-gray-100 animate-fade-in">
+                  <div className="flex flex-col items-center text-center min-w-[220px]">
                     <div className="flex justify-center mb-4">
-                      <div className="p-4 rounded-full bg-gradient-to-br from-gray-50 to-gray-100 shadow-md animate-pulse-slow">
-                        <metric.metricIcon className="h-10 w-10" style={{ color: metric.metricColor }} />
+                      <div className="p-5 rounded-full bg-gradient-to-br from-gray-50 to-gray-100 shadow-md animate-pulse-slow">
+                        <metric.metricIcon className="h-12 w-12" style={{ color: metric.metricColor }} />
                       </div>
                     </div>
-                    <div className="text-4xl font-bold mb-3 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent animate-number-grow" style={{color: metric.metricColor}}>
+                    <div className="text-5xl font-bold mb-4 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent animate-number-grow" style={{color: metric.metricColor}}>
                       {metric.metricValue}
                     </div>
-                    <div className="text-gray-700 font-bold mb-3 text-sm uppercase tracking-wide leading-tight">{metric.metricLabel}</div>
-                    <div className={`flex items-center px-4 py-2 rounded-full bg-gradient-to-r from-gray-50 to-gray-100 ${trend.color} shadow-sm animate-glow`}>
-                      <TrendIcon className="h-4 w-4 mr-2" />
+                    <div className="text-gray-700 font-bold mb-4 text-sm uppercase tracking-wide leading-tight">{metric.metricLabel}</div>
+                    <div className={`flex items-center px-4 py-3 rounded-full bg-gradient-to-r from-gray-50 to-gray-100 ${trend.color} shadow-sm animate-glow mb-3`}>
+                      <TrendIcon className="h-5 w-5 mr-2" />
                       <span className="text-xs font-bold">{metric.metricTrend}</span>
                     </div>
                     <div className="mt-2 text-xs text-gray-500 font-medium">
                       {trend.label}
+                    </div>
+                    <div className="mt-3 text-xs text-gray-400 italic">
+                      {metric.metricLabel.includes('Training') ? 'AI-powered adaptive learning' : 
+                       metric.metricLabel.includes('Support') ? 'Dedicated assistance team' :
+                       metric.metricLabel.includes('Security') ? 'End-to-end encryption' :
+                       metric.metricLabel.includes('Users') ? 'Active community members' :
+                       metric.metricLabel.includes('Performance') ? 'System reliability' :
+                       metric.metricLabel.includes('Satisfaction') ? 'User experience rating' :
+                       metric.metricLabel.includes('Memory') ? 'Cognitive exercises completed' :
+                       metric.metricLabel.includes('Accessibility') ? 'WCAG compliance features' :
+                       metric.metricLabel.includes('Consultations') ? 'Expert sessions conducted' :
+                       metric.metricLabel.includes('Emergency') ? 'Crisis response events' :
+                       metric.metricLabel.includes('Tasks') ? 'Daily activities completed' :
+                       metric.metricLabel.includes('Sessions') ? 'Platform engagement' :
+                       metric.metricLabel.includes('Interactions') ? 'AI conversations' :
+                       metric.metricLabel.includes('Response') ? 'Processing speed' :
+                       'Real-time monitoring'}
                     </div>
                   </div>
                 </div>
