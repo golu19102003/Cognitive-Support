@@ -32,14 +32,35 @@ const Home = () => {
         };
     }, []);
     const taglines = [
-    { prefix: "We Provide Cognitive Support for", resource: "Learning Disabilities" },
-    { prefix: "We Provide Cognitive Support for", resource: "ADHD" }, 
-    { prefix: "We Provide Cognitive Support for", resource: "Autism Spectrum" },
-    { prefix: "We Provide Cognitive Support for", resource: "Memory Disorders" },
-    { prefix: "We Provide", resource: "Learning Resources" },
-    { prefix: "We Provide", resource: "Community Support" }, 
-    { prefix: "We Provide", resource: "Professional Help" },
-    { prefix: "We Provide", resource: "Expert Support" }
+    { prefix: "We Provide Support for", resource: "Learning Disabilities" },
+    { prefix: "We Provide Support for", resource: "ADHD" },
+    { prefix: "We Provide Support for", resource: "Autism Spectrum" },
+    { prefix: "We Provide Support for", resource: "Memory Disorders" },
+    { prefix: "We Provide Support for", resource: "Developmental Disorders" },
+    { prefix: "We Provide Support for", resource: "Neurocognitive Disorders" },
+    { prefix: "We Provide Support for", resource: "Dementia" },
+    { prefix: "We Provide Support for", resource: "Traumatic Brain Injury" },
+    { prefix: "We Provide Support for", resource: "Intellectual Disability" },
+    { prefix: "We Provide Support for", resource: "Speech & Language Disorders" },
+    { prefix: "We Provide Support for", resource: "Specific Learning Disorders" },
+    { prefix: "We Provide Support for", resource: "Social Communication Disorder" },
+    { prefix: "We Provide Support for", resource: "Executive Functioning Disorders" },
+    { prefix: "We Provide Support for", resource: "Anxiety & Emotional Disorders" },
+    { prefix: "We Provide Support for", resource: "Epilepsy & Cerebral Palsy" },
+    { prefix: "We Provide Support for", resource: "Active Users Support" },
+    { prefix: "We Provide Support for", resource: "AI Assistant Interactions" },
+    { prefix: "We Provide Support for", resource: "Daily Active Sessions" },
+    { prefix: "We Provide Support for", resource: "Support Assistance" },
+    { prefix: "We Provide Support for", resource: "Task Completion Support" },
+    { prefix: "We Provide Support for", resource: "User Satisfaction Tracking" },
+    { prefix: "We Provide Support for", resource: "Fast AI Response System" },
+    { prefix: "We Provide Support for", resource: "Memory Exercise Programs" },
+    { prefix: "We Provide Support for", resource: "Accessibility Features" },
+    { prefix: "We Provide Support for", resource: "Community Support Groups" },
+    { prefix: "We Provide Support for", resource: "Professional Consultations" },
+    { prefix: "We Provide Support for", resource: "Emergency Response Services" },
+    { prefix: "We Provide Support for", resource: "Personalized Cognitive Training" },
+    { prefix: "We Provide Support for", resource: "Secure & Private Platform Access" }
   ];
 
   const [currentTagline, setCurrentTagline] = useState(0);
@@ -821,12 +842,13 @@ const Home = () => {
 
       {/* Enhanced Features Showcase */}
       <div className="bg-white rounded-lg shadow-lg p-8">
-        <h2 className="text-3xl font-bold text-center mb-8">
-          <span style={{color: '#16808D'}}>Cognitive Conditions</span>
-          <span className={`transition-colors duration-300 ${
-            isDarkMode ? 'text-white' : ''
-          }`} style={{color: isDarkMode ? '#ffffff' : '#000000'}}> & Support Features</span>
+        <h2 className="text-3xl font-bold text-center mb-4">
+          <span style={{color: '#16808D'}}>Explore</span>
+          <span style={{color: '#000000'}}> Cognitive Conditions</span>
         </h2>
+        <p className="text-center text-gray-600 mb-8 max-w-3xl mx-auto">
+          Comprehensive support for 15+ cognitive conditions with specialized AI-powered features, accessibility tools, and personalized assistance for enhanced quality of life and independence.
+        </p>
         
         {/* Carousel Container */}
         <div className="relative">
@@ -870,7 +892,7 @@ const Home = () => {
                       style={{ backgroundColor: `${featureDetail.featureColor}20` }}
                     >
                       <featureDetail.featureIcon 
-                        className="h-8 w-8"
+                        className="h-8 w-8 group-hover:text-blue-600 transition-colors duration-300"
                         style={{ color: featureDetail.featureColor }}
                       />
                     </div>
