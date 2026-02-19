@@ -203,43 +203,35 @@ const Home = () => {
 
   const communityOverviewData = [
     {
-      metricLabel: "Active Users Supported",
+      metricLabel: "Active Users",
       metricValue: "156",
       metricIcon: Users,
       metricColor: "#0C4A50",
-      metricTrend: "+12% this month",
+      metricTrend: "+12% growth",
       trendDirection: "up"
     },
     {
-      metricLabel: "AI Assistant Interactions", 
+      metricLabel: "AI Interactions", 
       metricValue: "8",
       metricIcon: MessageSquare,
       metricColor: "#22C55E",
-      metricTrend: "Avg 2.5min response",
+      metricTrend: "2.5min response",
       trendDirection: "stable"
     },
     {
-      metricLabel: "Daily Active Sessions",
+      metricLabel: "Daily Sessions",
       metricValue: "23", 
       metricIcon: Shield,
       metricColor: "#1B9AAA",
-      metricTrend: "All accessibility enabled",
+      metricTrend: "Accessibility enabled",
       trendDirection: "safe"
-    },
-    {
-      metricLabel: "System Performance",
-      metricValue: "99.9%",
-      metricIcon: Activity,
-      metricColor: "#EF4444", 
-      metricTrend: "Excellent uptime",
-      trendDirection: "excellent"
     },
     {
       metricLabel: "Tasks Completed",
       metricValue: "192",
       metricIcon: Target,
       metricColor: "#142C52",
-      metricTrend: "Cognitive support activities",
+      metricTrend: "Support activities",
       trendDirection: "tasks"
     },
     {
@@ -247,7 +239,7 @@ const Home = () => {
       metricValue: "94%",
       metricIcon: Star,
       metricColor: "#178740",
-      metricTrend: "Accessibility Experience Index",
+      metricTrend: "Experience Index",
       trendDirection: "satisfaction"
     },
     {
@@ -259,7 +251,7 @@ const Home = () => {
       trendDirection: "fast"
     },
     {
-      metricLabel: "Memory Exercises Completed",
+      metricLabel: "Memory Exercises",
       metricValue: "1,247",
       metricIcon: Activity,
       metricColor: "#059669",
@@ -267,7 +259,7 @@ const Home = () => {
       trendDirection: "up"
     },
     {
-      metricLabel: "Accessibility Features Used",
+      metricLabel: "Accessibility Used",
       metricValue: "8/12",
       metricIcon: Shield,
       metricColor: "#7C3AED",
@@ -275,7 +267,7 @@ const Home = () => {
       trendDirection: "compliant"
     },
     {
-      metricLabel: "Community Support Groups",
+      metricLabel: "Support Groups",
       metricValue: "45",
       metricIcon: Users,
       metricColor: "#0891B2",
@@ -283,7 +275,7 @@ const Home = () => {
       trendDirection: "growing"
     },
     {
-      metricLabel: "Professional Consultations",
+      metricLabel: "Consultations",
       metricValue: "328",
       metricIcon: Award,
       metricColor: "#BE123C",
@@ -291,7 +283,7 @@ const Home = () => {
       trendDirection: "professional"
     },
     {
-      metricLabel: "Emergency Responses",
+      metricLabel: "Emergency Response",
       metricValue: "12",
       metricIcon: AlertTriangle,
       metricColor: "#EA580C",
@@ -299,7 +291,7 @@ const Home = () => {
       trendDirection: "responsive"
     },
     {
-      metricLabel: "Personalized Cognitive Training",
+      metricLabel: "Cognitive Training",
       metricValue: "24/7",
       metricIcon: Brain,
       metricColor: "#8B5CF6",
@@ -315,11 +307,19 @@ const Home = () => {
       trendDirection: "support"
     },
     {
+      metricLabel: "System Performance",
+      metricValue: "99.9%",
+      metricIcon: Activity,
+      metricColor: "#F59E0B", 
+      metricTrend: "Excellent uptime",
+      trendDirection: "excellent"
+    },
+    {
       metricLabel: "Platform Security",
       metricValue: "100%",
       metricIcon: Shield,
-      metricColor: "#059669",
-      metricTrend: "Secure & Private Platform Access",
+      metricColor: "#06B6D4",
+      metricTrend: "Private access",
       trendDirection: "secure"
     }
   ];
@@ -514,24 +514,25 @@ const Home = () => {
 
       {/* Platform Highlights Section */}
       <div className="bg-white rounded-lg shadow-lg p-8">
-        <h2 className="text-3xl font-bold text-center mb-8">
+        <h2 className="text-3xl font-bold text-center mb-2">
           <span style={{color: '#16808D'}}>Platform</span>
           <span style={{color: '#000000'}}> Highlights</span>
         </h2>
+        <p className="text-gray-600 text-lg font-medium animate-pulse text-center mb-8">Advanced cognitive support features and accessibility tools for enhanced user experience </p>
         
         {/* Carousel Container */}
         <div className="relative">
           {/* Navigation Arrows */}
           <button
             onClick={() => setCurrentHighlightIndex((prev) => prev === 0 ? platformHighlights.length - 3 : prev - 3)}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-6 z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
           
           <button
             onClick={() => setCurrentHighlightIndex((prev) => (prev + 3) % platformHighlights.length)}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-6 z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
@@ -589,7 +590,7 @@ const Home = () => {
             <span style={{color: '#16808D'}}>Prihub</span>
             <span style={{color: '#000000'}}> at a glance</span>
           </h2>
-          <p className="text-gray-600 text-sm font-medium animate-pulse">Real-time cognitive disability support platform metrics and performance indicators</p>
+          <p className="text-gray-600 text-lg font-medium animate-pulse">Real-time cognitive disability support platform metrics and performance indicators</p>
         </div>
         
         {/* Animated Single Line Grid */}
@@ -611,15 +612,15 @@ const Home = () => {
                     <div className="text-5xl font-bold mb-4 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent animate-number-grow" style={{color: metric.metricColor}}>
                       {metric.metricValue}
                     </div>
-                    <div className="text-gray-700 font-bold mb-4 text-sm uppercase tracking-wide leading-tight">{metric.metricLabel}</div>
-                    <div className={`flex items-center px-4 py-3 rounded-full bg-gradient-to-r from-gray-50 to-gray-100 ${trend.color} shadow-sm animate-glow mb-3`}>
-                      <TrendIcon className="h-5 w-5 mr-2" />
-                      <span className="text-xs font-bold">{metric.metricTrend}</span>
+                    <div className="text-gray-700 font-bold mb-4 text-base uppercase tracking-wide leading-tight">{metric.metricLabel}</div>
+                    <div className={`flex items-center px-5 py-3 rounded-full bg-gradient-to-r from-gray-50 to-gray-100 shadow-sm animate-glow mb-3`} style={{color: metric.metricColor}}>
+                      <TrendIcon className="h-6 w-6 mr-3" />
+                      <span className="text-base font-bold">{metric.metricTrend}</span>
                     </div>
-                    <div className="mt-2 text-xs text-gray-500 font-medium">
+                    <div className="mt-2 text-base text-gray-500 font-medium">
                       {trend.label}
                     </div>
-                    <div className="mt-3 text-xs text-gray-400 italic">
+                    <div className="mt-3 text-base text-gray-600 italic">
                       {metric.metricLabel.includes('Training') ? 'AI-powered adaptive learning' : 
                        metric.metricLabel.includes('Support') ? 'Dedicated assistance team' :
                        metric.metricLabel.includes('Security') ? 'End-to-end encryption' :
@@ -657,15 +658,15 @@ const Home = () => {
                     <div className="text-5xl font-bold mb-4 bg-gradient-to-r from-gray-800 to-gray-600 bg-clip-text text-transparent animate-number-grow" style={{color: metric.metricColor}}>
                       {metric.metricValue}
                     </div>
-                    <div className="text-gray-700 font-bold mb-4 text-sm uppercase tracking-wide leading-tight">{metric.metricLabel}</div>
-                    <div className={`flex items-center px-4 py-3 rounded-full bg-gradient-to-r from-gray-50 to-gray-100 ${trend.color} shadow-sm animate-glow mb-3`}>
-                      <TrendIcon className="h-5 w-5 mr-2" />
-                      <span className="text-xs font-bold">{metric.metricTrend}</span>
+                    <div className="text-gray-700 font-bold mb-4 text-base uppercase tracking-wide leading-tight">{metric.metricLabel}</div>
+                    <div className={`flex items-center px-5 py-3 rounded-full bg-gradient-to-r from-gray-50 to-gray-100 shadow-sm animate-glow mb-3`} style={{color: metric.metricColor}}>
+                      <TrendIcon className="h-6 w-6 mr-3" />
+                      <span className="text-base font-bold">{metric.metricTrend}</span>
                     </div>
-                    <div className="mt-2 text-xs text-gray-500 font-medium">
+                    <div className="mt-2 text-base text-gray-500 font-medium">
                       {trend.label}
                     </div>
-                    <div className="mt-3 text-xs text-gray-400 italic">
+                    <div className="mt-3 text-base text-gray-600 italic">
                       {metric.metricLabel.includes('Training') ? 'AI-powered adaptive learning' : 
                        metric.metricLabel.includes('Support') ? 'Dedicated assistance team' :
                        metric.metricLabel.includes('Security') ? 'End-to-end encryption' :
@@ -701,7 +702,7 @@ const Home = () => {
         }
         
         .animate-scroll-x {
-          animation: scroll-x 8s linear infinite;
+          animation: scroll-x 12s linear infinite;
         }
         
         .animate-scroll-x:hover {
@@ -775,6 +776,20 @@ const Home = () => {
         
         .animate-glow {
           animation: glow 2s ease-in-out infinite;
+        }
+        
+        /* Enhanced visibility during transition */
+        .animate-scroll-x > div {
+          backdrop-filter: blur(0px);
+          -webkit-backdrop-filter: blur(0px);
+          transition: all 0.3s ease;
+        }
+        
+        .animate-scroll-x > div:hover {
+          backdrop-filter: blur(0px);
+          -webkit-backdrop-filter: blur(0px);
+          transform: scale(1.1) translateZ(10px);
+          z-index: 10;
         }
       `}</style>
 
