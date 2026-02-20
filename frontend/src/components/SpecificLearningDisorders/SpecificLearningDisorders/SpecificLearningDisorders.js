@@ -26,17 +26,9 @@ const SpecificLearningDisorders = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       
-      {/* HEADER */}
-      <div className="bg-gradient-to-r from-[#7C3AED] to-[#9333EA] text-white py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <Link
-            to="/"
-            className="inline-flex items-center text-white hover:text-gray-200 mb-6"
-          >
-            <ArrowLeft className="h-5 w-5 mr-2" />
-            Back to Home
-          </Link>
-
+      {/* HERO SECTION */}
+      <div className="bg-gradient-to-r from-[#9333EA] to-[#7C3AED] text-white py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex justify-center mb-6">
               <div className="bg-white/20 p-4 rounded-full">
@@ -50,6 +42,23 @@ const SpecificLearningDisorders = () => {
               A comprehensive clinical guide to understanding Dyslexia,
               Dysgraphia, and Dyscalculia under DSM-5.
             </p>
+            <div className="flex flex-wrap justify-center gap-4 mt-8">
+              <Link 
+                to="/contact" 
+                className="bg-white text-[#9333EA] px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              >
+                Get Professional Help
+              </Link>
+              <Link 
+                to="/resources" 
+                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-[#9333EA] transition-colors"
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                }}
+              >
+                View Resources
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -377,6 +386,9 @@ const SpecificLearningDisorders = () => {
                   <Link
                     to="/resources"
                     className="block w-full text-center px-4 py-2 border border-[#9333EA] text-[#9333EA] rounded-lg hover:bg-[#9333EA] hover:text-white transition-colors"
+                    onClick={() => {
+                      window.scrollTo(0, 0);
+                    }}
                   >
                     View Resources
                   </Link>

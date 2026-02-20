@@ -24,6 +24,9 @@ import IntellectualDisability from './components/IntellectualDisability/Intellec
 import SpeechLanguageDisorders from './components/SpeechLanguageDisorders/SpeechLanguageDisorders';
 import SpecificLearningDisorders from './components/SpecificLearningDisorders/SpecificLearningDisorders/SpecificLearningDisorders';
 import SocialCommunication from './components/SocialCommunication/SocialCommunication';
+import ExecutiveFunctioningDisorders from './components/ExecutiveFunctioningDisorders/ExecutiveFunctioningDisorders';
+import AnxietyDisorders from './components/AnxietyDisorders/AnxietyDisorders';
+import CerebralPalsyEpilepsy from './components/CerebralPalsyEpilepsy/CerebralPalsyEpilepsy';
 import AllFeatures from './components/AllFeatures/AllFeatures';
 import ResourcesPage from './components/ResourcesPage/Resources';
 import './App.css';
@@ -54,8 +57,11 @@ function Application() {
           <Route path="/conditions/traumatic-brain-injury" element={<TraumaticBrainInjury />} />
           <Route path="/conditions/intellectual-disability" element={<IntellectualDisability />} />
           <Route path="/conditions/speech-language-disorders" element={<SpeechLanguageDisorders />} />
+          <Route path="/conditions/anxiety-emotional-disorders" element={<AnxietyDisorders />} />
           <Route path="/conditions/specific-learning-disorders" element={<SpecificLearningDisorders />} />
           <Route path="/conditions/social-communication-disorder" element={<SocialCommunication />} />
+          <Route path="/conditions/executive-functioning-disorders" element={<ExecutiveFunctioningDisorders />} />
+          <Route path="/conditions/epilepsy-cerebral-palsy" element={<CerebralPalsyEpilepsy />} />
           <Route path="/all-features" element={<AllFeatures />} />
           <Route path="/resources" element={<ResourcesPage />} />
           <Route path="/contact" element={<ContactPage />} />

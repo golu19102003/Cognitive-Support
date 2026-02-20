@@ -18,13 +18,6 @@ const MemoryDisorders = () => {
       {/* Header */}
       <div className="bg-gradient-to-r from-[#142C52] to-[#0F172A] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center mb-6">
-            <Link to="/" className="inline-flex items-center text-white hover:text-gray-200 transition-colors mr-4">
-              <ArrowLeft className="h-5 w-5 mr-2" />
-              Back to Home
-            </Link>
-          </div>
-          
           <div className="text-center">
             <div className="flex justify-center mb-6">
               <div className="bg-white/20 p-4 rounded-full">
@@ -36,6 +29,20 @@ const MemoryDisorders = () => {
               Memory disorders change your ability to make and recall memories. They can be caused by physical and mental health conditions, 
               traumas, injuries, substances, or medications. Some last a few minutes. Others last a lifetime.
             </p>
+            <div className="flex flex-wrap justify-center gap-4 mt-8">
+              <Link 
+                to="/contact" 
+                className="bg-white text-[#142C52] px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              >
+                Get Professional Help
+              </Link>
+              <Link 
+                to="/resources" 
+                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-[#142C52] transition-colors"
+              >
+                View Resources
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -543,6 +550,9 @@ const MemoryDisorders = () => {
                   <Link
                     to="/resources"
                     className="block w-full text-center px-4 py-2 border border-[#142C52] text-[#142C52] rounded-lg hover:bg-[#142C52] hover:text-white transition-colors"
+                    onClick={() => {
+                      window.scrollTo(0, 0);
+                    }}
                   >
                     View Resources
                   </Link>

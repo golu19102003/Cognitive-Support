@@ -18,17 +18,10 @@ const ADHD = () => {
       {/* Header */}
       <div className="bg-gradient-to-r from-[#22C55E] to-[#16A34A] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center mb-6">
-            <Link to="/" className="inline-flex items-center text-white hover:text-gray-200 transition-colors mr-4">
-              <ArrowLeft className="h-5 w-5 mr-2" />
-              Back to Home
-            </Link>
-          </div>
-          
           <div className="text-center">
             <div className="flex justify-center mb-6">
               <div className="bg-white/20 p-4 rounded-full">
-                <Activity className="h-16 w-16 text-white" />
+                <Target className="h-16 w-16 text-white" />
               </div>
             </div>
             <h1 className="text-4xl font-bold mb-4">ADHD - Attention-Deficit/Hyperactivity Disorder</h1>
@@ -39,6 +32,23 @@ const ADHD = () => {
             <p className="text-sm text-white/80 mt-4">
               ADHD is treatable with medications and therapies that manage symptoms and make daily life easier.
             </p>
+            <div className="flex flex-wrap justify-center gap-4 mt-8">
+              <Link 
+                to="/contact" 
+                className="bg-white text-[#22C55E] px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              >
+                Get Professional Help
+              </Link>
+              <Link 
+                to="/resources" 
+                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-[#22C55E] transition-colors"
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                }}
+              >
+                View Resources
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -431,6 +441,9 @@ const ADHD = () => {
                   <Link
                     to="/resources"
                     className="block w-full text-center px-4 py-2 border border-[#22C55E] text-[#22C55E] rounded-lg hover:bg-[#22C55E] hover:text-white transition-colors"
+                    onClick={() => {
+                      window.scrollTo(0, 0);
+                    }}
                   >
                     View Resources
                   </Link>

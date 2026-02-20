@@ -15,20 +15,13 @@ const LearningDisabilities = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
+      {/* HERO SECTION */}
       <div className="bg-gradient-to-r from-[#16808D] to-[#1B9AAA] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center mb-6">
-            <Link to="/" className="inline-flex items-center text-white hover:text-gray-200 transition-colors mr-4">
-              <ArrowLeft className="h-5 w-5 mr-2" />
-              Back to Home
-            </Link>
-          </div>
-          
           <div className="text-center">
             <div className="flex justify-center mb-6">
               <div className="bg-white/20 p-4 rounded-full">
-                <Brain className="h-16 w-16 text-white" />
+                <BookOpen className="h-16 w-16 text-white" />
               </div>
             </div>
             <h1 className="text-4xl font-bold mb-4">Learning Disabilities and Disorders in Children</h1>
@@ -39,6 +32,20 @@ const LearningDisabilities = () => {
             <p className="text-sm text-white/80 mt-4">
               By Gina Kemp, M.A., Melinda Smith, M.A. and Jeanne Segal, Ph.D.
             </p>
+            <div className="flex flex-wrap justify-center gap-4 mt-8">
+              <Link 
+                to="/contact" 
+                className="bg-white text-[#16808D] px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              >
+                Get Professional Help
+              </Link>
+              <Link 
+                to="/resources" 
+                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-[#16808D] transition-colors"
+              >
+                View Resources
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -499,6 +506,9 @@ const LearningDisabilities = () => {
                   <Link
                     to="/resources"
                     className="block w-full text-center px-4 py-2 border border-[#16808D] text-[#16808D] rounded-lg hover:bg-[#16808D] hover:text-white transition-colors"
+                    onClick={() => {
+                      window.scrollTo(0, 0);
+                    }}
                   >
                     View Resources
                   </Link>

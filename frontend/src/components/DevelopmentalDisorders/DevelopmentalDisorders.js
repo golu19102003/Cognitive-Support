@@ -15,20 +15,13 @@ const DevelopmentalDisorders = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-[#02394A] to-[#0F172A] text-white py-16">
+      {/* HERO SECTION */}
+      <div className="bg-gradient-to-r from-[#0F172A] to-[#0F172A] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center mb-6">
-            <Link to="/" className="inline-flex items-center text-white hover:text-gray-200 transition-colors mr-4">
-              <ArrowLeft className="h-5 w-5 mr-2" />
-              Back to Home
-            </Link>
-          </div>
-          
           <div className="text-center">
             <div className="flex justify-center mb-6">
               <div className="bg-white/20 p-4 rounded-full">
-                <Brain className="h-16 w-16 text-white" />
+                <Activity className="h-16 w-16 text-white" />
               </div>
             </div>
             <h1 className="text-4xl font-bold mb-4">A Brief Guide to Developmental Disorders</h1>
@@ -39,6 +32,20 @@ const DevelopmentalDisorders = () => {
             <p className="text-sm text-white/80 mt-4">
               Early understanding, support, and intervention can significantly improve quality of life and independence.
             </p>
+            <div className="flex flex-wrap justify-center gap-4 mt-8">
+              <Link 
+                to="/contact" 
+                className="bg-white text-[#02394A] px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              >
+                Get Professional Help
+              </Link>
+              <Link 
+                to="/resources" 
+                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-[#02394A] transition-colors"
+              >
+                View Resources
+              </Link>
+            </div>
           </div>
         </div>
       </div>

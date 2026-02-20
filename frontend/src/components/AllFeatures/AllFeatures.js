@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, BookOpen, Brain, Users, MessageSquare, Calendar, Shield, Activity, Heart, Target, Zap, ChevronRight, FileText, Calculator, PenTool, Eye, Clock, AlertTriangle, Stethoscope, Pill, Wrench } from 'lucide-react';
+import { ArrowLeft, BookOpen, Brain, Users, MessageSquare, Calendar, Shield, Activity, Heart, Target, Zap, ChevronRight, FileText, Calculator, PenTool, Eye, Clock, AlertTriangle, Stethoscope, Pill, Wrench, Search } from 'lucide-react';
 
 const AllFeatures = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  
   const allFeatures = [
     {
       featureIcon: BookOpen,
@@ -111,18 +113,15 @@ const AllFeatures = () => {
     }
   ];
 
+  const filteredFeatures = allFeatures.filter(feature =>
+    feature.featureTitle.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <div className="bg-gradient-to-r from-[#142C52] to-[#16808D] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center mb-6">
-            <Link to="/" className="inline-flex items-center text-white hover:text-gray-200 transition-colors mr-4">
-              <ArrowLeft className="h-5 w-5 mr-2" />
-              Back to Home
-            </Link>
-          </div>
-          
           <div className="text-center">
             <div className="flex justify-center mb-6">
               <div className="bg-white/20 p-4 rounded-full">
@@ -138,10 +137,26 @@ const AllFeatures = () => {
         </div>
       </div>
 
+      {/* Search Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="max-w-2xl mx-auto">
+          <div className="relative">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Search conditions..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#142C52] focus:border-transparent text-gray-900 placeholder-gray-500"
+            />
+          </div>
+        </div>
+      </div>
+
       {/* Features Grid */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {allFeatures.map((featureDetail, index) => (
+          {filteredFeatures.map((featureDetail, index) => (
             <Link
               key={index}
               to={featureDetail.featureLink}
@@ -192,29 +207,29 @@ const AllFeatures = () => {
 
         {/* Back to Home CTA */}
         <div className="mt-16 text-center">
-          <div className="bg-white rounded-lg shadow-lg p-8">
-            <h2 className="text-2xl font-bold mb-4 text-gray-900">
-              Ready to Get Started?
-            </h2>
-            <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-              Explore these cognitive conditions and discover how PriHub can provide the specialized support you need. 
-              Each condition offers unique features and tools designed to enhance daily living and independence.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/"
-                className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white rounded-lg font-semibold hover:from-[#16808D] hover:to-[#142C52] transition-all transform hover:scale-105 shadow-lg"
-              >
-                <ArrowLeft className="mr-2 h-5 w-5" />
-                Back to Home
-              </Link>
-              <Link
-                to="/resources"
-                className="inline-flex items-center px-6 py-3 border border-[#142C52] text-[#142C52] rounded-lg font-semibold hover:bg-[#142C52] hover:text-white transition-all"
-              >
-                <BookOpen className="mr-2 h-5 w-5" />
-                View Resources
-              </Link>
+          <div className="bg-gradient-to-r from-[#16808D] to-[#142C52] rounded-lg shadow-lg p-8 text-center text-white">
+            <div className="max-w-3xl mx-auto">
+              <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
+              <p className="text-xl mb-6 opacity-90">
+                Explore these cognitive conditions and discover how PriHub can provide the specialized support you need. 
+                Each condition offers unique features and tools designed to enhance daily living and independence.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <Link
+                  to="/"
+                  className="flex items-center justify-center px-8 py-3 bg-white text-[#142C52] rounded-lg font-semibold hover:bg-gray-100 transition-all transform hover:scale-105 shadow-lg"
+                >
+                  <ArrowLeft className="mr-2 h-5 w-5" />
+                  Back to Home
+                </Link>
+                <Link
+                  to="/resources"
+                  className="flex items-center justify-center px-8 py-3 border-2 border-white text-white rounded-lg font-semibold hover:bg-white hover:text-[#142C52] transition-all transform hover:scale-105 shadow-lg"
+                >
+                  <BookOpen className="mr-2 h-5 w-5" />
+                  View Resources
+                </Link>
+              </div>
             </div>
           </div>
         </div>

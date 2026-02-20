@@ -15,16 +15,9 @@ const SpeechLanguageDisorders = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
+      {/* HERO SECTION */}
       <div className="bg-gradient-to-r from-[#DC2626] to-[#B91C1C] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center mb-6">
-            <Link to="/" className="inline-flex items-center text-white hover:text-gray-200 transition-colors mr-4">
-              <ArrowLeft className="h-5 w-5 mr-2" />
-              Back to Home
-            </Link>
-          </div>
-          
           <div className="text-center">
             <div className="flex justify-center mb-6">
               <div className="bg-white/20 p-4 rounded-full">
@@ -39,6 +32,23 @@ const SpeechLanguageDisorders = () => {
             <p className="text-sm text-white/80 mt-4">
               Based on peer-reviewed medical literature and clinical guidelines
             </p>
+            <div className="flex flex-wrap justify-center gap-4 mt-8">
+              <Link 
+                to="/contact" 
+                className="bg-white text-[#DC2626] px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              >
+                Get Professional Help
+              </Link>
+              <Link 
+                to="/resources" 
+                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-[#DC2626] transition-colors"
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                }}
+              >
+                View Resources
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -523,6 +533,9 @@ const SpeechLanguageDisorders = () => {
                   <Link
                     to="/resources"
                     className="block w-full text-center px-4 py-2 border border-[#DC2626] text-[#DC2626] rounded-lg hover:bg-[#DC2626] hover:text-white transition-colors"
+                    onClick={() => {
+                      window.scrollTo(0, 0);
+                    }}
                   >
                     View Resources
                   </Link>

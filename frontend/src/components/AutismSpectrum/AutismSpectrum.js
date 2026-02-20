@@ -18,17 +18,10 @@ const AutismSpectrum = () => {
       {/* Header */}
       <div className="bg-gradient-to-r from-[#1B9AAA] to-[#16808D] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center mb-6">
-            <Link to="/" className="inline-flex items-center text-white hover:text-gray-200 transition-colors mr-4">
-              <ArrowLeft className="h-5 w-5 mr-2" />
-              Back to Home
-            </Link>
-          </div>
-          
           <div className="text-center">
             <div className="flex justify-center mb-6">
               <div className="bg-white/20 p-4 rounded-full">
-                <Brain className="h-16 w-16 text-white" />
+                <Users className="h-16 w-16 text-white" />
               </div>
             </div>
             <h1 className="text-4xl font-bold mb-4">Autism Spectrum Disorder (ASD)</h1>
@@ -39,6 +32,23 @@ const AutismSpectrum = () => {
             <p className="text-sm text-white/80 mt-4">
               These symptoms appear in early childhood and vary in severity, creating a heterogeneous presentation across individuals.
             </p>
+            <div className="flex flex-wrap justify-center gap-4 mt-8">
+              <Link 
+                to="/contact" 
+                className="bg-white text-[#1B9AAA] px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              >
+                Get Professional Help
+              </Link>
+              <Link 
+                to="/resources" 
+                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-[#1B9AAA] transition-colors"
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                }}
+              >
+                View Resources
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -427,6 +437,9 @@ const AutismSpectrum = () => {
                   <Link
                     to="/resources"
                     className="block w-full text-center px-4 py-2 border border-[#1B9AAA] text-[#1B9AAA] rounded-lg hover:bg-[#1B9AAA] hover:text-white transition-colors"
+                    onClick={() => {
+                      window.scrollTo(0, 0);
+                    }}
                   >
                     View Resources
                   </Link>

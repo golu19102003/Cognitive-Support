@@ -15,16 +15,9 @@ const IntellectualDisability = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-[#EC4899] to-[#DB2777] text-white py-16">
+      {/* HERO SECTION */}
+      <div className="bg-gradient-to-r from-[#DB2777] to-[#EC4899] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center mb-6">
-            <Link to="/" className="inline-flex items-center text-white hover:text-gray-200 transition-colors mr-4">
-              <ArrowLeft className="h-5 w-5 mr-2" />
-              Back to Home
-            </Link>
-          </div>
-          
           <div className="text-center">
             <div className="flex justify-center mb-6">
               <div className="bg-white/20 p-4 rounded-full">
@@ -39,6 +32,20 @@ const IntellectualDisability = () => {
             <p className="text-sm text-white/80 mt-4">
               Based on peer-reviewed medical literature and clinical guidelines
             </p>
+            <div className="flex flex-wrap justify-center gap-4 mt-8">
+              <Link 
+                to="/contact" 
+                className="bg-white text-[#DB2777] px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              >
+                Get Professional Help
+              </Link>
+              <Link 
+                to="/resources" 
+                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-[#DB2777] transition-colors"
+              >
+                View Resources
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -521,6 +528,9 @@ const IntellectualDisability = () => {
                   <Link
                     to="/resources"
                     className="block w-full text-center px-4 py-2 border border-[#DB2777] text-[#DB2777] rounded-lg hover:bg-[#DB2777] hover:text-white transition-colors"
+                    onClick={() => {
+                      window.scrollTo(0, 0);
+                    }}
                   >
                     View Resources
                   </Link>

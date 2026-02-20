@@ -57,17 +57,9 @@ const SocialCommunication = () => {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* HEADER */}
+      {/* HERO SECTION */}
       <div className="bg-gradient-to-r from-[#0891B2] to-[#0E7490] text-white py-16">
-        <div className="max-w-7xl mx-auto px-4">
-          <Link
-            to="/"
-            className="inline-flex items-center text-white hover:text-gray-200 transition-colors mb-6"
-          >
-            <ArrowLeft className="h-5 w-5 mr-2" />
-            Back to Home
-          </Link>
-          
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex justify-center mb-6">
               <div className="bg-white bg-opacity-20 p-4 rounded-full">
@@ -80,6 +72,23 @@ const SocialCommunication = () => {
             <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
               Understanding challenges in social language use and developing effective communication strategies
             </p>
+            <div className="flex flex-wrap justify-center gap-4 mt-8">
+              <Link 
+                to="/contact" 
+                className="bg-white text-[#0891B2] px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+              >
+                Get Professional Help
+              </Link>
+              <Link 
+                to="/resources" 
+                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-[#0891B2] transition-colors"
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                }}
+              >
+                View Resources
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -525,6 +534,9 @@ const SocialCommunication = () => {
                   <Link
                     to="/resources"
                     className="block w-full text-center px-4 py-2 border border-[#0E7490] text-[#0E7490] rounded-lg hover:bg-[#0E7490] hover:text-white transition-colors"
+                    onClick={() => {
+                      window.scrollTo(0, 0);
+                    }}
                   >
                     View Resources
                   </Link>
