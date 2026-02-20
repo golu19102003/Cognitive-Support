@@ -16,7 +16,7 @@ const Dementia = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#16808D] to-[#0C4A50] text-white py-16">
+      <div className="bg-gradient-to-r from-[#EA580C] to-[#DC2626] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center mb-6">
             <Link to="/" className="inline-flex items-center text-white hover:text-gray-200 transition-colors mr-4">
@@ -62,7 +62,7 @@ const Dementia = () => {
                 onClick={() => scrollToSection(item.id)}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors whitespace-nowrap ${
                   activeSection === item.id
-                    ? 'bg-[#16808D] text-white'
+                    ? 'bg-[#DC2626] text-white'
                     : 'text-gray-600 hover:bg-gray-100'
                 }`}
               >
@@ -479,13 +479,13 @@ const Dementia = () => {
                 <div className="space-y-3">
                   <Link
                     to="/contact"
-                    className="block w-full text-center px-4 py-2 bg-[#16808D] text-white rounded-lg hover:bg-[#0C4A50] transition-colors"
+                    className="block w-full text-center px-4 py-2 bg-[#DC2626] text-white rounded-lg hover:bg-[#EA580C] transition-colors"
                   >
                     Get Professional Help
                   </Link>
                   <Link
                     to="/resources"
-                    className="block w-full text-center px-4 py-2 border border-[#16808D] text-[#16808D] rounded-lg hover:bg-[#16808D] hover:text-white transition-colors"
+                    className="block w-full text-center px-4 py-2 border border-[#DC2626] text-[#DC2626] rounded-lg hover:bg-[#DC2626] hover:text-white transition-colors"
                   >
                     View Resources
                   </Link>
@@ -496,10 +496,10 @@ const Dementia = () => {
               <div className="bg-white rounded-lg shadow-lg p-6">
                 <h3 className="text-lg font-semibold mb-4">Related Topics</h3>
                 <ul className="space-y-2">
-                  <li><Link to="/conditions/alzheimers" className="text-[#16808D] hover:underline">• Alzheimer's Disease</Link></li>
-                  <li><Link to="/conditions/mild-cognitive-impairment" className="text-[#16808D] hover:underline">• Mild Cognitive Impairment</Link></li>
-                  <li><Link to="/conditions/vascular-dementia" className="text-[#16808D] hover:underline">• Vascular Dementia</Link></li>
-                  <li><Link to="/conditions/lewy-body" className="text-[#16808D] hover:underline">• Lewy Body Dementia</Link></li>
+                  <li><Link to="/conditions/alzheimers" className="text-[#DC2626] hover:underline">• Alzheimer's Disease</Link></li>
+                  <li><Link to="/conditions/mild-cognitive-impairment" className="text-[#DC2626] hover:underline">• Mild Cognitive Impairment</Link></li>
+                  <li><Link to="/conditions/vascular-dementia" className="text-[#DC2626] hover:underline">• Vascular Dementia</Link></li>
+                  <li><Link to="/conditions/lewy-body" className="text-[#DC2626] hover:underline">• Lewy Body Dementia</Link></li>
                 </ul>
               </div>
 

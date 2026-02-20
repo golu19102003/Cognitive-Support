@@ -22,6 +22,8 @@ import Dementia from './components/Dementia/Dementia';
 import TraumaticBrainInjury from './components/TraumaticBrainInjury/TraumaticBrainInjury';
 import IntellectualDisability from './components/IntellectualDisability/IntellectualDisability';
 import SpeechLanguageDisorders from './components/SpeechLanguageDisorders/SpeechLanguageDisorders';
+import SpecificLearningDisorders from './components/SpecificLearningDisorders/SpecificLearningDisorders/SpecificLearningDisorders';
+import SocialCommunication from './components/SocialCommunication/SocialCommunication';
 import AllFeatures from './components/AllFeatures/AllFeatures';
 import ResourcesPage from './components/ResourcesPage/Resources';
 import './App.css';
@@ -52,6 +54,8 @@ function Application() {
           <Route path="/conditions/traumatic-brain-injury" element={<TraumaticBrainInjury />} />
           <Route path="/conditions/intellectual-disability" element={<IntellectualDisability />} />
           <Route path="/conditions/speech-language-disorders" element={<SpeechLanguageDisorders />} />
+          <Route path="/conditions/specific-learning-disorders" element={<SpecificLearningDisorders />} />
+          <Route path="/conditions/social-communication-disorder" element={<SocialCommunication />} />
           <Route path="/all-features" element={<AllFeatures />} />
           <Route path="/resources" element={<ResourcesPage />} />
           <Route path="/contact" element={<ContactPage />} />

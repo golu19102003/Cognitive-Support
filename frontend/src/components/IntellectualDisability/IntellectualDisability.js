@@ -16,7 +16,7 @@ const IntellectualDisability = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#6B46C1] to-[#553C9A] text-white py-16">
+      <div className="bg-gradient-to-r from-[#EC4899] to-[#DB2777] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center mb-6">
             <Link to="/" className="inline-flex items-center text-white hover:text-gray-200 transition-colors mr-4">
@@ -62,7 +62,7 @@ const IntellectualDisability = () => {
                 onClick={() => scrollToSection(item.id)}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors whitespace-nowrap ${
                   activeSection === item.id
-                    ? 'bg-[#6B46C1] text-white'
+                    ? 'bg-[#DB2777] text-white'
                     : 'text-gray-600 hover:bg-gray-100'
                 }`}
               >
@@ -514,13 +514,13 @@ const IntellectualDisability = () => {
                 <div className="space-y-3">
                   <Link
                     to="/contact"
-                    className="block w-full text-center px-4 py-2 bg-[#6B46C1] text-white rounded-lg hover:bg-[#553C9A] transition-colors"
+                    className="block w-full text-center px-4 py-2 bg-[#DB2777] text-white rounded-lg hover:bg-[#EC4899] transition-colors"
                   >
                     Get Professional Help
                   </Link>
                   <Link
                     to="/resources"
-                    className="block w-full text-center px-4 py-2 border border-[#6B46C1] text-[#6B46C1] rounded-lg hover:bg-[#6B46C1] hover:text-white transition-colors"
+                    className="block w-full text-center px-4 py-2 border border-[#DB2777] text-[#DB2777] rounded-lg hover:bg-[#DB2777] hover:text-white transition-colors"
                   >
                     View Resources
                   </Link>
@@ -531,10 +531,10 @@ const IntellectualDisability = () => {
               <div className="bg-white rounded-lg shadow-lg p-6">
                 <h3 className="text-lg font-semibold mb-4">Related Topics</h3>
                 <ul className="space-y-2">
-                  <li><Link to="/conditions/developmental-disorders" className="text-[#6B46C1] hover:underline">• Developmental Disorders</Link></li>
-                  <li><Link to="/conditions/learning-disabilities" className="text-[#6B46C1] hover:underline">• Learning Disabilities</Link></li>
-                  <li><Link to="/conditions/autism" className="text-[#6B46C1] hover:underline">• Autism Spectrum</Link></li>
-                  <li><Link to="/conditions/adhd" className="text-[#6B46C1] hover:underline">• ADHD</Link></li>
+                  <li><Link to="/conditions/developmental-disorders" className="text-[#DB2777] hover:underline">• Developmental Disorders</Link></li>
+                  <li><Link to="/conditions/learning-disabilities" className="text-[#DB2777] hover:underline">• Learning Disabilities</Link></li>
+                  <li><Link to="/conditions/autism" className="text-[#DB2777] hover:underline">• Autism Spectrum</Link></li>
+                  <li><Link to="/conditions/adhd" className="text-[#DB2777] hover:underline">• ADHD</Link></li>
                 </ul>
               </div>
 

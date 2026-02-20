@@ -1,240 +1,421 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowLeft, BookOpen, Brain, Users, Target, ChevronRight, FileText, Activity, AlertTriangle, Shield } from 'lucide-react';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  ArrowLeft,
+  BookOpen,
+  Brain,
+  Heart,
+  AlertTriangle,
+  Target,
+  Shield,
+  Lightbulb,
+  FileText,
+} from "lucide-react";
 
 const SpecificLearningDisorders = () => {
+  const [activeSection, setActiveSection] = useState("overview");
+
+  const scrollToSection = (sectionId) => {
+    setActiveSection(sectionId);
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-[#142C52] to-[#16808D] text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center mb-6">
-            <Link to="/all-features" className="inline-flex items-center text-white hover:text-gray-200 transition-colors mr-4">
-              <ArrowLeft className="h-5 w-5 mr-2" />
-              Back to All Conditions
-            </Link>
-          </div>
-          
+      
+      {/* HEADER */}
+      <div className="bg-gradient-to-r from-[#7C3AED] to-[#9333EA] text-white py-16">
+        <div className="max-w-7xl mx-auto px-4">
+          <Link
+            to="/"
+            className="inline-flex items-center text-white hover:text-gray-200 mb-6"
+          >
+            <ArrowLeft className="h-5 w-5 mr-2" />
+            Back to Home
+          </Link>
+
           <div className="text-center">
             <div className="flex justify-center mb-6">
               <div className="bg-white/20 p-4 rounded-full">
                 <FileText className="h-16 w-16 text-white" />
               </div>
             </div>
-            <h1 className="text-4xl font-bold mb-4">Specific Learning Disorders</h1>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto">
-              Dyslexia, Dyscalculia, Dysgraphia. Tailors educational resources, assistive technologies, and personalized teaching strategies for specific learning challenges and academic success.
+            <h1 className="text-4xl font-bold mb-4">
+              Specific Learning Disorders (SpLD)
+            </h1>
+            <p className="text-lg text-white/90 max-w-3xl mx-auto">
+              A comprehensive clinical guide to understanding Dyslexia,
+              Dysgraphia, and Dyscalculia under DSM-5.
             </p>
           </div>
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Left Column - What is SpLD */}
-          <div className="lg:col-span-2 space-y-6">
-            <div className="bg-white rounded-lg shadow-lg p-8">
-              <h2 className="text-2xl font-bold mb-4 text-gray-900">What is a Specific Learning Disability (SpLD)?</h2>
-              <p className="text-gray-700 leading-relaxed mb-6">
-                Specific Learning Disabilities (SpLDs) refer to a group of specific lifelong cognitive impairments identified through unexpected underachievement in a range of learning processes involving skills of listening, speaking, spelling, written expression, mathematics, understanding, or reading including decoding and comprehension (American Psychiatric Association, 2013; IDEA, 2004; Hammill, 1990).
-              </p>
+      {/* NAVIGATION */}
+      <div className="sticky top-0 bg-white shadow-sm z-10 border-b">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="flex space-x-6 overflow-x-auto py-4">
+            {[
+              { id: "overview", label: "Overview", icon: Brain },
+              { id: "types", label: "Types", icon: BookOpen },
+              { id: "symptoms", label: "Symptoms", icon: AlertTriangle },
+              { id: "causes", label: "Causes", icon: Target },
+              { id: "diagnosis", label: "Diagnosis", icon: Shield },
+              { id: "treatment", label: "Treatment", icon: Lightbulb },
+              { id: "social", label: "Living With", icon: Heart },
+            ].map((item) => (
+              <button
+                key={item.id}
+                onClick={() => scrollToSection(item.id)}
+                className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors whitespace-nowrap ${
+                  activeSection === item.id
+                    ? 'bg-[#9333EA] text-white'
+                    : 'text-gray-600 hover:bg-gray-100'
+                }`}
+              >
+                <item.icon className="h-4 w-4" />
+                <span className="text-sm font-medium">{item.label}</span>
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* CONTENT */}
+      <div className="max-w-7xl mx-auto px-4 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+
+          {/* MAIN CONTENT */}
+          <div className="lg:col-span-3 space-y-12">
+
+            {/* OVERVIEW */}
+            <section id="overview" className="bg-white rounded-lg shadow-lg p-8">
+              <h2 className="text-3xl font-bold mb-6 text-gray-900">
+                What are Specific Learning Disorders?
+              </h2>
               
-              <h3 className="text-xl font-semibold mb-3 text-gray-900">Key facts about SpLDs</h3>
-              <ul className="space-y-3 text-gray-700">
-                <li className="flex items-start">
-                  <span className="font-semibold mr-2">•</span>
-                  <span>SpLDs are distinct from intellectual disabilities in that they are specific and not global impairments. This means that SpLDs will only impact particular areas of learning such as spelling or memory whereas an intellectual disability (global impairment) will impact every aspect of an individual's cognitive functioning.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-semibold mr-2">•</span>
-                  <span>Dyslexia is the most common SpLD comprising 80% of all diagnosed SpLDs. Dyslexia relates primarily to barriers in the acquisition of reading and writing skills (Lerner, 2006).</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-semibold mr-2">•</span>
-                  <span>Aside from academic barriers, people with SpLDs can also experience barriers in time management, organisational skills, social perception and social interaction.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-semibold mr-2">•</span>
-                  <span>SpLDs have a variety of presentations and range in severity.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-semibold mr-2">•</span>
-                  <span>The experience of SpLD varies from person to person and can be more disabling when there are greater barriers in the learning environment (Snowling, 2012).</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-semibold mr-2">•</span>
-                  <span>As a hidden disability, the prevalence of SpLDs is frequently underestimated. International estimates indicate that SpLDs impact approximately 10% of the population (Firth, 2008).</span>
-                </li>
-              </ul>
-            </div>
+              <div className="prose prose-lg text-gray-700 space-y-4 mb-6">
+                <p>
+                  "Specific learning disorder" is term Diagnostic and Statistical Manual of Mental Disorders uses to describe neurodevelopmental disorders that involve consistent difficulty in at least one of three major areas:
+                </p>
+                <ul className="list-disc list-inside space-y-2">
+                  <li><strong className="text-blue-600">Reading</strong></li>
+                  <li><strong className="text-green-600">Writing</strong></li>
+                  <li><strong className="text-purple-600">Math</strong></li>
+                </ul>
+                <p>
+                  The merging of three separate learning disorders into one diagnostic category under Specific Learning Disorder (SLD) in DSM-5 required three different specifiers to identify area(s) of academic weakness.
+                </p>
+              </div>
 
-            {/* Types of SpLDs */}
-            <div className="bg-white rounded-lg shadow-lg p-8">
-              <h2 className="text-2xl font-bold mb-4 text-gray-900">Types of SpLDs</h2>
-              <p className="text-gray-700 leading-relaxed mb-6">
-                SpLDs typically comprise of dyslexia, impacting reading and writing, dyscalculia, impacting processing of numbers and maths, and dysgraphia impacting the mechanics of hand writing.
-              </p>
-            </div>
+              <div className="bg-blue-50 border-l-4 border-blue-400 p-6 mt-6">
+                <h3 className="text-lg font-semibold text-blue-900 mb-2">10% of people affected</h3>
+                <p className="text-blue-800">
+                  Learning disabilities affect about 10% of people in the U.S. Dyslexia is the most common, accounting for at least 80% of all learning disabilities.
+                </p>
+              </div>
+            </section>
 
-            {/* Individual Disorders */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {/* Dyslexia */}
-              <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer border border-gray-100">
-                <div className="flex justify-center mb-4">
-                  <div className="p-3 rounded-full" style={{ backgroundColor: '#17874020' }}>
-                    <BookOpen className="h-8 w-8" style={{ color: '#178740' }} />
-                  </div>
-                </div>
-                <div className="text-center">
-                  <h3 className="text-xl font-bold mb-3" style={{ color: '#178740' }}>Dyslexia</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                    Dyslexia is associated with specific barriers in reading, writing, spelling or comprehension. Dyslexia is the most common SpLD, affecting approximately 80% of people with an SpLD (Lee, 2008; Mather and Wendling, 2012; Kalanje, 2011; International Dyslexia Association, 2012). Because dyslexia is related to literacy skills, it is most evident in educational settings. Students with dyslexia can experience barriers in one or a collection of the below:
+            {/* TYPES */}
+            <section id="types" className="bg-white rounded-lg shadow-lg p-8">
+              <h2 className="text-3xl font-bold mb-6 text-gray-900">
+                Types of Specific Learning Disorders
+              </h2>
+
+              <div className="space-y-6">
+                <div className="border-l-4 border-blue-400 pl-6 bg-blue-50 p-4 rounded">
+                  <h3 className="text-lg font-semibold mb-2 text-blue-900">
+                    With Impairment in Reading (Dyslexia)
+                  </h3>
+                  <p className="text-blue-800">
+                    The specifier "with impairment in reading" is added to SLD diagnosis when a person demonstrates significant impairment in one or more of reading subskills including word reading accuracy, reading rate or fluency, and/or reading comprehension.
                   </p>
-                  <ul className="text-left text-gray-600 text-sm space-y-2">
-                    <li className="flex items-center">
-                      <Shield className="h-4 w-4 mr-2 text-green-600" />
-                      <span>Visual perception of letters and words and their corresponding sounds and phonemes</span>
-                    </li>
-                    <li className="flex items-center">
-                      <Brain className="h-4 w-4 mr-2 text-purple-600" />
-                      <span>Memory</span>
-                    </li>
-                    <li className="flex items-center">
-                      <Activity className="h-4 w-4 mr-2 text-blue-600" />
-                      <span>Vocabulary</span>
-                    </li>
-                    <li className="flex items-center">
-                      <Target className="h-4 w-4 mr-2 text-orange-600" />
-                      <span>Spelling of spoken words</span>
-                    </li>
-                    <li className="flex items-center">
-                      <AlertTriangle className="h-4 w-4 mr-2 text-red-600" />
-                      <span>Comprehension</span>
-                    </li>
+                </div>
+
+                <div className="border-l-4 border-green-400 pl-6 bg-green-50 p-4 rounded">
+                  <h3 className="text-lg font-semibold mb-2 text-green-900">
+                    With Impairment in Written Expression (Dysgraphia)
+                  </h3>
+                  <p className="text-green-800">
+                    An impairment in writing skills is assigned to specifier "with impairment in written expression" and refers to those children with impaired spelling and problems with writing.
+                  </p>
+                </div>
+
+                <div className="border-l-4 border-purple-400 pl-6 bg-purple-50 p-4 rounded">
+                  <h3 className="text-lg font-semibold mb-2 text-purple-900">
+                    With Impairment in Mathematics (Dyscalculia)
+                  </h3>
+                  <p className="text-purple-800">
+                    The third SLD specifier "with impairment in mathematics" is for individuals who demonstrate significantly below average skills in number sense, memorization of arithmetic facts, accurate or fluent calculation.
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {/* SYMPTOMS */}
+            <section id="symptoms" className="bg-white rounded-lg shadow-lg p-8">
+              <h2 className="text-3xl font-bold mb-6 text-gray-900">Symptoms and Signs</h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div className="bg-orange-50 border-l-4 border-orange-400 p-4 rounded">
+                  <h3 className="text-lg font-semibold mb-2 text-orange-900">General Signs</h3>
+                  <p className="text-orange-800 text-sm">
+                    The main sign of any learning disability is when there's a difference between a child's academic potential and their academic performance.
+                  </p>
+                </div>
+
+                <div className="bg-red-50 border-l-4 border-red-400 p-4 rounded">
+                  <h3 className="text-lg font-semibold mb-2 text-red-900">Behavior Symptoms</h3>
+                  <p className="text-red-800 text-sm">
+                    Learning disorders often affect your child's self-esteem and how they feel about school. They may also feel frustrated that their performance doesn't match their peers'.
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <h4 className="font-semibold text-orange-900 mb-2">Academic Signs:</h4>
+                  <ul className="text-sm text-orange-800 space-y-1">
+                    <li>• Identifying letters, numbers, colors</li>
+                    <li>• Counting and expanding vocabulary</li>
+                    <li>• Rhyming and sounding out words</li>
+                    <li>• Organizing assignments and thoughts</li>
+                    <li>• Memory and coordination issues</li>
+                  </ul>
+                </div>
+
+                <div className="space-y-2">
+                  <h4 className="font-semibold text-red-900 mb-2">Emotional Signs:</h4>
+                  <ul className="text-sm text-red-800 space-y-1">
+                    <li>• Not wanting to go to school</li>
+                    <li>• Avoiding reading aloud or math problems</li>
+                    <li>• Complaining about teachers</li>
+                    <li>• "Acting out" in social situations</li>
+                    <li>• Self-critical statements</li>
                   </ul>
                 </div>
               </div>
+            </section>
 
-              {/* Dyscalculia */}
-              <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer border border-gray-100">
-                <div className="flex justify-center mb-4">
-                  <div className="p-3 rounded-full" style={{ backgroundColor: '#05966920' }}>
-                    <Target className="h-8 w-8" style={{ color: '#059669' }} />
-                  </div>
+            {/* CAUSES */}
+            <section id="causes" className="bg-white rounded-lg shadow-lg p-8">
+              <h2 className="text-3xl font-bold mb-6 text-gray-900">Causes and Risk Factors</h2>
+              
+              <div className="bg-purple-50 border-l-4 border-purple-400 p-6 mb-6">
+                <h3 className="text-lg font-semibold text-purple-900 mb-2">Complex Origins</h3>
+                <p className="text-purple-800">
+                  Researchers still have a lot to learn about learning disabilities and their causes. Currently, they think LDs result from a combination of genetic and environmental factors.
+                </p>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="bg-indigo-50 border-l-4 border-indigo-400 p-4 rounded">
+                  <h3 className="text-lg font-semibold mb-2 text-indigo-900">Risk Factors</h3>
+                  <ul className="text-sm text-indigo-800 space-y-1">
+                    <li>• Biological family history of LDs</li>
+                    <li>• Premature birth</li>
+                    <li>• Fetal exposure to alcohol/substances</li>
+                    <li>• Speech and language developmental delay</li>
+                    <li>• Malnutrition</li>
+                    <li>• Environmental toxins (lead)</li>
+                    <li>• Adverse childhood experiences (ACEs)</li>
+                    <li>• Traumatic brain injury (TBI)</li>
+                  </ul>
                 </div>
-                <div className="text-center">
-                  <h3 className="text-xl font-bold mb-3" style={{ color: '#059669' }}>Dyscalculia</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                    Dyscalculia is associated with barriers in understanding numbers and mathematical concepts. Dyscalculia is estimated to occur in up to 3% of the population. For individuals with dyscalculia, it may be difficult to visualize patterns, different parts of a maths problem or identify critical information needed to solve equations and more complex problems. Dyscalculia can affect a person's ability to think quantitatively, do arithmetic, understand and measure time and space, remember times tables and perform basic calculations.
+
+                <div className="bg-pink-50 border-l-4 border-pink-400 p-4 rounded">
+                  <h3 className="text-lg font-semibold mb-2 text-pink-900">Co-occurring Disorders</h3>
+                  <p className="text-pink-800 text-sm mb-2">LDs often exist alongside other disorders:</p>
+                  <ul className="text-sm text-pink-800 space-y-1">
+                    <li>• Attention-deficit/hyperactivity disorder (ADHD)</li>
+                    <li>• Anxiety</li>
+                    <li>• Bipolar disorder</li>
+                    <li>• Depression</li>
+                    <li>• Obsessive-compulsive disorder (OCD)</li>
+                    <li>• Oppositional defiant disorder (ODD)</li>
+                  </ul>
+                  <p className="text-pink-800 text-sm mt-2 font-semibold">
+                    20% to 70% of children with psychiatric conditions have LDs
                   </p>
                 </div>
               </div>
+            </section>
 
-              {/* Dysgraphia */}
-              <div className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer border border-gray-100">
-                <div className="flex justify-center mb-4">
-                  <div className="p-3 rounded-full" style={{ backgroundColor: '#DC262620' }}>
-                    <FileText className="h-8 w-8" style={{ color: '#DC2626' }} />
-                  </div>
-                </div>
-                <div className="text-center">
-                  <h3 className="text-xl font-bold mb-3" style={{ color: '#DC2626' }}>Dysgraphia</h3>
-                  <p className="text-gray-600 text-sm leading-relaxed mb-4">
-                    Dysgraphia is associated with restrictions in handwriting tasks. Dysgraphia can affect skills associated with holding a pen or pencil such as drawing shapes, numbers or letters. Dysgraphia is a neurological disorder that typically appears when using complex collection of motor and information processing skills involved in the activity of writing. Not only does it require the ability to organize and express ideas in the mind. It also requires the ability to get the muscles in the hands and fingers to form those ideas, letter by letter, on paper. A person with dysgraphia may write their letters in reverse, have trouble recalling how letters are formed, or when to use lower or upper case letters.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* SpLD Terminology */}
-            <div className="bg-white rounded-lg shadow-lg p-8">
-              <h2 className="text-2xl font-bold mb-4 text-gray-900">SpLD terminology</h2>
-              <p className="text-gray-700 leading-relaxed mb-6">
-                A range of terms are applied to SpLDs including learning disabilities, dyslexia, specific learning disorders, language disorders and learning difficulties. Variations in SpLD nomenclature is thought to expound the difficulty in understanding defining features of an SpLD. In addition, non-diagnostic terms such as reading disorder or learning difficulty do not provide definitive information about processing barriers for students with SpLDs. This can result in inappropriate support for students with SpLDs (Glazzard, 2010; Macdonald, 2009). As a result, generic non-diagnostic labelling of students with SpLDs is discouraged and students are advised to source an SpLD diagnosis to acquire the most detailed understanding of their strengths, weaknesses and processing preferences.
+            {/* DIAGNOSIS */}
+            <section id="diagnosis" className="bg-white rounded-lg shadow-lg p-8">
+              <h2 className="text-3xl font-bold mb-6">Diagnosis and Tests</h2>
+              
+              <p className="text-gray-700 mb-6">
+                Caregivers and teachers typically suspect learning disabilities once a child is in school. Your child will need to go through special assessments and tests so that a professional can make a diagnosis.
               </p>
+
+              <div className="mb-6">
+                <h3 className="text-xl font-semibold mb-3">Types of Evaluations</h3>
+                <ul className="list-disc list-inside text-gray-700 space-y-2">
+                  <li><strong>Medical evaluation:</strong> Physical exam and neurological exam to rule out underlying medical conditions</li>
+                  <li><strong>Educational assessment:</strong> Teacher observations and academic performance evaluation</li>
+                  <li><strong>Cognitive evaluation:</strong> Verbal and nonverbal intelligence (IQ) testing</li>
+                  <li><strong>Psychological evaluation:</strong> Assessment for ADHD, anxiety, depression, and confidence issues</li>
+                  <li><strong>Neuropsychological assessment:</strong> How brain conditions affect behavior and cognitive skills</li>
+                </ul>
+              </div>
+
+              <div>
+                <h3 className="text-xl font-semibold mb-3">School Evaluation Process</h3>
+                <p className="text-gray-700">
+                  If you think your child has a learning disorder, you should formally request testing through their school system. Schools are required to evaluate a child (age 3 to 21) if they're suspected of having a disability that affects their learning or educational performance.
+                </p>
+              </div>
+            </section>
+
+            {/* TREATMENT */}
+            <section id="treatment" className="bg-white rounded-lg shadow-lg p-8">
+              <h2 className="text-3xl font-bold mb-6">
+                Management and Treatment
+              </h2>
+
+              <div className="space-y-6">
+                <div className="bg-blue-50 p-4 rounded-lg">
+                  <h3 className="font-semibold text-lg mb-2">Early Intervention</h3>
+                  <p className="text-gray-700">
+                    Though there is no "cure," specific learning disorders can be successfully managed throughout one's life. Early intervention is key for people with a SLD.
+                  </p>
+                </div>
+                
+                <div className="bg-purple-50 p-4 rounded-lg">
+                  <h3 className="font-semibold text-lg mb-2">Educational Interventions</h3>
+                  <ul className="list-disc list-inside text-gray-700 space-y-1">
+                    <li>Systematic, intensive and individualized instruction</li>
+                    <li>Multisensory structured teaching approaches</li>
+                    <li>Individualized Education Plans (IEPs)</li>
+                    <li>Special education services</li>
+                  </ul>
+                </div>
+                
+                <div className="bg-green-50 p-4 rounded-lg">
+                  <h3 className="font-semibold text-lg mb-2">Accommodations</h3>
+                  <ul className="list-disc list-inside text-gray-700 space-y-1">
+                    <li>Additional time for tests and written assignments</li>
+                    <li>Using computers for typing rather than writing by hand</li>
+                    <li>Smaller class sizes</li>
+                    <li>Assistive technology</li>
+                  </ul>
+                </div>
+                
+                <div className="bg-gray-100 p-4 rounded-lg">
+                  <h3 className="font-semibold text-lg mb-2">Medication</h3>
+                  <p className="text-gray-700">
+                    Currently, there are no FDA approved medications for specific learning disorders. However, medications may be prescribed for co-occurring disorders such as ADHD and anxiety.
+                  </p>
+                </div>
+                
+                <div className="bg-pink-50 p-4 rounded-lg">
+                  <h3 className="font-semibold text-lg mb-2">Legal Rights</h3>
+                  <p className="text-gray-700">
+                    Under federal law, per Individuals with Disabilities Education Act (IDEA), students with learning disorders are eligible for special education services and free appropriate public education (FAPE).
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {/* LIVING WITH */}
+            <section id="social" className="bg-white rounded-lg shadow-lg p-8">
+              <h2 className="text-3xl font-bold mb-6 text-gray-900">
+                Living With Learning Disabilities
+              </h2>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div className="bg-green-50 border-l-4 border-green-400 p-4 rounded">
+                  <h3 className="text-lg font-semibold mb-2 text-green-900">How to Help Your Child</h3>
+                  <ul className="text-sm text-green-800 space-y-1">
+                    <li>• Monitor your child's progress with their IEP</li>
+                    <li>• Foster communication between specialists, school personnel and pediatrician</li>
+                    <li>• Provide an atmosphere of encouragement and support at home</li>
+                    <li>• Seek mental health support if needed</li>
+                    <li>• Take care of yourself as a caregiver</li>
+                  </ul>
+                </div>
+
+                <div className="bg-blue-50 border-l-4 border-blue-400 p-4 rounded">
+                  <h3 className="text-lg font-semibold mb-2 text-blue-900">Outlook and Prognosis</h3>
+                  <p className="text-blue-800 text-sm mb-2">
+                    Even though children don't outgrow learning disabilities, they can learn to adapt and improve their skills. Children who receive early diagnoses and interventions are more likely to overcome challenges while maintaining a positive self-image.
+                  </p>
+                  <p className="text-blue-800 text-sm">
+                    They may also build on personal strengths that tend to come with learning disorders. For example, people with dyslexia are often especially creative. Children with learning disabilities can grow to become very productive and successful adults.
+                  </p>
+                </div>
+              </div>
+
+              <div className="bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
+                <h3 className="text-lg font-semibold mb-2 text-yellow-900">Prevention</h3>
+                <p className="text-yellow-800">
+                  Learning disabilities aren't preventable, but they're often manageable with different strategies. This is most beneficial if your child receives early intervention.
+                </p>
+              </div>
+            </section>
+
+          </div>
+
+          {/* SIDEBAR */}
+          <div className="lg:col-span-1">
+            <div className="sticky top-24 space-y-6">
+
+              {/* Quick Actions */}
+              <div className="bg-white rounded-lg shadow-lg p-6">
+                <h3 className="text-lg font-semibold mb-4">Quick Actions</h3>
+                <div className="space-y-3">
+                  <Link
+                    to="/contact"
+                    className="block w-full text-center px-4 py-2 bg-[#9333EA] text-white rounded-lg hover:bg-[#7C3AED] transition-colors"
+                  >
+                    Get Professional Help
+                  </Link>
+                  <Link
+                    to="/resources"
+                    className="block w-full text-center px-4 py-2 border border-[#9333EA] text-[#9333EA] rounded-lg hover:bg-[#9333EA] hover:text-white transition-colors"
+                  >
+                    View Resources
+                  </Link>
+                </div>
+              </div>
+
+              {/* Related Topics */}
+              <div className="bg-white rounded-lg shadow-lg p-6">
+                <h3 className="text-lg font-semibold mb-4">Related Topics</h3>
+                <ul className="space-y-2">
+                  <li><Link to="/conditions/adhd" className="text-[#9333EA] hover:underline">• ADHD</Link></li>
+                  <li><Link to="/conditions/autism" className="text-[#9333EA] hover:underline">• Autism Spectrum</Link></li>
+                  <li><Link to="/conditions/learning-disabilities" className="text-[#9333EA] hover:underline">• Learning Disabilities</Link></li>
+                  <li><Link to="/conditions/memory-disorders" className="text-[#9333EA] hover:underline">• Memory Disorders</Link></li>
+                  <li><Link to="/conditions/developmental-disorders" className="text-[#9333EA] hover:underline">• Developmental Disorders</Link></li>
+                </ul>
+              </div>
+
+              <div className="bg-red-50 border border-red-200 rounded-lg p-6">
+                <h3 className="text-red-900 font-semibold">
+                  Need Immediate Help?
+                </h3>
+                <p className="text-sm text-red-800 mt-2">
+                  Crisis Hotline: 988 <br /> Emergency: 911
+                </p>
+              </div>
+
+              <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
+                <h3 className="text-blue-900 font-semibold mb-3">
+                  Did You Know?
+                </h3>
+                <p className="text-sm text-blue-800">
+                  Learning disabilities affect about 10% of people in the U.S. Dyslexia is the most common, accounting for at least 80% of all learning disabilities.
+                </p>
+              </div>
+
             </div>
           </div>
 
-          {/* Right Column - Resources */}
-          <div className="space-y-6">
-            {/* Teaching Strategies */}
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <div className="flex justify-center mb-4">
-                <div className="p-3 rounded-full" style={{ backgroundColor: '#22C55E20' }}>
-                  <Brain className="h-8 w-8" style={{ color: '#22C55E' }} />
-                </div>
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-center" style={{ color: '#22C55E' }}>Teaching Strategies</h3>
-              <ul className="space-y-3 text-gray-600 text-sm">
-                <li className="flex items-start">
-                  <span className="font-semibold mr-2">•</span>
-                  <span>Teaching strategies</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-semibold mr-2">•</span>
-                  <span>Study skills</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-semibold mr-2">•</span>
-                  <span>Universal design solutions</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-semibold mr-2">•</span>
-                  <span>Impact of a specific learning disability</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* PriHub Support Features */}
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <div className="flex justify-center mb-4">
-                <div className="p-3 rounded-full" style={{ backgroundColor: '#1B9AAA20' }}>
-                  <Users className="h-8 w-8" style={{ color: '#1B9AAA' }} />
-                </div>
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-center" style={{ color: '#1B9AAA' }}>PriHub Support Features</h3>
-              <ul className="space-y-3 text-gray-600 text-sm">
-                <li className="flex items-start">
-                  <span className="font-semibold mr-2">•</span>
-                  <span>Text-to-speech functionality</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-semibold mr-2">•</span>
-                  <span>Adaptive learning paths</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-semibold mr-2">•</span>
-                  <span>Personalized teaching strategies</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-semibold mr-2">•</span>
-                  <span>Assistive technology integration</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="font-semibold mr-2">•</span>
-                  <span>Progress tracking and analytics</span>
-                </li>
-              </ul>
-            </div>
-
-            {/* Back to All Features */}
-            <div className="bg-white rounded-lg shadow-lg p-6">
-              <Link
-                to="/all-features"
-                className="block"
-                onClick={() => window.scrollTo(0, 0)}
-              >
-                <div className="text-center">
-                  <div className="inline-flex items-center text-sm font-semibold text-blue-600 hover:text-blue-700 transition-colors duration-300">
-                    <ArrowLeft className="mr-2 h-4 w-4" />
-                    Back to All Conditions
-                    <ChevronRight className="ml-2 h-4 w-4" />
-                  </div>
-                </div>
-              </Link>
-            </div>
-          </div>
         </div>
       </div>
     </div>
