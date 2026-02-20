@@ -248,7 +248,7 @@ const MainLayout = ({ children }) => {
 
       <footer className="bg-white text-gray-800 mt-auto">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-6 items-start">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 items-start">
             <div className="flex flex-col h-full">
               <div className="flex items-center mb-4">
                 <img 
@@ -291,9 +291,13 @@ const MainLayout = ({ children }) => {
             </div>
 
             <div className="flex flex-col h-full">
-              <h3 className={`text-lg font-bold mb-4 transition-colors duration-300 ${
-                isDarkMode ? 'text-white' : ''
-              }`} style={{color: isDarkMode ? '#ffffff' : '#01181F'}}>Quick Links</h3>
+              <div className="flex items-center mb-4">
+                <div className="w-12"></div>
+                <h3 className={`text-lg font-bold transition-colors duration-300 ${
+                  isDarkMode ? 'text-white' : ''
+                }`} style={{color: isDarkMode ? '#ffffff' : '#01181F'}}>Quick Links</h3>
+                <div className="flex-1"></div>
+              </div>
               <div className="grid grid-cols-2 gap-4 text-sm">
                 <div className="space-y-2">
                   <Link to="/" className={`block transition-colors ${isDarkMode ? 'text-gray-400 hover:text-[#4C97A8]' : 'text-gray-600 hover:text-[#4C97A8]'}`} onClick={() => window.scrollTo(0, 0)}>Home</Link>
@@ -308,9 +312,6 @@ const MainLayout = ({ children }) => {
                 </div>
               </div>
             </div>
-
-            {/* Extra space between Quick Links and Contact Info */}
-            <div className="hidden md:block"></div>
 
             <div className="flex flex-col h-full">
               <h3 className={`text-lg font-bold mb-4 transition-colors duration-300 ${
@@ -348,7 +349,7 @@ const MainLayout = ({ children }) => {
 
           <div className="border-t border-gray-200 mt-8 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center">
-              <div className="text-sm text-gray-600">
+              <div className="text-sm text-gray-600 flex-1 text-center ml-80">
                 <p>&copy; 2026 Support System. All rights reserved.</p>
               </div>
               <div className="flex space-x-6 mt-4 md:mt-0">
