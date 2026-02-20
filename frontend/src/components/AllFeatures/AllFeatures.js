@@ -1,9 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowLeft, BookOpen, Brain, Users, MessageSquare, Calendar, Shield, Activity, Heart, Target, Zap, ChevronRight, FileText, Calculator, PenTool, Eye, Clock, AlertTriangle, Stethoscope, Pill, Wrench, Search } from 'lucide-react';
+import { ArrowLeft, BookOpen, Brain, Users, MessageSquare, Calendar, Shield, Activity, Heart, Target, Zap, ChevronRight, FileText, Calculator, PenTool, Eye, Clock, AlertTriangle, Stethoscope, Pill, Wrench, Search, X } from 'lucide-react';
 
 const AllFeatures = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [debouncedSearchTerm, setDebouncedSearchTerm] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
+
+  // Debounce search term
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearchTerm(searchTerm);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
+
+  const clearSearch = () => {
+    setSearchTerm('');
+    setDebouncedSearchTerm('');
+  };
   
   const allFeatures = [
     {
@@ -114,7 +130,7 @@ const AllFeatures = () => {
   ];
 
   const filteredFeatures = allFeatures.filter(feature =>
-    feature.featureTitle.toLowerCase().includes(searchTerm.toLowerCase())
+    debouncedSearchTerm.trim() === '' || feature.featureTitle.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
   );
 
   return (
@@ -139,22 +155,42 @@ const AllFeatures = () => {
 
       {/* Search Section */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="max-w-2xl mx-auto">
+        <div className="max-w-2xl ml-auto">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 transition-colors ${isFocused ? 'text-[#142C52]' : 'text-gray-400'}`} />
             <input
               type="text"
-              placeholder="Search conditions..."
+              placeholder="Search cognitive conditions, find specialized support..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#142C52] focus:border-transparent text-gray-900 placeholder-gray-500"
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+              className={`w-full pl-10 pr-12 py-3 border rounded-lg transition-all duration-200 text-gray-900 placeholder-gray-500 ${
+                isFocused 
+                  ? 'border-[#142C52] ring-2 ring-[#142C52]/20 shadow-lg' 
+                  : 'border-gray-300 hover:border-gray-400'
+              }`}
             />
+            {searchTerm && (
+              <button
+                onClick={clearSearch}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 p-1 rounded-full hover:bg-gray-100 transition-colors"
+                aria-label="Clear search"
+              >
+                <X className="h-4 w-4 text-gray-400 hover:text-gray-600" />
+              </button>
+            )}
           </div>
+          {debouncedSearchTerm && (
+            <div className="mt-2 text-sm text-gray-600">
+              Found {filteredFeatures.length} result{filteredFeatures.length !== 1 ? 's' : ''} for "{debouncedSearchTerm}"
+            </div>
+          )}
         </div>
       </div>
 
       {/* Features Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {filteredFeatures.map((featureDetail, index) => (
             <Link
