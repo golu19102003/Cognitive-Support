@@ -53,7 +53,7 @@ const CerebralPalsyEpilepsy = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-purple-700 to-indigo-800 text-white py-16">
+      <div className="bg-gradient-to-r from-[#7C3AED] to-[#3730A3] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex justify-center mb-6">

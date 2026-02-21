@@ -62,7 +62,7 @@ const ExecutiveFunctioningDisorders = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* HERO SECTION */}
-      <div className="bg-gradient-to-r from-indigo-600 to-indigo-800 text-white py-16">
+      <div className="bg-gradient-to-r from-[#4F46E5] to-[#3730A3] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex justify-center mb-6">

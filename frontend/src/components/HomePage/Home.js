@@ -93,106 +93,113 @@ const Home = () => {
       featureIcon: BookOpen,
       featureTitle: "Learning Disabilities",
       featureDescription: "Learning disabilities affect reading, writing, math, and information processing. These neurological conditions impact academic performance and daily functioning, requiring specialized educational support and accommodations to help individuals succeed in school and life.",
-      featureColor: "#0C4A50",
+      featureColor: "#16808D",
       featureLink: "/conditions/learning-disabilities"
     },
     {
       featureIcon: Target,
       featureTitle: "ADHD",
       featureDescription: "ADHD is a neurodevelopmental disorder affecting focus, hyperactivity, and impulse control. It impacts academic performance, social relationships, and daily functioning throughout life, requiring behavioral therapy, medication, and coping strategies for successful management.",
-      featureColor: "#DC2626",
+      featureColor: "#22C55E",
       featureLink: "/conditions/adhd"
     },
     {
       featureIcon: Users,
       featureTitle: "Autism Spectrum",
       featureDescription: "Autism Spectrum Disorder affects social communication, behavior, and sensory processing. Individuals experience unique challenges with social interaction, communication patterns, and repetitive behaviors, requiring personalized support and understanding to thrive in their environment.",
-      featureColor: "#7C3AED",
+      featureColor: "#1B9AAA",
       featureLink: "/conditions/autism"
     },
     {
       featureIcon: Brain,
       featureTitle: "Memory Disorders",
       featureDescription: "Memory disorders impair recall and cognitive function, including Alzheimer's, dementia, and amnesia. These conditions affect daily living, independence, and quality of life, requiring medical treatment, cognitive therapy, and caregiver support for optimal management.",
-      featureColor: "#059669",
+      featureColor: "#142C52",
       featureLink: "/conditions/memory-disorders"
     },
     {
       featureIcon: Activity,
       featureTitle: "Developmental Disorders",
       featureDescription: "Developmental Disorders impact brain development, affecting language, social skills, and learning abilities. These lifelong conditions require early intervention, specialized education, and therapeutic support to maximize potential and improve daily functioning throughout life.",
-      featureColor: "#EA580C",
+      featureColor: "#059669",
       featureLink: "/conditions/developmental-disorders"
     },
     {
       featureIcon: AlertTriangle,
       featureTitle: "Neurocognitive disorders",
       featureDescription: "Neurocognitive disorders cause progressive brain function decline, affecting memory, attention, and language. Conditions like Alzheimer's, stroke, and epilepsy range from mild to severe, impacting independence and requiring medical treatment, cognitive rehabilitation, and long-term care.",
-      featureColor: "#BE123C",
+      featureColor: "#4C97A8",
       featureLink: "/conditions/neurocognitive-disorders"
     },
     {
       featureIcon: Clock,
       featureTitle: "Dementia",
       featureDescription: "Dementia causes progressive brain deterioration, severely impairing memory, thinking, and daily functioning. This condition affects reasoning, concentration, and independence, requiring comprehensive care, cognitive support, and medical management to maintain quality of life.",
-      featureColor: "#0891B2",
+      featureColor: "#DC2626",
       featureLink: "/conditions/dementia"
+    },
+    {
+      featureIcon: Activity,
+      featureTitle: "Epilepsy & Cerebral Palsy",
+      featureDescription: "Epilepsy requires medical management and safety protocols. Cerebral Palsy affects motor and cognitive functioning, needing specialized support tools and accessibility features.",
+      featureColor: "#7C3AED",
+      featureLink: "/conditions/epilepsy-cerebral-palsy"
     },
     {
       featureIcon: Wrench,
       featureTitle: "Traumatic Brain Injury",
       featureDescription: "Traumatic brain injury results from head trauma causing nerve damage. Common causes include falls, accidents, sports injuries, and combat wounds. TBI affects cognitive, physical, and emotional functioning, requiring emergency care, rehabilitation, and long-term support.",
-      featureColor: "#6B46C1",
+      featureColor: "#178740",
       featureLink: "/conditions/traumatic-brain-injury"
     },
     {
       featureIcon: Brain,
       featureTitle: "Intellectual Disability",
       featureDescription: "Lifelong neurodevelopmental condition affecting reasoning, learning, and problem-solving. Requires simplified interfaces, specialized support tools, and comprehensive educational accommodations for optimal development and independence.",
-      featureColor: "#4C97A8",
+      featureColor: "#DB2777",
       featureLink: "/conditions/intellectual-disability"
     },
     {
       featureIcon: MessageSquare,
       featureTitle: "Speech & Language Disorders",
       featureDescription: "Includes apraxia, stuttering, and expressive/receptive language difficulties. Supports PriHub's text-to-speech, chatbot guidance, and communication tools for effective assistance and social integration.",
-      featureColor: "#02394A",
+      featureColor: "#F97316",
       featureLink: "/conditions/speech-language-disorders"
     },
     {
       featureIcon: FileText,
       featureTitle: "Specific Learning Disorders",
       featureDescription: "Dyslexia, Dyscalculia, Dysgraphia. Tailors educational resources, assistive technologies, and personalized teaching strategies for specific learning challenges and academic success.",
-      featureColor: "#178740",
+      featureColor: "#9333EA",
       featureLink: "/conditions/specific-learning-disorders"
-    },
-    {
-      featureIcon: Users,
-      featureTitle: "Social Communication Disorder",
-      featureDescription: "Affects pragmatic language use and social interaction skills. Complementary to autism spectrum; provides social support features and communication strategies for better integration.",
-      featureColor: "#1B9AAA",
-      featureLink: "/conditions/social-communication-disorder"
     },
     {
       featureIcon: Target,
       featureTitle: "Executive Functioning Disorders",
       featureDescription: "Difficulty with planning, organizing, time management, and decision-making. Integrates with PriHub reminders, notes, and task management tools for improved daily functioning and independence.",
-      featureColor: "#16808D",
+      featureColor: "#4F46E5",
       featureLink: "/conditions/executive-functioning-disorders"
     },
     {
       featureIcon: Heart,
       featureTitle: "Anxiety & Emotional Disorders",
       featureDescription: "Anxiety, depression, or stress significantly impact memory, attention, and learning. Supports PriHub's chatbot guidance, emotional support, and mental wellness resources for comprehensive care.",
-      featureColor: "#22C55E",
+      featureColor: "#BE123C",
       featureLink: "/conditions/anxiety-emotional-disorders"
     },
     {
-      featureIcon: Activity,
-      featureTitle: "Epilepsy & Cerebral Palsy",
-      featureDescription: "Epilepsy requires medical management and safety protocols. Cerebral Palsy affects motor and cognitive functioning, needing specialized support tools and accessibility features.",
+      featureIcon: Brain,
+      featureTitle: "Memory Disorders",
+      featureDescription: "Memory disorders impair recall and cognitive function, including Alzheimer's, dementia, and amnesia. These conditions affect daily living, independence, and quality of life, requiring medical treatment, cognitive therapy, and caregiver support for optimal management.",
       featureColor: "#142C52",
-      featureLink: "/conditions/epilepsy-cerebral-palsy"
+      featureLink: "/conditions/memory-disorders"
+    },
+    {
+      featureIcon: Users,
+      featureTitle: "Social Communication Disorder",
+      featureDescription: "Affects pragmatic language use and social interaction skills. Complementary to autism spectrum; provides social support features and communication strategies for better integration.",
+      featureColor: "#0891B2",
+      featureLink: "/conditions/social-communication-disorder"
     }
   ];
 
@@ -855,18 +862,16 @@ const Home = () => {
           {/* Navigation Arrows */}
           <button
             onClick={handlePrevious}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-4 z-10 bg-white rounded-full p-2 shadow-lg hover:shadow-xl transition-shadow"
-            style={{ backgroundColor: '#142C52' }}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-6 z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
           >
-            <ChevronLeft className="h-6 w-6 text-white" />
+            <ChevronLeft className="h-5 w-5" />
           </button>
           
           <button
             onClick={handleNext}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-4 z-10 bg-white rounded-full p-2 shadow-lg hover:shadow-xl transition-shadow"
-            style={{ backgroundColor: '#142C52' }}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-6 z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
           >
-            <ChevronRight className="h-6 w-6 text-white" />
+            <ChevronRight className="h-5 w-5" />
           </button>
 
           {/* Features Grid */}
@@ -879,7 +884,7 @@ const Home = () => {
                 onClick={() => window.scrollTo(0, 0)}
               >
                 <div 
-                  className={`group relative rounded-lg p-6 shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer border h-full flex flex-col ${
+                  className={`group relative rounded-lg p-6 shadow-md hover:shadow-blue-200 transition-all duration-300 transform hover:scale-105 cursor-pointer border h-full flex flex-col ${
                     isDarkMode 
                       ? 'bg-gradient-to-br from-gray-800 to-gray-900 border-gray-700' 
                       : 'bg-gradient-to-br from-gray-50 to-white border-gray-100'
@@ -888,11 +893,20 @@ const Home = () => {
                   {/* Icon */}
                   <div className="flex justify-center mb-4">
                     <div 
-                      className="p-3 rounded-full group-hover:scale-110 transition-transform duration-300"
+                      className="p-3 rounded-full group-hover:scale-110 transition-all duration-300"
                       style={{ backgroundColor: `${featureDetail.featureColor}20` }}
                     >
+                      <div 
+                        className="absolute inset-0 p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                        style={{ backgroundColor: '#E0F2FE' }}
+                      >
+                        <featureDetail.featureIcon 
+                          className="h-8 w-8 transition-colors duration-300"
+                          style={{ color: '#2563EB' }}
+                        />
+                      </div>
                       <featureDetail.featureIcon 
-                        className="h-8 w-8 group-hover:text-blue-600 transition-colors duration-300"
+                        className="h-8 w-8 group-hover:!text-sky-600 transition-colors duration-300"
                         style={{ color: featureDetail.featureColor }}
                       />
                     </div>

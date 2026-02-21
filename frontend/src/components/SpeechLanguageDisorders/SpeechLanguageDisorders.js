@@ -16,7 +16,7 @@ const SpeechLanguageDisorders = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* HERO SECTION */}
-      <div className="bg-gradient-to-r from-[#DC2626] to-[#B91C1C] text-white py-16">
+      <div className="bg-gradient-to-r from-[#F97316] to-[#EA580C] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex justify-center mb-6">
@@ -35,13 +35,13 @@ const SpeechLanguageDisorders = () => {
             <div className="flex flex-wrap justify-center gap-4 mt-8">
               <Link 
                 to="/contact" 
-                className="bg-white text-[#DC2626] px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+                className="bg-white text-[#F97316] px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
               >
                 Get Professional Help
               </Link>
               <Link 
                 to="/resources" 
-                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-[#DC2626] transition-colors"
+                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-[#F97316] transition-colors"
                 onClick={() => {
                   window.scrollTo(0, 0);
                 }}
@@ -72,7 +72,7 @@ const SpeechLanguageDisorders = () => {
                 onClick={() => scrollToSection(item.id)}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors whitespace-nowrap ${
                   activeSection === item.id
-                    ? 'bg-[#DC2626] text-white'
+                    ? 'bg-[#F97316] text-white'
                     : 'text-gray-600 hover:bg-gray-100'
                 }`}
               >
@@ -526,13 +526,13 @@ const SpeechLanguageDisorders = () => {
                 <div className="space-y-3">
                   <Link
                     to="/contact"
-                    className="block w-full text-center px-4 py-2 bg-[#DC2626] text-white rounded-lg hover:bg-[#B91C1C] transition-colors"
+                    className="block w-full text-center px-4 py-2 bg-[#F97316] text-white rounded-lg hover:bg-[#B91C1C] transition-colors"
                   >
                     Get Professional Help
                   </Link>
                   <Link
                     to="/resources"
-                    className="block w-full text-center px-4 py-2 border border-[#DC2626] text-[#DC2626] rounded-lg hover:bg-[#DC2626] hover:text-white transition-colors"
+                    className="block w-full text-center px-4 py-2 border border-[#F97316] text-[#F97316] rounded-lg hover:bg-[#F97316] hover:text-white transition-colors"
                     onClick={() => {
                       window.scrollTo(0, 0);
                     }}
@@ -546,10 +546,10 @@ const SpeechLanguageDisorders = () => {
               <div className="bg-white rounded-lg shadow-lg p-6">
                 <h3 className="text-lg font-semibold mb-4">Related Topics</h3>
                 <ul className="space-y-2">
-                  <li><Link to="/conditions/autism" className="text-[#DC2626] hover:underline">• Autism Spectrum</Link></li>
-                  <li><Link to="/conditions/intellectual-disability" className="text-[#DC2626] hover:underline">• Intellectual Disability</Link></li>
-                  <li><Link to="/conditions/learning-disabilities" className="text-[#DC2626] hover:underline">• Learning Disabilities</Link></li>
-                  <li><Link to="/conditions/adhd" className="text-[#DC2626] hover:underline">• ADHD</Link></li>
+                  <li><Link to="/conditions/autism" className="text-[#F97316] hover:underline">• Autism Spectrum</Link></li>
+                  <li><Link to="/conditions/intellectual-disability" className="text-[#F97316] hover:underline">• Intellectual Disability</Link></li>
+                  <li><Link to="/conditions/learning-disabilities" className="text-[#F97316] hover:underline">• Learning Disabilities</Link></li>
+                  <li><Link to="/conditions/adhd" className="text-[#F97316] hover:underline">• ADHD</Link></li>
                 </ul>
               </div>
 

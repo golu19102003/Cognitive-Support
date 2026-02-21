@@ -53,7 +53,7 @@ const AnxietyDisorders = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-teal-600 to-cyan-600 text-white py-16">
+      <div className="bg-gradient-to-r from-[#BE123C] to-[#991B1B] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex justify-center mb-6">
@@ -72,13 +72,13 @@ const AnxietyDisorders = () => {
             <div className="flex flex-wrap justify-center gap-4 mt-8">
               <Link 
                 to="/contact" 
-                className="bg-white text-teal-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+                className="bg-white text-[#BE123C] px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
               >
                 Get Professional Help
               </Link>
               <Link 
                 to="/resources" 
-                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-teal-600 transition-colors"
+                className="border-2 border-white text-white px-8 py-3 rounded-lg font-semibold hover:bg-white hover:text-[#BE123C] transition-colors"
                 onClick={() => {
                   window.scrollTo(0, 0);
                 }}
@@ -108,7 +108,7 @@ const AnxietyDisorders = () => {
                 onClick={() => scrollToSection(item.id)}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors whitespace-nowrap ${
                   activeSection === item.id
-                    ? 'bg-teal-600 text-white'
+                    ? 'bg-[#BE123C] text-white'
                     : 'text-gray-600 hover:bg-gray-100'
                 }`}
               >
@@ -140,19 +140,19 @@ const AnxietyDisorders = () => {
                     situations, and can last a long time if untreated. An estimated 4.4% of the global population currently 
                     experience an anxiety disorder, making it the most common of all mental disorders.
                   </p>
-                  <div className="bg-teal-50 border-l-4 border-teal-600 p-6 rounded-lg mt-6">
-                    <h3 className="font-bold text-teal-800 mb-3">Key Facts:</h3>
+                  <div className="bg-[#BE123C]/10 border-l-4 border-[#BE123C] p-6 rounded-lg mt-6">
+                    <h3 className="font-bold text-[#BE123C] mb-3">Key Facts:</h3>
                     <ul className="space-y-2">
                       <li className="flex items-start">
-                        <span className="text-teal-600 mr-2">•</span>
+                        <span className="text-[#BE123C] mr-2">•</span>
                         <span>Affects 359 million people globally (2021)</span>
                       </li>
                       <li className="flex items-start">
-                        <span className="text-teal-600 mr-2">•</span>
+                        <span className="text-[#BE123C] mr-2">•</span>
                         <span>Women are twice as likely as men to have anxiety disorders</span>
                       </li>
                       <li className="flex items-start">
-                        <span className="text-teal-600 mr-2">•</span>
+                        <span className="text-[#BE123C] mr-2">•</span>
                         <span>Highly effective treatments available</span>
                       </li>
                     </ul>
@@ -208,65 +208,65 @@ const AnxietyDisorders = () => {
                 <div className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <h3 className="font-bold text-lg text-teal-700 mb-4">Psychological Symptoms</h3>
+                      <h3 className="font-bold text-lg text-[#BE123C] mb-4">Psychological Symptoms</h3>
                       <ul className="space-y-2 text-gray-600">
                         <li className="flex items-start">
-                          <span className="text-teal-600 mr-2">•</span>
+                          <span className="text-[#BE123C] mr-2">•</span>
                           <span>Feeling panic, fear, dread and uneasiness</span>
                         </li>
                         <li className="flex items-start">
-                          <span className="text-teal-600 mr-2">•</span>
+                          <span className="text-[#BE123C] mr-2">•</span>
                           <span>Feeling on edge or irritable</span>
                         </li>
                         <li className="flex items-start">
-                          <span className="text-teal-600 mr-2">•</span>
+                          <span className="text-[#BE123C] mr-2">•</span>
                           <span>Uncontrollable, obsessive thoughts</span>
                         </li>
                         <li className="flex items-start">
-                          <span className="text-teal-600 mr-2">•</span>
+                          <span className="text-[#BE123C] mr-2">•</span>
                           <span>Difficulty concentrating</span>
                         </li>
                       </ul>
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg text-teal-700 mb-4">Physical Symptoms</h3>
+                      <h3 className="font-bold text-lg text-[#BE123C] mb-4">Physical Symptoms</h3>
                       <ul className="space-y-2 text-gray-600">
                         <li className="flex items-start">
-                          <span className="text-teal-600 mr-2">•</span>
+                          <span className="text-[#BE123C] mr-2">•</span>
                           <span>Restlessness and heart palpitations</span>
                         </li>
                         <li className="flex items-start">
-                          <span className="text-teal-600 mr-2">•</span>
+                          <span className="text-[#BE123C] mr-2">•</span>
                           <span>Shortness of breath and muscle tension</span>
                         </li>
                         <li className="flex items-start">
-                          <span className="text-teal-600 mr-2">•</span>
+                          <span className="text-[#BE123C] mr-2">•</span>
                           <span>Cold or sweaty hands, dry mouth</span>
                         </li>
                         <li className="flex items-start">
-                          <span className="text-teal-600 mr-2">•</span>
+                          <span className="text-[#BE123C] mr-2">•</span>
                           <span>Difficulty falling asleep or staying asleep</span>
                         </li>
                       </ul>
                     </div>
                   </div>
-                  <div className="bg-teal-50 border-l-4 border-teal-600 p-6 rounded-lg mt-6">
-                    <h3 className="font-bold text-teal-800 mb-3">Common Causes:</h3>
+                  <div className="bg-[#BE123C]/10 border-l-4 border-[#BE123C] p-6 rounded-lg mt-6">
+                    <h3 className="font-bold text-[#BE123C] mb-3">Common Causes:</h3>
                     <ul className="space-y-2 text-gray-700">
                       <li className="flex items-start">
-                        <span className="text-teal-600 mr-2">•</span>
+                        <span className="text-[#BE123C] mr-2">•</span>
                         <span><strong>Chemical imbalances:</strong> Neurotransmitters like serotonin, dopamine, and GABA</span>
                       </li>
                       <li className="flex items-start">
-                        <span className="text-teal-600 mr-2">•</span>
+                        <span className="text-[#BE123C] mr-2">•</span>
                         <span><strong>Brain changes:</strong> Increased amygdala activity in response to anxiety cues</span>
                       </li>
                       <li className="flex items-start">
-                        <span className="text-teal-600 mr-2">•</span>
+                        <span className="text-[#BE123C] mr-2">•</span>
                         <span><strong>Genetics:</strong> Family history increases risk factors</span>
                       </li>
                       <li className="flex items-start">
-                        <span className="text-teal-600 mr-2">•</span>
+                        <span className="text-[#BE123C] mr-2">•</span>
                         <span><strong>Environmental factors:</strong> Severe stress and traumatic events</span>
                       </li>
                     </ul>
@@ -316,7 +316,7 @@ const AnxietyDisorders = () => {
                 <div className="space-y-6">
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <h3 className="font-bold text-lg text-teal-700 mb-4">Medication</h3>
+                      <h3 className="font-bold text-lg text-[#BE123C] mb-4">Medication</h3>
                       <div className="space-y-3 text-gray-600">
                         <p><strong>Antidepressants:</strong> SSRIs and SNRIs adjust brain chemicals</p>
                         <p><strong>Benzodiazepines:</strong> Quick relief but short-term use only</p>
@@ -324,7 +324,7 @@ const AnxietyDisorders = () => {
                       </div>
                     </div>
                     <div>
-                      <h3 className="font-bold text-lg text-teal-700 mb-4">Psychotherapy</h3>
+                      <h3 className="font-bold text-lg text-[#BE123C] mb-4">Psychotherapy</h3>
                       <div className="space-y-3 text-gray-600">
                         <p><strong>Cognitive Behavioral Therapy (CBT):</strong> Most common approach</p>
                         <p><strong>Exposure Therapy:</strong> Safe confrontation of fears</p>
@@ -332,19 +332,19 @@ const AnxietyDisorders = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="bg-green-50 border-l-4 border-green-600 p-6 rounded-lg mt-6">
-                    <h3 className="font-bold text-green-800 mb-3">Treatment Goals:</h3>
+                  <div className="bg-[#BE123C]/10 border-l-4 border-[#BE123C] p-6 rounded-lg mt-6">
+                    <h3 className="font-bold text-[#BE123C] mb-3">Treatment Goals:</h3>
                     <ul className="space-y-2 text-gray-700">
                       <li className="flex items-start">
-                        <span className="text-green-600 mr-2">✓</span>
+                        <span className="text-[#BE123C] mr-2">✓</span>
                         <span>Reduce frequency and intensity of anxiety symptoms</span>
                       </li>
                       <li className="flex items-start">
-                        <span className="text-green-600 mr-2">✓</span>
+                        <span className="text-[#BE123C] mr-2">✓</span>
                         <span>Improve daily functioning and quality of life</span>
                       </li>
                       <li className="flex items-start">
-                        <span className="text-green-600 mr-2">✓</span>
+                        <span className="text-[#BE123C] mr-2">✓</span>
                         <span>Develop effective coping strategies</span>
                       </li>
                     </ul>
@@ -476,13 +476,13 @@ const AnxietyDisorders = () => {
                 <div className="space-y-3">
                   <Link
                     to="/contact"
-                    className="block w-full text-center px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors"
+                    className="block w-full text-center px-4 py-2 bg-[#BE123C] text-white rounded-lg hover:bg-[#991B1B] transition-colors"
                   >
                     Get Professional Help
                   </Link>
                   <Link
                     to="/resources"
-                    className="block w-full text-center px-4 py-2 border border-teal-600 text-teal-600 rounded-lg hover:bg-teal-600 hover:text-white transition-colors"
+                    className="block w-full text-center px-4 py-2 border border-[#BE123C] text-[#BE123C] rounded-lg hover:bg-[#BE123C] hover:text-white transition-colors"
                     onClick={() => {
                       window.scrollTo(0, 0);
                     }}
@@ -496,18 +496,18 @@ const AnxietyDisorders = () => {
               <div className="bg-white rounded-lg shadow-lg p-6">
                 <h3 className="text-lg font-semibold mb-4">Related Topics</h3>
                 <ul className="space-y-2">
-                  <li><Link to="/conditions/depression" className="text-teal-600 hover:underline">• Depression</Link></li>
-                  <li><Link to="/conditions/stress-management" className="text-teal-600 hover:underline">• Stress Management</Link></li>
-                  <li><Link to="/conditions/panic-disorders" className="text-teal-600 hover:underline">• Panic Disorders</Link></li>
-                  <li><Link to="/conditions/social-anxiety" className="text-teal-600 hover:underline">• Social Anxiety</Link></li>
-                  <li><Link to="/conditions/ptsd" className="text-teal-600 hover:underline">• PTSD</Link></li>
-                  <li><Link to="/conditions/ocd" className="text-teal-600 hover:underline">• OCD</Link></li>
+                  <li><Link to="/conditions/depression" className="text-[#BE123C] hover:underline">• Depression</Link></li>
+                  <li><Link to="/conditions/stress-management" className="text-[#BE123C] hover:underline">• Stress Management</Link></li>
+                  <li><Link to="/conditions/panic-disorders" className="text-[#BE123C] hover:underline">• Panic Disorders</Link></li>
+                  <li><Link to="/conditions/social-anxiety" className="text-[#BE123C] hover:underline">• Social Anxiety</Link></li>
+                  <li><Link to="/conditions/ptsd" className="text-[#BE123C] hover:underline">• PTSD</Link></li>
+                  <li><Link to="/conditions/ocd" className="text-[#BE123C] hover:underline">• OCD</Link></li>
                 </ul>
               </div>
 
               {/* Assessment Tools */}
               <div className="bg-white rounded-lg shadow-lg p-6">
-                <h3 className="font-bold text-lg mb-4 text-teal-600">Assessment Tools</h3>
+                <h3 className="font-bold text-lg mb-4 text-[#BE123C]">Assessment Tools</h3>
                 <div className="space-y-3">
                   <div className="p-3 bg-blue-50 rounded-lg">
                     <h4 className="font-medium text-blue-700 mb-2">GAD-7 Scale</h4>

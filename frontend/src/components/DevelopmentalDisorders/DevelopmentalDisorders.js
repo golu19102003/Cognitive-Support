@@ -16,7 +16,7 @@ const DevelopmentalDisorders = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* HERO SECTION */}
-      <div className="bg-gradient-to-r from-[#0F172A] to-[#0F172A] text-white py-16">
+      <div className="bg-gradient-to-r from-[#059669] to-[#047857] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex justify-center mb-6">
@@ -69,7 +69,7 @@ const DevelopmentalDisorders = () => {
                 onClick={() => scrollToSection(item.id)}
                 className={`flex items-center space-x-2 px-4 py-2 rounded-lg transition-colors whitespace-nowrap ${
                   activeSection === item.id
-                    ? 'bg-[#02394A] text-white'
+                    ? 'bg-[#059669] text-white'
                     : 'text-gray-600 hover:bg-gray-100'
                 }`}
               >
@@ -421,13 +421,13 @@ const DevelopmentalDisorders = () => {
                 <div className="space-y-3">
                   <Link
                     to="/contact"
-                    className="block w-full text-center px-4 py-2 bg-[#02394A] text-white rounded-lg hover:bg-[#0F172A] transition-colors"
+                    className="block w-full text-center px-4 py-2 bg-[#059669] text-white rounded-lg hover:bg-[#047857] transition-colors"
                   >
                     Get Professional Help
                   </Link>
                   <Link
                     to="/resources"
-                    className="block w-full text-center px-4 py-2 border border-[#02394A] text-[#02394A] rounded-lg hover:bg-[#02394A] hover:text-white transition-colors"
+                    className="block w-full text-center px-4 py-2 border border-[#059669] text-[#059669] rounded-lg hover:bg-[#059669] hover:text-white transition-colors"
                   >
                     View Resources
                   </Link>
@@ -438,10 +438,10 @@ const DevelopmentalDisorders = () => {
               <div className="bg-white rounded-lg shadow-lg p-6">
                 <h3 className="text-lg font-semibold mb-4">Related Topics</h3>
                 <ul className="space-y-2">
-                  <li><Link to="/conditions/autism" className="text-[#02394A] hover:underline">• Autism Spectrum</Link></li>
-                  <li><Link to="/conditions/adhd" className="text-[#02394A] hover:underline">• ADHD</Link></li>
-                  <li><Link to="/conditions/learning-disabilities" className="text-[#02394A] hover:underline">• Learning Disabilities</Link></li>
-                  <li><Link to="/conditions/intellectual-disability" className="text-[#02394A] hover:underline">• Intellectual Disability</Link></li>
+                  <li><Link to="/conditions/autism" className="text-[#059669] hover:underline">• Autism Spectrum</Link></li>
+                  <li><Link to="/conditions/adhd" className="text-[#059669] hover:underline">• ADHD</Link></li>
+                  <li><Link to="/conditions/learning-disabilities" className="text-[#059669] hover:underline">• Learning Disabilities</Link></li>
+                  <li><Link to="/conditions/intellectual-disability" className="text-[#059669] hover:underline">• Intellectual Disability</Link></li>
                 </ul>
               </div>
 

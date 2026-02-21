@@ -26,7 +26,7 @@ const AllFeatures = () => {
       featureIcon: BookOpen,
       featureTitle: "Learning Disabilities",
       featureDescription: "Learning disabilities affect reading, writing, math, and information processing. These neurological conditions impact academic performance and daily functioning, requiring specialized educational support and accommodations to help individuals succeed in school and life.",
-      featureColor: "#0C4A50",
+      featureColor: "#16808D",
       featureLink: "/conditions/learning-disabilities"
     },
     {
@@ -44,6 +44,13 @@ const AllFeatures = () => {
       featureLink: "/conditions/autism"
     },
     {
+      featureIcon: Activity,
+      featureTitle: "Epilepsy & Cerebral Palsy",
+      featureDescription: "Epilepsy requires medical management and safety protocols. Cerebral Palsy affects motor and cognitive functioning, needing specialized support tools and accessibility features.",
+      featureColor: "#7C3AED",
+      featureLink: "/conditions/epilepsy-cerebral-palsy"
+    },
+    {
       featureIcon: Brain,
       featureTitle: "Memory Disorders",
       featureDescription: "Memory disorders impair recall and cognitive function, including Alzheimer's, dementia, and amnesia. These conditions affect daily living, independence, and quality of life, requiring medical treatment, cognitive therapy, and caregiver support for optimal management.",
@@ -54,8 +61,15 @@ const AllFeatures = () => {
       featureIcon: Activity,
       featureTitle: "Developmental Disorders",
       featureDescription: "Developmental Disorders impact brain development, affecting language, social skills, and learning abilities. These lifelong conditions require early intervention, specialized education, and therapeutic support to maximize potential and improve daily functioning throughout life.",
-      featureColor: "#02394A",
+      featureColor: "#059669",
       featureLink: "/conditions/developmental-disorders"
+    },
+    {
+      featureIcon: Clock,
+      featureTitle: "Dementia",
+      featureDescription: "Dementia causes progressive brain deterioration, severely impairing memory, thinking, and daily functioning. This condition affects reasoning, concentration, and independence, requiring comprehensive care, cognitive support, and medical management to maintain quality of life.",
+      featureColor: "#DC2626",
+      featureLink: "/conditions/dementia"
     },
     {
       featureIcon: AlertTriangle,
@@ -63,13 +77,6 @@ const AllFeatures = () => {
       featureDescription: "Neurocognitive disorders cause progressive brain function decline, affecting memory, attention, and language. Conditions like Alzheimer's, stroke, and epilepsy range from mild to severe, impacting independence and requiring medical treatment, cognitive rehabilitation, and long-term care.",
       featureColor: "#4C97A8",
       featureLink: "/conditions/neurocognitive-disorders"
-    },
-    {
-      featureIcon: Clock,
-      featureTitle: "Dementia",
-      featureDescription: "Dementia causes progressive brain deterioration, severely impairing memory, thinking, and daily functioning. This condition affects reasoning, concentration, and independence, requiring comprehensive care, cognitive support, and medical management to maintain quality of life.",
-      featureColor: "#16808D",
-      featureLink: "/conditions/dementia"
     },
     {
       featureIcon: Wrench,
@@ -82,35 +89,28 @@ const AllFeatures = () => {
       featureIcon: Brain,
       featureTitle: "Intellectual Disability",
       featureDescription: "Lifelong neurodevelopmental condition affecting reasoning, learning, and problem-solving. Requires simplified interfaces, specialized support tools, and comprehensive educational accommodations for optimal development and independence.",
-      featureColor: "#6B46C1",
+      featureColor: "#DB2777",
       featureLink: "/conditions/intellectual-disability"
     },
     {
       featureIcon: MessageSquare,
       featureTitle: "Speech & Language Disorders",
       featureDescription: "Includes apraxia, stuttering, and expressive/receptive language difficulties. Supports PriHub's text-to-speech, chatbot guidance, and communication tools for effective assistance and social integration.",
-      featureColor: "#DC2626",
+      featureColor: "#F97316",
       featureLink: "/conditions/speech-language-disorders"
     },
     {
       featureIcon: FileText,
       featureTitle: "Specific Learning Disorders",
       featureDescription: "Dyslexia, Dyscalculia, Dysgraphia. Tailors educational resources, assistive technologies, and personalized teaching strategies for specific learning challenges and academic success.",
-      featureColor: "#059669",
+      featureColor: "#9333EA",
       featureLink: "/conditions/specific-learning-disorders"
-    },
-    {
-      featureIcon: Users,
-      featureTitle: "Social Communication Disorder",
-      featureDescription: "Affects pragmatic language use and social interaction skills. Complementary to autism spectrum; provides social support features and communication strategies for better integration.",
-      featureColor: "#0891B2",
-      featureLink: "/conditions/social-communication-disorder"
     },
     {
       featureIcon: Target,
       featureTitle: "Executive Functioning Disorders",
       featureDescription: "Difficulty with planning, organizing, time management, and decision-making. Integrates with PriHub reminders, notes, and task management tools for improved daily functioning and independence.",
-      featureColor: "#7C3AED",
+      featureColor: "#4F46E5",
       featureLink: "/conditions/executive-functioning-disorders"
     },
     {
@@ -121,11 +121,11 @@ const AllFeatures = () => {
       featureLink: "/conditions/anxiety-emotional-disorders"
     },
     {
-      featureIcon: Activity,
-      featureTitle: "Epilepsy & Cerebral Palsy",
-      featureDescription: "Epilepsy requires medical management and safety protocols. Cerebral Palsy affects motor and cognitive functioning, needing specialized support tools and accessibility features.",
-      featureColor: "#EA580C",
-      featureLink: "/conditions/epilepsy-cerebral-palsy"
+      featureIcon: Users,
+      featureTitle: "Social Communication Disorder",
+      featureDescription: "Affects pragmatic language use and social interaction skills. Complementary to autism spectrum; provides social support features and communication strategies for better integration.",
+      featureColor: "#0891B2",
+      featureLink: "/conditions/social-communication-disorder"
     }
   ];
 
@@ -200,16 +200,25 @@ const AllFeatures = () => {
               onClick={() => window.scrollTo(0, 0)}
             >
               <div 
-                className="group relative bg-gradient-to-br from-gray-50 to-white rounded-lg p-6 shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer border border-gray-100 h-full flex flex-col"
+                className="group relative bg-gradient-to-br from-gray-50 to-white rounded-lg p-6 shadow-md hover:shadow-blue-200 transition-all duration-300 transform hover:scale-105 cursor-pointer border border-gray-100 h-full flex flex-col"
               >
                 {/* Icon */}
                 <div className="flex justify-center mb-4">
                   <div 
-                    className="p-3 rounded-full group-hover:scale-110 transition-transform duration-300"
+                    className="p-3 rounded-full group-hover:scale-110 transition-all duration-300"
                     style={{ backgroundColor: `${featureDetail.featureColor}20` }}
                   >
+                    <div 
+                      className="absolute inset-0 p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                      style={{ backgroundColor: '#E0F2FE' }}
+                    >
+                      <featureDetail.featureIcon 
+                        className="h-8 w-8 transition-colors duration-300"
+                        style={{ color: '#2563EB' }}
+                      />
+                    </div>
                     <featureDetail.featureIcon 
-                      className="h-8 w-8"
+                      className="h-8 w-8 transition-colors duration-300"
                       style={{ color: featureDetail.featureColor }}
                     />
                   </div>
@@ -218,7 +227,8 @@ const AllFeatures = () => {
                 {/* Content */}
                 <div className="flex-grow text-center">
                   <h3 
-                    className="text-xl font-bold mb-3 group-hover:text-blue-600 transition-colors"
+                    className="text-xl font-bold mb-3 transition-colors group-hover:!text-blue-600"
+                    style={{ color: featureDetail.featureColor }}
                   >
                     {featureDetail.featureTitle}
                   </h3>
@@ -230,7 +240,8 @@ const AllFeatures = () => {
                 {/* Learn More */}
                 <div className="mt-4 text-center">
                   <span 
-                    className="inline-flex items-center text-sm font-semibold group-hover:text-blue-600 transition-colors"
+                    className="inline-flex items-center text-sm font-semibold transition-colors group-hover:!text-blue-600"
+                    style={{ color: featureDetail.featureColor }}
                   >
                     Learn more
                     <ChevronRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
