@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import MainLayout from './components/Layout/MainLayout';
 import HomePage from './components/HomePage/Home';
 import AboutPage from './components/AboutPage/About';
+import GenesisExplore from './components/AboutPage/GenesisExplore';
+import CommunityExplore from './components/AboutPage/CommunityExplore';
+import InnovationExplore from './components/AboutPage/InnovationExplore';
 import ContactPage from './components/ContactPage/Contact';
 import SignInPage from './components/AuthPages/Login';
 import Register from './components/AuthPages/Register';
@@ -40,6 +43,9 @@ function Application() {
           <Route path="/login" element={<SignInPage />} />
           <Route path="/signin" element={<SignInPage />} />
           <Route path="/about" element={<AboutPage />} />
+          <Route path="/about/genesis" element={<GenesisExplore />} />
+          <Route path="/about/community" element={<CommunityExplore />} />
+          <Route path="/about/innovation" element={<InnovationExplore />} />
           <Route path="/dashboard" element={<UserDashboard />} />
           <Route path="/residents" element={<UserDashboard />} />
           <Route path="/therapy" element={<UserDashboard />} />

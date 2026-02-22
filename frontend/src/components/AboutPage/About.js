@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-import { Users, Brain, Heart, BookOpen, Users2, Shield, Phone, Mail, MapPin, ChevronRight } from 'lucide-react';
+import { Users, Brain, Heart, BookOpen, Users2, Shield, Phone, Mail, MapPin, ChevronRight, Calendar, Award, TrendingUp, Globe, Zap, Star, ArrowRight, Play, Pause, RotateCw } from 'lucide-react';
+
+import GenesisExplore from './GenesisExplore';
+import CommunityExplore from './CommunityExplore';
+import InnovationExplore from './InnovationExplore';
 
 
 
@@ -9,6 +14,18 @@ const About = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   const [activeSection, setActiveSection] = useState('mission');
+
+  const [activeTimeline, setActiveTimeline] = useState(0);
+
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const [hoveredMilestone, setHoveredMilestone] = useState(null);
+
+  const [selectedStat, setSelectedStat] = useState(null);
+
+  const [explorePage, setExplorePage] = useState(null);
+
+  const navigate = useNavigate();
 
 
 
@@ -269,13 +286,9 @@ const About = () => {
             <div className="absolute inset-0 bg-gradient-to-r from-[#16808D]/10 to-purple-500/10 animate-pulse"></div>
 
             <div className="relative z-10">
-
               <Brain className="h-16 w-16 text-[#16808D] mx-auto mb-4 animate-bounce" />
-
               <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-[#16808D] to-purple-600 bg-clip-text text-transparent">
-
-                Our Mission
-
+                <span style={{ color: '#16808D' }}>Our Mission</span>
               </h2>
 
               <p className="text-lg max-w-2xl mx-auto italic leading-relaxed">
@@ -911,27 +924,357 @@ const About = () => {
 
 
       {activeSection === 'story' && (
-
-        <div className="text-center py-12 relative overflow-hidden">
-
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-600/10 to-pink-600/10 animate-pulse"></div>
-
-          <div className="relative z-10">
-
-            <BookOpen className="h-16 w-16 text-purple-600 mx-auto mb-4 animate-bounce" />
-
-            <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Our Story</h2>
-
-            <p className="text-lg max-w-2xl mx-auto italic">
-
-              Founded with a deep understanding of challenges faced by individuals with cognitive disabilities, our journey began when passionate professionals and families came together to create comprehensive support services. Through collaboration, innovation, and unwavering dedication, we've grown into a trusted resource that empowers lives and transforms communities through inclusive support and understanding.
-
-            </p>
-
+        <div className="animate-fadeIn">
+          <div className="text-center py-12 relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-600/10 to-pink-600/10 animate-pulse"></div>
+            <div className="relative z-10">
+              <BookOpen className="h-16 w-16 text-purple-600 mx-auto mb-4 animate-bounce" />
+              <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Our Story</h2>
+              <p className="text-lg max-w-2xl mx-auto italic leading-relaxed">
+                Founded with a deep understanding of challenges faced by individuals with cognitive disabilities, our journey began when passionate professionals and families came together to create comprehensive support services. Through collaboration, innovation, and unwavering dedication, we've grown into a trusted resource that empowers lives and transforms communities through inclusive support and understanding.
+              </p>
+            </div>
           </div>
 
-        </div>
+          {/* Story Journey Timeline */}
+          <div className={`bg-white rounded-lg shadow-lg p-8 transition-all duration-300 hover:shadow-xl mb-8 transform hover:scale-[1.02] ${
+            isDarkMode ? 'bg-gray-800' : 'bg-white'
+          }`}>
+            <div className="flex items-center mb-6">
+              <BookOpen className="h-12 w-12 text-purple-600 mr-3 animate-pulse" />
+              <h2 className={`text-2xl font-bold transition-colors duration-300 ${
+                isDarkMode ? 'text-white' : 'text-gray-900'
+              }`}>Our Journey Timeline</h2>
+            </div>
 
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {[
+                {
+                  title: "The Genesis (2019)",
+                  description: "Our journey began when healthcare professionals, educators, and families recognized critical gaps in cognitive support services. Through countless conversations with individuals living with cognitive disabilities, we understood the urgent need for comprehensive, accessible, and personalized support solutions.",
+                  icon: "🌱",
+                  color: "purple",
+                  stats: { year: "2019", impact: "Foundation", growth: "100%" }
+                },
+                {
+                  title: "Community Building (2020-2021)",
+                  description: "We built our foundation on collaboration with neurodiversity advocates, cognitive specialists, technology experts, and most importantly, individuals with lived experiences. This collective wisdom shaped our approach to creating inclusive, empowering, and effective support systems.",
+                  icon: "🤝",
+                  color: "pink",
+                  stats: { years: "2020-2021", impact: "Collaboration", growth: "300%" }
+                },
+                {
+                  title: "Innovation & Growth (2022-Present)",
+                  description: "Leveraging cutting-edge technology and evidence-based practices, we developed innovative solutions that adapt to individual needs. Our commitment to continuous improvement and research ensures we remain at the forefront of cognitive support services.",
+                  icon: "🚀",
+                  color: "indigo",
+                  stats: { years: "2022+", impact: "Innovation", growth: "500%" }
+                }
+              ].map((phase, index) => (
+                <div 
+                  key={index}
+                  className={`relative border-l-4 transition-all duration-300 hover:shadow-lg hover:transform hover:scale-105 ${
+                    `border-${phase.color}-600 bg-gradient-to-r from-${phase.color}-50 to-${phase.color}-100 dark:from-${phase.color}-900/20 dark:to-${phase.color}-800/20`
+                  } rounded-xl p-6 group`}
+                >
+                  {/* Corner Number Badge */}
+                  <div className={`absolute -top-2 -right-2 w-8 h-8 rounded-full flex items-center justify-center bg-${phase.color}-600 shadow-lg`}>
+                    <span className="text-white text-xs font-bold">{index + 1}</span>
+                  </div>
+
+                  {/* Phase Icon */}
+                  <div className="flex items-center mb-4">
+                    <div className="text-4xl mr-3">
+                      {phase.icon}
+                    </div>
+                    <div className="flex-1">
+                      <h3 className={`text-lg font-bold text-${phase.color}-600 ${
+                        isDarkMode ? 'text-white' : 'text-gray-900'
+                      }`}>{phase.title}</h3>
+                    </div>
+                  </div>
+
+                  {/* Stats Display */}
+                  <div className={`grid grid-cols-3 gap-2 mb-4`}>
+                    {Object.entries(phase.stats).map(([key, value]) => (
+                      <div key={key} className={`text-center p-2 rounded-lg bg-${phase.color}-50 dark:bg-${phase.color}-900/20`}>
+                        <div className={`text-xs font-semibold text-${phase.color}-600 dark:text-${phase.color}-400 capitalize`}>{key}</div>
+                        <div className={`text-sm font-bold text-${phase.color}-700 dark:text-${phase.color}-300`}>{value}</div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Description */}
+                  <p className={`text-sm leading-relaxed ${
+                    isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                  }`}>
+                    {phase.description}
+                  </p>
+
+                  {/* Progress Bar */}
+                  <div className="mt-4">
+                    <div className={`h-2 bg-${phase.color}-200 dark:bg-${phase.color}-800 rounded-full overflow-hidden`}>
+                      <div 
+                        className={`h-full bg-gradient-to-r from-${phase.color}-400 to-${phase.color}-600 transition-all duration-1000 rounded-full`}
+                        style={{ width: '100%' }}
+                      ></div>
+                    </div>
+                  </div>
+
+                  {/* Explore More Button */}
+                  <div className="absolute -bottom-3 left-1/2 transform -translate-x-1/2">
+                    <button 
+                      onClick={() => {
+                        console.log('Explore More clicked for phase:', phase.color);
+                        const targetPage = phase.color === 'purple' ? 'genesis' : phase.color === 'pink' ? 'community' : 'innovation';
+                        console.log('Navigating to explore page:', targetPage);
+                        setExplorePage(targetPage);
+                        // Navigate to the explore page
+                        navigate(`/about/${targetPage}`);
+                      }}
+                      className={`bg-${phase.color}-600 text-white px-4 py-2 rounded-full text-xs font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 flex items-center space-x-1`}
+                    >
+                      <ArrowRight className="w-3 h-3" />
+                      Explore More
+                    </button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Impact Statistics */}
+          <div className={`bg-white rounded-lg shadow-lg p-8 transition-all duration-300 hover:shadow-xl mb-8 transform hover:scale-[1.02] ${
+            isDarkMode ? 'bg-gray-800' : 'bg-white'
+          }`}>
+            <div className="flex items-center mb-6">
+              <Heart className="h-12 w-12 text-purple-600 mr-3 animate-pulse" />
+              <h2 className={`text-2xl font-bold transition-colors duration-300 ${
+                isDarkMode ? 'text-white' : 'text-gray-900'
+              }`}>Our Impact Journey</h2>
+            </div>
+
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+              {[
+                { value: "10,000+", label: "Lives Impacted", icon: "👥", color: "purple", trend: "+25%" },
+                { value: "500+", label: "Professional Partners", icon: "🤝", color: "pink", trend: "+40%" },
+                { value: "50+", label: "Support Programs", icon: "🎯", color: "indigo", trend: "+60%" },
+                { value: "24/7", label: "Support Available", icon: "⏰", color: "green", trend: "100%" }
+              ].map((stat, index) => (
+                <div 
+                  key={index}
+                  className={`relative bg-gradient-to-br from-${stat.color}-50 to-${stat.color}-100 dark:from-${stat.color}-900/20 dark:to-${stat.color}-800/20 rounded-xl p-6 transition-all duration-500 cursor-pointer group ${
+                    selectedStat === index ? 'scale-110 shadow-2xl ring-4 ring-' + stat.color + '-400 ring-opacity-50' : 'hover:scale-105 hover:shadow-xl'
+                  }`}
+                  onClick={() => setSelectedStat(selectedStat === index ? null : index)}
+                  onMouseEnter={() => setSelectedStat(index)}
+                >
+                  {/* Floating Icon */}
+                  <div className={`absolute -top-3 left-1/2 transform -translate-x-1/2 text-3xl transition-all duration-500 ${
+                    selectedStat === index ? 'scale-125 rotate-12' : 'group-hover:scale-110 group-hover:rotate-6'
+                  }`}>
+                    {stat.icon}
+                  </div>
+
+                  {/* Animated Counter */}
+                  <div className={`text-3xl font-bold mb-2 transition-all duration-500 ${
+                    selectedStat === index ? `text-${stat.color}-600 scale-110` : `text-${stat.color}-600 group-hover:scale-105`
+                  }`}>
+                    <span className="inline-block transition-all duration-1000" style={{
+                      animation: selectedStat === index ? 'countUp 1s ease-out' : 'none'
+                    }}>
+                      {stat.value}
+                    </span>
+                  </div>
+
+                  {/* Label with Trend */}
+                  <div className="relative">
+                    <p className={`text-sm font-medium transition-colors duration-300 ${
+                      isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                    }`}>
+                      {stat.label}
+                    </p>
+                    
+                    {/* Trend Indicator */}
+                    <div className={`absolute -top-1 -right-1 flex items-center space-x-1 px-2 py-1 rounded-full bg-${stat.color}-100 dark:bg-${stat.color}-800 transition-all duration-300 ${
+                      selectedStat === index ? 'scale-110 opacity-100' : 'opacity-0 group-hover:opacity-100 scale-105'
+                    }`}>
+                      <TrendingUp className={`w-3 h-3 text-${stat.color}-600`} />
+                      <span className={`text-xs font-bold text-${stat.color}-700 dark:text-${stat.color}-300`}>{stat.trend}</span>
+                    </div>
+                  </div>
+
+                  {/* Pulse Effect */}
+                  <div className={`absolute inset-0 rounded-xl transition-all duration-1000 ${
+                    selectedStat === index ? `bg-${stat.color}-400 opacity-20 animate-pulse` : 'opacity-0'
+                  }`}></div>
+
+                  {/* Detail Expansion */}
+                  {selectedStat === index && (
+                    <div className="absolute top-full left-1/2 transform -translate-x-1/2 mt-2 z-50">
+                      <div className={`bg-white dark:bg-gray-800 rounded-lg shadow-2xl p-4 border border-${stat.color}-200 dark:border-${stat.color}-700 transition-all duration-300 animate-fadeIn`}>
+                        <div className="flex items-center space-x-2 mb-2">
+                          <Award className={`w-4 h-4 text-${stat.color}-600`} />
+                          <span className={`text-sm font-bold text-${stat.color}-700 dark:text-${stat.color}-300`}>Achievement Unlocked</span>
+                        </div>
+                        <p className={`text-xs text-gray-600 dark:text-gray-300`}>
+                          Click to explore detailed insights about our {stat.label.toLowerCase()} milestone and impact stories.
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Key Milestones */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* Milestones Section */}
+            <div className={`bg-white rounded-lg shadow-lg p-8 transition-colors duration-300 ${
+              isDarkMode ? 'bg-gray-800' : 'bg-white'
+            }`}>
+              <div className="flex items-center mb-6">
+                <Shield className="h-12 w-12 text-purple-600" />
+              </div>
+              <h2 className={`text-2xl font-bold mb-4 transition-colors duration-300 ${
+                isDarkMode ? 'text-white' : 'text-gray-900'
+              }`}>Key Milestones</h2>
+              <p className={`leading-relaxed transition-colors duration-300 ${
+                isDarkMode ? 'text-gray-300' : 'text-gray-600'
+              }`}>
+                Our journey has been marked by significant achievements that have transformed cognitive support services and empowered countless individuals to lead more independent, fulfilling lives.
+              </p>
+
+              <div className="mt-6 space-y-4">
+                <div className="flex items-start space-x-3">
+                  <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-white font-bold">1</span>
+                  </div>
+                  <div>
+                    <h3 className={`text-lg font-semibold transition-colors duration-300 ${
+                      isDarkMode ? 'text-white' : 'text-gray-900'
+                    }`}>Launch of PriHub Platform</h3>
+                    <p className={`transition-colors duration-300 ${
+                      isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                    }`}>
+                      Revolutionized digital accessibility with AI-powered cognitive support tools and personalized assistance features.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-3">
+                  <div className="w-8 h-8 bg-pink-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-white font-bold">2</span>
+                  </div>
+                  <div>
+                    <h3 className={`text-lg font-semibold transition-colors duration-300 ${
+                      isDarkMode ? 'text-white' : 'text-gray-900'
+                    }`}>National Recognition</h3>
+                    <p className={`transition-colors duration-300 ${
+                      isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                    }`}>
+                      Received multiple awards for innovation in cognitive accessibility and inclusive technology solutions.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-3">
+                  <div className="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-white font-bold">3</span>
+                  </div>
+                  <div>
+                    <h3 className={`text-lg font-semibold transition-colors duration-300 ${
+                      isDarkMode ? 'text-white' : 'text-gray-900'
+                    }`}>Global Partnership Network</h3>
+                    <p className={`transition-colors duration-300 ${
+                      isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                    }`}>
+                      Established partnerships with leading healthcare institutions and cognitive research centers worldwide.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Vision Section */}
+            <div className={`bg-white rounded-lg shadow-lg p-8 transition-colors duration-300 ${
+              isDarkMode ? 'bg-gray-800' : 'bg-white'
+            }`}>
+              <div className="flex items-center mb-6">
+                <Users2 className="h-12 w-12 text-purple-600" />
+              </div>
+              <h2 className={`text-2xl font-bold mb-4 transition-colors duration-300 ${
+                isDarkMode ? 'text-white' : 'text-gray-900'
+              }`}>Our Vision for Tomorrow</h2>
+              <p className={`leading-relaxed transition-colors duration-300 ${
+                isDarkMode ? 'text-gray-300' : 'text-gray-600'
+              }`}>
+                We envision a world where cognitive disabilities are no longer barriers to success, where technology empowers every individual to reach their full potential, and where inclusive communities celebrate neurodiversity as a strength.
+              </p>
+
+              <div className="mt-6 space-y-4">
+                <div className="flex items-start space-x-3">
+                  <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-white font-bold">✓</span>
+                  </div>
+                  <div>
+                    <h3 className={`text-lg font-semibold transition-colors duration-300 ${
+                      isDarkMode ? 'text-white' : 'text-gray-900'
+                    }`}>Advanced AI Integration</h3>
+                    <p className={`transition-colors duration-300 ${
+                      isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                    }`}>
+                      Next-generation artificial intelligence for personalized cognitive support and adaptive learning experiences.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-3">
+                  <div className="w-8 h-8 bg-pink-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-white font-bold">✓</span>
+                  </div>
+                  <div>
+                    <h3 className={`text-lg font-semibold transition-colors duration-300 ${
+                      isDarkMode ? 'text-white' : 'text-gray-900'
+                    }`}>Global Accessibility Standards</h3>
+                    <p className={`transition-colors duration-300 ${
+                      isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                    }`}>
+                      Setting new benchmarks for digital accessibility and cognitive support across all platforms and devices.
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-3">
+                  <div className="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-white font-bold">✓</span>
+                  </div>
+                  <div>
+                    <h3 className={`text-lg font-semibold transition-colors duration-300 ${
+                      isDarkMode ? 'text-white' : 'text-gray-900'
+                    }`}>Community Empowerment</h3>
+                    <p className={`transition-colors duration-300 ${
+                      isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                    }`}>
+                      Building self-sustaining communities where individuals with cognitive disabilities support and empower each other.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Inspirational Quote */}
+          <div className="text-center py-8">
+            <blockquote className="text-xl italic text-gray-700 dark:text-gray-300 max-w-3xl mx-auto border-l-4 border-purple-600 pl-6 py-4">
+              "Founded with deep understanding and compassion, we've grown into a trusted resource that empowers lives and transforms communities through inclusive support, innovative solutions, and unwavering dedication to cognitive wellness."
+            </blockquote>
+            <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
+              Through collaboration, innovation, and unwavering dedication, we continue to break barriers and create pathways to independence, dignity, and fulfillment for every individual we serve.
+            </p>
+          </div>
+        </div>
       )}
 
 
@@ -1011,6 +1354,11 @@ const About = () => {
         </div>
 
       )}
+
+      {/* Explore Pages - Separate Routes */}
+      {explorePage === 'genesis' && <GenesisExplore />}
+      {explorePage === 'community' && <CommunityExplore />}
+      {explorePage === 'innovation' && <InnovationExplore />}
 
     </div>
 

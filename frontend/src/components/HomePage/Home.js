@@ -981,11 +981,11 @@ const Home = () => {
 
       {/* How PriHub Works Section */}
       <div className="bg-gradient-to-br from-[#E0F7FA] to-[#D4DBE9] rounded-lg shadow-lg p-8">
-        <h2 className="text-3xl font-bold text-center mb-4">
+        <h2 className="text-3xl font-bold text-center mb-2">
           <span style={{color: '#16808D'}}>Advanced PriHub</span>
           <span style={{color: '#000000'}}> Cognitive Support System</span>
         </h2>
-        <p className="text-gray-600 text-lg font-medium animate-pulse text-center mb-8">Revolutionary AI-powered platform with comprehensive disability support features and personalized cognitive assistance</p>
+        <p className="text-gray-600 text-lg font-medium animate-pulse text-center mb-4">Revolutionary AI-powered platform with comprehensive disability support features and personalized cognitive assistance</p>
         <div className="grid grid-cols-4 gap-4 max-w-9xl mx-auto">
           {[
             {

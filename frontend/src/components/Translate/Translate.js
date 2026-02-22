@@ -27,6 +27,15 @@ const Translate = () => {
     { code: 'es', name: 'Spanish', nativeName: 'Español', flag: '🇪🇸' },
     { code: 'zh-cn', name: 'Chinese (Simplified)', nativeName: '中文', flag: '🇨🇳' },
     { code: 'sa', name: 'Sanskrit', nativeName: 'संस्कृत', flag: '🇮🇳' },
+    { code: 'it', name: 'Italian', nativeName: 'Italiano', flag: '🇮🇹' },
+    { code: 'pt', name: 'Portuguese', nativeName: 'Português', flag: '🇵🇹' },
+    { code: 'ja', name: 'Japanese', nativeName: '日本語', flag: '🇯🇵' },
+    { code: 'ko', name: 'Korean', nativeName: '한국어', flag: '🇰🇷' },
+    { code: 'ar', name: 'Arabic', nativeName: 'العربية', flag: '🇸🇦' },
+    { code: 'bn', name: 'Bengali', nativeName: 'বাংলা', flag: '🇧🇩' },
+    { code: 'ml', name: 'Malayalam', nativeName: 'മലയാളം', flag: '🇲🇳' },
+    { code: 'pa', name: 'Punjabi', nativeName: 'ਪੰਜਾਬੀ', flag: '🇵🇰' },
+    { code: 'ur', name: 'Urdu', nativeName: 'اردو', flag: '🇵🇰' },
   ];
   useEffect(() => {
     const existingElement = document.getElementById('google_translate_element');
@@ -49,7 +58,7 @@ const Translate = () => {
           new window.google.translate.TranslateElement(
             {
               pageLanguage: 'en',
-              includedLanguages: 'en,hi,mr,ta,te,kn,gu,fr,ru,de,es,zh-CN,sa',
+              includedLanguages: 'en,hi,mr,ta,te,kn,gu,fr,ru,de,es,zh-CN,sa,it,pt,ja,ko,ar,bn,ml,pa,ur',
               layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
               autoDisplay: false,
               multilanguagePage: true
@@ -187,6 +196,15 @@ const Translate = () => {
       gu: "🇮🇳",
       ta: "🇮🇳",
       sa: "🇮🇳",
+      it: "🇮🇹",
+      pt: "🇵🇹",
+      ja: "🇯🇵",
+      ko: "🇰🇷",
+      ar: "🇸🇦",
+      bn: "🇧🇩",
+      ml: "🇲🇳",
+      pa: "🇵🇰",
+      ur: "🇵🇰",
     };
     
     return flagMap[langCode] || "🌐";
