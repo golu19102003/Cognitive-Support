@@ -399,15 +399,8 @@ const CommunityExplore = () => {
                           className={`absolute left-1/2 w-8 h-8 rounded-full border-2 border-white dark:border-gray-800 transform -translate-x-1/2 z-10 flex items-center justify-center transition-all duration-300 cursor-pointer group ${
                             hoveredMilestone === index ? 'scale-125 shadow-xl' : 'scale-100 shadow-sm'
                           }`}
-                          onMouseEnter={() => {
-                            setHoveredMilestone(index);
-                            setHoveredCard(index);
-                          }}
-                          onMouseLeave={() => {
-                            setHoveredMilestone(null);
-                            setHoveredCard(null);
-                          }}
-                          onClick={() => setSelectedMilestone(milestone)}
+                          onMouseEnter={() => setHoveredMilestone(index)}
+                          onMouseLeave={() => setHoveredMilestone(null)}
                         >
                           <div
                             className={`absolute inset-0 rounded-full transition-all duration-300 ${
@@ -467,15 +460,8 @@ const CommunityExplore = () => {
                               ? 'bg-gradient-to-br from-pink-50 to-pink-100 dark:from-pink-900/20 dark:to-pink-800/20 border-2 border-pink-300 dark:border-pink-600' 
                               : 'bg-white dark:bg-gray-800 border-2 border-pink-200 dark:border-pink-700'
                           }`}
-                          onClick={() => setSelectedMilestone(milestone)}
-                          onMouseEnter={() => {
-                            setHoveredCard(index);
-                            setHoveredMilestone(index);
-                          }}
-                          onMouseLeave={() => {
-                            setHoveredCard(null);
-                            setHoveredMilestone(null);
-                          }}
+                          onMouseEnter={() => setHoveredMilestone(index)}
+                          onMouseLeave={() => setHoveredMilestone(null)}
                         >
                           <div className={`flex items-center space-x-2 mb-3`}>
                             <div className="text-2xl">{milestone.icon}</div>
@@ -521,7 +507,7 @@ const CommunityExplore = () => {
                           </div>
                           
                           {/* Hover Details - 2019 Style with Complete Content */}
-                          {(hoveredCard === index || hoveredMilestone === index) && (
+                          {hoveredCard === index && (
                             <div className={`mt-3 p-4 rounded-lg border ${
                               milestone.color === 'pink' ? 'bg-pink-50 dark:bg-pink-900/20 border-pink-200 dark:border-pink-700' :
                               milestone.color === 'blue' ? 'bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-700' :
@@ -714,23 +700,6 @@ const CommunityExplore = () => {
                                 }`}>
                                   <TrendingUp className="w-3 h-3" />
                                   <span>Community Impact</span>
-                                </div>
-                              </div>
-                              
-                              {/* Click Indicator */}
-                              <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                <div className={`w-6 h-6 rounded-full flex items-center justify-center ${
-                                  milestone.color === 'pink' ? 'bg-pink-500' :
-                                  milestone.color === 'blue' ? 'bg-blue-500' :
-                                  milestone.color === 'green' ? 'bg-green-500' :
-                                  milestone.color === 'orange' ? 'bg-orange-500' :
-                                  milestone.color === 'purple' ? 'bg-purple-500' :
-                                  milestone.color === 'red' ? 'bg-red-500' :
-                                  milestone.color === 'indigo' ? 'bg-indigo-500' :
-                                  milestone.color === 'yellow' ? 'bg-yellow-500' :
-                                  'bg-gray-500'
-                                }`}>
-                                  <ChevronRight className="w-3 h-3 text-white" />
                                 </div>
                               </div>
                               
