@@ -1,11 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Calendar, Users, Award, TrendingUp, Target, Zap, Globe, Shield, Star, ChevronRight, Clock, MapPin, ExternalLink, Brain, Lightbulb, Rocket, Sparkles, Activity, BarChart, Eye, Heart, MessageCircle, UserCheck, Award as AwardIcon, TrendingUp as TrendingUpIcon, Target as TargetIcon } from 'lucide-react';
+import { ArrowLeft, Calendar, Users, Award, TrendingUp, Target, Zap, Globe, Shield, Star, ChevronRight, Clock, MapPin, ExternalLink, Brain, Lightbulb, Rocket, Sparkles, Activity, BarChart, Eye, Heart, MessageCircle, UserCheck, Award as AwardIcon, TrendingUp as TrendingUpIcon, Target as TargetIcon, Filter, Search, ChevronDown, ChevronUp, Palette, ArrowUpDown } from 'lucide-react';
 
 const GenesisExplore = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [activeTab, setActiveTab] = useState('overview');
   const [selectedAchievement, setSelectedAchievement] = useState(null);
   const [hoveredMilestone, setHoveredMilestone] = useState(null);
+  const [showDetailsModal, setShowDetailsModal] = useState(null);
+  const [selectedFilter, setSelectedFilter] = useState('all');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [dateRange, setDateRange] = useState({ start: '', end: '' });
+  const [selectedColors, setSelectedColors] = useState([]);
+  const [sortBy, setSortBy] = useState('chronological');
+  const [showAdvanced, setShowAdvanced] = useState(false);
   const [activeMetric, setActiveMetric] = useState('growth');
   const [selectedTechnology, setSelectedTechnology] = useState(null);
   const [selectedMetric, setSelectedMetric] = useState(null);
@@ -34,6 +41,146 @@ const GenesisExplore = () => {
 
   const handleBackToStory = () => {
     window.location.href = '/about#story';
+  };
+
+  const handleShareViaGmail = (milestone) => {
+    const subject = encodeURIComponent(`Genesis Milestone: ${milestone.event} - ${milestone.month}`);
+    const body = encodeURIComponent(
+      `Hello,\n\nI wanted to share this amazing milestone from our genesis journey:\n\n` +
+      `📅 ${milestone.month}\n` +
+      `🎯 ${milestone.event}\n` +
+      `📝 ${milestone.detail}\n\n` +
+      `This represents our commitment to building a supportive community for cognitive health and wellness.\n\n` +
+      `Learn more about our journey and join us in making a difference!\n\n` +
+      `Best regards,\n` +
+      `PriHub Genesis Team`
+    );
+    
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=&su=${subject}&body=${body}`;
+    window.open(gmailUrl, '_blank');
+  };
+
+  const handleViewDetails = (milestone) => {
+    setShowDetailsModal(milestone);
+  };
+
+  const getFilteredMilestones = () => {
+    let filtered = [
+      { 
+        month: "January", 
+        event: "Research phase initiated", 
+        detail: "Comprehensive study of cognitive disability challenges",
+        icon: "🔬",
+        progress: 100,
+        color: "purple",
+        side: "left"
+      },
+      { 
+        month: "March", 
+        event: "Team formation", 
+        detail: "Multidisciplinary team assembled",
+        icon: "👥",
+        progress: 100,
+        color: "blue",
+        side: "right"
+      },
+      { 
+        month: "June", 
+        event: "Funding secured", 
+        detail: "Seed funding for prototype development",
+        icon: "💰",
+        progress: 100,
+        color: "green",
+        side: "left"
+      },
+      { 
+        month: "September", 
+        event: "First prototype", 
+        detail: "Initial cognitive support platform launched",
+        icon: "🚀",
+        progress: 100,
+        color: "orange",
+        side: "right"
+      },
+      { 
+        month: "December", 
+        event: "User testing", 
+        detail: "Beta testing with 100+ users",
+        icon: "👤",
+        progress: 100,
+        color: "red",
+        side: "left"
+      }
+    ];
+    
+    // Apply category filter
+    if (selectedFilter !== 'all') {
+      if (selectedFilter === 'research') {
+        filtered = filtered.filter(item => 
+          item.event.toLowerCase().includes('research') || 
+          item.event.toLowerCase().includes('study')
+        );
+      } else if (selectedFilter === 'team') {
+        filtered = filtered.filter(item => 
+          item.event.toLowerCase().includes('team') || 
+          item.event.toLowerCase().includes('formation')
+        );
+      } else if (selectedFilter === 'development') {
+        filtered = filtered.filter(item => 
+          item.event.toLowerCase().includes('prototype') || 
+          item.event.toLowerCase().includes('testing')
+        );
+      } else if (selectedFilter === 'funding') {
+        filtered = filtered.filter(item => 
+          item.event.toLowerCase().includes('funding') || 
+          item.event.toLowerCase().includes('seed')
+        );
+      }
+    }
+    
+    // Apply search
+    if (searchTerm) {
+      filtered = filtered.filter(item => 
+        item.event.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.detail.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.month.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+    
+    // Apply date range filter
+    if (dateRange.start || dateRange.end) {
+      filtered = filtered.filter(item => {
+        // Parse the month from item.month (e.g., "January")
+        const monthMap = {
+          'January': 0, 'February': 1, 'March': 2, 'April': 3, 'May': 4, 'June': 5,
+          'July': 6, 'August': 7, 'September': 8, 'October': 9, 'November': 10, 'December': 11
+        };
+        const itemDate = new Date(2019, monthMap[item.month]);
+        const startDate = dateRange.start ? new Date(dateRange.start) : null;
+        const endDate = dateRange.end ? new Date(dateRange.end) : null;
+        
+        if (startDate && itemDate < startDate) return false;
+        if (endDate && itemDate > endDate) return false;
+        return true;
+      });
+    }
+    
+    // Apply color filter
+    if (selectedColors.length > 0) {
+      filtered = filtered.filter(item => selectedColors.includes(item.color));
+    }
+    
+    // Apply sorting
+    if (sortBy === 'alphabetical') {
+      filtered.sort((a, b) => a.event.localeCompare(b.event));
+    } else if (sortBy === 'progress') {
+      filtered.sort((a, b) => b.progress - a.progress);
+    } else if (sortBy === 'reverse-chronological') {
+      filtered.sort((a, b) => new Date(b.month + ' 2019') - new Date(a.month + ' 2019'));
+    }
+    // chronological is default (already sorted)
+    
+    return filtered;
   };
 
   const achievements = [
@@ -454,6 +601,195 @@ const GenesisExplore = () => {
                 </div>
               </div>
               
+              {/* Timeline Filters Section */}
+              <div className={`bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-xl shadow-lg p-4 mb-8 border border-purple-200 dark:border-purple-700`}>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex items-center space-x-3">
+                    <Filter className="w-5 h-5 text-purple-600" />
+                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Advanced Filters</h3>
+                    <button
+                      onClick={() => setShowAdvanced(!showAdvanced)}
+                      className="text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 transition-colors"
+                    >
+                      {showAdvanced ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
+                    </button>
+                  </div>
+                  
+                  <div className="flex items-center space-x-2">
+                    <span className="text-sm text-gray-600 dark:text-gray-400">
+                      {getFilteredMilestones().length} of 5 milestones
+                    </span>
+                    {(selectedFilter !== 'all' || searchTerm || dateRange.start || dateRange.end || selectedColors.length > 0 || sortBy !== 'chronological') && (
+                      <button
+                        onClick={() => {
+                          setSelectedFilter('all');
+                          setSearchTerm('');
+                          setDateRange({ start: '', end: '' });
+                          setSelectedColors([]);
+                          setSortBy('chronological');
+                        }}
+                        className="text-sm text-purple-600 hover:text-purple-700 dark:text-purple-400 dark:hover:text-purple-300 font-medium"
+                      >
+                        Clear All
+                      </button>
+                    )}
+                  </div>
+                </div>
+                
+                {/* Basic Filters */}
+                <div className="flex flex-col lg:flex-row items-start lg:items-center gap-3">
+                  {/* Search Bar */}
+                  <div className="relative w-full lg:w-auto">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-4 h-4 text-gray-400" />
+                    <input
+                      type="text"
+                      placeholder="Search milestones..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm w-full lg:w-56"
+                    />
+                  </div>
+                  
+                  {/* Category Filter Buttons */}
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      onClick={() => setSelectedFilter('all')}
+                      className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                        selectedFilter === 'all' 
+                          ? 'bg-purple-600 text-white shadow-md' 
+                          : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                      }`}
+                    >
+                      All
+                    </button>
+                    <button
+                      onClick={() => setSelectedFilter('research')}
+                      className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                        selectedFilter === 'research' 
+                          ? 'bg-purple-600 text-white shadow-md' 
+                          : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                      }`}
+                    >
+                      Research
+                    </button>
+                    <button
+                      onClick={() => setSelectedFilter('team')}
+                      className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                        selectedFilter === 'team' 
+                          ? 'bg-purple-600 text-white shadow-md' 
+                          : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                      }`}
+                    >
+                      Team
+                    </button>
+                    <button
+                      onClick={() => setSelectedFilter('development')}
+                      className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                        selectedFilter === 'development' 
+                          ? 'bg-purple-600 text-white shadow-md' 
+                          : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                      }`}
+                    >
+                      Development
+                    </button>
+                    <button
+                      onClick={() => setSelectedFilter('funding')}
+                      className={`px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                        selectedFilter === 'funding' 
+                          ? 'bg-purple-600 text-white shadow-md' 
+                          : 'bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
+                      }`}
+                    >
+                      Funding
+                    </button>
+                  </div>
+                </div>
+                
+                {/* Advanced Filters */}
+                {showAdvanced && (
+                  <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-600 space-y-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                      {/* Date Range Filter */}
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center">
+                          <Calendar className="w-4 h-4 mr-2" />
+                          Date Range
+                        </label>
+                        <div className="flex space-x-2">
+                          <input
+                            type="date"
+                            placeholder="Start Date"
+                            value={dateRange.start}
+                            onChange={(e) => setDateRange(prev => ({ ...prev, start: e.target.value }))}
+                            className="flex-1 px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-purple-500"
+                          />
+                          <input
+                            type="date"
+                            placeholder="End Date"
+                            value={dateRange.end}
+                            onChange={(e) => setDateRange(prev => ({ ...prev, end: e.target.value }))}
+                            className="flex-1 px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-purple-500"
+                          />
+                        </div>
+                      </div>
+                      
+                      {/* Color Filter */}
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center">
+                          <Palette className="w-4 h-4 mr-2" />
+                          Colors
+                        </label>
+                        <div className="flex items-center space-x-1">
+                          {['purple', 'blue', 'green', 'orange', 'red'].map(color => (
+                            <button
+                              key={color}
+                              onClick={() => {
+                                setSelectedColors(prev => 
+                                  prev.includes(color) 
+                                    ? prev.filter(c => c !== color)
+                                    : [...prev, color]
+                                );
+                              }}
+                              className={`w-6 h-6 rounded-full border-2 transition-all ${
+                                selectedColors.includes(color) 
+                                  ? 'border-gray-900 dark:border-white scale-110' 
+                                  : 'border-gray-300 dark:border-gray-600'
+                              } ${
+                                color === 'purple' ? 'bg-purple-500' :
+                                color === 'blue' ? 'bg-blue-500' :
+                                color === 'green' ? 'bg-green-500' :
+                                color === 'orange' ? 'bg-orange-500' :
+                                'bg-red-500'
+                              }`}
+                              title={color.charAt(0).toUpperCase() + color.slice(1)}
+                            >
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                      
+                      {/* Sort Options */}
+                      <div className="space-y-2">
+                        <label className="text-sm font-medium text-gray-700 dark:text-gray-300 flex items-center">
+                          <ArrowUpDown className="w-4 h-4 mr-2" />
+                          Sort By
+                        </label>
+                        <select
+                          value={sortBy}
+                          onChange={(e) => setSortBy(e.target.value)}
+                          className="w-full px-3 py-2 text-sm border border-gray-300 dark:border-gray-600 rounded bg-white dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-1 focus:ring-purple-500"
+                        >
+                          <option value="chronological">Chronological</option>
+                          <option value="reverse-chronological">Reverse Chronological</option>
+                          <option value="alphabetical">Alphabetical</option>
+                          <option value="progress">Progress</option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
+              
               <div className="relative space-y-6">
                 {/* Vertical Timeline Line */}
                 <div className="relative">
@@ -466,53 +802,7 @@ const GenesisExplore = () => {
                     </div>
                   </div>
                   
-                  {[
-                    { 
-                      month: "January", 
-                      event: "Research phase initiated", 
-                      detail: "Comprehensive study of cognitive disability challenges",
-                      icon: "🔬",
-                      progress: 100,
-                      color: "purple",
-                      side: "left"
-                    },
-                    { 
-                      month: "March", 
-                      event: "Team formation", 
-                      detail: "Multidisciplinary team assembled",
-                      icon: "👥",
-                      progress: 100,
-                      color: "blue",
-                      side: "right"
-                    },
-                    { 
-                      month: "June", 
-                      event: "Funding secured", 
-                      detail: "Seed funding for prototype development",
-                      icon: "💰",
-                      progress: 100,
-                      color: "green",
-                      side: "left"
-                    },
-                    { 
-                      month: "September", 
-                      event: "First prototype", 
-                      detail: "Initial cognitive support platform launched",
-                      icon: "🚀",
-                      progress: 100,
-                      color: "orange",
-                      side: "right"
-                    },
-                    { 
-                      month: "December", 
-                      event: "User testing", 
-                      detail: "Beta testing with 100+ users",
-                      icon: "👤",
-                      progress: 100,
-                      color: "red",
-                      side: "left"
-                    }
-                  ].map((item, index) => (
+                  {getFilteredMilestones().map((item, index) => (
                     <div 
                       key={index} 
                       className={`relative flex items-center mb-8 ${
@@ -646,6 +936,37 @@ const GenesisExplore = () => {
                                 </div>
                               </div>
                             )}
+                            
+                            {/* Action Buttons */}
+                            <div className="flex items-center space-x-3 mt-4">
+                              <button
+                                onClick={() => handleShareViaGmail(item)}
+                                className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105 ${
+                                  item.color === 'purple' ? 'bg-purple-100 text-purple-700 hover:bg-purple-200 dark:bg-purple-900/30 dark:text-purple-300 dark:hover:bg-purple-900/50' :
+                                  item.color === 'blue' ? 'bg-blue-100 text-blue-700 hover:bg-blue-200 dark:bg-blue-900/30 dark:text-blue-300 dark:hover:bg-blue-900/50' :
+                                  item.color === 'green' ? 'bg-green-100 text-green-700 hover:bg-green-200 dark:bg-green-900/30 dark:text-green-300 dark:hover:bg-green-900/50' :
+                                  item.color === 'orange' ? 'bg-orange-100 text-orange-700 hover:bg-orange-200 dark:bg-orange-900/30 dark:text-orange-300 dark:hover:bg-orange-900/50' :
+                                  'bg-red-100 text-red-700 hover:bg-red-200 dark:bg-red-900/30 dark:text-red-300 dark:hover:bg-red-900/50'
+                                }`}
+                              >
+                                <MessageCircle className="w-4 h-4" />
+                                <span>Share</span>
+                              </button>
+                              
+                              <button
+                                onClick={() => handleViewDetails(item)}
+                                className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105 ${
+                                  item.color === 'purple' ? 'bg-purple-600 text-white hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600' :
+                                  item.color === 'blue' ? 'bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600' :
+                                  item.color === 'green' ? 'bg-green-600 text-white hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600' :
+                                  item.color === 'orange' ? 'bg-orange-600 text-white hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600' :
+                                  'bg-red-600 text-white hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600'
+                                }`}
+                              >
+                                <ExternalLink className="w-4 h-4" />
+                                <span>View Details</span>
+                              </button>
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -1763,6 +2084,134 @@ const GenesisExplore = () => {
           </div>
         </div>
       </div>
+      
+      {/* Details Modal */}
+      {showDetailsModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+          <div className={`bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto ${
+            showDetailsModal.color === 'purple' ? 'border-4 border-purple-200 dark:border-purple-700' :
+            showDetailsModal.color === 'blue' ? 'border-4 border-blue-200 dark:border-blue-700' :
+            showDetailsModal.color === 'green' ? 'border-4 border-green-200 dark:border-green-700' :
+            showDetailsModal.color === 'orange' ? 'border-4 border-orange-200 dark:border-orange-700' :
+            'border-4 border-red-200 dark:border-red-700'
+          }`}>
+            <div className={`p-6 ${
+              showDetailsModal.color === 'purple' ? 'bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/30' :
+              showDetailsModal.color === 'blue' ? 'bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/30' :
+              showDetailsModal.color === 'green' ? 'bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/30' :
+              showDetailsModal.color === 'orange' ? 'bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/30' :
+              'bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/30'
+            }`}>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-3">
+                  <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-3xl ${
+                    showDetailsModal.color === 'purple' ? 'bg-gradient-to-br from-purple-200 to-purple-300 dark:from-purple-700 dark:to-purple-600' :
+                    showDetailsModal.color === 'blue' ? 'bg-gradient-to-br from-blue-200 to-blue-300 dark:from-blue-700 dark:to-blue-600' :
+                    showDetailsModal.color === 'green' ? 'bg-gradient-to-br from-green-200 to-green-300 dark:from-green-700 dark:to-green-600' :
+                    showDetailsModal.color === 'orange' ? 'bg-gradient-to-br from-orange-200 to-orange-300 dark:from-orange-700 dark:to-orange-600' :
+                    'bg-gradient-to-br from-red-200 to-red-300 dark:from-red-700 dark:to-red-600'
+                  }`}>
+                    {showDetailsModal.icon}
+                  </div>
+                  <div>
+                    <h3 className={`text-2xl font-bold ${
+                      showDetailsModal.color === 'purple' ? 'text-purple-800 dark:text-purple-200' :
+                      showDetailsModal.color === 'blue' ? 'text-blue-800 dark:text-blue-200' :
+                      showDetailsModal.color === 'green' ? 'text-green-800 dark:text-green-200' :
+                      showDetailsModal.color === 'orange' ? 'text-orange-800 dark:text-orange-200' :
+                      'text-red-800 dark:text-red-200'
+                    }`}>
+                      {showDetailsModal.event}
+                    </h3>
+                    <p className={`text-lg ${
+                      showDetailsModal.color === 'purple' ? 'text-purple-600 dark:text-purple-400' :
+                      showDetailsModal.color === 'blue' ? 'text-blue-600 dark:text-blue-400' :
+                      showDetailsModal.color === 'green' ? 'text-green-600 dark:text-green-400' :
+                      showDetailsModal.color === 'orange' ? 'text-orange-600 dark:text-orange-400' :
+                      'text-red-600 dark:text-red-400'
+                    }`}>
+                      {showDetailsModal.month} 2019
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setShowDetailsModal(null)}
+                  className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+                >
+                  <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+              
+              <div className="space-y-4">
+                <div className="bg-white dark:bg-gray-700 rounded-xl p-4">
+                  <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Description</h4>
+                  <p className="text-gray-600 dark:text-gray-300">{showDetailsModal.detail}</p>
+                </div>
+                
+                <div className="bg-white dark:bg-gray-700 rounded-xl p-4">
+                  <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Progress Status</h4>
+                  <div className="flex items-center space-x-3">
+                    <div className="flex-1 bg-gray-200 dark:bg-gray-600 rounded-full h-2">
+                      <div 
+                        className={`h-full rounded-full ${
+                          showDetailsModal.progress === 100 ? 'bg-green-500' : 'bg-yellow-500'
+                        }`}
+                        style={{ width: `${showDetailsModal.progress}%` }}
+                      ></div>
+                    </div>
+                    <span className="text-sm font-medium text-gray-900 dark:text-white">
+                      {showDetailsModal.progress}% Complete
+                    </span>
+                  </div>
+                </div>
+                
+                <div className="bg-white dark:bg-gray-700 rounded-xl p-4">
+                  <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Genesis Timeline Information</h4>
+                  <div className="space-y-2">
+                    <div className="flex items-center space-x-2">
+                      <Calendar className="w-4 h-4 text-gray-500" />
+                      <span className="text-gray-600 dark:text-gray-300">Timeline: {showDetailsModal.month} 2019</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Target className="w-4 h-4 text-gray-500" />
+                      <span className="text-gray-600 dark:text-gray-300">Status: {showDetailsModal.progress === 100 ? 'Completed' : 'In Progress'}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Users className="w-4 h-4 text-gray-500" />
+                      <span className="text-gray-600 dark:text-gray-300">Impact: Foundation Building</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div className="flex space-x-3">
+                  <button
+                    onClick={() => handleShareViaGmail(showDetailsModal)}
+                    className={`flex-1 flex items-center justify-center space-x-2 px-4 py-3 rounded-lg font-medium transition-all duration-300 hover:scale-105 ${
+                      showDetailsModal.color === 'purple' ? 'bg-purple-600 text-white hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600' :
+                      showDetailsModal.color === 'blue' ? 'bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600' :
+                      showDetailsModal.color === 'green' ? 'bg-green-600 text-white hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600' :
+                      showDetailsModal.color === 'orange' ? 'bg-orange-600 text-white hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600' :
+                      'bg-red-600 text-white hover:bg-red-700 dark:bg-red-500 dark:hover:bg-red-600'
+                    }`}
+                  >
+                    <MessageCircle className="w-5 h-5" />
+                    <span>Share via Gmail</span>
+                  </button>
+                  
+                  <button
+                    onClick={() => setShowDetailsModal(null)}
+                    className="flex-1 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white px-4 py-3 rounded-lg font-medium hover:bg-gray-300 dark:hover:bg-gray-600 transition-all duration-300 hover:scale-105"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
