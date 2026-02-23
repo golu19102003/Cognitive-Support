@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Calendar, Users, Award, TrendingUp, Target, Zap, Globe, Shield, Star, ChevronRight, Clock, MapPin, ExternalLink, Brain, Lightbulb, Rocket, Sparkles, Activity, BarChart, Eye, Heart, MessageCircle, UserCheck, Award as AwardIcon, TrendingUp as TrendingUpIcon, Target as TargetIcon, Filter, Search, ChevronDown, ChevronUp, Palette, ArrowUpDown } from 'lucide-react';
+import { ArrowLeft, Calendar, Users, Award, TrendingUp, Target, Zap, Globe, Shield, Star, ChevronRight, Clock, MapPin, ExternalLink, Brain, Lightbulb, Rocket, Sparkles, Activity, BarChart, Eye, Heart, MessageCircle, UserCheck, Award as AwardIcon, TrendingUp as TrendingUpIcon, Target as TargetIcon, Filter, Search, ChevronDown, ChevronUp, Palette, ArrowUpDown, X, Download } from 'lucide-react';
 
 const GenesisExplore = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -16,6 +16,78 @@ const GenesisExplore = () => {
   const [activeMetric, setActiveMetric] = useState('growth');
   const [selectedTechnology, setSelectedTechnology] = useState(null);
   const [selectedMetric, setSelectedMetric] = useState(null);
+  const [selectedInitiative, setSelectedInitiative] = useState(null);
+  const [showInitiativeModal, setShowInitiativeModal] = useState(false);
+
+  // PDF Download Function
+  const downloadPDF = (modalData, modalType) => {
+    // For now, create a simple text download as a placeholder
+    // In a real implementation, you would use a PDF library like jsPDF
+    const content = `
+${modalType === 'achievement' ? 'ACHIEVEMENT DETAILS' : 
+  modalType === 'metric' ? 'PERFORMANCE METRICS' : 
+  modalType === 'technology' ? 'TECHNOLOGY INFORMATION' : 
+  'INITIATIVE DETAILS'}
+
+========================================
+Logo: C:\\Users\\pranj\\OneDrive\\Desktop\\My Projects\\Final Year Major Project Documents\\Cognitive-Support\\frontend\\public\\Longs_logo.png
+========================================
+
+${modalType === 'achievement' && modalData ? `
+Title: ${modalData.title}
+Category: ${modalData.category}
+Impact: ${modalData.impact}
+Date: ${modalData.date}
+
+Description:
+${modalData.description}` :
+
+modalType === 'metric' && modalData ? `
+Metric: ${modalData.label}
+Value: ${modalData.value}
+Trend: ${modalData.trend}
+Impact: ${modalData.impact}
+Category: ${modalData.category}
+Timeframe: ${modalData.timeframe}
+
+Description:
+${modalData.description}` :
+
+modalType === 'technology' && modalData ? `
+Technology: ${modalData.name}
+Category: ${modalData.category}
+Proficiency: ${modalData.level}%
+Experience: ${modalData.experience}
+Projects: ${modalData.projects}
+
+Description:
+${modalData.description}` :
+
+modalType === 'initiative' && modalData ? `
+Initiative: ${modalData.title}
+Category: ${modalData.category}
+Status: ${modalData.status}
+Impact: ${modalData.impact}
+
+Description:
+${modalData.description}` : ''}
+
+========================================
+Generated on: ${new Date().toLocaleString()}
+========================================
+`;
+    
+    // Create and download file
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${modalType}_${modalData?.title || modalData?.label || modalData?.name || 'details'}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  };
 
   useEffect(() => {
     const checkTheme = () => {
@@ -288,6 +360,149 @@ const GenesisExplore = () => {
     { name: "Docker", level: 70, category: "DevOps", icon: "🐳", description: "Container platform", experience: "2+ years", projects: "5+" }
   ];
 
+  const genesisInitiatives = [
+    {
+      icon: '🔬',
+      title: 'Research Foundation',
+      description: 'Comprehensive cognitive disability research and analysis',
+      impact: '500+ research hours',
+      status: 'Completed',
+      color: 'purple',
+      detailedContent: {
+        overview: 'Our Research Foundation initiative represents the cornerstone of our genesis journey, involving extensive study of cognitive disability challenges, user needs analysis, and evidence-based approach development.',
+        keyFeatures: [
+          'Deep cognitive research methodology',
+          'Evidence-based framework development',
+          'User-centered design approach',
+          'Comprehensive needs assessment'
+        ],
+        achievements: [
+          '500+ hours of dedicated research',
+          'Evidence-based cognitive frameworks',
+          'Multi-disciplinary expert collaboration',
+          'Research publication in cognitive science'
+        ],
+        futureGoals: [
+          'Expand research to global demographics',
+          'Develop AI-powered research tools',
+          'Establish cognitive research lab',
+          'Create open research database'
+        ],
+        testimonials: [
+          'The research foundation provided invaluable insights into cognitive challenges.',
+          'Evidence-based approach transformed our understanding of user needs.',
+          'Comprehensive research methodology set new industry standards.'
+        ],
+        getInvolved: 'Join our research community to contribute to cognitive science advancement and evidence-based solution development.'
+      }
+    },
+    {
+      icon: '👥',
+      title: 'Team Excellence',
+      description: 'Multidisciplinary expert team assembly and collaboration',
+      impact: '20+ specialized experts',
+      status: 'Active',
+      color: 'blue',
+      detailedContent: {
+        overview: 'Our Team Excellence initiative focuses on assembling and nurturing a multidisciplinary team of cognitive science experts, developers, researchers, and accessibility specialists.',
+        keyFeatures: [
+          'Cross-functional team structure',
+          'Continuous professional development',
+          'Collaborative innovation culture',
+          'Expert knowledge sharing'
+        ],
+        achievements: [
+          '20+ specialized team members',
+          '400% team growth in 6 months',
+          'Multi-disciplinary expertise coverage',
+          'Industry-leading talent retention'
+        ],
+        futureGoals: [
+          'Expand to 50+ team members',
+          'Establish international talent network',
+          'Create internal training academy',
+          'Launch expert mentorship program'
+        ],
+        testimonials: [
+          'The multidisciplinary approach brings diverse perspectives to problem-solving.',
+          'Team collaboration culture fosters innovation and excellence.',
+          'Expert team members provide unmatched cognitive insights.'
+        ],
+        getInvolved: 'Join our expert team to contribute your specialized skills to cognitive support innovation.'
+      }
+    },
+    {
+      icon: '💰',
+      title: 'Strategic Funding',
+      description: 'Seed funding acquisition and financial resource management',
+      impact: '$250K seed investment',
+      status: 'Secured',
+      color: 'green',
+      detailedContent: {
+        overview: 'Our Strategic Funding initiative successfully secured seed investment for prototype development, research expansion, and team growth through comprehensive investor presentations.',
+        keyFeatures: [
+          'Comprehensive funding strategy',
+          'Investor relationship management',
+          'Financial resource optimization',
+          'Transparent fund allocation'
+        ],
+        achievements: [
+          '$250K seed funding secured',
+          'Multiple investor partnerships',
+          'Strategic financial planning',
+          'Resource allocation efficiency'
+        ],
+        futureGoals: [
+          'Series A funding round',
+          'Institutional partnerships',
+          'Grant acquisition programs',
+          'Sustainable revenue models'
+        ],
+        testimonials: [
+          'Strategic funding approach ensured sustainable growth trajectory.',
+          'Transparent fund allocation built investor confidence.',
+          'Well-planned financial strategy enabled rapid scaling.'
+        ],
+        getInvolved: 'Partner with us through investment opportunities or strategic funding collaborations.'
+      }
+    },
+    {
+      icon: '🚀',
+      title: 'Platform Innovation',
+      description: 'Advanced cognitive support platform development and deployment',
+      impact: '25+ core features',
+      status: 'Launched',
+      color: 'orange',
+      detailedContent: {
+        overview: 'Our Platform Innovation initiative delivered a comprehensive cognitive support platform with advanced features, AI integration, and accessibility-first design.',
+        keyFeatures: [
+          'AI-powered cognitive assistance',
+          'Real-time support systems',
+          'Accessibility-first design',
+          'Multi-platform compatibility'
+        ],
+        achievements: [
+          '25+ core platform features',
+          '98% WCAG compliance score',
+          '4.7/5 user satisfaction rating',
+          '99.9% platform uptime'
+        ],
+        futureGoals: [
+          'Mobile application launch',
+          'Advanced AI integration',
+          'Global accessibility expansion',
+          'Enterprise platform version'
+        ],
+        testimonials: [
+          'Platform innovation exceeded all expectations for cognitive support.',
+          'Accessibility-first approach made it usable for everyone.',
+          'AI features provide personalized cognitive assistance.'
+        ],
+        getInvolved: 'Contribute to platform development through testing, feedback, and feature suggestions.'
+      }
+    }
+  ];
+
   const metrics = [
     { label: "Research Hours", value: "500+", icon: "🔬", trend: "+100%", description: "Deep cognitive research", category: "research", impact: "High", timeframe: "6 months" },
     { label: "Team Members", value: "20", icon: "👥", trend: "+400%", description: "Multidisciplinary experts", category: "team", impact: "Critical", timeframe: "Ongoing" },
@@ -362,16 +577,6 @@ const GenesisExplore = () => {
       {/* Header */}
       <div className="bg-gradient-to-r from-purple-600 to-purple-800 text-white py-16">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between mb-6">
-            <button 
-              onClick={handleBackToStory}
-              className="flex items-center space-x-2 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition-all duration-300"
-            >
-              <ArrowLeft className="w-5 h-5" />
-              <span>Back to Story</span>
-            </button>
-          </div>
-          
           <div className="text-center">
             <div className="text-6xl mb-4">🌱</div>
             <h1 className="text-4xl font-bold mb-4">The Genesis (2019)</h1>
@@ -386,7 +591,7 @@ const GenesisExplore = () => {
       <div className="sticky top-0 z-40 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex space-x-8">
-            {['overview', 'achievements', 'technologies', 'metrics'].map((tab) => (
+            {['overview', 'achievements', 'initiatives', 'technologies', 'metrics'].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
@@ -1026,6 +1231,122 @@ const GenesisExplore = () => {
           </div>
         )}
 
+        {/* Genesis Initiatives Tab */}
+        {activeTab === 'initiatives' && (
+          <div className="space-y-8">
+            <div className={`bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 relative overflow-hidden`}>
+              {/* Background Animation */}
+              <div className="absolute inset-0 bg-gradient-to-br from-purple-50/30 via-blue-50/30 to-indigo-50/30 dark:from-purple-900/5 dark:via-blue-900/5 dark:to-indigo-900/5"></div>
+              
+              {/* Enhanced Header */}
+              <div className="relative mb-8">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center">
+                    <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center mr-3 shadow-lg animate-pulse">
+                      <Rocket className="w-4 h-4 text-white" />
+                    </div>
+                    Genesis Initiatives
+                  </h2>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">Active Programs</span>
+                  </div>
+                </div>
+                
+                {/* Progress Bar */}
+                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 overflow-hidden">
+                  <div className="h-full bg-gradient-to-r from-purple-500 via-blue-500 to-indigo-500 rounded-full animate-pulse" style={{ width: '100%' }}></div>
+                </div>
+              </div>
+
+              {/* Genesis Initiatives Grid */}
+              <div className="grid md:grid-cols-2 gap-6">
+                {genesisInitiatives.map((initiative, index) => (
+                  <div 
+                    key={index}
+                    className={`relative border-2 rounded-xl transition-all duration-300 hover:shadow-xl hover:scale-105 cursor-pointer ${
+                      selectedInitiative === index 
+                        ? `border-${initiative.color}-500 bg-${initiative.color}-50 dark:bg-${initiative.color}-900/30 ring-2 ring-${initiative.color}-300` 
+                        : `border-${initiative.color}-200 dark:border-${initiative.color}-700 bg-white dark:bg-gray-800`
+                    }`}
+                    onMouseEnter={() => setHoveredMilestone(index)}
+                    onMouseLeave={() => setHoveredMilestone(null)}
+                    onClick={() => {
+                      setSelectedInitiative(initiative);
+                      setShowInitiativeModal(true);
+                    }}
+                  >
+                    {/* Header */}
+                    <div className="p-6">
+                      <div className="flex items-start space-x-4 mb-4">
+                        <div className="text-5xl mb-2 animate-bounce">{initiative.icon}</div>
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                            {initiative.title}
+                          </h3>
+                          <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                            {initiative.description}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Key Features in Main Grid */}
+                      <div className="mb-4">
+                        <h4 className={`text-sm font-semibold text-${initiative.color}-700 dark:text-${initiative.color}-300 mb-2 flex items-center`}>
+                          <Star className="w-4 h-4 mr-1" />
+                          Key Features
+                        </h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                          {initiative.detailedContent.keyFeatures.map((feature, idx) => (
+                            <div 
+                              key={idx} 
+                              className={`group relative p-2 rounded-lg bg-gradient-to-r from-${initiative.color}-50 to-${initiative.color}-100 dark:from-${initiative.color}-900/20 dark:to-${initiative.color}-800/20 border border-${initiative.color}-200 hover:border-${initiative.color}-400 transition-all duration-300 hover:shadow-md hover:scale-105 cursor-pointer`}
+                            >
+                              <div className={`absolute top-1 right-1 w-2 h-2 rounded-full bg-${initiative.color}-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
+                                <div className="w-full h-full rounded-full bg-white"></div>
+                              </div>
+                              <span className="text-xs text-gray-700 dark:text-gray-300 font-medium group-hover:text-${initiative.color}-800 dark:group-hover:text-${initiative.color}-200 transition-colors duration-300">
+                                {feature}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Learn More Button and Impact */}
+                      <div className="flex items-center justify-between">
+                        {/* Learn More Button */}
+                        <button 
+                          onClick={(e) => {
+                            e.stopPropagation(); // Prevent card click from firing
+                            setSelectedInitiative(initiative);
+                            setShowInitiativeModal(true);
+                          }}
+                          className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105 ${
+                            initiative.color === 'purple' ? 'bg-purple-600 text-white hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600' :
+                            initiative.color === 'blue' ? 'bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600' :
+                            initiative.color === 'green' ? 'bg-green-600 text-white hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600' :
+                            initiative.color === 'orange' ? 'bg-orange-600 text-white hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600' :
+                            'bg-purple-600 text-white hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600'
+                          }`}
+                        >
+                          <ChevronRight className="w-4 h-4" />
+                          <span>Learn More</span>
+                        </button>
+                        
+                        {/* Impact on Right Side */}
+                        <span className="text-sm text-gray-500 dark:text-gray-400 font-medium">
+                          {initiative.impact}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Technologies Tab */}
         {activeTab === 'technologies' && (
           <div className="space-y-8">
@@ -1209,12 +1530,21 @@ const GenesisExplore = () => {
                           <p className="text-gray-600 dark:text-gray-400">{selectedTechnology.category}</p>
                         </div>
                       </div>
-                      <button 
-                        onClick={() => setSelectedTechnology(null)}
-                        className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-                      >
-                        <ArrowLeft className="w-4 h-4 text-gray-600 dark:text-gray-400" />
-                      </button>
+                      <div className="flex items-center space-x-2">
+                        <button
+                          onClick={() => downloadPDF(selectedTechnology, 'technology')}
+                          className="text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+                          title="Download PDF"
+                        >
+                          <Download className="w-6 h-6" />
+                        </button>
+                        <button 
+                          onClick={() => setSelectedTechnology(null)}
+                          className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                        >
+                          <X className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+                        </button>
+                      </div>
                     </div>
                     
                     <div className="space-y-6">
@@ -1699,12 +2029,21 @@ const GenesisExplore = () => {
                           <p className="text-gray-600 dark:text-gray-400 capitalize">{selectedMetric.category}</p>
                         </div>
                       </div>
-                      <button 
-                        onClick={() => setSelectedMetric(null)}
-                        className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
-                      >
-                        <ArrowLeft className="w-4 h-4 text-gray-600 dark:text-gray-400" />
-                      </button>
+                      <div className="flex items-center space-x-2">
+                        <button
+                          onClick={() => downloadPDF(selectedMetric, 'metric')}
+                          className="text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+                          title="Download PDF"
+                        >
+                          <Download className="w-6 h-6" />
+                        </button>
+                        <button 
+                          onClick={() => setSelectedMetric(null)}
+                          className="w-8 h-8 rounded-full bg-gray-200 dark:bg-gray-700 flex items-center justify-center hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+                        >
+                          <X className="w-4 h-4 text-gray-600 dark:text-gray-400" />
+                        </button>
+                      </div>
                     </div>
                     
                     <div className="space-y-6">
@@ -2074,27 +2413,79 @@ const GenesisExplore = () => {
         )}
 
         {/* Hero Section - At the End */}
-        <div className={`bg-gradient-to-br from-purple-600 via-purple-700 to-indigo-800 text-white rounded-2xl shadow-2xl p-8 mt-12`}>
-          <div className="text-center">
-            <Rocket className="w-16 h-16 mx-auto mb-6 animate-pulse" />
+        <div className={`bg-gradient-to-br from-purple-600 via-purple-700 to-indigo-800 text-white rounded-2xl shadow-2xl p-8 mt-12 relative overflow-hidden`}>
+          {/* Background Animation */}
+          <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-black/10"></div>
+          
+          {/* Floating Elements */}
+          <div className="absolute top-4 left-4 opacity-50">
+            <Zap className="w-8 h-8 text-white/30 animate-pulse" />
+          </div>
+          <div className="absolute top-4 right-4 opacity-50">
+            <Sparkles className="w-8 h-8 text-white/30 animate-pulse" />
+          </div>
+          <div className="absolute bottom-4 left-4 opacity-50">
+            <Lightbulb className="w-8 h-8 text-white/30 animate-pulse" />
+          </div>
+          <div className="absolute bottom-4 right-4 opacity-50">
+            <Target className="w-8 h-8 text-white/30 animate-pulse" />
+          </div>
+          
+          <div className="relative text-center">
+            {/* Main Icon */}
+            <div className="w-16 h-16 mx-auto mb-6 bg-white/20 rounded-full flex items-center justify-center animate-pulse">
+              <Rocket className="w-8 h-8 text-white" />
+            </div>
+            
+            {/* Main Title */}
             <h2 className="text-3xl font-bold mb-4">The Genesis Era</h2>
-            <p className="text-xl text-purple-100 max-w-4xl mx-auto leading-relaxed">
+            
+            {/* Tagline */}
+            <p className="text-xl text-white/90 max-w-4xl mx-auto leading-relaxed">
               Where revolutionary ideas transformed into life-changing cognitive support solutions
             </p>
+            
+            {/* Innovation Values */}
+            <div className="mt-8 flex flex-wrap justify-center gap-8">
+              <div className="flex items-center space-x-2 bg-white/10 px-4 py-2 rounded-full">
+                <Zap className="w-4 h-4 text-yellow-300" />
+                <span className="text-white/80 font-medium">Innovation</span>
+              </div>
+              <div className="flex items-center space-x-2 bg-white/10 px-4 py-2 rounded-full">
+                <Lightbulb className="w-4 h-4 text-yellow-300" />
+                <span className="text-white/80 font-medium">Ideas</span>
+              </div>
+              <div className="flex items-center space-x-2 bg-white/10 px-4 py-2 rounded-full">
+                <Target className="w-4 h-4 text-yellow-300" />
+                <span className="text-white/80 font-medium">Solutions</span>
+              </div>
+            </div>
+            
+            {/* Additional Innovation Message */}
+            <div className="mt-6 p-4 bg-white/5 rounded-xl border border-white/10">
+              <p className="text-white/70 text-sm">
+                Revolutionizing cognitive support through cutting-edge innovation and transformative ideas
+              </p>
+            </div>
           </div>
         </div>
       </div>
       
       {/* Details Modal */}
       {showDetailsModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          onClick={() => setShowDetailsModal(null)}
+        >
           <div className={`bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto ${
             showDetailsModal.color === 'purple' ? 'border-4 border-purple-200 dark:border-purple-700' :
             showDetailsModal.color === 'blue' ? 'border-4 border-blue-200 dark:border-blue-700' :
             showDetailsModal.color === 'green' ? 'border-4 border-green-200 dark:border-green-700' :
             showDetailsModal.color === 'orange' ? 'border-4 border-orange-200 dark:border-orange-700' :
             'border-4 border-red-200 dark:border-red-700'
-          }`}>
+          }`}
+          onClick={(e) => e.stopPropagation()}
+        >
             <div className={`p-6 ${
               showDetailsModal.color === 'purple' ? 'bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/30' :
               showDetailsModal.color === 'blue' ? 'bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/30' :
@@ -2207,6 +2598,264 @@ const GenesisExplore = () => {
                     Close
                   </button>
                 </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Genesis Initiatives Modal */}
+      {showInitiativeModal && selectedInitiative && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          onClick={() => setShowInitiativeModal(false)}
+        >
+          <div 
+            className={`bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto ${
+              selectedInitiative.color === 'purple' ? 'border-4 border-purple-200 dark:border-purple-700' :
+              selectedInitiative.color === 'blue' ? 'border-4 border-blue-200 dark:border-blue-700' :
+              selectedInitiative.color === 'green' ? 'border-4 border-green-200 dark:border-green-700' :
+              selectedInitiative.color === 'orange' ? 'border-4 border-orange-200 dark:border-orange-700' :
+              'border-4 border-purple-200 dark:border-purple-700'
+            }`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className={`p-6 ${
+              selectedInitiative.color === 'purple' ? 'bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/30' :
+              selectedInitiative.color === 'blue' ? 'bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/30' :
+              selectedInitiative.color === 'green' ? 'bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/30' :
+              selectedInitiative.color === 'orange' ? 'bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/30' :
+              'bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/30'
+            }`}>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-3">
+                  <div className={`w-16 h-16 rounded-2xl flex items-center justify-center text-3xl ${
+                    selectedInitiative.color === 'purple' ? 'bg-gradient-to-br from-purple-200 to-purple-300 dark:from-purple-700 dark:to-purple-600' :
+                    selectedInitiative.color === 'blue' ? 'bg-gradient-to-br from-blue-200 to-blue-300 dark:from-blue-700 dark:to-blue-600' :
+                    selectedInitiative.color === 'green' ? 'bg-gradient-to-br from-green-200 to-green-300 dark:from-green-700 dark:to-green-600' :
+                    selectedInitiative.color === 'orange' ? 'bg-gradient-to-br from-orange-200 to-orange-300 dark:from-orange-700 dark:to-orange-600' :
+                    'bg-gradient-to-br from-purple-200 to-purple-300 dark:from-purple-700 dark:to-purple-600'
+                  }`}>
+                    {selectedInitiative.icon}
+                  </div>
+                  <div>
+                    <h3 className={`text-2xl font-bold ${
+                      selectedInitiative.color === 'purple' ? 'text-purple-800 dark:text-purple-200' :
+                      selectedInitiative.color === 'blue' ? 'text-blue-800 dark:text-blue-200' :
+                      selectedInitiative.color === 'green' ? 'text-green-800 dark:text-green-200' :
+                      selectedInitiative.color === 'orange' ? 'text-orange-800 dark:text-orange-200' :
+                      'text-purple-800 dark:text-purple-200'
+                    }`}>
+                      {selectedInitiative.title}
+                    </h3>
+                    <p className={`text-lg ${
+                      selectedInitiative.color === 'purple' ? 'text-purple-600 dark:text-purple-400' :
+                      selectedInitiative.color === 'blue' ? 'text-blue-600 dark:text-blue-400' :
+                      selectedInitiative.color === 'green' ? 'text-green-600 dark:text-green-400' :
+                      selectedInitiative.color === 'orange' ? 'text-orange-600 dark:text-orange-400' :
+                      'text-purple-600 dark:text-purple-400'
+                    }`}>
+                      {selectedInitiative.status} • {selectedInitiative.impact}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <button
+                    onClick={() => downloadPDF(selectedInitiative, 'initiative')}
+                    className="text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+                    title="Download PDF"
+                  >
+                    <Download className="w-6 h-6" />
+                  </button>
+                  <button
+                    onClick={() => setShowInitiativeModal(false)}
+                    className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Overview */}
+              <div className="mb-6">
+                <h4 className={`text-lg font-semibold mb-3 ${
+                  selectedInitiative.color === 'purple' ? 'text-purple-800 dark:text-purple-200' :
+                  selectedInitiative.color === 'blue' ? 'text-blue-800 dark:text-blue-200' :
+                  selectedInitiative.color === 'green' ? 'text-green-800 dark:text-green-200' :
+                  selectedInitiative.color === 'orange' ? 'text-orange-800 dark:text-orange-200' :
+                  'text-purple-800 dark:text-purple-200'
+                }`}>
+                  Overview
+                </h4>
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                  {selectedInitiative.detailedContent.overview}
+                </p>
+              </div>
+
+              {/* Key Features */}
+              <div className="mb-6">
+                <h4 className={`text-lg font-semibold mb-3 ${
+                  selectedInitiative.color === 'purple' ? 'text-purple-800 dark:text-purple-200' :
+                  selectedInitiative.color === 'blue' ? 'text-blue-800 dark:text-blue-200' :
+                  selectedInitiative.color === 'green' ? 'text-green-800 dark:text-green-200' :
+                  selectedInitiative.color === 'orange' ? 'text-orange-800 dark:text-orange-200' :
+                  'text-purple-800 dark:text-purple-200'
+                }`}>
+                  Key Features
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {selectedInitiative.detailedContent.keyFeatures.map((feature, idx) => (
+                    <div key={idx} className={`p-3 rounded-lg ${
+                      selectedInitiative.color === 'purple' ? 'bg-purple-100 dark:bg-purple-900/30' :
+                      selectedInitiative.color === 'blue' ? 'bg-blue-100 dark:bg-blue-900/30' :
+                      selectedInitiative.color === 'green' ? 'bg-green-100 dark:bg-green-900/30' :
+                      selectedInitiative.color === 'orange' ? 'bg-orange-100 dark:bg-orange-900/30' :
+                      'bg-purple-100 dark:bg-purple-900/30'
+                    }`}>
+                      <span className={`text-sm font-medium ${
+                        selectedInitiative.color === 'purple' ? 'text-purple-800 dark:text-purple-200' :
+                        selectedInitiative.color === 'blue' ? 'text-blue-800 dark:text-blue-200' :
+                        selectedInitiative.color === 'green' ? 'text-green-800 dark:text-green-200' :
+                        selectedInitiative.color === 'orange' ? 'text-orange-800 dark:text-orange-200' :
+                        'text-purple-800 dark:text-purple-200'
+                      }`}>
+                        {feature}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Achievements */}
+              <div className="mb-6">
+                <h4 className={`text-lg font-semibold mb-3 ${
+                  selectedInitiative.color === 'purple' ? 'text-purple-800 dark:text-purple-200' :
+                  selectedInitiative.color === 'blue' ? 'text-blue-800 dark:text-blue-200' :
+                  selectedInitiative.color === 'green' ? 'text-green-800 dark:text-green-200' :
+                  selectedInitiative.color === 'orange' ? 'text-orange-800 dark:text-orange-200' :
+                  'text-purple-800 dark:text-purple-200'
+                }`}>
+                  Achievements
+                </h4>
+                <div className="space-y-2">
+                  {selectedInitiative.detailedContent.achievements.map((achievement, idx) => (
+                    <div key={idx} className="flex items-start space-x-2">
+                      <div className={`w-2 h-2 rounded-full mt-2 ${
+                        selectedInitiative.color === 'purple' ? 'bg-purple-500' :
+                        selectedInitiative.color === 'blue' ? 'bg-blue-500' :
+                        selectedInitiative.color === 'green' ? 'bg-green-500' :
+                        selectedInitiative.color === 'orange' ? 'bg-orange-500' :
+                        'bg-purple-500'
+                      }`}></div>
+                      <span className="text-gray-700 dark:text-gray-300 text-sm">{achievement}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Future Goals */}
+              <div className="mb-6">
+                <h4 className={`text-lg font-semibold mb-3 ${
+                  selectedInitiative.color === 'purple' ? 'text-purple-800 dark:text-purple-200' :
+                  selectedInitiative.color === 'blue' ? 'text-blue-800 dark:text-blue-200' :
+                  selectedInitiative.color === 'green' ? 'text-green-800 dark:text-green-200' :
+                  selectedInitiative.color === 'orange' ? 'text-orange-800 dark:text-orange-200' :
+                  'text-purple-800 dark:text-purple-200'
+                }`}>
+                  Future Goals
+                </h4>
+                <div className="space-y-2">
+                  {selectedInitiative.detailedContent.futureGoals.map((goal, idx) => (
+                    <div key={idx} className="flex items-start space-x-2">
+                      <Target className={`w-4 h-4 mt-0.5 ${
+                        selectedInitiative.color === 'purple' ? 'text-purple-500' :
+                        selectedInitiative.color === 'blue' ? 'text-blue-500' :
+                        selectedInitiative.color === 'green' ? 'text-green-500' :
+                        selectedInitiative.color === 'orange' ? 'text-orange-500' :
+                        'text-purple-500'
+                      }`} />
+                      <span className="text-gray-700 dark:text-gray-300 text-sm">{goal}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Testimonials */}
+              <div className="mb-6">
+                <h4 className={`text-lg font-semibold mb-3 ${
+                  selectedInitiative.color === 'purple' ? 'text-purple-800 dark:text-purple-200' :
+                  selectedInitiative.color === 'blue' ? 'text-blue-800 dark:text-blue-200' :
+                  selectedInitiative.color === 'green' ? 'text-green-800 dark:text-green-200' :
+                  selectedInitiative.color === 'orange' ? 'text-orange-800 dark:text-orange-200' :
+                  'text-purple-800 dark:text-purple-200'
+                }`}>
+                  Testimonials
+                </h4>
+                <div className="space-y-3">
+                  {selectedInitiative.detailedContent.testimonials.map((testimonial, idx) => (
+                    <div key={idx} className={`p-3 rounded-lg italic ${
+                      selectedInitiative.color === 'purple' ? 'bg-purple-100 dark:bg-purple-900/30' :
+                      selectedInitiative.color === 'blue' ? 'bg-blue-100 dark:bg-blue-900/30' :
+                      selectedInitiative.color === 'green' ? 'bg-green-100 dark:bg-green-900/30' :
+                      selectedInitiative.color === 'orange' ? 'bg-orange-100 dark:bg-orange-900/30' :
+                      'bg-purple-100 dark:bg-purple-900/30'
+                    }`}>
+                      <span className="text-gray-700 dark:text-gray-300 text-sm">"{testimonial}"</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Get Involved */}
+              <div className="mb-6">
+                <h4 className={`text-lg font-semibold mb-3 ${
+                  selectedInitiative.color === 'purple' ? 'text-purple-800 dark:text-purple-200' :
+                  selectedInitiative.color === 'blue' ? 'text-blue-800 dark:text-blue-200' :
+                  selectedInitiative.color === 'green' ? 'text-green-800 dark:text-green-200' :
+                  selectedInitiative.color === 'orange' ? 'text-orange-800 dark:text-orange-200' :
+                  'text-purple-800 dark:text-purple-200'
+                }`}>
+                  Get Involved
+                </h4>
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                  {selectedInitiative.detailedContent.getInvolved}
+                </p>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex space-x-3">
+                <button
+                  onClick={() => setShowInitiativeModal(false)}
+                  className={`flex-1 ${
+                    selectedInitiative.color === 'purple' ? 'bg-purple-600 text-white hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600' :
+                    selectedInitiative.color === 'blue' ? 'bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600' :
+                    selectedInitiative.color === 'green' ? 'bg-green-600 text-white hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600' :
+                    selectedInitiative.color === 'orange' ? 'bg-orange-600 text-white hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600' :
+                    'bg-purple-600 text-white hover:bg-purple-700 dark:bg-purple-500 dark:hover:bg-purple-600'
+                  } px-4 py-3 rounded-lg font-medium transition-all duration-300 hover:scale-105`}
+                >
+                  Join Initiative
+                </button>
+                
+                <button
+                  onClick={() => setShowInitiativeModal(false)}
+                  className={`flex-1 ${
+                    selectedInitiative.color === 'purple' ? 'bg-purple-100 text-purple-800 hover:bg-purple-200 dark:bg-purple-900/30 dark:hover:bg-purple-800/50 dark:text-purple-200' :
+                    selectedInitiative.color === 'blue' ? 'bg-blue-100 text-blue-800 hover:bg-blue-200 dark:bg-blue-900/30 dark:hover:bg-blue-800/50 dark:text-blue-200' :
+                    selectedInitiative.color === 'green' ? 'bg-green-100 text-green-800 hover:bg-green-200 dark:bg-green-900/30 dark:hover:bg-green-800/50 dark:text-green-200' :
+                    selectedInitiative.color === 'orange' ? 'bg-orange-100 text-orange-800 hover:bg-orange-200 dark:bg-orange-900/30 dark:hover:bg-orange-800/50 dark:text-orange-200' :
+                    'bg-purple-100 text-purple-800 hover:bg-purple-200 dark:bg-purple-900/30 dark:hover:bg-purple-800/50 dark:text-purple-200'
+                  } px-4 py-3 rounded-lg font-medium transition-all duration-300 hover:scale-105`}
+                >
+                  Learn More
+                </button>
+                
+                <button
+                  onClick={() => setShowInitiativeModal(false)}
+                  className="flex-1 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-white px-4 py-3 rounded-lg font-medium hover:bg-gray-300 dark:hover:bg-gray-600 transition-all duration-300 hover:scale-105"
+                >
+                  Close
+                </button>
               </div>
             </div>
           </div>

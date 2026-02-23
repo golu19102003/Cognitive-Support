@@ -150,16 +150,6 @@ const InnovationExplore = () => {
       {/* Header */}
       <div className="bg-gradient-to-r from-indigo-600 to-indigo-800 text-white py-16">
         <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between mb-6">
-            <button 
-              onClick={handleBackToStory}
-              className="flex items-center space-x-2 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition-all duration-300"
-            >
-              <ArrowLeft className="w-5 h-5" />
-              <span>Back to Story</span>
-            </button>
-          </div>
-          
           <div className="text-center">
             <div className="text-6xl mb-4">🚀</div>
             <h1 className="text-4xl font-bold mb-4">Innovation & Growth (2022-Present)</h1>

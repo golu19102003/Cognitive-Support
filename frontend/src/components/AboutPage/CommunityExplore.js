@@ -1,22 +1,102 @@
 
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Calendar, Users, Award, TrendingUp, Target, Zap, Globe, Shield, Star, ChevronRight, Clock, MapPin, ExternalLink, Heart, Lightbulb, MessageCircle, Activity, UserCheck, Sparkles, HelpingHand, Users2, Map, Filter, Search, ChevronDown, ChevronUp, Palette, ArrowUpDown } from 'lucide-react';
+import { ArrowLeft, Calendar, Users, Award, TrendingUp, Target, Zap, Globe, Shield, Star, ChevronRight, Clock, MapPin, ExternalLink, Heart, Lightbulb, MessageCircle, Activity, UserCheck, Sparkles, HelpingHand, Users2, Map, Filter, Search, ChevronDown, ChevronUp, Palette, ArrowUpDown, BarChart, BookOpen, X, Download } from 'lucide-react';
 
 const CommunityExplore = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [activeTab, setActiveTab] = useState('overview');
   const [hoveredInitiative, setHoveredInitiative] = useState(null);
   const [hoveredMilestone, setHoveredMilestone] = useState(null);
-  const [selectedAchievement, setSelectedAchievement] = useState(null);
+  const [selectedInitiative, setSelectedInitiative] = useState(null);
+  const [showInitiativeModal, setShowInitiativeModal] = useState(false);
   const [showDetailsModal, setShowDetailsModal] = useState(null);
+  const [selectedAchievement, setSelectedAchievement] = useState(null);
+  const [showAchievementModal, setShowAchievementModal] = useState(false);
   const [selectedFilter, setSelectedFilter] = useState('all');
   const [searchTerm, setSearchTerm] = useState('');
   const [dateRange, setDateRange] = useState({ start: '', end: '' });
   const [selectedColors, setSelectedColors] = useState([]);
   const [sortBy, setSortBy] = useState('chronological');
   const [showAdvanced, setShowAdvanced] = useState(false);
+  const [selectedMetric, setSelectedMetric] = useState(null);
+  const [showMetricModal, setShowMetricModal] = useState(false);
+  const [selectedTechnology, setSelectedTechnology] = useState(null);
+  const [showTechnologyModal, setShowTechnologyModal] = useState(false);
+
+  // PDF Download Function
+  const downloadPDF = (modalData, modalType) => {
+    // For now, create a simple text download as a placeholder
+    // In a real implementation, you would use a PDF library like jsPDF
+    const content = `
+${modalType === 'achievement' ? 'ACHIEVEMENT DETAILS' : 
+  modalType === 'metric' ? 'PERFORMANCE METRICS' : 
+  modalType === 'technology' ? 'TECHNOLOGY INFORMATION' : 
+  'INITIATIVE DETAILS'}
+
+========================================
+Logo: C:\\Users\\pranj\\OneDrive\\Desktop\\My Projects\\Final Year Major Project Documents\\Cognitive-Support\\frontend\\public\\Longs_logo.png
+========================================
+
+${modalType === 'achievement' && modalData ? `
+Title: ${modalData.title}
+Category: ${modalData.category}
+Impact: ${modalData.impact}
+Date: ${modalData.date}
+
+Description:
+${modalData.description}` :
+
+modalType === 'metric' && modalData ? `
+Metric: ${modalData.label}
+Value: ${modalData.value}
+Trend: ${modalData.trend}
+Impact: ${modalData.impact}
+Category: ${modalData.category}
+Timeframe: ${modalData.timeframe}
+
+Description:
+${modalData.description}` :
+
+modalType === 'technology' && modalData ? `
+Technology: ${modalData.name}
+Category: ${modalData.category}
+Proficiency: ${modalData.level}%
+Experience: ${modalData.experience}
+Projects: ${modalData.projects}
+
+Description:
+${modalData.description}` :
+
+modalType === 'initiative' && modalData ? `
+Initiative: ${modalData.title}
+Category: ${modalData.category}
+Status: ${modalData.status}
+Impact: ${modalData.impact}
+
+Description:
+${modalData.description}` : ''}
+
+========================================
+Generated on: ${new Date().toLocaleString()}
+========================================
+`;
+    
+    // Create and download file
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${modalType}_${modalData?.title || modalData?.label || modalData?.name || 'details'}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
+  };
 
   useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo(0, 0);
+    
     const checkTheme = () => {
       const theme = localStorage.getItem('theme') || 
         (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
@@ -150,7 +230,34 @@ const CommunityExplore = () => {
       description: 'Building bridges between neurodiversity advocates and cognitive specialists',
       impact: '15+ organizations partnered',
       status: 'Active',
-      color: 'pink'
+      color: 'pink',
+      detailedContent: {
+        overview: 'Our Neurodiversity Partnership program connects leading neurodiversity advocacy organizations with cognitive health specialists to create comprehensive support networks.',
+        keyFeatures: [
+          'Monthly collaborative workshops',
+          'Shared resource libraries',
+          'Cross-organization training programs',
+          'Joint research initiatives'
+        ],
+        achievements: [
+          '15+ partner organizations onboarded',
+          '50+ collaborative events conducted',
+          '2000+ individuals served through partnerships',
+          '3 major research publications'
+        ],
+        futureGoals: [
+          'Expand to 25+ partner organizations',
+          'Launch international partnership network',
+          'Develop unified certification program',
+          'Create global knowledge sharing platform'
+        ],
+        testimonials: [
+          'This partnership has transformed how we approach neurodiversity support.',
+          'The collaborative approach has doubled our impact in the community.',
+          'Finally, specialists and advocates are working together effectively.'
+        ],
+        getInvolved: 'Join our partnership network to collaborate on creating inclusive cognitive support solutions.'
+      }
     },
     {
       icon: '🧠',
@@ -158,7 +265,34 @@ const CommunityExplore = () => {
       description: 'Leading cognitive specialists guiding our mission',
       impact: '8 experts on board',
       status: 'Established',
-      color: 'blue'
+      color: 'blue',
+      detailedContent: {
+        overview: 'Our Expert Advisory Board comprises world-renowned cognitive specialists, neuroscientists, and healthcare professionals who provide strategic guidance and oversight.',
+        keyFeatures: [
+          'Quarterly strategic planning sessions',
+          'Research review and validation',
+          'Clinical best practices development',
+          'Innovation assessment and recommendations'
+        ],
+        achievements: [
+          '8 leading experts from diverse fields',
+          '25+ research papers reviewed and endorsed',
+          '10+ evidence-based protocols developed',
+          'Annual cognitive health conference organized'
+        ],
+        futureGoals: [
+          'Expand to 15+ international experts',
+          'Launch peer-reviewed journal',
+          'Create certification programs for practitioners',
+          'Establish research grant foundation'
+        ],
+        testimonials: [
+          'The expertise brought by this board is invaluable for our community.',
+          'Evidence-based approaches have significantly improved our outcomes.',
+          'Finally, we have access to cutting-edge cognitive research.'
+        ],
+        getInvolved: 'Connect with our experts through workshops, consultations, and collaborative research projects.'
+      }
     },
     {
       icon: '🌐',
@@ -166,7 +300,34 @@ const CommunityExplore = () => {
       description: 'Digital hub for peer support and resource sharing',
       impact: '2000+ members engaged',
       status: 'Launched',
-      color: 'green'
+      color: 'green',
+      detailedContent: {
+        overview: 'Our digital community platform provides a safe, accessible space for individuals with cognitive disabilities to connect, share resources, and access support services.',
+        keyFeatures: [
+          '24/7 peer support chat rooms',
+          'Resource library with 500+ materials',
+          'Personalized progress tracking',
+          'Accessible video conferencing tools'
+        ],
+        achievements: [
+          '2000+ active community members',
+          '500+ educational resources available',
+          '1000+ peer support sessions monthly',
+          '95% user satisfaction rate'
+        ],
+        futureGoals: [
+          'Launch mobile applications',
+          'Add AI-powered personalization',
+          'Integrate telehealth services',
+          'Expand to multilingual support'
+        ],
+        testimonials: [
+          'This platform has connected me with people who truly understand my journey.',
+          'The resources available have been life-changing for my family.',
+          'Finally, a safe space where I can be myself and get support.'
+        ],
+        getInvolved: 'Join our growing community to access resources, connect with peers, and participate in support groups.'
+      }
     },
     {
       icon: '📈',
@@ -174,7 +335,34 @@ const CommunityExplore = () => {
       description: 'Growing our professional and community network',
       impact: '400% growth rate',
       status: 'Expanding',
-      color: 'orange'
+      color: 'orange',
+      detailedContent: {
+        overview: 'Our Network Expansion initiative focuses on rapidly scaling our reach to serve more communities while maintaining quality and accessibility standards.',
+        keyFeatures: [
+          'Regional hub establishment',
+          'Professional training programs',
+          'Community ambassador recruitment',
+          'Digital outreach campaigns'
+        ],
+        achievements: [
+          '400% growth in 12 months',
+          '5 new regional hubs established',
+          '50+ community ambassadors trained',
+          '100+ organizations in network'
+        ],
+        futureGoals: [
+          'Establish 20+ regional hubs',
+          'Train 200+ community ambassadors',
+          'Reach 10,000+ individuals directly',
+          'Launch international expansion program'
+        ],
+        testimonials: [
+          'The rapid expansion has brought vital services to our underserved area.',
+          'Quality has remained excellent despite incredible growth.',
+          'Network expansion has made support accessible to so many more people.'
+        ],
+        getInvolved: 'Become a community ambassador or partner with us to expand our reach to new areas.'
+      }
     }
   ];
 
@@ -187,7 +375,34 @@ const CommunityExplore = () => {
       color: 'yellow',
       metrics: '2000+ members',
       date: '2021',
-      category: 'Community'
+      category: 'Community',
+      detailedContent: {
+        overview: 'Our Community Building Excellence initiative represents a cornerstone achievement in creating a supportive ecosystem for individuals with cognitive disabilities. This milestone demonstrates our commitment to fostering inclusive communities where everyone feels valued and empowered.',
+        keyFeatures: [
+          'Comprehensive community engagement programs',
+          'Peer support network establishment',
+          'Inclusive community guidelines development',
+          'Regular community events and activities'
+        ],
+        achievements: [
+          '2000+ active community members',
+          '500+ peer support connections',
+          '100+ community events organized',
+          '95% member satisfaction rate'
+        ],
+        futureGoals: [
+          'Expand to 5000+ community members',
+          'Launch mobile community app',
+          'Establish regional community hubs',
+          'Create mentorship programs'
+        ],
+        testimonials: [
+          'The community has transformed how I connect with others who understand my journey.',
+          'Finally, I found a place where I belong and can be myself.',
+          'The support network has been invaluable for my personal growth.'
+        ],
+        getInvolved: 'Join our thriving community to connect, share experiences, and grow together in a supportive environment.'
+      }
     },
     {
       id: 2,
@@ -197,22 +412,137 @@ const CommunityExplore = () => {
       color: 'blue',
       metrics: '500+ professionals',
       date: '2021',
-      category: 'Network'
+      category: 'Network',
+      detailedContent: {
+        overview: 'Our Professional Network Growth initiative successfully established a comprehensive network of healthcare providers, specialists, and professionals dedicated to supporting individuals with cognitive disabilities. This achievement bridges the gap between community needs and professional expertise.',
+        keyFeatures: [
+          'Healthcare provider partnerships',
+          'Specialist consultation services',
+          'Professional training programs',
+          'Referral network establishment'
+        ],
+        achievements: [
+          '500+ healthcare professionals onboarded',
+          '25+ specialized healthcare fields covered',
+          '1000+ professional consultations provided',
+          'Established referral pathways'
+        ],
+        futureGoals: [
+          'Expand to 1000+ professionals',
+          'Include international specialists',
+          'Launch telehealth integration',
+          'Create professional certification programs'
+        ],
+        testimonials: [
+          'The professional network has connected me with specialists who truly understand my needs.',
+          'Having access to qualified professionals has transformed my care journey.',
+          'The referral system made finding the right specialist so much easier.'
+        ],
+        getInvolved: 'Connect with our professional network to access specialized support and expertise tailored to your needs.'
+      }
+    },
+    {
+      id: 3,
+      title: 'Accessibility Innovation',
+      description: 'Pioneered inclusive design solutions',
+      icon: '♿',
+      color: 'green',
+      metrics: '95% compliance',
+      date: '2022',
+      category: 'Innovation',
+      detailedContent: {
+        overview: 'Our Accessibility Innovation initiative led the way in creating truly inclusive digital experiences for individuals with cognitive disabilities. This achievement sets new standards for accessible design and user experience.',
+        keyFeatures: [
+          'WCAG 2.1 AA compliance implementation',
+          'Cognitive-friendly interface design',
+          'Multi-modal accessibility features',
+          'User-centered testing protocols'
+        ],
+        achievements: [
+          '95% accessibility compliance score',
+          '50+ accessibility features implemented',
+          '1000+ user testing sessions completed',
+          'Industry recognition for inclusive design'
+        ],
+        futureGoals: [
+          'Achieve 99% accessibility compliance',
+          'Implement AI-powered accessibility',
+          'Create accessibility certification program',
+          'Develop adaptive interface technology'
+        ],
+        testimonials: [
+          'The accessibility features have made the platform usable for me for the first time.',
+          'Finally, a digital space that understands and adapts to my needs.',
+          'The inclusive design approach has transformed my digital experience.'
+        ],
+        getInvolved: 'Join our accessibility initiatives to help create a more inclusive digital world for everyone.'
+      }
+    },
+    {
+      id: 4,
+      title: 'Educational Impact',
+      description: 'Delivered comprehensive learning programs',
+      icon: '🎓',
+      color: 'purple',
+      metrics: '100+ courses',
+      date: '2022',
+      category: 'Education',
+      detailedContent: {
+        overview: 'Our Educational Impact initiative successfully created and delivered comprehensive learning programs tailored for individuals with cognitive disabilities. This achievement demonstrates our commitment to accessible education and skill development.',
+        keyFeatures: [
+          'Adaptive learning methodologies',
+          'Multi-format educational content',
+          'Personalized learning paths',
+          'Progress tracking systems'
+        ],
+        achievements: [
+          '100+ educational courses created',
+          '5000+ learners enrolled',
+          '85% course completion rate',
+          'Industry recognition for educational innovation'
+        ],
+        futureGoals: [
+          'Expand to 200+ specialized courses',
+          'Launch mobile learning app',
+          'Create certification programs',
+          'Establish international partnerships'
+        ],
+        testimonials: [
+          'The courses have helped me develop skills I never thought possible.',
+          'Finally, educational content that adapts to my learning style.',
+          'The personalized approach has transformed my learning journey.'
+        ],
+        getInvolved: 'Explore our educational programs to unlock your potential through adaptive and inclusive learning experiences.'
+      }
     }
   ];
 
   const technologies = [
-    { name: 'React.js', icon: '⚛️', description: 'Frontend framework' },
-    { name: 'Node.js', icon: '🟢', description: 'Backend runtime' },
-    { name: 'Firebase', icon: '🔥', description: 'Database & Auth' },
-    { name: 'Tailwind CSS', icon: '🎨', description: 'Styling framework' }
+    { name: "React.js", level: 85, category: "Frontend", icon: "⚛️", description: "Component-based UI framework", experience: "3+ years", projects: "15+" },
+    { name: "Node.js", level: 80, category: "Backend", icon: "🟢", description: "JavaScript runtime environment", experience: "3+ years", projects: "12+" },
+    { name: "Firebase", level: 90, category: "Database", icon: "🔥", description: "Real-time database & authentication", experience: "4+ years", projects: "20+" },
+    { name: "AI/ML", level: 75, category: "Intelligence", icon: "🤖", description: "Machine learning & cognitive AI", experience: "2+ years", projects: "8+" },
+    { name: "Tailwind CSS", level: 95, category: "Styling", icon: "🎨", description: "Utility-first CSS framework", experience: "3+ years", projects: "25+" },
+    { name: "Framer Motion", level: 85, category: "Animation", icon: "🎬", description: "React animation library", experience: "2+ years", projects: "10+" },
+    { name: "TypeScript", level: 88, category: "Language", icon: "📘", description: "Typed JavaScript superset", experience: "3+ years", projects: "18+" },
+    { name: "MongoDB", level: 82, category: "Database", icon: "🍃", description: "NoSQL document database", experience: "3+ years", projects: "14+" },
+    { name: "GraphQL", level: 78, category: "API", icon: "🔗", description: "Query language for APIs", experience: "2+ years", projects: "6+" },
+    { name: "Docker", level: 70, category: "DevOps", icon: "🐳", description: "Container platform", experience: "2+ years", projects: "5+" }
   ];
 
   const metrics = [
-    { icon: '👥', label: 'Community Members', value: '2,000+', change: '+25%' },
-    { icon: '🤝', label: 'Professional Network', value: '500+', change: '+40%' },
-    { icon: '🎯', label: 'Success Rate', value: '94%', change: '+12%' },
-    { icon: '⭐', label: 'Satisfaction', value: '4.8/5', change: '+0.3' }
+    { label: "Community Members", value: "2,000+", icon: "👥", trend: "+25%", description: "Active participants in our community", category: "team", impact: "High", timeframe: "Ongoing" },
+    { label: "Professional Network", value: "500+", icon: "🤝", trend: "+40%", description: "Healthcare providers and specialists", category: "team", impact: "High", timeframe: "2 years" },
+    { label: "Partner Organizations", value: "15+", icon: "🎯", trend: "+20%", description: "Strategic partnerships established", category: "development", impact: "Medium", timeframe: "1 year" },
+    { label: "Resources Created", value: "100+", icon: "📚", trend: "+60%", description: "Educational materials and guides", category: "knowledge", impact: "High", timeframe: "6 months" },
+    { label: "Support Sessions", value: "1,200+", icon: "💬", trend: "+150%", description: "Peer support interactions", category: "support", impact: "High", timeframe: "3 months" },
+    { label: "Workshops Conducted", value: "50+", icon: "🎓", trend: "+80%", description: "Educational workshops and training", category: "quality", impact: "Medium", timeframe: "1 year" },
+    { label: "User Satisfaction", value: "4.8/5", icon: "⭐", trend: "+15%", description: "Community feedback rating", category: "quality", impact: "High", timeframe: "6 months" },
+    { label: "Platform Uptime", value: "99.9%", icon: "⚡", trend: "+5%", description: "Service availability and reliability", category: "performance", impact: "Critical", timeframe: "Ongoing" },
+    { label: "Response Time", value: "<2s", icon: "⏱️", trend: "+30%", description: "Average support response time", category: "performance", impact: "Medium", timeframe: "3 months" },
+    { label: "Accessibility Score", value: "95%", icon: "♿", trend: "+25%", description: "WCAG compliance rating", category: "accessibility", impact: "Critical", timeframe: "6 months" },
+    { label: "Content Updates", value: "200+", icon: "🔄", trend: "+120%", description: "Regular content and feature updates", category: "devops", impact: "Medium", timeframe: "6 months" },
+    { label: "Community Growth", value: "+150%", icon: "📈", trend: "+150%", description: "Monthly active user growth", category: "research", impact: "High", timeframe: "6 months" }
   ];
 
   const timelineMilestones = [
@@ -330,16 +660,6 @@ const CommunityExplore = () => {
     <div className={`min-h-screen ${isDarkMode ? 'dark' : ''}`}>
       <div className="bg-gradient-to-br from-pink-600 to-purple-700 text-white">
         <div className="max-w-7xl mx-auto px-4 py-12">
-          <div className="flex items-center justify-between mb-8">
-            <button
-              onClick={handleBackToStory}
-              className="flex items-center space-x-2 bg-white/20 hover:bg-white/30 px-4 py-2 rounded-lg transition-all duration-300"
-            >
-              <ArrowLeft className="w-5 h-5" />
-              <span>Back to Story</span>
-            </button>
-          </div>
-          
           <div className="text-center">
             <div className="text-6xl mb-4">🤝</div>
             <h1 className="text-4xl font-bold mb-4">Community Building (2020-2021)</h1>
@@ -354,7 +674,7 @@ const CommunityExplore = () => {
       <div className="sticky top-0 z-40 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex space-x-8">
-            {['overview', 'achievements', 'technologies', 'metrics'].map((tab) => (
+            {['overview', 'achievements', 'initiatives', 'technologies', 'metrics'].map((tab) => (
               <button
                 key={tab}
                 onClick={() => setActiveTab(tab)}
@@ -1234,50 +1554,259 @@ const CommunityExplore = () => {
                 </div>
               </div>
             </div>
+          </div>
+        )}
 
-            {/* Enhanced Initiatives Section */}
-            <div className={`bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8`}>
-              <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white flex items-center">
-                <Sparkles className="w-6 h-6 mr-3 text-pink-600" />
-                Community Initiatives
-              </h2>
+        {/* Achievements Tab */}
+        {activeTab === 'achievements' && (
+          <div className="space-y-8">
+            <div className={`bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 relative overflow-hidden`}>
+              {/* Background Animation */}
+              <div className="absolute inset-0 bg-gradient-to-br from-pink-50/30 via-purple-50/30 to-indigo-50/30 dark:from-pink-900/5 dark:via-purple-900/5 dark:to-indigo-900/5"></div>
               
-              <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-6">
-                {communityInitiatives.map((initiative, index) => (
+              {/* Enhanced Header */}
+              <div className="relative mb-8">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center">
+                    <div className="w-8 h-8 bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg flex items-center justify-center mr-3 shadow-lg animate-pulse">
+                      <Award className="w-4 h-4 text-white" />
+                    </div>
+                    Key Achievements
+                  </h2>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">Community Milestones</span>
+                  </div>
+                </div>
+                
+                {/* Progress Bar */}
+                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 overflow-hidden">
+                  <div className="h-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 rounded-full animate-pulse" style={{ width: '100%' }}></div>
+                </div>
+              </div>
+              
+              <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
+                {achievements.map((achievement) => (
                   <div 
-                    key={index}
-                    className={`p-6 border-2 rounded-lg transition-all duration-300 hover:shadow-lg hover:scale-105 cursor-pointer ${
-                      hoveredInitiative === index 
-                        ? 'border-pink-500 bg-pink-50 dark:bg-pink-900/30' 
-                        : 'border-pink-200 dark:border-pink-700 bg-white dark:bg-gray-800'
-                    }`}
-                    onMouseEnter={() => setHoveredInitiative(index)}
-                    onMouseLeave={() => setHoveredInitiative(null)}
+                    key={achievement.id}
+                    className={`bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-xl shadow-lg p-6 text-center transition-all duration-300 hover:shadow-xl hover:scale-105 border border-pink-100 dark:border-pink-800 group cursor-pointer relative`}
+                    onClick={() => {
+                      console.log('Achievement clicked:', achievement);
+                      setSelectedAchievement(achievement);
+                      setShowAchievementModal(true);
+                    }}
                   >
-                    <div className="flex items-start space-x-4 mb-4">
-                      <div className="text-4xl mb-2">{initiative.icon}</div>
-                      <div className="flex-1">
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                          {initiative.title}
-                        </h3>
-                        <p className="text-gray-600 dark:text-gray-300 text-sm mb-3">
-                          {initiative.description}
-                        </p>
-                        <div className="flex items-center justify-between">
-                          <span className={`text-xs px-2 py-1 rounded-full ${
-                            initiative.status === 'Active' 
-                              ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300' 
-                              : initiative.status === 'Established'
-                              ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300'
-                              : initiative.status === 'Launched'
-                              ? 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300'
-                              : 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300'
+                    {/* View Details Button - Top Right */}
+                    <div className="absolute top-4 right-4">
+                      <button className="flex items-center space-x-2 px-3 py-2 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-lg hover:from-pink-600 hover:to-pink-700 transition-all duration-300 text-sm font-medium">
+                        <Award className="w-4 h-4" />
+                        <span>View Details</span>
+                      </button>
+                    </div>
+                    
+                    {/* Enhanced Icon */}
+                    <div className={`w-16 h-16 mx-auto mb-4 rounded-xl flex items-center justify-center text-3xl transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 ${
+                      achievement.category === 'Community' ? 'bg-gradient-to-br from-pink-100 to-pink-200 dark:from-pink-800 dark:to-pink-700' :
+                      achievement.category === 'Network' ? 'bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-800 dark:to-blue-700' :
+                      achievement.category === 'Innovation' ? 'bg-gradient-to-br from-green-100 to-green-200 dark:from-green-800 dark:to-green-700' :
+                      achievement.category === 'Education' ? 'bg-gradient-to-br from-purple-100 to-purple-200 dark:from-purple-800 dark:to-purple-700' :
+                      'bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700'
+                    }`}>
+                      {achievement.icon}
+                    </div>
+                    
+                    {/* Enhanced Value */}
+                    <div className="text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:scale-105 transition-transform">
+                      {achievement.title}
+                    </div>
+                    
+                    {/* Enhanced Label */}
+                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-3 font-medium">
+                      {achievement.description}
+                    </p>
+                    
+                    {/* Enhanced Date */}
+                    <div className="flex items-center justify-center space-x-2 text-sm text-gray-500 dark:text-gray-400 mb-2">
+                      <Calendar className="w-4 h-4" />
+                      <span>{achievement.date}</span>
+                    </div>
+                    
+                    {/* Enhanced Metrics */}
+                    <div className="flex items-center justify-center space-x-2 text-sm font-semibold text-pink-600 mb-2">
+                      <Target className="w-4 h-4" />
+                      <span>{achievement.metrics}</span>
+                    </div>
+                    
+                    {/* Category Tag */}
+                    <div className="flex items-center justify-center space-x-2 text-xs text-gray-500 dark:text-gray-400">
+                      <div className={`w-2 h-2 rounded-full ${
+                        achievement.category === 'Community' ? 'bg-pink-500' :
+                        achievement.category === 'Network' ? 'bg-blue-500' :
+                        achievement.category === 'Innovation' ? 'bg-green-500' :
+                        achievement.category === 'Education' ? 'bg-purple-500' :
+                        'bg-gray-500'
+                      }`}></div>
+                      <span>{achievement.category}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Technologies Tab */}
+        {activeTab === 'technologies' && (
+          <div className="space-y-8">
+            <div className={`bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 relative overflow-hidden`}>
+              {/* Background Animation */}
+              <div className="absolute inset-0 bg-gradient-to-br from-pink-50/30 via-purple-50/30 to-indigo-50/30 dark:from-pink-900/5 dark:via-purple-900/5 dark:to-indigo-900/5"></div>
+              
+              {/* Enhanced Header */}
+              <div className="relative mb-8">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center">
+                    <div className="w-8 h-8 bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg flex items-center justify-center mr-3 shadow-lg animate-pulse">
+                      <Zap className="w-4 h-4 text-white" />
+                    </div>
+                    Technology Stack
+                  </h2>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">Active Technologies</span>
+                  </div>
+                </div>
+                
+                {/* Progress Bar */}
+                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 overflow-hidden">
+                  <div className="h-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 rounded-full animate-pulse" style={{ width: '85%' }}></div>
+                </div>
+              </div>
+              
+              {/* Technology Categories Overview */}
+              <div className="relative mb-8">
+                <div className="flex flex-wrap gap-2 justify-center">
+                  {['Frontend', 'Backend', 'Database', 'Intelligence', 'Styling', 'Animation', 'Language', 'API', 'DevOps'].map((category, index) => (
+                    <div key={index} className="px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-pink-100 to-blue-100 dark:from-pink-800 dark:to-blue-800 text-pink-700 dark:text-pink-300 border border-pink-200 dark:border-pink-600">
+                      {category}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              <div className="relative grid md:grid-cols-2 gap-6">
+                {technologies.map((tech, index) => (
+                  <div key={index} className="group relative">
+                    {/* Card with Advanced Hover Effects */}
+                    <div 
+                      className="space-y-4 p-6 rounded-2xl transition-all duration-500 hover:shadow-2xl hover:scale-105 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md border border-pink-100 dark:border-pink-800 relative overflow-hidden cursor-pointer"
+                      onClick={() => {
+                        console.log('Technology clicked:', tech);
+                        setSelectedTechnology(tech);
+                        setShowTechnologyModal(true);
+                      }}
+                    >
+                      {/* Arrow Indicator - Top Right */}
+                      <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-pink-600 rounded-full flex items-center justify-center shadow-lg">
+                          <ChevronRight className="w-4 h-4 text-white" />
+                        </div>
+                      </div>
+                      
+                      {/* Background Pattern */}
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div className="absolute inset-0 bg-gradient-to-br from-pink-500/5 via-purple-500/5 to-indigo-500/5"></div>
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-pink-400/10 to-transparent rounded-full blur-2xl"></div>
+                        <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-br from-blue-400/10 to-transparent rounded-full blur-xl"></div>
+                      </div>
+                      
+                      {/* Technology Header */}
+                      <div className="relative flex items-center justify-between">
+                        <div className="flex items-center space-x-4">
+                          <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl transition-all duration-500 group-hover:scale-125 group-hover:rotate-12 shadow-lg ${
+                            tech.category === 'Frontend' ? 'bg-gradient-to-br from-blue-400 to-blue-600 text-white shadow-blue-500/50' :
+                            tech.category === 'Backend' ? 'bg-gradient-to-br from-green-400 to-green-600 text-white shadow-green-500/50' :
+                            tech.category === 'Database' ? 'bg-gradient-to-br from-orange-400 to-orange-600 text-white shadow-orange-500/50' :
+                            tech.category === 'Intelligence' ? 'bg-gradient-to-br from-purple-400 to-purple-600 text-white shadow-purple-500/50' :
+                            tech.category === 'Styling' ? 'bg-gradient-to-br from-pink-400 to-pink-600 text-white shadow-pink-500/50' :
+                            tech.category === 'Animation' ? 'bg-gradient-to-br from-indigo-400 to-indigo-600 text-white shadow-indigo-500/50' :
+                            tech.category === 'Language' ? 'bg-gradient-to-br from-yellow-400 to-yellow-600 text-white shadow-yellow-500/50' :
+                            tech.category === 'API' ? 'bg-gradient-to-br from-red-400 to-red-600 text-white shadow-red-500/50' :
+                            tech.category === 'DevOps' ? 'bg-gradient-to-br from-gray-400 to-gray-600 text-white shadow-gray-500/50' :
+                            'bg-gradient-to-br from-gray-400 to-gray-600 text-white shadow-gray-500/50'
                           }`}>
-                            {initiative.status}
-                          </span>
-                          <span className="text-xs text-gray-500 dark:text-gray-400">
-                            {initiative.impact}
-                          </span>
+                            {tech.icon}
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-gray-900 dark:text-white text-xl group-hover:text-pink-600 dark:group-hover:text-pink-400 transition-colors">
+                              {tech.name}
+                            </h4>
+                            <div className="flex items-center space-x-2 mt-1">
+                              <span className="text-sm text-gray-500 dark:text-gray-400">{tech.category}</span>
+                              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                              <span className="text-xs text-green-600 font-medium">Active</span>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-2xl font-bold text-pink-600 group-hover:text-pink-700 transition-colors">{tech.level}%</div>
+                          <div className="text-xs text-gray-500">Proficiency</div>
+                        </div>
+                      </div>
+                      
+                      {/* Technology Description */}
+                      <p className="relative text-sm text-gray-600 dark:text-gray-300 leading-relaxed group-hover:text-gray-700 dark:group-hover:text-gray-200 transition-colors">
+                        {tech.description}
+                      </p>
+                      
+                      {/* Enhanced Progress Bar */}
+                      <div className="relative w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
+                        <div 
+                          className={`h-2 rounded-full transition-all duration-1000 ease-out relative overflow-hidden ${
+                            tech.category === 'Frontend' ? 'bg-gradient-to-r from-blue-500 to-blue-600' :
+                            tech.category === 'Backend' ? 'bg-gradient-to-r from-green-500 to-green-600' :
+                            tech.category === 'Database' ? 'bg-gradient-to-r from-orange-500 to-orange-600' :
+                            tech.category === 'Intelligence' ? 'bg-gradient-to-r from-purple-500 to-purple-600' :
+                            tech.category === 'Styling' ? 'bg-gradient-to-r from-pink-500 to-pink-600' :
+                            tech.category === 'Animation' ? 'bg-gradient-to-r from-indigo-500 to-indigo-600' :
+                            tech.category === 'Language' ? 'bg-gradient-to-r from-yellow-500 to-yellow-600' :
+                            tech.category === 'API' ? 'bg-gradient-to-r from-red-500 to-red-600' :
+                            tech.category === 'DevOps' ? 'bg-gradient-to-r from-gray-500 to-gray-600' :
+                            'bg-gradient-to-r from-gray-500 to-gray-600'
+                          }`}
+                          style={{ width: `${tech.level}%` }}
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse"></div>
+                          <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent"></div>
+                        </div>
+                      </div>
+                      
+                      {/* Skill Level Badge */}
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <div className={`px-3 py-1 rounded-full text-xs font-bold text-white ${
+                            tech.level >= 80 ? 'bg-gradient-to-r from-green-500 to-green-600' :
+                            tech.level >= 60 ? 'bg-gradient-to-r from-yellow-500 to-yellow-600' :
+                            'bg-gradient-to-r from-orange-500 to-orange-600'
+                          }`}>
+                            {tech.level >= 80 ? 'Expert' : tech.level >= 60 ? 'Advanced' : 'Intermediate'}
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-1 text-xs text-gray-500 dark:text-gray-400">
+                          <Clock className="w-3 h-3" />
+                          <span>{tech.experience}</span>
+                        </div>
+                      </div>
+                      
+                      {/* Projects & Status */}
+                      <div className="flex items-center justify-between pt-2 border-t border-gray-200 dark:border-gray-700">
+                        <div className="flex items-center space-x-2">
+                          <Target className="w-4 h-4 text-pink-500" />
+                          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">{tech.projects} projects</span>
+                        </div>
+                        <div className="flex items-center space-x-1 text-xs text-gray-500 dark:text-gray-400">
+                          <Zap className="w-3 h-3" />
+                          <span>Optimized</span>
                         </div>
                       </div>
                     </div>
@@ -1288,73 +1817,267 @@ const CommunityExplore = () => {
           </div>
         )}
 
-        {/* Achievements Tab */}
-        {activeTab === 'achievements' && (
-          <div className="space-y-8">
-            <div className="grid md:grid-cols-2 gap-6">
-              {achievements.map((achievement) => (
-                <div 
-                  key={achievement.id}
-                  className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl hover:scale-105 cursor-pointer`}
-                  onClick={() => setSelectedAchievement(achievement.id === selectedAchievement ? null : achievement.id)}
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="text-3xl">{achievement.icon}</div>
-                    <div className={`px-3 py-1 rounded-full text-xs font-medium ${
-                      achievement.category === 'Community' 
-                        ? 'bg-pink-100 text-pink-800 dark:bg-pink-900/30 dark:text-pink-300'
-                        : 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300'
-                    }`}>
-                      {achievement.category}
-                    </div>
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                    {achievement.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
-                    {achievement.description}
-                  </p>
-                  <div className="flex items-center justify-between text-sm">
-                    <span className="text-gray-500 dark:text-gray-400">{achievement.date}</span>
-                    <span className="font-semibold text-pink-600">{achievement.metrics}</span>
+        {/* Technology Details Modal */}
+      {showTechnologyModal && selectedTechnology && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          onClick={() => setShowTechnologyModal(false)}
+        >
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-100"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="bg-gradient-to-r from-pink-500 to-pink-600 p-6 rounded-t-2xl sticky top-0 z-10">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <div className="text-4xl animate-bounce">{selectedTechnology.icon}</div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-white">{selectedTechnology.name}</h3>
+                    <p className="text-white/90 text-sm">{selectedTechnology.description}</p>
                   </div>
                 </div>
-              ))}
+                <div className="flex items-center space-x-2">
+                  <button 
+                    onClick={() => downloadPDF(selectedTechnology, 'technology')}
+                    className="text-white hover:bg-white/20 p-2 rounded-lg transition-colors duration-200"
+                    title="Download PDF"
+                  >
+                    <Download className="w-5 h-5" />
+                  </button>
+                  <button 
+                    onClick={() => setShowTechnologyModal(false)}
+                    className="text-white hover:bg-white/20 p-2 rounded-lg transition-colors duration-200"
+                    title="Close"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
             </div>
-          </div>
-        )}
 
-        {/* Technologies Tab */}
-        {activeTab === 'technologies' && (
-          <div className="space-y-8">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {technologies.map((tech, index) => (
-                <div key={index} className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 text-center hover:shadow-xl transition-all duration-300">
-                  <div className="text-3xl mb-3">{tech.icon}</div>
-                  <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">{tech.name}</h3>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm">{tech.description}</p>
+            {/* Modal Content */}
+            <div className="p-6 space-y-6">
+              {/* Overview */}
+              <div>
+                <h4 className="text-xl font-bold text-pink-700 dark:text-pink-300 mb-3 flex items-center">
+                  <Lightbulb className="w-6 h-6 mr-2" />
+                  Technology Overview
+                </h4>
+                <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+                  {selectedTechnology.name} is a {selectedTechnology.category.toLowerCase()} technology that plays a crucial role in our cognitive support platform. 
+                  With {selectedTechnology.level}% proficiency level and {selectedTechnology.experience} of experience, 
+                  we've successfully implemented {selectedTechnology.projects} projects using this technology.
+                </p>
+              </div>
+
+              {/* Technical Details */}
+              <div>
+                <h4 className="text-xl font-bold text-pink-700 dark:text-pink-300 mb-3 flex items-center">
+                  <Zap className="w-6 h-6 mr-2" />
+                  Technical Implementation
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="p-4 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Proficiency Level</h5>
+                    <div className="text-3xl font-bold text-pink-600">{selectedTechnology.level}%</div>
+                    <p className="text-gray-600 dark:text-gray-300">Expert level with extensive project experience</p>
+                  </div>
+                  <div className="p-4 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Experience</h5>
+                    <div className="text-3xl font-bold text-pink-600">{selectedTechnology.experience}</div>
+                    <p className="text-gray-600 dark:text-gray-300">Hands-on experience in production environments</p>
+                  </div>
+                  <div className="p-4 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Projects Completed</h5>
+                    <div className="text-3xl font-bold text-pink-600">{selectedTechnology.projects}</div>
+                    <p className="text-gray-600 dark:text-gray-300">Successfully delivered projects</p>
+                  </div>
                 </div>
-              ))}
+              </div>
+
+              {/* Key Features */}
+              <div>
+                <h4 className="text-xl font-bold text-pink-700 dark:text-pink-300 mb-3 flex items-center">
+                  <Star className="w-6 h-6 mr-2" />
+                  Key Features & Benefits
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="p-3 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">🚀 High Performance</span>
+                  </div>
+                  <div className="p-3 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">🛡️ Secure & Reliable</span>
+                  </div>
+                  <div className="p-3 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">🔧 Easy Integration</span>
+                  </div>
+                  <div className="p-3 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">📱 Responsive Design</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Use Cases */}
+              <div>
+                <h4 className="text-xl font-bold text-pink-700 dark:text-pink-300 mb-3 flex items-center">
+                  <Target className="w-6 h-6 mr-2" />
+                  Real-World Applications
+                </h4>
+                <div className="space-y-3">
+                  <div className="p-4 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">User Interface</h5>
+                    <p className="text-gray-700 dark:text-gray-300">Creating intuitive and accessible user interfaces for cognitive support</p>
+                  </div>
+                  <div className="p-4 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Data Management</h5>
+                    <p className="text-gray-700 dark:text-gray-300">Handling user data securely and efficiently with real-time synchronization</p>
+                  </div>
+                  <div className="p-4 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">API Integration</h5>
+                    <p className="text-gray-700 dark:text-gray-300">Seamless integration with third-party services and external systems</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Get Involved */}
+              <div className="p-4 rounded-lg bg-gradient-to-r from-pink-100 to-pink-200 dark:from-pink-900/30 dark:to-pink-800/40 border border-pink-200 dark:border-pink-700">
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 flex items-center">
+                  <Users className="w-5 h-5 mr-2 text-pink-600" />
+                  Learn More About {selectedTechnology.name}
+                </h4>
+                <p className="text-gray-700 dark:text-gray-300">
+                  Discover how {selectedTechnology.name} powers our cognitive support platform and explore its technical capabilities. 
+                  Join our developer community to contribute to innovative solutions.
+                </p>
+              </div>
             </div>
           </div>
-        )}
+        </div>
+      )}
 
         {/* Metrics Tab */}
         {activeTab === 'metrics' && (
           <div className="space-y-8">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {metrics.map((metric, index) => (
-                <div key={index} className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 text-center`}>
-                  <div className="text-3xl mb-3">{metric.icon}</div>
-                  <div className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{metric.value}</div>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm mb-1">{metric.label}</p>
-                  <div className={`text-sm font-medium ${
-                    metric.change.startsWith('+') ? 'text-green-600' : 'text-gray-600'
-                  }`}>
-                    {metric.change}
+            <div className={`bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 relative overflow-hidden`}>
+              {/* Background Animation */}
+              <div className="absolute inset-0 bg-gradient-to-br from-pink-50/30 via-purple-50/30 to-indigo-50/30 dark:from-pink-900/5 dark:via-purple-900/5 dark:to-indigo-900/5"></div>
+              
+              {/* Enhanced Header */}
+              <div className="relative mb-8">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center">
+                    <div className="w-8 h-8 bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg flex items-center justify-center mr-3 shadow-lg animate-pulse">
+                      <BarChart className="w-4 h-4 text-white" />
+                    </div>
+                    Performance Metrics
+                  </h2>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">Live Analytics</span>
                   </div>
                 </div>
-              ))}
+                
+                {/* Progress Bar */}
+                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 overflow-hidden">
+                  <div className="h-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 rounded-full animate-pulse" style={{ width: '92%' }}></div>
+                </div>
+              </div>
+              
+              <div className="relative grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {metrics.map((metric, index) => (
+                  <div key={index} className={`bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-xl shadow-lg p-6 text-center transition-all duration-300 hover:shadow-xl hover:scale-105 border border-pink-100 dark:border-pink-800 group cursor-pointer relative`}
+                    onClick={() => {
+                      console.log('Metric clicked:', metric);
+                      setSelectedMetric(metric);
+                      setShowMetricModal(true);
+                    }}
+                  >
+                    {/* Arrow Indicator - Top Right */}
+                    <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="w-8 h-8 bg-gradient-to-r from-pink-500 to-pink-600 rounded-full flex items-center justify-center shadow-lg">
+                        <ChevronRight className="w-4 h-4 text-white" />
+                      </div>
+                    </div>
+                    
+                    {/* Enhanced Icon */}
+                    <div className={`w-16 h-16 mx-auto mb-4 rounded-xl flex items-center justify-center text-3xl transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 ${
+                      metric.category === 'research' ? 'bg-gradient-to-br from-purple-100 to-purple-200 dark:from-purple-800 dark:to-purple-700' :
+                      metric.category === 'team' ? 'bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-800 dark:to-blue-700' :
+                      metric.category === 'financial' ? 'bg-gradient-to-br from-green-100 to-green-200 dark:from-green-800 dark:to-green-700' :
+                      metric.category === 'development' ? 'bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-800 dark:to-orange-700' :
+                      metric.category === 'testing' ? 'bg-gradient-to-br from-red-100 to-red-200 dark:from-red-800 dark:to-red-700' :
+                      metric.category === 'accessibility' ? 'bg-gradient-to-br from-indigo-100 to-indigo-200 dark:from-indigo-800 dark:to-indigo-700' :
+                      metric.category === 'quality' ? 'bg-gradient-to-br from-pink-100 to-pink-200 dark:from-pink-800 dark:to-pink-700' :
+                      metric.category === 'performance' ? 'bg-gradient-to-br from-yellow-100 to-yellow-200 dark:from-yellow-800 dark:to-yellow-700' :
+                      metric.category === 'devops' ? 'bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700' :
+                      metric.category === 'support' ? 'bg-gradient-to-br from-teal-100 to-teal-200 dark:from-teal-800 dark:to-teal-700' :
+                      metric.category === 'knowledge' ? 'bg-gradient-to-br from-cyan-100 to-cyan-200 dark:from-cyan-800 dark:to-cyan-700' :
+                      'bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700'
+                    }`}>
+                      {metric.icon}
+                    </div>
+                    
+                    {/* Enhanced Value */}
+                    <div className="text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:scale-105 transition-transform">
+                      {metric.value}
+                    </div>
+                    
+                    {/* Enhanced Label */}
+                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-3 font-medium">
+                      {metric.label}
+                    </p>
+                    
+                    {/* Enhanced Description */}
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-3 line-clamp-2">
+                      {metric.description}
+                    </p>
+                    
+                    {/* Enhanced Trend */}
+                    <div className="flex items-center justify-center space-x-1 text-green-600 mb-2">
+                      <TrendingUp className="w-4 h-4 animate-bounce" />
+                      <span className="text-sm font-medium">{metric.trend}</span>
+                    </div>
+                    
+                    {/* Impact Level */}
+                    <div className="flex items-center justify-center space-x-2 mb-2">
+                      <div className={`w-2 h-2 rounded-full ${
+                        metric.impact === 'Critical' ? 'bg-red-500' :
+                        metric.impact === 'High' ? 'bg-orange-500' :
+                        metric.impact === 'Medium' ? 'bg-yellow-500' :
+                        'bg-green-500'
+                      }`}></div>
+                      <span className="text-xs font-medium text-gray-600 dark:text-gray-400">
+                        {metric.impact} Impact
+                      </span>
+                    </div>
+                    
+                    {/* Timeframe */}
+                    <div className="flex items-center justify-center space-x-1 text-xs text-gray-500 dark:text-gray-400 mb-2">
+                      <Clock className="w-3 h-3" />
+                      <span>{metric.timeframe}</span>
+                    </div>
+                    
+                    {/* Category Tag */}
+                    <div className="flex items-center justify-center space-x-2 text-xs text-gray-500 dark:text-gray-400">
+                      <div className={`w-2 h-2 rounded-full ${
+                        metric.category === 'research' ? 'bg-purple-500' :
+                        metric.category === 'team' ? 'bg-blue-500' :
+                        metric.category === 'financial' ? 'bg-green-500' :
+                        metric.category === 'development' ? 'bg-orange-500' :
+                        metric.category === 'testing' ? 'bg-red-500' :
+                        metric.category === 'accessibility' ? 'bg-indigo-500' :
+                        metric.category === 'quality' ? 'bg-pink-500' :
+                        metric.category === 'performance' ? 'bg-yellow-500' :
+                        metric.category === 'devops' ? 'bg-gray-500' :
+                        metric.category === 'support' ? 'bg-teal-500' :
+                        metric.category === 'knowledge' ? 'bg-cyan-500' :
+                        'bg-gray-500'
+                      }`}></div>
+                      <span>{metric.category}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}
@@ -1362,7 +2085,10 @@ const CommunityExplore = () => {
       
       {/* Details Modal */}
       {showDetailsModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          onClick={() => setShowDetailsModal(null)}
+        >
           <div className={`bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto ${
             showDetailsModal.color === 'rose' ? 'border-4 border-rose-200 dark:border-rose-700' :
             showDetailsModal.color === 'violet' ? 'border-4 border-violet-200 dark:border-violet-700' :
@@ -1376,7 +2102,9 @@ const CommunityExplore = () => {
             showDetailsModal.color === 'indigo' ? 'border-4 border-indigo-200 dark:border-indigo-700' :
             showDetailsModal.color === 'cyan' ? 'border-4 border-cyan-200 dark:border-cyan-700' :
             'border-4 border-purple-200 dark:border-purple-700'
-          }`}>
+          }`}
+          onClick={(e) => e.stopPropagation()}
+        >
             <div className={`p-6 ${
               showDetailsModal.color === 'rose' ? 'bg-gradient-to-br from-rose-50 to-rose-100 dark:from-rose-900/20 dark:to-rose-800/30' :
               showDetailsModal.color === 'violet' ? 'bg-gradient-to-br from-violet-50 to-violet-100 dark:from-violet-900/20 dark:to-violet-800/30' :
@@ -1529,6 +2257,605 @@ const CommunityExplore = () => {
           </div>
         </div>
       )}
+
+      {/* Initiative Details Modal */}
+      {showInitiativeModal && selectedInitiative && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          onClick={() => setShowInitiativeModal(false)}
+        >
+          <div 
+            className={`bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-100`}
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className={`bg-gradient-to-r from-${selectedInitiative.color}-500 to-${selectedInitiative.color}-600 p-6 rounded-t-2xl sticky top-0 z-10`}>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <div className="text-4xl animate-bounce">{selectedInitiative.icon}</div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-white">{selectedInitiative.title}</h3>
+                    <p className="text-white/90 text-sm">{selectedInitiative.description}</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <button
+                    onClick={() => downloadPDF(selectedInitiative, 'initiative')}
+                    className="text-white hover:bg-white/20 p-2 rounded-lg transition-colors duration-200"
+                    title="Download PDF"
+                  >
+                    <Download className="w-6 h-6" />
+                  </button>
+                  <button 
+                    onClick={() => setShowInitiativeModal(false)}
+                    className="text-white hover:bg-white/20 p-2 rounded-lg transition-colors duration-200"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6 space-y-6">
+              {/* Overview */}
+              <div>
+                <h4 className={`text-xl font-bold text-${selectedInitiative.color}-700 dark:text-${selectedInitiative.color}-300 mb-3 flex items-center`}>
+                  <Lightbulb className="w-6 h-6 mr-2" />
+                  Overview
+                </h4>
+                <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+                  {selectedInitiative.detailedContent.overview}
+                </p>
+              </div>
+
+              {/* Key Features */}
+              <div>
+                <h4 className={`text-xl font-bold text-${selectedInitiative.color}-700 dark:text-${selectedInitiative.color}-300 mb-3 flex items-center`}>
+                  <Star className="w-6 h-6 mr-2" />
+                  Key Features
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {selectedInitiative.detailedContent.keyFeatures.map((feature, idx) => (
+                    <div key={idx} className={`p-3 rounded-lg bg-${selectedInitiative.color}-50 dark:bg-${selectedInitiative.color}-900/30 border-l-4 border-${selectedInitiative.color}-400`}>
+                      <span className="text-gray-700 dark:text-gray-300 font-medium">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Achievements */}
+              <div>
+                <h4 className={`text-xl font-bold text-${selectedInitiative.color}-700 dark:text-${selectedInitiative.color}-300 mb-3 flex items-center`}>
+                  <Award className="w-6 h-6 mr-2" />
+                  Key Achievements
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {selectedInitiative.detailedContent.achievements.map((achievement, idx) => (
+                    <div key={idx} className={`p-3 rounded-lg bg-${selectedInitiative.color}-50 dark:bg-${selectedInitiative.color}-900/30 border-l-4 border-${selectedInitiative.color}-400`}>
+                      <span className="text-gray-700 dark:text-gray-300 font-medium">{achievement}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Future Goals */}
+              <div>
+                <h4 className={`text-xl font-bold text-${selectedInitiative.color}-700 dark:text-${selectedInitiative.color}-300 mb-3 flex items-center`}>
+                  <Target className="w-6 h-6 mr-2" />
+                  Future Goals
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {selectedInitiative.detailedContent.futureGoals.map((goal, idx) => (
+                    <div key={idx} className={`p-3 rounded-lg bg-${selectedInitiative.color}-50 dark:bg-${selectedInitiative.color}-900/30 border-l-4 border-${selectedInitiative.color}-400`}>
+                      <span className="text-gray-700 dark:text-gray-300 font-medium">{goal}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Testimonials */}
+              <div>
+                <h4 className={`text-xl font-bold text-${selectedInitiative.color}-700 dark:text-${selectedInitiative.color}-300 mb-3 flex items-center`}>
+                  <Heart className="w-6 h-6 mr-2" />
+                  Community Impact
+                </h4>
+                <div className="space-y-3">
+                  {selectedInitiative.detailedContent.testimonials.map((testimonial, idx) => (
+                    <div key={idx} className={`p-4 rounded-xl bg-white dark:bg-gray-800 border-l-4 border-${selectedInitiative.color}-400 shadow-md`}>
+                      <p className="text-gray-700 dark:text-gray-300 text-lg italic">"{testimonial}"</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Get Involved */}
+              <div className={`p-6 rounded-xl bg-gradient-to-r from-${selectedInitiative.color}-100 to-${selectedInitiative.color}-200 dark:from-${selectedInitiative.color}-900/30 dark:to-${selectedInitiative.color}-800/30 border-2 border-${selectedInitiative.color}-300`}>
+                <h4 className={`text-xl font-bold text-${selectedInitiative.color}-700 dark:text-${selectedInitiative.color}-300 mb-3 flex items-center`}>
+                  <Users className="w-6 h-6 mr-2" />
+                  Get Involved
+                </h4>
+                <p className="text-gray-700 dark:text-gray-300 text-lg font-medium mb-4">
+                  {selectedInitiative.detailedContent.getInvolved}
+                </p>
+                
+                {/* Action Buttons */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                  <button className={`bg-${selectedInitiative.color}-600 text-white px-4 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center justify-center space-x-2`}>
+                    <Users className="w-4 h-4" />
+                    Join Community
+                  </button>
+                  <button className={`bg-${selectedInitiative.color}-600 text-white px-4 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center justify-center space-x-2`}>
+                    <Heart className="w-4 h-4" />
+                    Support Initiative
+                  </button>
+                  <button className={`bg-${selectedInitiative.color}-600 text-white px-4 py-3 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105 flex items-center justify-center space-x-2`}>
+                    <HelpingHand className="w-4 h-4" />
+                    Get Involved
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Metrics Details Modal */}
+      {showMetricModal && selectedMetric && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          onClick={() => setShowMetricModal(false)}
+        >
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-100"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className="bg-gradient-to-r from-pink-500 to-pink-600 p-6 rounded-t-2xl sticky top-0 z-10">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <div className="text-4xl animate-bounce">{selectedMetric.icon}</div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-white">{selectedMetric.label}</h3>
+                    <p className="text-white/90 text-sm">{selectedMetric.description}</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <button 
+                    onClick={() => downloadPDF(selectedMetric, 'metric')}
+                    className="text-white hover:bg-white/20 p-2 rounded-lg transition-colors duration-200"
+                    title="Download PDF"
+                  >
+                    <Download className="w-5 h-5" />
+                  </button>
+                  <button 
+                    onClick={() => setShowMetricModal(false)}
+                    className="text-white hover:bg-white/20 p-2 rounded-lg transition-colors duration-200"
+                    title="Close"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6 space-y-6">
+              {/* Overview */}
+              <div>
+                <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+                  <BarChart className="w-5 h-5 mr-2 text-pink-600" />
+                  Performance Overview
+                </h4>
+                <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+                  {selectedMetric.label} represents a critical performance indicator for our cognitive support platform, 
+                  showing our commitment to excellence and continuous improvement in service delivery.
+                </p>
+              </div>
+
+              {/* Key Metrics */}
+              <div>
+                <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+                  <TrendingUp className="w-5 h-5 mr-2 text-pink-600" />
+                  Key Performance Indicators
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="p-4 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Current Value</h5>
+                    <div className="text-3xl font-bold text-pink-600">{selectedMetric.value}</div>
+                  </div>
+                  <div className="p-4 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Growth Trend</h5>
+                    <div className="flex items-center space-x-2 text-green-600">
+                      <TrendingUp className="w-5 h-5 animate-bounce" />
+                      <span className="text-lg font-bold">{selectedMetric.trend}</span>
+                    </div>
+                  </div>
+                  <div className="p-4 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Impact Level</h5>
+                    <div className="flex items-center space-x-2">
+                      <div className={`w-3 h-3 rounded-full ${
+                        selectedMetric.impact === 'Critical' ? 'bg-red-500' :
+                        selectedMetric.impact === 'High' ? 'bg-orange-500' :
+                        selectedMetric.impact === 'Medium' ? 'bg-yellow-500' :
+                        'bg-green-500'
+                      }`}></div>
+                      <span className="text-gray-700 dark:text-gray-300 font-medium">{selectedMetric.impact} Impact</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Timeframe Analysis */}
+              <div>
+                <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+                  <Clock className="w-5 h-5 mr-2 text-pink-600" />
+                  Timeframe Analysis
+                </h4>
+                <div className="p-4 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                  <p className="text-gray-700 dark:text-gray-300 text-lg mb-2">
+                    <span className="font-semibold">Measurement Period:</span> {selectedMetric.timeframe}
+                  </p>
+                  <p className="text-gray-700 dark:text-gray-300 text-lg">
+                    This metric is tracked over {selectedMetric.timeframe} to ensure consistent performance monitoring 
+                    and identify trends for continuous improvement.
+                  </p>
+                </div>
+              </div>
+
+              {/* Category Insights */}
+              <div>
+                <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+                  <Target className="w-5 h-5 mr-2 text-pink-600" />
+                  Category Insights
+                </h4>
+                <div className="p-4 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                  <p className="text-gray-700 dark:text-gray-300 text-lg mb-2">
+                    <span className="font-semibold">Category:</span> {selectedMetric.category}
+                  </p>
+                  <div className="flex items-center space-x-2">
+                    <div className={`w-3 h-3 rounded-full ${
+                      selectedMetric.category === 'research' ? 'bg-purple-500' :
+                      selectedMetric.category === 'team' ? 'bg-blue-500' :
+                      selectedMetric.category === 'financial' ? 'bg-green-500' :
+                      selectedMetric.category === 'development' ? 'bg-orange-500' :
+                      selectedMetric.category === 'testing' ? 'bg-red-500' :
+                      selectedMetric.category === 'accessibility' ? 'bg-indigo-500' :
+                      selectedMetric.category === 'quality' ? 'bg-pink-500' :
+                      selectedMetric.category === 'performance' ? 'bg-yellow-500' :
+                      selectedMetric.category === 'devops' ? 'bg-gray-500' :
+                      selectedMetric.category === 'support' ? 'bg-teal-500' :
+                      selectedMetric.category === 'knowledge' ? 'bg-cyan-500' :
+                      'bg-gray-500'
+                    }`}></div>
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">{selectedMetric.category} Performance</span>
+                  </div>
+                </div>
+              </div>
+
+                          </div>
+          </div>
+        </div>
+      )}
+
+        {/* Initiatives Tab */}
+        {activeTab === 'initiatives' && (
+          <div className="space-y-8">
+            <div className={`bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 relative overflow-hidden`}>
+              {/* Background Animation */}
+              <div className="absolute inset-0 bg-gradient-to-br from-pink-50/30 via-purple-50/30 to-indigo-50/30 dark:from-pink-900/5 dark:via-purple-900/5 dark:to-indigo-900/5"></div>
+              
+              {/* Enhanced Header */}
+              <div className="relative mb-8">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center">
+                    <div className="w-8 h-8 bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg flex items-center justify-center mr-3 shadow-lg animate-pulse">
+                      <Sparkles className="w-4 h-4 text-white" />
+                    </div>
+                    Community Initiative
+                  </h2>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">Active Programs</span>
+                  </div>
+                </div>
+                
+                {/* Progress Bar */}
+                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 overflow-hidden">
+                  <div className="h-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 rounded-full animate-pulse" style={{ width: '100%' }}></div>
+                </div>
+              </div>
+
+              {/* Community Initiatives Grid */}
+              <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-6">
+                {communityInitiatives.map((initiative, index) => (
+                  <div 
+                    key={index}
+                    className={`relative border-2 rounded-xl transition-all duration-300 hover:shadow-xl hover:scale-105 cursor-pointer ${
+                      selectedInitiative === index 
+                        ? `border-${initiative.color}-500 bg-${initiative.color}-50 dark:bg-${initiative.color}-900/30 ring-2 ring-${initiative.color}-300` 
+                        : `border-${initiative.color}-200 dark:border-${initiative.color}-700 bg-white dark:bg-gray-800`
+                    }`}
+                    onMouseEnter={() => setHoveredInitiative(index)}
+                    onMouseLeave={() => setHoveredInitiative(null)}
+                    onClick={() => {
+                      setSelectedInitiative(initiative);
+                      setShowInitiativeModal(true);
+                    }}
+                  >
+                    {/* Header */}
+                    <div className="p-6">
+                      <div className="flex items-start space-x-4 mb-4">
+                        <div className="text-5xl mb-2 animate-bounce">{initiative.icon}</div>
+                        <div className="flex-1">
+                          <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                            {initiative.title}
+                          </h3>
+                          <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                            {initiative.description}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Key Features in Main Grid */}
+                      <div className="mb-4">
+                        <h4 className={`text-sm font-semibold text-${initiative.color}-700 dark:text-${initiative.color}-300 mb-2 flex items-center`}>
+                          <Star className="w-4 h-4 mr-1" />
+                          Key Features
+                        </h4>
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+                          {initiative.detailedContent.keyFeatures.map((feature, idx) => (
+                            <div 
+                              key={idx} 
+                              className={`group relative p-2 rounded-lg bg-gradient-to-r from-${initiative.color}-50 to-${initiative.color}-100 dark:from-${initiative.color}-900/20 dark:to-${initiative.color}-800/20 border border-${initiative.color}-200 hover:border-${initiative.color}-400 transition-all duration-300 hover:shadow-md hover:scale-105 cursor-pointer`}
+                            >
+                              <div className={`absolute top-1 right-1 w-2 h-2 rounded-full bg-${initiative.color}-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300`}>
+                                <div className="w-full h-full rounded-full bg-white"></div>
+                              </div>
+                              <span className="text-xs text-gray-700 dark:text-gray-300 font-medium group-hover:text-${initiative.color}-800 dark:group-hover:text-${initiative.color}-200 transition-colors duration-300">
+                                {feature}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Learn More Button and Impact */}
+                      <div className="flex items-center justify-between">
+                        {/* Learn More Button */}
+                        <button 
+                          onClick={(e) => {
+                            e.stopPropagation(); // Prevent card click from firing
+                            setSelectedInitiative(initiative);
+                            setShowInitiativeModal(true);
+                          }}
+                          className={`flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105 ${
+                            initiative.color === 'pink' ? 'bg-pink-600 text-white hover:bg-pink-700 dark:bg-pink-500 dark:hover:bg-pink-600' :
+                            initiative.color === 'blue' ? 'bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600' :
+                            initiative.color === 'green' ? 'bg-green-600 text-white hover:bg-green-700 dark:bg-green-500 dark:hover:bg-green-600' :
+                            initiative.color === 'orange' ? 'bg-orange-600 text-white hover:bg-orange-700 dark:bg-orange-500 dark:hover:bg-orange-600' :
+                            'bg-pink-600 text-white hover:bg-pink-700 dark:bg-pink-500 dark:hover:bg-pink-600'
+                          }`}
+                        >
+                          <ChevronRight className="w-4 h-4" />
+                          <span>Learn More</span>
+                        </button>
+                        
+                        {/* Impact on Right Side */}
+                        <span className="text-sm text-gray-500 dark:text-gray-400 font-medium">
+                          {initiative.impact}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* Achievement Details Modal */}
+      {showAchievementModal && selectedAchievement && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          onClick={() => setShowAchievementModal(false)}
+        >
+          {console.log('Modal opened with achievement:', selectedAchievement)}
+          <div className={`bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto ${
+            selectedAchievement.color === 'yellow' ? 'border-4 border-yellow-200 dark:border-yellow-700' :
+            selectedAchievement.color === 'blue' ? 'border-4 border-blue-200 dark:border-blue-700' :
+            'border-4 border-pink-200 dark:border-pink-700'
+          }`}
+          onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className={`p-6 ${
+              selectedAchievement.color === 'yellow' ? 'bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900/20 dark:to-yellow-800/30' :
+              selectedAchievement.color === 'blue' ? 'bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/30' :
+              'bg-gradient-to-br from-pink-50 to-pink-100 dark:from-pink-900/20 dark:to-pink-800/30'
+            }`}>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-3">
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-3xl ${
+                    selectedAchievement.color === 'yellow' ? 'bg-gradient-to-br from-yellow-400 to-yellow-600' :
+                    selectedAchievement.color === 'blue' ? 'bg-gradient-to-br from-blue-400 to-blue-600' :
+                    'bg-gradient-to-br from-pink-400 to-pink-600'
+                  }`}>
+                    {selectedAchievement.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                      {selectedAchievement.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300">
+                      {selectedAchievement.description}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <button
+                    onClick={() => downloadPDF(selectedAchievement, 'achievement')}
+                    className="text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+                    title="Download PDF"
+                  >
+                    <Download className="w-6 h-6" />
+                  </button>
+                  <button
+                    onClick={() => setShowAchievementModal(false)}
+                    className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                  >
+                    <X className="w-5 h-5 text-gray-500" />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6 space-y-6">
+              {/* Overview */}
+              <div>
+                <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+                  <Lightbulb className="w-5 h-5 mr-2 text-pink-600" />
+                  Overview
+                </h4>
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                  {console.log('Overview content:', selectedAchievement.detailedContent?.overview)}
+                  {selectedAchievement.detailedContent?.overview || 'No overview available'}
+                </p>
+              </div>
+
+              {/* Key Features */}
+              <div>
+                <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+                  <Star className="w-5 h-5 mr-2 text-pink-600" />
+                  Key Features
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {selectedAchievement.detailedContent.keyFeatures.map((feature, idx) => (
+                    <div key={idx} className={`p-3 rounded-lg bg-pink-50 dark:bg-pink-900/30 border-l-4 border-pink-400`}>
+                      <span className="text-gray-700 dark:text-gray-300 font-medium">{feature}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Achievements */}
+              <div>
+                <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+                  <Award className="w-5 h-5 mr-2 text-pink-600" />
+                  Key Achievements
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {selectedAchievement.detailedContent.achievements.map((achievement, idx) => (
+                    <div key={idx} className={`p-3 rounded-lg bg-pink-50 dark:bg-pink-900/30 border-l-4 border-pink-400`}>
+                      <span className="text-gray-700 dark:text-gray-300 font-medium">{achievement}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Future Goals */}
+              <div>
+                <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+                  <Target className="w-5 h-5 mr-2 text-pink-600" />
+                  Future Goals
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  {selectedAchievement.detailedContent.futureGoals.map((goal, idx) => (
+                    <div key={idx} className={`p-3 rounded-lg bg-pink-50 dark:bg-pink-900/30 border-l-4 border-pink-400`}>
+                      <span className="text-gray-700 dark:text-gray-300 font-medium">{goal}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Testimonials */}
+              <div>
+                <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+                  <Heart className="w-5 h-5 mr-2 text-pink-600" />
+                  Community Impact
+                </h4>
+                <div className="space-y-3">
+                  {selectedAchievement.detailedContent.testimonials.map((testimonial, idx) => (
+                    <div key={idx} className={`p-4 rounded-lg bg-pink-50 dark:bg-pink-900/30 border-l-4 border-pink-400`}>
+                      <p className="text-gray-700 dark:text-gray-300 italic">"{testimonial}"</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Get Involved */}
+              <div className={`p-4 rounded-lg bg-gradient-to-r from-pink-100 to-pink-200 dark:from-pink-900/30 dark:to-pink-800/40 border border-pink-200 dark:border-pink-700`}>
+                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 flex items-center">
+                  <HelpingHand className="w-5 h-5 mr-2 text-pink-600" />
+                  Get Involved
+                </h4>
+                <p className="text-gray-700 dark:text-gray-300">
+                  {selectedAchievement.detailedContent.getInvolved}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    {/* Community Era Section - Community Focused */}
+      <div className="mt-2 mb-8">
+        <div className={`bg-gradient-to-br from-pink-600 via-pink-700 to-indigo-800 text-white rounded-2xl shadow-2xl p-8 relative overflow-hidden`}>
+          {/* Background Animation */}
+          <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-black/10"></div>
+          
+          {/* Floating Elements */}
+          <div className="absolute top-4 left-4 opacity-50">
+            <Users className="w-8 h-8 text-white/30 animate-pulse" />
+          </div>
+          <div className="absolute top-4 right-4 opacity-50">
+            <Heart className="w-8 h-8 text-white/30 animate-pulse" />
+          </div>
+          <div className="absolute bottom-4 left-4 opacity-50">
+            <HelpingHand className="w-8 h-8 text-white/30 animate-pulse" />
+          </div>
+          <div className="absolute bottom-4 right-4 opacity-50">
+            <Sparkles className="w-8 h-8 text-white/30 animate-pulse" />
+          </div>
+          
+          <div className="relative text-center">
+            {/* Main Icon */}
+            <div className="w-16 h-16 mx-auto mb-6 bg-white/20 rounded-full flex items-center justify-center animate-pulse">
+              <Users2 className="w-8 h-8 text-white" />
+            </div>
+            
+            {/* Unique Community Title */}
+            <h2 className="text-3xl font-bold mb-4">The Community Era</h2>
+            
+            {/* Community-Focused Tagline */}
+            <p className="text-xl text-white/90 max-w-4xl mx-auto leading-relaxed">
+              Where community collaboration transformed into life-changing cognitive support solutions
+            </p>
+            
+            {/* Community Values */}
+            <div className="mt-8 flex flex-wrap justify-center gap-8">
+              <div className="flex items-center space-x-2 bg-white/10 px-4 py-2 rounded-full">
+                <Users className="w-4 h-4 text-yellow-300" />
+                <span className="text-white/80 font-medium">Community</span>
+              </div>
+              <div className="flex items-center space-x-2 bg-white/10 px-4 py-2 rounded-full">
+                <Heart className="w-4 h-4 text-yellow-300" />
+                <span className="text-white/80 font-medium">Compassion</span>
+              </div>
+              <div className="flex items-center space-x-2 bg-white/10 px-4 py-2 rounded-full">
+                <HelpingHand className="w-4 h-4 text-yellow-300" />
+                <span className="text-white/80 font-medium">Support</span>
+              </div>
+            </div>
+            
+            {/* Additional Community Message */}
+            <div className="mt-6 p-4 bg-white/5 rounded-xl border border-white/10">
+              <p className="text-white/70 text-sm">
+                Together we build, together we grow, together we transform lives
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
