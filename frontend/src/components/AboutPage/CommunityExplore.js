@@ -409,10 +409,10 @@ Generated on: ${new Date().toLocaleString()}
       title: 'Professional Network Growth',
       description: 'Built extensive professional healthcare network',
       icon: '🤝',
-      color: 'blue',
+      color: 'green',
       metrics: '500+ professionals',
       date: '2021',
-      category: 'Network',
+      category: 'Innovation',
       detailedContent: {
         overview: 'Our Professional Network Growth initiative successfully established a comprehensive network of healthcare providers, specialists, and professionals dedicated to supporting individuals with cognitive disabilities. This achievement bridges the gap between community needs and professional expertise.',
         keyFeatures: [
@@ -446,10 +446,10 @@ Generated on: ${new Date().toLocaleString()}
       title: 'Accessibility Innovation',
       description: 'Pioneered inclusive design solutions',
       icon: '♿',
-      color: 'green',
+      color: 'blue',
       metrics: '95% compliance',
       date: '2022',
-      category: 'Innovation',
+      category: 'Network',
       detailedContent: {
         overview: 'Our Accessibility Innovation initiative led the way in creating truly inclusive digital experiences for individuals with cognitive disabilities. This achievement sets new standards for accessible design and user experience.',
         keyFeatures: [
@@ -518,10 +518,10 @@ Generated on: ${new Date().toLocaleString()}
   ];
 
   const technologies = [
-    { name: "React.js", level: 85, category: "Frontend", icon: "⚛️", description: "Component-based UI framework", experience: "3+ years", projects: "15+" },
+    { name: "React.js", level: 85, category: "Intelligence", icon: "⚛️", description: "Component-based UI framework", experience: "3+ years", projects: "15+" },
     { name: "Node.js", level: 80, category: "Backend", icon: "🟢", description: "JavaScript runtime environment", experience: "3+ years", projects: "12+" },
     { name: "Firebase", level: 90, category: "Database", icon: "🔥", description: "Real-time database & authentication", experience: "4+ years", projects: "20+" },
-    { name: "AI/ML", level: 75, category: "Intelligence", icon: "🤖", description: "Machine learning & cognitive AI", experience: "2+ years", projects: "8+" },
+    { name: "AI/ML", level: 75, category: "Frontend", icon: "🤖", description: "Machine learning & cognitive AI", experience: "2+ years", projects: "8+" },
     { name: "Tailwind CSS", level: 95, category: "Styling", icon: "🎨", description: "Utility-first CSS framework", experience: "3+ years", projects: "25+" },
     { name: "Framer Motion", level: 85, category: "Animation", icon: "🎬", description: "React animation library", experience: "2+ years", projects: "10+" },
     { name: "TypeScript", level: 88, category: "Language", icon: "📘", description: "Typed JavaScript superset", experience: "3+ years", projects: "18+" },
@@ -696,180 +696,225 @@ Generated on: ${new Date().toLocaleString()}
         {/* Overview Tab */}
         {activeTab === 'overview' && (
           <div className="space-y-12">
-            <div className={`bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 relative overflow-hidden`}>
-              {/* Background Animation */}
-              <div className="absolute inset-0 bg-gradient-to-br from-pink-50/30 via-purple-50/30 to-indigo-50/30 dark:from-pink-900/5 dark:via-purple-900/5 dark:to-indigo-900/5"></div>
-              
-              <div className="relative">
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-3xl font-bold text-gray-900 dark:text-white flex items-center">
-                    <div className="w-8 h-8 bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg flex items-center justify-center mr-3 shadow-lg animate-pulse">
-                      <Users className="w-5 h-5 text-white" />
-                    </div>
-                    Community Building Overview
-                  </h2>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">Active Development</span>
+            {/* Community Overview Card */}
+            <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8">
+              {/* Header */}
+              <div className="flex items-center justify-between mb-8">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center">
+                  <div className="w-8 h-8 bg-gradient-to-br from-pink-500 to-pink-700 rounded-lg flex items-center justify-center mr-3">
+                    <Users className="w-4 h-4 text-white" />
                   </div>
+                  Community Building Overview
+                </h2>
+
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-pink-500 rounded-full animate-pulse"></div>
+                  <span className="text-sm text-pink-600 dark:text-pink-400 font-medium">
+                    Active Development
+                  </span>
                 </div>
-                
-                <div className="grid md:grid-cols-2 gap-8">
-                  <div className="space-y-6">
-                    <div>
-                      <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white flex items-center">
-                        <div className="w-6 h-6 bg-gradient-to-br from-pink-400 to-pink-500 rounded-lg flex items-center justify-center mr-2">
-                          <Users2 className="w-4 h-4 text-white" />
-                        </div>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-10">
+                {/* Left Section */}
+                <div className="space-y-6">
+                  {/* Building Together */}
+                  <div>
+                    {/* Section Header with Gradient */}
+                    <div className="relative mb-6">
+                      <div className="absolute inset-0 bg-gradient-to-r from-pink-600/20 to-purple-600/20 rounded-xl blur-xl"></div>
+                      <h3 className="relative text-xl font-bold text-gray-900 dark:text-white flex items-center">
+                        <Users2 className="w-5 h-5 mr-2 text-pink-600" />
                         Building Together
                       </h3>
-                      <div className="space-y-4">
-                        <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
-                          We built our foundation on <span className="font-semibold text-pink-600 dark:text-pink-400">collaborative excellence</span> with neurodiversity advocates, cognitive specialists, technology experts, and most importantly, individuals with lived experiences. This collective wisdom shaped our approach to creating <span className="font-semibold text-purple-600 dark:text-purple-400">inclusive, empowering, and effective</span> support systems.
-                        </p>
-                        <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
-                          The community building phase focused on creating <span className="font-semibold text-indigo-600 dark:text-indigo-400">meaningful networks</span>, establishing <span className="font-semibold text-blue-600 dark:text-blue-400">strategic partnerships</span>, and developing <span className="font-semibold text-teal-600 dark:text-teal-400">innovative platforms</span> for meaningful connections and support sharing.
-                        </p>
-                      </div>
                     </div>
-                    
-                    {/* Key Metrics */}
-                    <div className="bg-gradient-to-br from-pink-50 to-purple-50 dark:from-pink-900/20 dark:to-purple-900/20 rounded-xl p-6 border border-pink-200 dark:border-pink-700">
-                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-4 flex items-center">
-                        <TrendingUp className="w-5 h-5 mr-2 text-pink-600" />
-                        Key Achievements
-                      </h4>
-                      <div className="grid grid-cols-2 gap-3.5">
-                        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 text-center">
-                          <div className="text-3xl font-bold text-pink-600 dark:text-pink-400">50+</div>
-                          <div className="text-sm text-gray-600 dark:text-gray-400">Partners</div>
+
+                    <p className="text-black dark:text-gray-300 leading-relaxed border-l-4 border-pink-500 pl-4 py-2 bg-pink-50/50 dark:bg-pink-900/10 rounded-r-lg mb-4">
+                      We built our foundation on collaborative excellence with neurodiversity advocates, cognitive specialists, technology experts, and individuals with lived experiences. This collective wisdom shaped our approach to creating inclusive, empowering, and effective support systems.
+                    </p>
+
+                    <p className="text-black dark:text-gray-300 leading-relaxed border-l-4 border-green-500 pl-4 py-2 bg-pink-50/50 dark:bg-pink-900/10 rounded-r-lg">
+                      The community building phase focused on creating meaningful networks, establishing strategic partnerships, and developing innovative platforms for meaningful connections and support sharing. This collaborative approach ensures sustainable growth and lasting impact in community.
+                    </p>
+                  </div>
+
+                  {/* Key Achievements */}
+                  <div>
+                    <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center">
+                      <TrendingUp className="w-5 h-5 mr-2 text-pink-600" />
+                      Key Achievements
+                    </h4>
+
+                    <div className="grid grid-cols-2 gap-y-4 gap-x-4">
+                      {[
+                        { value: "50+", label: "Partners", icon: "🤝", color: "pink" },
+                        { value: "200+", label: "Members", icon: "👥", color: "purple" },
+                        { value: "15+", label: "Programs", icon: "📚", color: "blue" },
+                        { value: "1000+", label: "Hours", icon: "⏰", color: "green" },
+                        { value: "25+", label: "Workshops", icon: "🎯", color: "orange" },
+                        { value: "10+", label: "Countries", icon: "🌍", color: "yellow" },
+                        { value: "5★", label: "Rating", icon: "⭐", color: "indigo" },
+                        { value: "100%", label: "Satisfaction", icon: "💯", color: "red" },
+                      ].map((item, index) => (
+                        <div
+                          key={index}
+                          className={`group p-6 rounded-xl transition-all duration-300 cursor-pointer hover:shadow-lg hover:scale-105 text-center ${
+                            item.color === 'pink' ? 'bg-gradient-to-br from-pink-50 to-pink-100 dark:from-pink-900/20 dark:to-pink-800/20 hover:from-pink-100 hover:to-pink-200 dark:hover:from-pink-800/30 dark:hover:to-pink-700/30' :
+                            item.color === 'purple' ? 'bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 hover:from-purple-100 hover:to-purple-200 dark:hover:from-purple-800/30 dark:hover:to-purple-700/30' :
+                            item.color === 'blue' ? 'bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 hover:from-blue-100 hover:to-blue-200 dark:hover:from-blue-800/30 dark:hover:to-blue-700/30' :
+                            item.color === 'green' ? 'bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 hover:from-green-100 hover:to-green-200 dark:hover:from-green-800/30 dark:hover:to-green-700/30' :
+                            item.color === 'orange' ? 'bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 hover:from-orange-100 hover:to-orange-200 dark:hover:from-orange-800/30 dark:hover:to-orange-700/30' :
+                            item.color === 'yellow' ? 'bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900/20 dark:to-yellow-800/20 hover:from-yellow-100 hover:to-yellow-200 dark:hover:from-yellow-800/30 dark:hover:to-yellow-700/30' :
+                            item.color === 'indigo' ? 'bg-gradient-to-br from-indigo-50 to-indigo-100 dark:from-indigo-900/20 dark:to-indigo-800/20 hover:from-indigo-100 hover:to-indigo-200 dark:hover:from-indigo-800/30 dark:hover:to-indigo-700/30' :
+                            'bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/20 hover:from-red-100 hover:to-red-200 dark:hover:from-red-800/30 dark:hover:to-red-700/30'
+                          }`}
+                        >
+                          <div className={`w-12 h-12 mx-auto mb-3 rounded-full flex items-center justify-center text-xl transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 ${
+                            item.color === 'pink' ? 'bg-gradient-to-br from-pink-400 to-pink-500' :
+                            item.color === 'purple' ? 'bg-gradient-to-br from-purple-400 to-purple-500' :
+                            item.color === 'blue' ? 'bg-gradient-to-br from-blue-400 to-blue-500' :
+                            item.color === 'green' ? 'bg-gradient-to-br from-green-400 to-green-500' :
+                            item.color === 'orange' ? 'bg-gradient-to-br from-orange-400 to-orange-500' :
+                            item.color === 'yellow' ? 'bg-gradient-to-br from-yellow-400 to-yellow-500' :
+                            item.color === 'indigo' ? 'bg-gradient-to-br from-indigo-400 to-indigo-500' :
+                            'bg-gradient-to-br from-red-400 to-red-500'
+                          }`}>
+                            {item.icon}
+                          </div>
+                          <div className={`text-2xl font-bold mb-1 ${
+                            item.color === 'pink' ? 'text-pink-700 dark:text-pink-300' :
+                            item.color === 'purple' ? 'text-purple-700 dark:text-purple-300' :
+                            item.color === 'blue' ? 'text-blue-700 dark:text-blue-300' :
+                            item.color === 'green' ? 'text-green-700 dark:text-green-300' :
+                            item.color === 'orange' ? 'text-orange-700 dark:text-orange-300' :
+                            item.color === 'yellow' ? 'text-yellow-700 dark:text-yellow-300' :
+                            item.color === 'indigo' ? 'text-indigo-700 dark:text-indigo-300' :
+                            'text-red-700 dark:text-red-300'
+                          }`}>
+                            {item.value}
+                          </div>
+                          <div className="text-sm text-gray-600 dark:text-gray-400">
+                            {item.label}
+                          </div>
                         </div>
-                        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 text-center">
-                          <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">200+</div>
-                          <div className="text-sm text-gray-600 dark:text-gray-400">Members</div>
-                        </div>
-                        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 text-center">
-                          <div className="text-3xl font-bold text-indigo-600 dark:text-indigo-400">15+</div>
-                          <div className="text-sm text-gray-600 dark:text-gray-400">Programs</div>
-                        </div>
-                        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 text-center">
-                          <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">1000+</div>
-                          <div className="text-sm text-gray-600 dark:text-gray-400">Hours</div>
-                        </div>
-                        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 text-center">
-                          <div className="text-3xl font-bold text-teal-600 dark:text-teal-400">25+</div>
-                          <div className="text-sm text-gray-600 dark:text-gray-400">Workshops</div>
-                        </div>
-                        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 text-center">
-                          <div className="text-3xl font-bold text-green-600 dark:text-green-400">10+</div>
-                          <div className="text-sm text-gray-600 dark:text-gray-400">Countries</div>
-                        </div>
-                        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 text-center">
-                          <div className="text-3xl font-bold text-orange-600 dark:text-orange-400">5★</div>
-                          <div className="text-sm text-gray-600 dark:text-gray-400">Rating</div>
-                        </div>
-                        <div className="bg-white dark:bg-gray-800 rounded-xl p-4 text-center">
-                          <div className="text-3xl font-bold text-red-600 dark:text-red-400">100%</div>
-                          <div className="text-sm text-gray-600 dark:text-gray-400">Satisfaction</div>
-                        </div>
-                      </div>
+                      ))}
                     </div>
                   </div>
-                  
-                  <div className="space-y-6">
-                    <div>
-                      <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white flex items-center">
-                        <div className="w-6 h-6 bg-gradient-to-br from-purple-400 to-purple-500 rounded-lg flex items-center justify-center mr-2">
+                </div>
+
+                {/* Right Section */}
+                <div className="space-y-8">
+
+                  {/* Core Values */}
+                  <div>
+                    {/* Section Header with Gradient */}
+                    <div className="relative mb-6">
+                      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-green-600/20 rounded-xl blur-xl"></div>
+                      <h3 className="relative text-xl font-bold text-gray-900 dark:text-white flex items-center">
+                        <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-green-500 rounded-lg flex items-center justify-center mr-3">
                           <Star className="w-4 h-4 text-white" />
                         </div>
                         Core Values
                       </h3>
-                      <div className="space-y-3">
-                        {[
-                          { 
-                            title: "Inclusive Collaboration", 
-                            description: "Bringing diverse voices together",
-                            icon: "🤝",
-                            color: "pink"
-                          },
-                          { 
-                            title: "Lived Experience Integration", 
-                            description: "Real insights from real experiences",
-                            icon: "💡",
-                            color: "purple"
-                          },
-                          { 
-                            title: "Professional Partnership", 
-                            description: "Expert guidance and support",
-                            icon: "🎯",
-                            color: "indigo"
-                          },
-                          { 
-                            title: "Community Empowerment", 
-                            description: "Building stronger together",
-                            icon: "🚀",
-                            color: "blue"
-                          },
-                          { 
-                            title: "Shared Knowledge Building", 
-                            description: "Collective growth and learning",
-                            icon: "📚",
-                            color: "teal"
-                          }
-                        ].map((item, index) => (
-                          <div key={index} className={`group p-4 bg-gradient-to-r from-${item.color}-50 to-${item.color}-100 dark:from-${item.color}-900/20 dark:to-${item.color}-800/30 rounded-xl border border-${item.color}-200 dark:border-${item.color}-700 hover:shadow-lg transition-all duration-300 hover:scale-102 cursor-pointer`}>
-                            <div className="flex items-start space-x-3">
-                              <div className="text-2xl group-hover:scale-110 transition-transform duration-300">{item.icon}</div>
-                              <div className="flex-1">
-                                <h4 className={`font-semibold text-gray-900 dark:text-white mb-1 group-hover:text-${item.color}-600 dark:group-hover:text-${item.color}-400 transition-colors`}>
-                                  {item.title}
-                                </h4>
-                                <p className="text-sm text-gray-600 dark:text-gray-400">{item.description}</p>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
                     </div>
-                    
-                    {/* Impact Timeline */}
-                    <div className="bg-gradient-to-br from-indigo-50 to-blue-50 dark:from-indigo-900/20 dark:to-blue-900/20 rounded-xl p-4 border border-indigo-200 dark:border-indigo-700">
-                      <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
-                        <Clock className="w-5 h-5 mr-2 text-indigo-600" />
-                        Impact Timeline
-                      </h4>
-                      <div className="space-y-4">
-                        <div className="flex items-center space-x-3">
-                          <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                          <div className="flex-1 p-5 bg-white dark:bg-gray-800 rounded-xl border border-green-200 dark:border-green-700 hover:shadow-lg transition-all duration-300">
-                            <div className="text-base font-medium text-gray-900 dark:text-white mb-2">Foundation Established</div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400">Q1 2020</div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400">Core team formation</div>
+
+                    <div className="space-y-3">
+                      {[
+                        { month: "January", achievement: "Inclusive Collaboration", icon: "🤝", color: "pink" },
+                        { month: "February", achievement: "Lived Experience Integration", icon: "💡", color: "purple" },
+                        { month: "March", achievement: "Professional Partnership", icon: "🎯", color: "blue" },
+                        { month: "April", achievement: "Community Empowerment", icon: "🚀", color: "green" },
+                        { month: "May", achievement: "Shared Knowledge Building", icon: "📚", color: "orange" }
+                      ].map((milestone, index) => (
+                        <div 
+                          key={index} 
+                          className={`group flex items-center space-x-4 p-4 rounded-xl transition-all duration-300 cursor-pointer hover:shadow-lg hover:scale-102 ${
+                            index === 0 ? 'bg-gradient-to-r from-blue-50 to-green-100 dark:from-blue-900/20 dark:to-green-800/20 hover:from-blue-100 hover:to-green-200 dark:hover:from-blue-800/30 dark:hover:to-green-700/30' :
+                            milestone.color === 'pink' ? 'bg-gradient-to-r from-pink-50 to-pink-100 dark:from-pink-900/20 dark:to-pink-800/20 hover:from-pink-100 hover:to-pink-200 dark:hover:from-pink-800/30 dark:hover:to-pink-700/30' :
+                            milestone.color === 'purple' ? 'bg-gradient-to-r from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 hover:from-purple-100 hover:to-purple-200 dark:hover:from-purple-800/30 dark:hover:to-purple-700/30' :
+                            milestone.color === 'blue' ? 'bg-gradient-to-r from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 hover:from-blue-100 hover:to-blue-200 dark:hover:from-blue-800/30 dark:hover:to-blue-700/30' :
+                            milestone.color === 'green' ? 'bg-gradient-to-r from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 hover:from-green-100 hover:to-green-200 dark:hover:from-green-800/30 dark:hover:to-green-700/30' :
+                            'bg-gradient-to-r from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 hover:from-orange-100 hover:to-orange-200 dark:hover:from-orange-800/30 dark:hover:to-orange-700/30'
+                          }`}
+                        >
+                          <div className={`w-12 h-12 rounded-full flex items-center justify-center text-2xl transition-all duration-300 group-hover:scale-110 ${
+                            index === 0 ? 'bg-gradient-to-br from-blue-400 to-green-500' :
+                            milestone.color === 'pink' ? 'bg-gradient-to-br from-pink-400 to-pink-500' :
+                            milestone.color === 'purple' ? 'bg-gradient-to-br from-purple-400 to-purple-500' :
+                            milestone.color === 'blue' ? 'bg-gradient-to-br from-blue-400 to-blue-500' :
+                            milestone.color === 'green' ? 'bg-gradient-to-br from-green-400 to-green-500' :
+                            'bg-gradient-to-br from-orange-400 to-orange-500'
+                          }`}>
+                            {milestone.icon}
                           </div>
-                          <div className="w-3 h-3 bg-blue-500 rounded-full"></div>
-                          <div className="flex-1 p-5 bg-white dark:bg-gray-800 rounded-xl border border-blue-200 dark:border-blue-700 hover:shadow-lg transition-all duration-300">
-                            <div className="text-base font-medium text-gray-900 dark:text-white mb-2">Network Expansion</div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400">Q2-Q3 2020</div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400">Partnership development</div>
+                          <div className="flex-1">
+                            <div className={`font-bold text-sm mb-1 ${
+                              index === 0 ? 'text-blue-700 dark:text-blue-300' :
+                              milestone.color === 'pink' ? 'text-pink-700 dark:text-pink-300' :
+                              milestone.color === 'purple' ? 'text-purple-700 dark:text-purple-300' :
+                              milestone.color === 'blue' ? 'text-blue-700 dark:text-blue-300' :
+                              milestone.color === 'green' ? 'text-green-700 dark:text-green-300' :
+                              'text-orange-700 dark:text-orange-300'
+                            }`}>
+                              {milestone.month}
+                            </div>
+                            <div className="text-gray-700 dark:text-gray-300 font-medium">{milestone.achievement}</div>
                           </div>
+                          <ChevronRight className={`w-5 h-5 transition-all duration-300 group-hover:translate-x-1 ${
+                            index === 0 ? 'text-blue-500' :
+                            milestone.color === 'pink' ? 'text-pink-500' :
+                            milestone.color === 'purple' ? 'text-purple-500' :
+                            milestone.color === 'blue' ? 'text-blue-500' :
+                            milestone.color === 'green' ? 'text-green-500' :
+                            'text-orange-500'
+                          }`} />
                         </div>
-                        <div className="flex items-center space-x-3">
-                          <div className="w-3 h-3 bg-purple-500 rounded-full"></div>
-                          <div className="flex-1 p-4 bg-white dark:bg-gray-800 rounded-xl border border-purple-200 dark:border-purple-700 hover:shadow-lg transition-all duration-300">
-                            <div className="text-base font-medium text-gray-900 dark:text-white mb-2">Platform Launch</div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400">Q4 2020</div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400">Digital solutions</div>
-                          </div>
-                          <div className="w-3 h-3 bg-pink-500 rounded-full animate-pulse"></div>
-                          <div className="flex-1 p-4 bg-white dark:bg-gray-800 rounded-xl border border-pink-200 dark:border-pink-700 hover:shadow-lg transition-all duration-300">
-                            <div className="text-base font-medium text-gray-900 dark:text-white mb-2">Ongoing Growth</div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400">2021</div>
-                            <div className="text-sm text-gray-600 dark:text-gray-400">Continuous improvement</div>
-                          </div>
-                        </div>
-                      </div>
+                      ))}
                     </div>
                   </div>
+
+                  {/* Impact Timeline */}
+                  <div>
+                    <h4 className="text-lg font-bold text-gray-900 dark:text-white mb-4 flex items-center">
+                      <Clock className="w-5 h-5 mr-2 text-blue-600" />
+                      Impact Timeline
+                    </h4>
+
+                    <div className="space-y-4">
+                      {[
+                        { title: "Foundation Established", time: "Q1 2020", desc: "Core team formation", color: "blue" },
+                        { title: "Network Expansion", time: "Q2-Q3 2020", desc: "Partnership development", color: "green" },
+                        { title: "Platform Launch", time: "Q4 2020", desc: "Digital solutions", color: "purple" },
+                        { title: "Ongoing Growth", time: "2021", desc: "Continuous improvement", color: "orange" },
+                      ].map((item, index) => (
+                        <div
+                          key={index}
+                          className={`p-6 rounded-xl bg-gradient-to-r ${
+                            item.color === 'blue' ? 'from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/20 hover:from-blue-100 hover:to-blue-200 dark:hover:from-blue-800/30 dark:hover:to-blue-700/30' :
+                            item.color === 'green' ? 'from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20 hover:from-green-100 hover:to-green-200 dark:hover:from-green-800/30 dark:hover:to-green-700/30' :
+                            item.color === 'purple' ? 'from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/20 hover:from-purple-100 hover:to-purple-200 dark:hover:from-purple-800/30 dark:hover:to-purple-700/30' :
+                            'from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/20 hover:from-orange-100 hover:to-orange-200 dark:hover:from-orange-800/30 dark:hover:to-orange-700/30'
+                          } hover:shadow-lg transition-all duration-300`}
+                        >
+                          <div className={`font-semibold ${
+                            item.color === 'blue' ? 'text-blue-700 dark:text-blue-300' :
+                            item.color === 'green' ? 'text-green-700 dark:text-green-300' :
+                            item.color === 'purple' ? 'text-purple-700 dark:text-purple-300' :
+                            'text-orange-700 dark:text-orange-300'
+                          }`}>
+                            {item.title}
+                          </div>
+                          <div className="text-sm text-gray-600 dark:text-gray-400">
+                            {item.time}
+                          </div>
+                          <div className="text-sm text-gray-600 dark:text-gray-400">
+                            {item.desc}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
@@ -883,11 +928,21 @@ Generated on: ${new Date().toLocaleString()}
               
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {communityStats.map((stat, index) => (
-                  <div key={index} className="text-center p-6 bg-gradient-to-br from-pink-50 to-pink-100 dark:from-pink-900/20 dark:to-pink-900/30 rounded-xl border border-pink-200 dark:border-pink-700 hover:shadow-lg transition-all duration-300 hover:scale-105">
+                  <div key={index} className={`text-center p-6 bg-gradient-to-br ${
+                    index % 4 === 0 ? 'from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-900/30 rounded-xl border border-blue-200 dark:border-blue-700' :
+                    index % 4 === 1 ? 'from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-900/30 rounded-xl border border-green-200 dark:border-green-700' :
+                    index % 4 === 2 ? 'from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-900/30 rounded-xl border border-purple-200 dark:border-purple-700' :
+                    'from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-900/30 rounded-xl border border-orange-200 dark:border-orange-700'
+                  } hover:shadow-lg transition-all duration-300 hover:scale-105`}>
                     <div className="text-4xl mb-3">{stat.icon}</div>
                     <div className="text-2xl font-bold text-gray-900 dark:text-white mb-2">{stat.value}</div>
                     <p className="text-gray-600 dark:text-gray-300 text-sm mb-1">{stat.label}</p>
-                    <div className="flex items-center justify-center space-x-1 text-green-600">
+                    <div className={`flex items-center justify-center space-x-1 ${
+                      index % 4 === 0 ? 'text-blue-600' :
+                      index % 4 === 1 ? 'text-green-600' :
+                      index % 4 === 2 ? 'text-purple-600' :
+                      'text-orange-600'
+                    }`}>
                       <TrendingUp className="w-4 h-4" />
                       <span className="text-sm font-medium">{stat.trend}</span>
                     </div>
@@ -1598,7 +1653,13 @@ Generated on: ${new Date().toLocaleString()}
                   >
                     {/* View Details Button - Top Right */}
                     <div className="absolute top-4 right-4">
-                      <button className="flex items-center space-x-2 px-3 py-2 bg-gradient-to-r from-pink-500 to-pink-600 text-white rounded-lg hover:from-pink-600 hover:to-pink-700 transition-all duration-300 text-sm font-medium">
+                      <button className={`flex items-center space-x-2 px-3 py-2 text-white rounded-lg transition-all duration-300 text-sm font-medium ${
+                        achievement.category === 'Community' ? 'bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700' :
+                        achievement.category === 'Network' ? 'bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700' :
+                        achievement.category === 'Innovation' ? 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700' :
+                        achievement.category === 'Education' ? 'bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700' :
+                        'bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700'
+                      }`}>
                         <Award className="w-4 h-4" />
                         <span>View Details</span>
                       </button>
@@ -1606,7 +1667,7 @@ Generated on: ${new Date().toLocaleString()}
                     
                     {/* Enhanced Icon */}
                     <div className={`w-16 h-16 mx-auto mb-4 rounded-xl flex items-center justify-center text-3xl transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 ${
-                      achievement.category === 'Community' ? 'bg-gradient-to-br from-pink-100 to-pink-200 dark:from-pink-800 dark:to-pink-700' :
+                      achievement.category === 'Community' ? 'bg-gradient-to-br from-yellow-100 to-yellow-200 dark:from-yellow-800 dark:to-yellow-700' :
                       achievement.category === 'Network' ? 'bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-800 dark:to-blue-700' :
                       achievement.category === 'Innovation' ? 'bg-gradient-to-br from-green-100 to-green-200 dark:from-green-800 dark:to-green-700' :
                       achievement.category === 'Education' ? 'bg-gradient-to-br from-purple-100 to-purple-200 dark:from-purple-800 dark:to-purple-700' :
@@ -1827,10 +1888,34 @@ Generated on: ${new Date().toLocaleString()}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="bg-gradient-to-r from-pink-500 to-pink-600 p-6 rounded-t-2xl sticky top-0 z-10">
+            <div className={`p-6 rounded-t-2xl sticky top-0 z-10 ${
+              selectedTechnology.category === 'Frontend' ? 'bg-gradient-to-r from-blue-500 to-blue-600' :
+              selectedTechnology.category === 'Backend' ? 'bg-gradient-to-r from-green-500 to-green-600' :
+              selectedTechnology.category === 'Database' ? 'bg-gradient-to-r from-orange-500 to-orange-600' :
+              selectedTechnology.category === 'Intelligence' ? 'bg-gradient-to-r from-purple-500 to-purple-600' :
+              selectedTechnology.category === 'Styling' ? 'bg-gradient-to-r from-pink-500 to-pink-600' :
+              selectedTechnology.category === 'Animation' ? 'bg-gradient-to-r from-indigo-500 to-indigo-600' :
+              selectedTechnology.category === 'Language' ? 'bg-gradient-to-r from-yellow-500 to-yellow-600' :
+              selectedTechnology.category === 'API' ? 'bg-gradient-to-r from-red-500 to-red-600' :
+              selectedTechnology.category === 'DevOps' ? 'bg-gradient-to-r from-gray-500 to-gray-600' :
+              'bg-gradient-to-r from-gray-500 to-gray-600'
+            }`}>
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
-                  <div className="text-4xl animate-bounce">{selectedTechnology.icon}</div>
+                  <div className={`text-4xl animate-bounce ${
+                    selectedTechnology.category === 'Frontend' ? 'bg-gradient-to-br from-blue-400 to-blue-500' :
+                    selectedTechnology.category === 'Backend' ? 'bg-gradient-to-br from-green-400 to-green-500' :
+                    selectedTechnology.category === 'Database' ? 'bg-gradient-to-br from-orange-400 to-orange-500' :
+                    selectedTechnology.category === 'Intelligence' ? 'bg-gradient-to-br from-purple-400 to-purple-500' :
+                    selectedTechnology.category === 'Styling' ? 'bg-gradient-to-br from-pink-400 to-pink-500' :
+                    selectedTechnology.category === 'Animation' ? 'bg-gradient-to-br from-indigo-400 to-indigo-500' :
+                    selectedTechnology.category === 'Language' ? 'bg-gradient-to-br from-yellow-400 to-yellow-500' :
+                    selectedTechnology.category === 'API' ? 'bg-gradient-to-br from-red-400 to-red-500' :
+                    selectedTechnology.category === 'DevOps' ? 'bg-gradient-to-br from-gray-400 to-gray-500' :
+                    'bg-gradient-to-br from-gray-400 to-gray-500'
+                  }`}>
+                    {selectedTechnology.icon}
+                  </div>
                   <div>
                     <h3 className="text-2xl font-bold text-white">{selectedTechnology.name}</h3>
                     <p className="text-white/90 text-sm">{selectedTechnology.description}</p>
@@ -1859,8 +1944,30 @@ Generated on: ${new Date().toLocaleString()}
             <div className="p-6 space-y-6">
               {/* Overview */}
               <div>
-                <h4 className="text-xl font-bold text-pink-700 dark:text-pink-300 mb-3 flex items-center">
-                  <Lightbulb className="w-6 h-6 mr-2" />
+                <h4 className={`text-xl font-bold mb-3 flex items-center ${
+                  selectedTechnology.category === 'Frontend' ? 'text-blue-700 dark:text-blue-300' :
+                  selectedTechnology.category === 'Backend' ? 'text-green-700 dark:text-green-300' :
+                  selectedTechnology.category === 'Database' ? 'text-orange-700 dark:text-orange-300' :
+                  selectedTechnology.category === 'Intelligence' ? 'text-purple-700 dark:text-purple-300' :
+                  selectedTechnology.category === 'Styling' ? 'text-pink-700 dark:text-pink-300' :
+                  selectedTechnology.category === 'Animation' ? 'text-indigo-700 dark:text-indigo-300' :
+                  selectedTechnology.category === 'Language' ? 'text-yellow-700 dark:text-yellow-300' :
+                  selectedTechnology.category === 'API' ? 'text-red-700 dark:text-red-300' :
+                  selectedTechnology.category === 'DevOps' ? 'text-gray-700 dark:text-gray-300' :
+                  'text-gray-700 dark:text-gray-300'
+                }`}>
+                  <Lightbulb className={`w-6 h-6 mr-2 ${
+                    selectedTechnology.category === 'Frontend' ? 'text-blue-600' :
+                    selectedTechnology.category === 'Backend' ? 'text-green-600' :
+                    selectedTechnology.category === 'Database' ? 'text-orange-600' :
+                    selectedTechnology.category === 'Intelligence' ? 'text-purple-600' :
+                    selectedTechnology.category === 'Styling' ? 'text-pink-600' :
+                    selectedTechnology.category === 'Animation' ? 'text-indigo-600' :
+                    selectedTechnology.category === 'Language' ? 'text-yellow-600' :
+                    selectedTechnology.category === 'API' ? 'text-red-600' :
+                    selectedTechnology.category === 'DevOps' ? 'text-gray-600' :
+                    'text-gray-600'
+                  }`} />
                   Technology Overview
                 </h4>
                 <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
@@ -1872,46 +1979,227 @@ Generated on: ${new Date().toLocaleString()}
 
               {/* Technical Details */}
               <div>
-                <h4 className="text-xl font-bold text-pink-700 dark:text-pink-300 mb-3 flex items-center">
-                  <Zap className="w-6 h-6 mr-2" />
+                <h4 className={`text-xl font-bold mb-3 flex items-center ${
+                  selectedTechnology.category === 'Frontend' ? 'text-blue-700 dark:text-blue-300' :
+                  selectedTechnology.category === 'Backend' ? 'text-green-700 dark:text-green-300' :
+                  selectedTechnology.category === 'Database' ? 'text-orange-700 dark:text-orange-300' :
+                  selectedTechnology.category === 'Intelligence' ? 'text-purple-700 dark:text-purple-300' :
+                  selectedTechnology.category === 'Styling' ? 'text-pink-700 dark:text-pink-300' :
+                  selectedTechnology.category === 'Animation' ? 'text-indigo-700 dark:text-indigo-300' :
+                  selectedTechnology.category === 'Language' ? 'text-yellow-700 dark:text-yellow-300' :
+                  selectedTechnology.category === 'API' ? 'text-red-700 dark:text-red-300' :
+                  selectedTechnology.category === 'DevOps' ? 'text-gray-700 dark:text-gray-300' :
+                  'text-gray-700 dark:text-gray-300'
+                }`}>
+                  <Zap className={`w-6 h-6 mr-2 ${
+                    selectedTechnology.category === 'Frontend' ? 'text-blue-600' :
+                    selectedTechnology.category === 'Backend' ? 'text-green-600' :
+                    selectedTechnology.category === 'Database' ? 'text-orange-600' :
+                    selectedTechnology.category === 'Intelligence' ? 'text-purple-600' :
+                    selectedTechnology.category === 'Styling' ? 'text-pink-600' :
+                    selectedTechnology.category === 'Animation' ? 'text-indigo-600' :
+                    selectedTechnology.category === 'Language' ? 'text-yellow-600' :
+                    selectedTechnology.category === 'API' ? 'text-red-600' :
+                    selectedTechnology.category === 'DevOps' ? 'text-gray-600' :
+                    'text-gray-600'
+                  }`} />
                   Technical Implementation
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="p-4 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                  <div className={`p-4 rounded-lg border-l-4 ${
+                    selectedTechnology.category === 'Frontend' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                    selectedTechnology.category === 'Backend' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                    selectedTechnology.category === 'Database' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
+                    selectedTechnology.category === 'Intelligence' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                    selectedTechnology.category === 'Styling' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                    selectedTechnology.category === 'Animation' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
+                    selectedTechnology.category === 'Language' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
+                    selectedTechnology.category === 'API' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                    selectedTechnology.category === 'DevOps' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
+                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
+                  }`}>
                     <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Proficiency Level</h5>
-                    <div className="text-3xl font-bold text-pink-600">{selectedTechnology.level}%</div>
+                    <div className={`text-3xl font-bold ${
+                      selectedTechnology.category === 'Frontend' ? 'text-blue-600' :
+                      selectedTechnology.category === 'Backend' ? 'text-green-600' :
+                      selectedTechnology.category === 'Database' ? 'text-orange-600' :
+                      selectedTechnology.category === 'Intelligence' ? 'text-purple-600' :
+                      selectedTechnology.category === 'Styling' ? 'text-pink-600' :
+                      selectedTechnology.category === 'Animation' ? 'text-indigo-600' :
+                      selectedTechnology.category === 'Language' ? 'text-yellow-600' :
+                      selectedTechnology.category === 'API' ? 'text-red-600' :
+                      selectedTechnology.category === 'DevOps' ? 'text-gray-600' :
+                      'text-gray-600'
+                    }`}>{selectedTechnology.level}%</div>
                     <p className="text-gray-600 dark:text-gray-300">Expert level with extensive project experience</p>
                   </div>
-                  <div className="p-4 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                  <div className={`p-4 rounded-lg border-l-4 ${
+                    selectedTechnology.category === 'Frontend' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                    selectedTechnology.category === 'Backend' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                    selectedTechnology.category === 'Database' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
+                    selectedTechnology.category === 'Intelligence' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                    selectedTechnology.category === 'Styling' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                    selectedTechnology.category === 'Animation' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
+                    selectedTechnology.category === 'Language' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
+                    selectedTechnology.category === 'API' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                    selectedTechnology.category === 'DevOps' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
+                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
+                  }`}>
                     <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Experience</h5>
-                    <div className="text-3xl font-bold text-pink-600">{selectedTechnology.experience}</div>
+                    <div className={`text-3xl font-bold ${
+                      selectedTechnology.category === 'Frontend' ? 'text-blue-600' :
+                      selectedTechnology.category === 'Backend' ? 'text-green-600' :
+                      selectedTechnology.category === 'Database' ? 'text-orange-600' :
+                      selectedTechnology.category === 'Intelligence' ? 'text-purple-600' :
+                      selectedTechnology.category === 'Styling' ? 'text-pink-600' :
+                      selectedTechnology.category === 'Animation' ? 'text-indigo-600' :
+                      selectedTechnology.category === 'Language' ? 'text-yellow-600' :
+                      selectedTechnology.category === 'API' ? 'text-red-600' :
+                      selectedTechnology.category === 'DevOps' ? 'text-gray-600' :
+                      'text-gray-600'
+                    }`}>{selectedTechnology.experience}</div>
                     <p className="text-gray-600 dark:text-gray-300">Hands-on experience in production environments</p>
                   </div>
-                  <div className="p-4 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                  <div className={`p-4 rounded-lg border-l-4 ${
+                    selectedTechnology.category === 'Frontend' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                    selectedTechnology.category === 'Backend' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                    selectedTechnology.category === 'Database' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
+                    selectedTechnology.category === 'Intelligence' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                    selectedTechnology.category === 'Styling' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                    selectedTechnology.category === 'Animation' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
+                    selectedTechnology.category === 'Language' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
+                    selectedTechnology.category === 'API' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                    selectedTechnology.category === 'DevOps' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
+                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
+                  }`}>
                     <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Projects Completed</h5>
-                    <div className="text-3xl font-bold text-pink-600">{selectedTechnology.projects}</div>
+                    <div className={`text-3xl font-bold ${
+                      selectedTechnology.category === 'Frontend' ? 'text-blue-600' :
+                      selectedTechnology.category === 'Backend' ? 'text-green-600' :
+                      selectedTechnology.category === 'Database' ? 'text-orange-600' :
+                      selectedTechnology.category === 'Intelligence' ? 'text-purple-600' :
+                      selectedTechnology.category === 'Styling' ? 'text-pink-600' :
+                      selectedTechnology.category === 'Animation' ? 'text-indigo-600' :
+                      selectedTechnology.category === 'Language' ? 'text-yellow-600' :
+                      selectedTechnology.category === 'API' ? 'text-red-600' :
+                      selectedTechnology.category === 'DevOps' ? 'text-gray-600' :
+                      'text-gray-600'
+                    }`}>{selectedTechnology.projects}</div>
                     <p className="text-gray-600 dark:text-gray-300">Successfully delivered projects</p>
+                  </div>
+                  <div className={`p-4 rounded-lg border-l-4 ${
+                    selectedTechnology.category === 'Frontend' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                    selectedTechnology.category === 'Backend' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                    selectedTechnology.category === 'Database' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
+                    selectedTechnology.category === 'Intelligence' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                    selectedTechnology.category === 'Styling' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                    selectedTechnology.category === 'Animation' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
+                    selectedTechnology.category === 'Language' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
+                    selectedTechnology.category === 'API' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                    selectedTechnology.category === 'DevOps' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
+                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
+                  }`}>
+                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Code Quality</h5>
+                    <div className={`text-3xl font-bold ${
+                      selectedTechnology.category === 'Frontend' ? 'text-blue-600' :
+                      selectedTechnology.category === 'Backend' ? 'text-green-600' :
+                      selectedTechnology.category === 'Database' ? 'text-orange-600' :
+                      selectedTechnology.category === 'Intelligence' ? 'text-purple-600' :
+                      selectedTechnology.category === 'Styling' ? 'text-pink-600' :
+                      selectedTechnology.category === 'Animation' ? 'text-indigo-600' :
+                      selectedTechnology.category === 'Language' ? 'text-yellow-600' :
+                      selectedTechnology.category === 'API' ? 'text-red-600' :
+                      selectedTechnology.category === 'DevOps' ? 'text-gray-600' :
+                      'text-gray-600'
+                    }`}>98%</div>
+                    <p className="text-gray-600 dark:text-gray-300">High-quality maintainable code</p>
                   </div>
                 </div>
               </div>
 
               {/* Key Features */}
               <div>
-                <h4 className="text-xl font-bold text-pink-700 dark:text-pink-300 mb-3 flex items-center">
-                  <Star className="w-6 h-6 mr-2" />
+                <h4 className={`text-xl font-bold mb-3 flex items-center ${
+                  selectedTechnology.category === 'Frontend' ? 'text-blue-700 dark:text-blue-300' :
+                  selectedTechnology.category === 'Backend' ? 'text-green-700 dark:text-green-300' :
+                  selectedTechnology.category === 'Database' ? 'text-orange-700 dark:text-orange-300' :
+                  selectedTechnology.category === 'Intelligence' ? 'text-purple-700 dark:text-purple-300' :
+                  selectedTechnology.category === 'Styling' ? 'text-pink-700 dark:text-pink-300' :
+                  selectedTechnology.category === 'Animation' ? 'text-indigo-700 dark:text-indigo-300' :
+                  selectedTechnology.category === 'Language' ? 'text-yellow-700 dark:text-yellow-300' :
+                  selectedTechnology.category === 'API' ? 'text-red-700 dark:text-red-300' :
+                  selectedTechnology.category === 'DevOps' ? 'text-gray-700 dark:text-gray-300' :
+                  'text-gray-700 dark:text-gray-300'
+                }`}>
+                  <Star className={`w-6 h-6 mr-2 ${
+                    selectedTechnology.category === 'Frontend' ? 'text-blue-600' :
+                    selectedTechnology.category === 'Backend' ? 'text-green-600' :
+                    selectedTechnology.category === 'Database' ? 'text-orange-600' :
+                    selectedTechnology.category === 'Intelligence' ? 'text-purple-600' :
+                    selectedTechnology.category === 'Styling' ? 'text-pink-600' :
+                    selectedTechnology.category === 'Animation' ? 'text-indigo-600' :
+                    selectedTechnology.category === 'Language' ? 'text-yellow-600' :
+                    selectedTechnology.category === 'API' ? 'text-red-600' :
+                    selectedTechnology.category === 'DevOps' ? 'text-gray-600' :
+                    'text-gray-600'
+                  }`} />
                   Key Features & Benefits
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <div className="p-3 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                  <div className={`p-3 rounded-lg border-l-4 ${
+                    selectedTechnology.category === 'Frontend' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                    selectedTechnology.category === 'Backend' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                    selectedTechnology.category === 'Database' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
+                    selectedTechnology.category === 'Intelligence' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                    selectedTechnology.category === 'Styling' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                    selectedTechnology.category === 'Animation' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
+                    selectedTechnology.category === 'Language' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
+                    selectedTechnology.category === 'API' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                    selectedTechnology.category === 'DevOps' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
+                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
+                  }`}>
                     <span className="text-gray-700 dark:text-gray-300 font-medium">🚀 High Performance</span>
                   </div>
-                  <div className="p-3 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                  <div className={`p-3 rounded-lg border-l-4 ${
+                    selectedTechnology.category === 'Frontend' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                    selectedTechnology.category === 'Backend' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                    selectedTechnology.category === 'Database' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
+                    selectedTechnology.category === 'Intelligence' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                    selectedTechnology.category === 'Styling' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                    selectedTechnology.category === 'Animation' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
+                    selectedTechnology.category === 'Language' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
+                    selectedTechnology.category === 'API' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                    selectedTechnology.category === 'DevOps' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
+                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
+                  }`}>
                     <span className="text-gray-700 dark:text-gray-300 font-medium">🛡️ Secure & Reliable</span>
                   </div>
-                  <div className="p-3 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                  <div className={`p-3 rounded-lg border-l-4 ${
+                    selectedTechnology.category === 'Frontend' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                    selectedTechnology.category === 'Backend' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                    selectedTechnology.category === 'Database' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
+                    selectedTechnology.category === 'Intelligence' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                    selectedTechnology.category === 'Styling' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                    selectedTechnology.category === 'Animation' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
+                    selectedTechnology.category === 'Language' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
+                    selectedTechnology.category === 'API' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                    selectedTechnology.category === 'DevOps' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
+                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
+                  }`}>
                     <span className="text-gray-700 dark:text-gray-300 font-medium">🔧 Easy Integration</span>
                   </div>
-                  <div className="p-3 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                  <div className={`p-3 rounded-lg border-l-4 ${
+                    selectedTechnology.category === 'Frontend' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                    selectedTechnology.category === 'Backend' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                    selectedTechnology.category === 'Database' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
+                    selectedTechnology.category === 'Intelligence' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                    selectedTechnology.category === 'Styling' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                    selectedTechnology.category === 'Animation' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
+                    selectedTechnology.category === 'Language' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
+                    selectedTechnology.category === 'API' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                    selectedTechnology.category === 'DevOps' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
+                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
+                  }`}>
                     <span className="text-gray-700 dark:text-gray-300 font-medium">📱 Responsive Design</span>
                   </div>
                 </div>
@@ -1919,30 +2207,107 @@ Generated on: ${new Date().toLocaleString()}
 
               {/* Use Cases */}
               <div>
-                <h4 className="text-xl font-bold text-pink-700 dark:text-pink-300 mb-3 flex items-center">
-                  <Target className="w-6 h-6 mr-2" />
+                <h4 className={`text-xl font-bold mb-3 flex items-center ${
+                  selectedTechnology.category === 'Frontend' ? 'text-blue-700 dark:text-blue-300' :
+                  selectedTechnology.category === 'Backend' ? 'text-green-700 dark:text-green-300' :
+                  selectedTechnology.category === 'Database' ? 'text-orange-700 dark:text-orange-300' :
+                  selectedTechnology.category === 'Intelligence' ? 'text-purple-700 dark:text-purple-300' :
+                  selectedTechnology.category === 'Styling' ? 'text-pink-700 dark:text-pink-300' :
+                  selectedTechnology.category === 'Animation' ? 'text-indigo-700 dark:text-indigo-300' :
+                  selectedTechnology.category === 'Language' ? 'text-yellow-700 dark:text-yellow-300' :
+                  selectedTechnology.category === 'API' ? 'text-red-700 dark:text-red-300' :
+                  selectedTechnology.category === 'DevOps' ? 'text-gray-700 dark:text-gray-300' :
+                  'text-gray-700 dark:text-gray-300'
+                }`}>
+                  <Target className={`w-6 h-6 mr-2 ${
+                    selectedTechnology.category === 'Frontend' ? 'text-blue-600' :
+                    selectedTechnology.category === 'Backend' ? 'text-green-600' :
+                    selectedTechnology.category === 'Database' ? 'text-orange-600' :
+                    selectedTechnology.category === 'Intelligence' ? 'text-purple-600' :
+                    selectedTechnology.category === 'Styling' ? 'text-pink-600' :
+                    selectedTechnology.category === 'Animation' ? 'text-indigo-600' :
+                    selectedTechnology.category === 'Language' ? 'text-yellow-600' :
+                    selectedTechnology.category === 'API' ? 'text-red-600' :
+                    selectedTechnology.category === 'DevOps' ? 'text-gray-600' :
+                    'text-gray-600'
+                  }`} />
                   Real-World Applications
                 </h4>
                 <div className="space-y-3">
-                  <div className="p-4 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                  <div className={`p-4 rounded-lg border-l-4 ${
+                    selectedTechnology.category === 'Frontend' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                    selectedTechnology.category === 'Backend' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                    selectedTechnology.category === 'Database' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
+                    selectedTechnology.category === 'Intelligence' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                    selectedTechnology.category === 'Styling' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                    selectedTechnology.category === 'Animation' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
+                    selectedTechnology.category === 'Language' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
+                    selectedTechnology.category === 'API' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                    selectedTechnology.category === 'DevOps' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
+                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
+                  }`}>
                     <h5 className="font-semibold text-gray-900 dark:text-white mb-2">User Interface</h5>
                     <p className="text-gray-700 dark:text-gray-300">Creating intuitive and accessible user interfaces for cognitive support</p>
                   </div>
-                  <div className="p-4 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                  <div className={`p-4 rounded-lg border-l-4 ${
+                    selectedTechnology.category === 'Frontend' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                    selectedTechnology.category === 'Backend' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                    selectedTechnology.category === 'Database' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
+                    selectedTechnology.category === 'Intelligence' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                    selectedTechnology.category === 'Styling' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                    selectedTechnology.category === 'Animation' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
+                    selectedTechnology.category === 'Language' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
+                    selectedTechnology.category === 'API' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                    selectedTechnology.category === 'DevOps' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
+                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
+                  }`}>
                     <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Data Management</h5>
-                    <p className="text-gray-700 dark:text-gray-300">Handling user data securely and efficiently with real-time synchronization</p>
+                    <p className="text-gray-700 dark:text-gray-300">Secure storage and retrieval of user data and cognitive profiles</p>
                   </div>
-                  <div className="p-4 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
-                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">API Integration</h5>
-                    <p className="text-gray-700 dark:text-gray-300">Seamless integration with third-party services and external systems</p>
+                  <div className={`p-4 rounded-lg border-l-4 ${
+                    selectedTechnology.category === 'Frontend' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                    selectedTechnology.category === 'Backend' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                    selectedTechnology.category === 'Database' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
+                    selectedTechnology.category === 'Intelligence' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                    selectedTechnology.category === 'Styling' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                    selectedTechnology.category === 'Animation' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
+                    selectedTechnology.category === 'Language' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
+                    selectedTechnology.category === 'API' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                    selectedTechnology.category === 'DevOps' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
+                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
+                  }`}>
+                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Performance Optimization</h5>
+                    <p className="text-gray-700 dark:text-gray-300">Ensuring fast and responsive user experience across all devices</p>
                   </div>
                 </div>
               </div>
 
-              {/* Get Involved */}
-              <div className="p-4 rounded-lg bg-gradient-to-r from-pink-100 to-pink-200 dark:from-pink-900/30 dark:to-pink-800/40 border border-pink-200 dark:border-pink-700">
+              {/* Learn More Section */}
+              <div className={`p-4 rounded-lg bg-gradient-to-r border ${
+                selectedTechnology.category === 'Frontend' ? 'from-blue-100 to-blue-200 dark:from-blue-900/30 dark:to-blue-800/40 border-blue-200 dark:border-blue-700' :
+                selectedTechnology.category === 'Backend' ? 'from-green-100 to-green-200 dark:from-green-900/30 dark:to-green-800/40 border-green-200 dark:border-green-700' :
+                selectedTechnology.category === 'Database' ? 'from-orange-100 to-orange-200 dark:from-orange-900/30 dark:to-orange-800/40 border-orange-200 dark:border-orange-700' :
+                selectedTechnology.category === 'Intelligence' ? 'from-purple-100 to-purple-200 dark:from-purple-900/30 dark:to-purple-800/40 border-purple-200 dark:border-purple-700' :
+                selectedTechnology.category === 'Styling' ? 'from-pink-100 to-pink-200 dark:from-pink-900/30 dark:to-pink-800/40 border-pink-200 dark:border-pink-700' :
+                selectedTechnology.category === 'Animation' ? 'from-indigo-100 to-indigo-200 dark:from-indigo-900/30 dark:to-indigo-800/40 border-indigo-200 dark:border-indigo-700' :
+                selectedTechnology.category === 'Language' ? 'from-yellow-100 to-yellow-200 dark:from-yellow-900/30 dark:to-yellow-800/40 border-yellow-200 dark:border-yellow-700' :
+                selectedTechnology.category === 'API' ? 'from-red-100 to-red-200 dark:from-red-900/30 dark:to-red-800/40 border-red-200 dark:border-red-700' :
+                selectedTechnology.category === 'DevOps' ? 'from-gray-100 to-gray-200 dark:from-gray-900/30 dark:to-gray-800/40 border-gray-200 dark:border-gray-700' :
+                'from-gray-100 to-gray-200 dark:from-gray-900/30 dark:to-gray-800/40 border-gray-200 dark:border-gray-700'
+              }`}>
                 <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 flex items-center">
-                  <Users className="w-5 h-5 mr-2 text-pink-600" />
+                  <Users className={`w-5 h-5 mr-2 ${
+                    selectedTechnology.category === 'Frontend' ? 'text-blue-600' :
+                    selectedTechnology.category === 'Backend' ? 'text-green-600' :
+                    selectedTechnology.category === 'Database' ? 'text-orange-600' :
+                    selectedTechnology.category === 'Intelligence' ? 'text-purple-600' :
+                    selectedTechnology.category === 'Styling' ? 'text-pink-600' :
+                    selectedTechnology.category === 'Animation' ? 'text-indigo-600' :
+                    selectedTechnology.category === 'Language' ? 'text-yellow-600' :
+                    selectedTechnology.category === 'API' ? 'text-red-600' :
+                    selectedTechnology.category === 'DevOps' ? 'text-gray-600' :
+                    'text-gray-600'
+                  }`} />
                   Learn More About {selectedTechnology.name}
                 </h4>
                 <p className="text-gray-700 dark:text-gray-300">
@@ -2410,10 +2775,38 @@ Generated on: ${new Date().toLocaleString()}
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="bg-gradient-to-r from-pink-500 to-pink-600 p-6 rounded-t-2xl sticky top-0 z-10">
+            <div className={`p-6 rounded-t-2xl sticky top-0 z-10 ${
+              selectedMetric.category === 'research' ? 'bg-gradient-to-r from-purple-500 to-purple-600' :
+              selectedMetric.category === 'team' ? 'bg-gradient-to-r from-blue-500 to-blue-600' :
+              selectedMetric.category === 'financial' ? 'bg-gradient-to-r from-green-500 to-green-600' :
+              selectedMetric.category === 'development' ? 'bg-gradient-to-r from-orange-500 to-orange-600' :
+              selectedMetric.category === 'testing' ? 'bg-gradient-to-r from-red-500 to-red-600' :
+              selectedMetric.category === 'accessibility' ? 'bg-gradient-to-r from-indigo-500 to-indigo-600' :
+              selectedMetric.category === 'quality' ? 'bg-gradient-to-r from-pink-500 to-pink-600' :
+              selectedMetric.category === 'performance' ? 'bg-gradient-to-r from-yellow-500 to-yellow-600' :
+              selectedMetric.category === 'devops' ? 'bg-gradient-to-r from-gray-500 to-gray-600' :
+              selectedMetric.category === 'support' ? 'bg-gradient-to-r from-teal-500 to-teal-600' :
+              selectedMetric.category === 'knowledge' ? 'bg-gradient-to-r from-cyan-500 to-cyan-600' :
+              'bg-gradient-to-r from-gray-500 to-gray-600'
+            }`}>
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
-                  <div className="text-4xl animate-bounce">{selectedMetric.icon}</div>
+                  <div className={`text-4xl animate-bounce ${
+                    selectedMetric.category === 'research' ? 'bg-gradient-to-br from-purple-400 to-purple-500' :
+                    selectedMetric.category === 'team' ? 'bg-gradient-to-br from-blue-400 to-blue-500' :
+                    selectedMetric.category === 'financial' ? 'bg-gradient-to-br from-green-400 to-green-500' :
+                    selectedMetric.category === 'development' ? 'bg-gradient-to-br from-orange-400 to-orange-500' :
+                    selectedMetric.category === 'testing' ? 'bg-gradient-to-br from-red-400 to-red-500' :
+                    selectedMetric.category === 'accessibility' ? 'bg-gradient-to-br from-indigo-400 to-indigo-500' :
+                    selectedMetric.category === 'quality' ? 'bg-gradient-to-br from-pink-400 to-pink-500' :
+                    selectedMetric.category === 'performance' ? 'bg-gradient-to-br from-yellow-400 to-yellow-500' :
+                    selectedMetric.category === 'devops' ? 'bg-gradient-to-br from-gray-400 to-gray-500' :
+                    selectedMetric.category === 'support' ? 'bg-gradient-to-br from-teal-400 to-teal-500' :
+                    selectedMetric.category === 'knowledge' ? 'bg-gradient-to-br from-cyan-400 to-cyan-500' :
+                    'bg-gradient-to-br from-gray-400 to-gray-500'
+                  }`}>
+                    {selectedMetric.icon}
+                  </div>
                   <div>
                     <h3 className="text-2xl font-bold text-white">{selectedMetric.label}</h3>
                     <p className="text-white/90 text-sm">{selectedMetric.description}</p>
@@ -2442,8 +2835,34 @@ Generated on: ${new Date().toLocaleString()}
             <div className="p-6 space-y-6">
               {/* Overview */}
               <div>
-                <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
-                  <BarChart className="w-5 h-5 mr-2 text-pink-600" />
+                <h4 className={`text-xl font-semibold mb-3 flex items-center ${
+                  selectedMetric.category === 'research' ? 'text-purple-700 dark:text-purple-300' :
+                  selectedMetric.category === 'team' ? 'text-blue-700 dark:text-blue-300' :
+                  selectedMetric.category === 'financial' ? 'text-green-700 dark:text-green-300' :
+                  selectedMetric.category === 'development' ? 'text-orange-700 dark:text-orange-300' :
+                  selectedMetric.category === 'testing' ? 'text-red-700 dark:text-red-300' :
+                  selectedMetric.category === 'accessibility' ? 'text-indigo-700 dark:text-indigo-300' :
+                  selectedMetric.category === 'quality' ? 'text-pink-700 dark:text-pink-300' :
+                  selectedMetric.category === 'performance' ? 'text-yellow-700 dark:text-yellow-300' :
+                  selectedMetric.category === 'devops' ? 'text-gray-700 dark:text-gray-300' :
+                  selectedMetric.category === 'support' ? 'text-teal-700 dark:text-teal-300' :
+                  selectedMetric.category === 'knowledge' ? 'text-cyan-700 dark:text-cyan-300' :
+                  'text-gray-700 dark:text-gray-300'
+                }`}>
+                  <BarChart className={`w-5 h-5 mr-2 ${
+                    selectedMetric.category === 'research' ? 'text-purple-600' :
+                    selectedMetric.category === 'team' ? 'text-blue-600' :
+                    selectedMetric.category === 'financial' ? 'text-green-600' :
+                    selectedMetric.category === 'development' ? 'text-orange-600' :
+                    selectedMetric.category === 'testing' ? 'text-red-600' :
+                    selectedMetric.category === 'accessibility' ? 'text-indigo-600' :
+                    selectedMetric.category === 'quality' ? 'text-pink-600' :
+                    selectedMetric.category === 'performance' ? 'text-yellow-600' :
+                    selectedMetric.category === 'devops' ? 'text-gray-600' :
+                    selectedMetric.category === 'support' ? 'text-teal-600' :
+                    selectedMetric.category === 'knowledge' ? 'text-cyan-600' :
+                    'text-gray-600'
+                  }`} />
                   Performance Overview
                 </h4>
                 <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
@@ -2454,23 +2873,101 @@ Generated on: ${new Date().toLocaleString()}
 
               {/* Key Metrics */}
               <div>
-                <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
-                  <TrendingUp className="w-5 h-5 mr-2 text-pink-600" />
+                <h4 className={`text-xl font-semibold mb-3 flex items-center ${
+                  selectedMetric.category === 'research' ? 'text-purple-700 dark:text-purple-300' :
+                  selectedMetric.category === 'team' ? 'text-blue-700 dark:text-blue-300' :
+                  selectedMetric.category === 'financial' ? 'text-green-700 dark:text-green-300' :
+                  selectedMetric.category === 'development' ? 'text-orange-700 dark:text-orange-300' :
+                  selectedMetric.category === 'testing' ? 'text-red-700 dark:text-red-300' :
+                  selectedMetric.category === 'accessibility' ? 'text-indigo-700 dark:text-indigo-300' :
+                  selectedMetric.category === 'quality' ? 'text-pink-700 dark:text-pink-300' :
+                  selectedMetric.category === 'performance' ? 'text-yellow-700 dark:text-yellow-300' :
+                  selectedMetric.category === 'devops' ? 'text-gray-700 dark:text-gray-300' :
+                  selectedMetric.category === 'support' ? 'text-teal-700 dark:text-teal-300' :
+                  selectedMetric.category === 'knowledge' ? 'text-cyan-700 dark:text-cyan-300' :
+                  'text-gray-700 dark:text-gray-300'
+                }`}>
+                  <TrendingUp className={`w-5 h-5 mr-2 ${
+                    selectedMetric.category === 'research' ? 'text-purple-600' :
+                    selectedMetric.category === 'team' ? 'text-blue-600' :
+                    selectedMetric.category === 'financial' ? 'text-green-600' :
+                    selectedMetric.category === 'development' ? 'text-orange-600' :
+                    selectedMetric.category === 'testing' ? 'text-red-600' :
+                    selectedMetric.category === 'accessibility' ? 'text-indigo-600' :
+                    selectedMetric.category === 'quality' ? 'text-pink-600' :
+                    selectedMetric.category === 'performance' ? 'text-yellow-600' :
+                    selectedMetric.category === 'devops' ? 'text-gray-600' :
+                    selectedMetric.category === 'support' ? 'text-teal-600' :
+                    selectedMetric.category === 'knowledge' ? 'text-cyan-600' :
+                    'text-gray-600'
+                  }`} />
                   Key Performance Indicators
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className="p-4 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                  <div className={`p-4 rounded-lg border-l-4 ${
+                    selectedMetric.category === 'research' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                    selectedMetric.category === 'team' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                    selectedMetric.category === 'financial' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                    selectedMetric.category === 'development' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
+                    selectedMetric.category === 'testing' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                    selectedMetric.category === 'accessibility' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
+                    selectedMetric.category === 'quality' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                    selectedMetric.category === 'performance' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
+                    selectedMetric.category === 'devops' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
+                    selectedMetric.category === 'support' ? 'bg-teal-50 dark:bg-teal-900/30 border-teal-400' :
+                    selectedMetric.category === 'knowledge' ? 'bg-cyan-50 dark:bg-cyan-900/30 border-cyan-400' :
+                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
+                  }`}>
                     <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Current Value</h5>
-                    <div className="text-3xl font-bold text-pink-600">{selectedMetric.value}</div>
+                    <div className={`text-3xl font-bold ${
+                      selectedMetric.category === 'research' ? 'text-purple-600' :
+                      selectedMetric.category === 'team' ? 'text-blue-600' :
+                      selectedMetric.category === 'financial' ? 'text-green-600' :
+                      selectedMetric.category === 'development' ? 'text-orange-600' :
+                      selectedMetric.category === 'testing' ? 'text-red-600' :
+                      selectedMetric.category === 'accessibility' ? 'text-indigo-600' :
+                      selectedMetric.category === 'quality' ? 'text-pink-600' :
+                      selectedMetric.category === 'performance' ? 'text-yellow-600' :
+                      selectedMetric.category === 'devops' ? 'text-gray-600' :
+                      selectedMetric.category === 'support' ? 'text-teal-600' :
+                      selectedMetric.category === 'knowledge' ? 'text-cyan-600' :
+                      'text-gray-600'
+                    }`}>{selectedMetric.value}</div>
                   </div>
-                  <div className="p-4 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                  <div className={`p-4 rounded-lg border-l-4 ${
+                    selectedMetric.category === 'research' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                    selectedMetric.category === 'team' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                    selectedMetric.category === 'financial' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                    selectedMetric.category === 'development' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
+                    selectedMetric.category === 'testing' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                    selectedMetric.category === 'accessibility' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
+                    selectedMetric.category === 'quality' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                    selectedMetric.category === 'performance' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
+                    selectedMetric.category === 'devops' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
+                    selectedMetric.category === 'support' ? 'bg-teal-50 dark:bg-teal-900/30 border-teal-400' :
+                    selectedMetric.category === 'knowledge' ? 'bg-cyan-50 dark:bg-cyan-900/30 border-cyan-400' :
+                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
+                  }`}>
                     <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Growth Trend</h5>
                     <div className="flex items-center space-x-2 text-green-600">
                       <TrendingUp className="w-5 h-5 animate-bounce" />
                       <span className="text-lg font-bold">{selectedMetric.trend}</span>
                     </div>
                   </div>
-                  <div className="p-4 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                  <div className={`p-4 rounded-lg border-l-4 ${
+                    selectedMetric.category === 'research' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                    selectedMetric.category === 'team' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                    selectedMetric.category === 'financial' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                    selectedMetric.category === 'development' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
+                    selectedMetric.category === 'testing' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                    selectedMetric.category === 'accessibility' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
+                    selectedMetric.category === 'quality' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                    selectedMetric.category === 'performance' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
+                    selectedMetric.category === 'devops' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
+                    selectedMetric.category === 'support' ? 'bg-teal-50 dark:bg-teal-900/30 border-teal-400' :
+                    selectedMetric.category === 'knowledge' ? 'bg-cyan-50 dark:bg-cyan-900/30 border-cyan-400' :
+                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
+                  }`}>
                     <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Impact Level</h5>
                     <div className="flex items-center space-x-2">
                       <div className={`w-3 h-3 rounded-full ${
@@ -2482,16 +2979,86 @@ Generated on: ${new Date().toLocaleString()}
                       <span className="text-gray-700 dark:text-gray-300 font-medium">{selectedMetric.impact} Impact</span>
                     </div>
                   </div>
+                  <div className={`p-4 rounded-lg border-l-4 ${
+                    selectedMetric.category === 'research' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                    selectedMetric.category === 'team' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                    selectedMetric.category === 'financial' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                    selectedMetric.category === 'development' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
+                    selectedMetric.category === 'testing' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                    selectedMetric.category === 'accessibility' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
+                    selectedMetric.category === 'quality' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                    selectedMetric.category === 'performance' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
+                    selectedMetric.category === 'devops' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
+                    selectedMetric.category === 'support' ? 'bg-teal-50 dark:bg-teal-900/30 border-teal-400' :
+                    selectedMetric.category === 'knowledge' ? 'bg-cyan-50 dark:bg-cyan-900/30 border-cyan-400' :
+                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
+                  }`}>
+                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Performance Score</h5>
+                    <div className={`text-3xl font-bold ${
+                      selectedMetric.category === 'research' ? 'text-purple-600' :
+                      selectedMetric.category === 'team' ? 'text-blue-600' :
+                      selectedMetric.category === 'financial' ? 'text-green-600' :
+                      selectedMetric.category === 'development' ? 'text-orange-600' :
+                      selectedMetric.category === 'testing' ? 'text-red-600' :
+                      selectedMetric.category === 'accessibility' ? 'text-indigo-600' :
+                      selectedMetric.category === 'quality' ? 'text-pink-600' :
+                      selectedMetric.category === 'performance' ? 'text-yellow-600' :
+                      selectedMetric.category === 'devops' ? 'text-gray-600' :
+                      selectedMetric.category === 'support' ? 'text-teal-600' :
+                      selectedMetric.category === 'knowledge' ? 'text-cyan-600' :
+                      'text-gray-600'
+                    }`}>95%</div>
+                    <p className="text-gray-600 dark:text-gray-300">Overall performance rating</p>
+                  </div>
                 </div>
               </div>
 
               {/* Timeframe Analysis */}
               <div>
-                <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
-                  <Clock className="w-5 h-5 mr-2 text-pink-600" />
+                <h4 className={`text-xl font-semibold mb-3 flex items-center ${
+                  selectedMetric.category === 'research' ? 'text-purple-700 dark:text-purple-300' :
+                  selectedMetric.category === 'team' ? 'text-blue-700 dark:text-blue-300' :
+                  selectedMetric.category === 'financial' ? 'text-green-700 dark:text-green-300' :
+                  selectedMetric.category === 'development' ? 'text-orange-700 dark:text-orange-300' :
+                  selectedMetric.category === 'testing' ? 'text-red-700 dark:text-red-300' :
+                  selectedMetric.category === 'accessibility' ? 'text-indigo-700 dark:text-indigo-300' :
+                  selectedMetric.category === 'quality' ? 'text-pink-700 dark:text-pink-300' :
+                  selectedMetric.category === 'performance' ? 'text-yellow-700 dark:text-yellow-300' :
+                  selectedMetric.category === 'devops' ? 'text-gray-700 dark:text-gray-300' :
+                  selectedMetric.category === 'support' ? 'text-teal-700 dark:text-teal-300' :
+                  selectedMetric.category === 'knowledge' ? 'text-cyan-700 dark:text-cyan-300' :
+                  'text-gray-700 dark:text-gray-300'
+                }`}>
+                  <Clock className={`w-5 h-5 mr-2 ${
+                    selectedMetric.category === 'research' ? 'text-purple-600' :
+                    selectedMetric.category === 'team' ? 'text-blue-600' :
+                    selectedMetric.category === 'financial' ? 'text-green-600' :
+                    selectedMetric.category === 'development' ? 'text-orange-600' :
+                    selectedMetric.category === 'testing' ? 'text-red-600' :
+                    selectedMetric.category === 'accessibility' ? 'text-indigo-600' :
+                    selectedMetric.category === 'quality' ? 'text-pink-600' :
+                    selectedMetric.category === 'performance' ? 'text-yellow-600' :
+                    selectedMetric.category === 'devops' ? 'text-gray-600' :
+                    selectedMetric.category === 'support' ? 'text-teal-600' :
+                    selectedMetric.category === 'knowledge' ? 'text-cyan-600' :
+                    'text-gray-600'
+                  }`} />
                   Timeframe Analysis
                 </h4>
-                <div className="p-4 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                <div className={`p-4 rounded-lg border-l-4 ${
+                  selectedMetric.category === 'research' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                  selectedMetric.category === 'team' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                  selectedMetric.category === 'financial' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                  selectedMetric.category === 'development' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
+                  selectedMetric.category === 'testing' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                  selectedMetric.category === 'accessibility' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
+                  selectedMetric.category === 'quality' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                  selectedMetric.category === 'performance' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
+                  selectedMetric.category === 'devops' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
+                  selectedMetric.category === 'support' ? 'bg-teal-50 dark:bg-teal-900/30 border-teal-400' :
+                  selectedMetric.category === 'knowledge' ? 'bg-cyan-50 dark:bg-cyan-900/30 border-cyan-400' :
+                  'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
+                }`}>
                   <p className="text-gray-700 dark:text-gray-300 text-lg mb-2">
                     <span className="font-semibold">Measurement Period:</span> {selectedMetric.timeframe}
                   </p>
@@ -2504,11 +3071,50 @@ Generated on: ${new Date().toLocaleString()}
 
               {/* Category Insights */}
               <div>
-                <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
-                  <Target className="w-5 h-5 mr-2 text-pink-600" />
+                <h4 className={`text-xl font-semibold mb-3 flex items-center ${
+                  selectedMetric.category === 'research' ? 'text-purple-700 dark:text-purple-300' :
+                  selectedMetric.category === 'team' ? 'text-blue-700 dark:text-blue-300' :
+                  selectedMetric.category === 'financial' ? 'text-green-700 dark:text-green-300' :
+                  selectedMetric.category === 'development' ? 'text-orange-700 dark:text-orange-300' :
+                  selectedMetric.category === 'testing' ? 'text-red-700 dark:text-red-300' :
+                  selectedMetric.category === 'accessibility' ? 'text-indigo-700 dark:text-indigo-300' :
+                  selectedMetric.category === 'quality' ? 'text-pink-700 dark:text-pink-300' :
+                  selectedMetric.category === 'performance' ? 'text-yellow-700 dark:text-yellow-300' :
+                  selectedMetric.category === 'devops' ? 'text-gray-700 dark:text-gray-300' :
+                  selectedMetric.category === 'support' ? 'text-teal-700 dark:text-teal-300' :
+                  selectedMetric.category === 'knowledge' ? 'text-cyan-700 dark:text-cyan-300' :
+                  'text-gray-700 dark:text-gray-300'
+                }`}>
+                  <Target className={`w-5 h-5 mr-2 ${
+                    selectedMetric.category === 'research' ? 'text-purple-600' :
+                    selectedMetric.category === 'team' ? 'text-blue-600' :
+                    selectedMetric.category === 'financial' ? 'text-green-600' :
+                    selectedMetric.category === 'development' ? 'text-orange-600' :
+                    selectedMetric.category === 'testing' ? 'text-red-600' :
+                    selectedMetric.category === 'accessibility' ? 'text-indigo-600' :
+                    selectedMetric.category === 'quality' ? 'text-pink-600' :
+                    selectedMetric.category === 'performance' ? 'text-yellow-600' :
+                    selectedMetric.category === 'devops' ? 'text-gray-600' :
+                    selectedMetric.category === 'support' ? 'text-teal-600' :
+                    selectedMetric.category === 'knowledge' ? 'text-cyan-600' :
+                    'text-gray-600'
+                  }`} />
                   Category Insights
                 </h4>
-                <div className="p-4 bg-pink-50 dark:bg-pink-900/30 rounded-lg border-l-4 border-pink-400">
+                <div className={`p-4 rounded-lg border-l-4 ${
+                  selectedMetric.category === 'research' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                  selectedMetric.category === 'team' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                  selectedMetric.category === 'financial' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                  selectedMetric.category === 'development' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
+                  selectedMetric.category === 'testing' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                  selectedMetric.category === 'accessibility' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
+                  selectedMetric.category === 'quality' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                  selectedMetric.category === 'performance' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
+                  selectedMetric.category === 'devops' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
+                  selectedMetric.category === 'support' ? 'bg-teal-50 dark:bg-teal-900/30 border-teal-400' :
+                  selectedMetric.category === 'knowledge' ? 'bg-cyan-50 dark:bg-cyan-900/30 border-cyan-400' :
+                  'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
+                }`}>
                   <p className="text-gray-700 dark:text-gray-300 text-lg mb-2">
                     <span className="font-semibold">Category:</span> {selectedMetric.category}
                   </p>
@@ -2661,24 +3267,39 @@ Generated on: ${new Date().toLocaleString()}
         >
           {console.log('Modal opened with achievement:', selectedAchievement)}
           <div className={`bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto ${
-            selectedAchievement.color === 'yellow' ? 'border-4 border-yellow-200 dark:border-yellow-700' :
+            selectedAchievement.color === 'pink' ? 'border-4 border-pink-200 dark:border-pink-700' :
             selectedAchievement.color === 'blue' ? 'border-4 border-blue-200 dark:border-blue-700' :
-            'border-4 border-pink-200 dark:border-pink-700'
+            selectedAchievement.color === 'green' ? 'border-4 border-green-200 dark:border-green-700' :
+            selectedAchievement.color === 'yellow' ? 'border-4 border-yellow-200 dark:border-yellow-700' :
+            selectedAchievement.color === 'purple' ? 'border-4 border-purple-200 dark:border-purple-700' :
+            selectedAchievement.color === 'orange' ? 'border-4 border-orange-200 dark:border-orange-700' :
+            selectedAchievement.color === 'red' ? 'border-4 border-red-200 dark:border-red-700' :
+            'border-4 border-gray-200 dark:border-gray-700'
           }`}
           onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
             <div className={`p-6 ${
-              selectedAchievement.color === 'yellow' ? 'bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900/20 dark:to-yellow-800/30' :
+              selectedAchievement.color === 'pink' ? 'bg-gradient-to-br from-pink-50 to-pink-100 dark:from-pink-900/20 dark:to-pink-800/30' :
               selectedAchievement.color === 'blue' ? 'bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/30' :
-              'bg-gradient-to-br from-pink-50 to-pink-100 dark:from-pink-900/20 dark:to-pink-800/30'
+              selectedAchievement.color === 'green' ? 'bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/30' :
+              selectedAchievement.color === 'yellow' ? 'bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900/20 dark:to-yellow-800/30' :
+              selectedAchievement.color === 'purple' ? 'bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/30' :
+              selectedAchievement.color === 'orange' ? 'bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/30' :
+              selectedAchievement.color === 'red' ? 'bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/20 dark:to-red-800/30' :
+              'bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900/20 dark:to-gray-800/30'
             }`}>
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center space-x-3">
                   <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-3xl ${
-                    selectedAchievement.color === 'yellow' ? 'bg-gradient-to-br from-yellow-400 to-yellow-600' :
+                    selectedAchievement.color === 'pink' ? 'bg-gradient-to-br from-pink-400 to-pink-600' :
                     selectedAchievement.color === 'blue' ? 'bg-gradient-to-br from-blue-400 to-blue-600' :
-                    'bg-gradient-to-br from-pink-400 to-pink-600'
+                    selectedAchievement.color === 'green' ? 'bg-gradient-to-br from-green-400 to-green-600' :
+                    selectedAchievement.color === 'yellow' ? 'bg-gradient-to-br from-yellow-400 to-yellow-600' :
+                    selectedAchievement.color === 'purple' ? 'bg-gradient-to-br from-purple-400 to-purple-600' :
+                    selectedAchievement.color === 'orange' ? 'bg-gradient-to-br from-orange-400 to-orange-600' :
+                    selectedAchievement.color === 'red' ? 'bg-gradient-to-br from-red-400 to-red-600' :
+                    'bg-gradient-to-br from-gray-400 to-gray-600'
                   }`}>
                     {selectedAchievement.icon}
                   </div>
@@ -2725,13 +3346,31 @@ Generated on: ${new Date().toLocaleString()}
 
               {/* Key Features */}
               <div>
-                <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
-                  <Star className="w-5 h-5 mr-2 text-pink-600" />
+                <h4 className={`text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center`}>
+                  <Star className={`w-5 h-5 mr-2 ${
+                    selectedAchievement.color === 'pink' ? 'text-pink-600' :
+                    selectedAchievement.color === 'blue' ? 'text-blue-600' :
+                    selectedAchievement.color === 'green' ? 'text-green-600' :
+                    selectedAchievement.color === 'yellow' ? 'text-yellow-600' :
+                    selectedAchievement.color === 'purple' ? 'text-purple-600' :
+                    selectedAchievement.color === 'orange' ? 'text-orange-600' :
+                    selectedAchievement.color === 'red' ? 'text-red-600' :
+                    'text-gray-600'
+                  }`} />
                   Key Features
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {selectedAchievement.detailedContent.keyFeatures.map((feature, idx) => (
-                    <div key={idx} className={`p-3 rounded-lg bg-pink-50 dark:bg-pink-900/30 border-l-4 border-pink-400`}>
+                    <div key={idx} className={`p-3 rounded-lg border-l-4 ${
+                      selectedAchievement.color === 'pink' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                      selectedAchievement.color === 'blue' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                      selectedAchievement.color === 'green' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                      selectedAchievement.color === 'yellow' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
+                      selectedAchievement.color === 'purple' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                      selectedAchievement.color === 'orange' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
+                      selectedAchievement.color === 'red' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                      'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
+                    }`}>
                       <span className="text-gray-700 dark:text-gray-300 font-medium">{feature}</span>
                     </div>
                   ))}
@@ -2740,13 +3379,31 @@ Generated on: ${new Date().toLocaleString()}
 
               {/* Achievements */}
               <div>
-                <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
-                  <Award className="w-5 h-5 mr-2 text-pink-600" />
+                <h4 className={`text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center`}>
+                  <Award className={`w-5 h-5 mr-2 ${
+                    selectedAchievement.color === 'pink' ? 'text-pink-600' :
+                    selectedAchievement.color === 'blue' ? 'text-blue-600' :
+                    selectedAchievement.color === 'green' ? 'text-green-600' :
+                    selectedAchievement.color === 'yellow' ? 'text-yellow-600' :
+                    selectedAchievement.color === 'purple' ? 'text-purple-600' :
+                    selectedAchievement.color === 'orange' ? 'text-orange-600' :
+                    selectedAchievement.color === 'red' ? 'text-red-600' :
+                    'text-gray-600'
+                  }`} />
                   Key Achievements
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {selectedAchievement.detailedContent.achievements.map((achievement, idx) => (
-                    <div key={idx} className={`p-3 rounded-lg bg-pink-50 dark:bg-pink-900/30 border-l-4 border-pink-400`}>
+                    <div key={idx} className={`p-3 rounded-lg border-l-4 ${
+                      selectedAchievement.color === 'pink' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                      selectedAchievement.color === 'blue' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                      selectedAchievement.color === 'green' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                      selectedAchievement.color === 'yellow' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
+                      selectedAchievement.color === 'purple' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                      selectedAchievement.color === 'orange' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
+                      selectedAchievement.color === 'red' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                      'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
+                    }`}>
                       <span className="text-gray-700 dark:text-gray-300 font-medium">{achievement}</span>
                     </div>
                   ))}
@@ -2755,13 +3412,31 @@ Generated on: ${new Date().toLocaleString()}
 
               {/* Future Goals */}
               <div>
-                <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
-                  <Target className="w-5 h-5 mr-2 text-pink-600" />
+                <h4 className={`text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center`}>
+                  <Target className={`w-5 h-5 mr-2 ${
+                    selectedAchievement.color === 'pink' ? 'text-pink-600' :
+                    selectedAchievement.color === 'blue' ? 'text-blue-600' :
+                    selectedAchievement.color === 'green' ? 'text-green-600' :
+                    selectedAchievement.color === 'yellow' ? 'text-yellow-600' :
+                    selectedAchievement.color === 'purple' ? 'text-purple-600' :
+                    selectedAchievement.color === 'orange' ? 'text-orange-600' :
+                    selectedAchievement.color === 'red' ? 'text-red-600' :
+                    'text-gray-600'
+                  }`} />
                   Future Goals
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {selectedAchievement.detailedContent.futureGoals.map((goal, idx) => (
-                    <div key={idx} className={`p-3 rounded-lg bg-pink-50 dark:bg-pink-900/30 border-l-4 border-pink-400`}>
+                    <div key={idx} className={`p-3 rounded-lg border-l-4 ${
+                      selectedAchievement.color === 'pink' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                      selectedAchievement.color === 'blue' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                      selectedAchievement.color === 'green' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                      selectedAchievement.color === 'yellow' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
+                      selectedAchievement.color === 'purple' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                      selectedAchievement.color === 'orange' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
+                      selectedAchievement.color === 'red' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                      'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
+                    }`}>
                       <span className="text-gray-700 dark:text-gray-300 font-medium">{goal}</span>
                     </div>
                   ))}
@@ -2770,13 +3445,31 @@ Generated on: ${new Date().toLocaleString()}
 
               {/* Testimonials */}
               <div>
-                <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
-                  <Heart className="w-5 h-5 mr-2 text-pink-600" />
+                <h4 className={`text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center`}>
+                  <Heart className={`w-5 h-5 mr-2 ${
+                    selectedAchievement.color === 'pink' ? 'text-pink-600' :
+                    selectedAchievement.color === 'blue' ? 'text-blue-600' :
+                    selectedAchievement.color === 'green' ? 'text-green-600' :
+                    selectedAchievement.color === 'yellow' ? 'text-yellow-600' :
+                    selectedAchievement.color === 'purple' ? 'text-purple-600' :
+                    selectedAchievement.color === 'orange' ? 'text-orange-600' :
+                    selectedAchievement.color === 'red' ? 'text-red-600' :
+                    'text-gray-600'
+                  }`} />
                   Community Impact
                 </h4>
                 <div className="space-y-3">
                   {selectedAchievement.detailedContent.testimonials.map((testimonial, idx) => (
-                    <div key={idx} className={`p-4 rounded-lg bg-pink-50 dark:bg-pink-900/30 border-l-4 border-pink-400`}>
+                    <div key={idx} className={`p-4 rounded-lg border-l-4 ${
+                      selectedAchievement.color === 'pink' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                      selectedAchievement.color === 'blue' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                      selectedAchievement.color === 'green' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                      selectedAchievement.color === 'yellow' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
+                      selectedAchievement.color === 'purple' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                      selectedAchievement.color === 'orange' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
+                      selectedAchievement.color === 'red' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                      'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
+                    }`}>
                       <p className="text-gray-700 dark:text-gray-300 italic">"{testimonial}"</p>
                     </div>
                   ))}
@@ -2784,9 +3477,27 @@ Generated on: ${new Date().toLocaleString()}
               </div>
 
               {/* Get Involved */}
-              <div className={`p-4 rounded-lg bg-gradient-to-r from-pink-100 to-pink-200 dark:from-pink-900/30 dark:to-pink-800/40 border border-pink-200 dark:border-pink-700`}>
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 flex items-center">
-                  <HelpingHand className="w-5 h-5 mr-2 text-pink-600" />
+              <div className={`p-4 rounded-lg bg-gradient-to-r border ${
+                selectedAchievement.color === 'pink' ? 'from-pink-100 to-pink-200 dark:from-pink-900/30 dark:to-pink-800/40 border-pink-200 dark:border-pink-700' :
+                selectedAchievement.color === 'blue' ? 'from-blue-100 to-blue-200 dark:from-blue-900/30 dark:to-blue-800/40 border-blue-200 dark:border-blue-700' :
+                selectedAchievement.color === 'green' ? 'from-green-100 to-green-200 dark:from-green-900/30 dark:to-green-800/40 border-green-200 dark:border-green-700' :
+                selectedAchievement.color === 'yellow' ? 'from-yellow-100 to-yellow-200 dark:from-yellow-900/30 dark:to-yellow-800/40 border-yellow-200 dark:border-yellow-700' :
+                selectedAchievement.color === 'purple' ? 'from-purple-100 to-purple-200 dark:from-purple-900/30 dark:to-purple-800/40 border-purple-200 dark:border-purple-700' :
+                selectedAchievement.color === 'orange' ? 'from-orange-100 to-orange-200 dark:from-orange-900/30 dark:to-orange-800/40 border-orange-200 dark:border-orange-700' :
+                selectedAchievement.color === 'red' ? 'from-red-100 to-red-200 dark:from-red-900/30 dark:to-red-800/40 border-red-200 dark:border-red-700' :
+                'from-gray-100 to-gray-200 dark:from-gray-900/30 dark:to-gray-800/40 border-gray-200 dark:border-gray-700'
+              }`}>
+                <h4 className={`text-lg font-semibold text-gray-900 dark:text-white mb-2 flex items-center`}>
+                  <HelpingHand className={`w-5 h-5 mr-2 ${
+                    selectedAchievement.color === 'pink' ? 'text-pink-600' :
+                    selectedAchievement.color === 'blue' ? 'text-blue-600' :
+                    selectedAchievement.color === 'green' ? 'text-green-600' :
+                    selectedAchievement.color === 'yellow' ? 'text-yellow-600' :
+                    selectedAchievement.color === 'purple' ? 'text-purple-600' :
+                    selectedAchievement.color === 'orange' ? 'text-orange-600' :
+                    selectedAchievement.color === 'red' ? 'text-red-600' :
+                    'text-gray-600'
+                  }`} />
                   Get Involved
                 </h4>
                 <p className="text-gray-700 dark:text-gray-300">
@@ -2798,7 +3509,7 @@ Generated on: ${new Date().toLocaleString()}
         </div>
       )}
     {/* Community Era Section - Community Focused */}
-      <div className="mt-2 mb-8">
+      <div className="mt-12 mb-8">
         <div className={`bg-gradient-to-br from-pink-600 via-pink-700 to-indigo-800 text-white rounded-2xl shadow-2xl p-8 relative overflow-hidden`}>
           {/* Background Animation */}
           <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-black/10"></div>
