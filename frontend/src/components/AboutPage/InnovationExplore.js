@@ -479,37 +479,44 @@ const InnovationExplore = () => {
               
               <div className="grid md:grid-cols-2 gap-8">
                 <div className="space-y-6">
-                  <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white flex items-center">
-                    <div className="w-6 h-6 bg-gradient-to-br from-indigo-400 to-indigo-500 rounded-lg flex items-center justify-center mr-2">
-                      <Zap className="w-4 h-4 text-white" />
-                    </div>
-                    Cutting-Edge Technology
-                  </h3>
+                  {/* Section Header with Blue Gradient Shadow */}
+                  <div className="relative mb-6">
+                    <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-indigo-600/20 rounded-xl blur-xl"></div>
+                    <h3 className="relative text-xl font-semibold text-gray-900 dark:text-white flex items-center">
+                      <div className="w-6 h-6 bg-gradient-to-br from-indigo-400 to-indigo-500 rounded-lg flex items-center justify-center mr-2">
+                        <Lightbulb className="w-4 h-4 text-white" />
+                      </div>
+                      Cutting-Edge Technology
+                    </h3>
+                  </div>
                   <div className="space-y-4">
-                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
-                      Leveraging <span className="font-semibold text-indigo-600 dark:text-indigo-400">cutting-edge technology</span> and <span className="font-semibold text-purple-600 dark:text-purple-400">evidence-based practices</span>, we developed innovative solutions that adapt to individual needs. Our commitment to <span className="font-semibold text-blue-600 dark:text-blue-400">continuous improvement</span> and <span className="font-semibold text-teal-600 dark:text-teal-400">research</span> ensures we remain at the forefront of cognitive support services.
+                    <p className="text-black dark:text-gray-300 leading-relaxed border-l-4 border-blue-500 pl-4 py-2 bg-blue-50/50 dark:bg-blue-900/10 rounded-r-lg mb-4">
+                      Leveraging cutting-edge technology and evidence-based practices, we developed innovative solutions that adapt to individual needs. Our commitment to continuous improvement and ensures we remain at the forefront of cognitive support services. This technological revolution began when our research team identified critical gaps in existing cognitive support systems and recognized the transformative potential of artificial intelligence and machine learning in addressing these challenges.
                     </p>
-                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-lg">
-                      The innovation phase has been marked by <span className="font-semibold text-pink-600 dark:text-pink-400">breakthrough AI implementations</span>, <span className="font-semibold text-orange-600 dark:text-orange-400">global expansion</span>, and <span className="font-semibold text-red-600 dark:text-red-400">recognition as leaders</span> in cognitive accessibility technology.
+                    <p className="text-black dark:text-gray-300 leading-relaxed border-l-4 border-purple-500 pl-4 py-2 bg-purple-50/50 dark:bg-purple-900/10 rounded-r-lg">
+                      The innovation phase has been marked by breakthrough AI implementations, global expansion, and recognition as leaders in cognitive accessibility technology. Through extensive collaboration with neurodiversity advocates, cognitive specialists, and individuals with lived experiences, we've developed a comprehensive ecosystem that integrates advanced algorithms, personalized learning pathways, and real-time adaptation mechanisms. Our journey has involved countless iterations, user testing sessions, and breakthrough moments that have shaped our current platform into a beacon of innovation in cognitive support services.
                     </p>
                   </div>
                 </div>
                 
                 <div className="space-y-6">
-                  <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white flex items-center">
-                    <div className="w-6 h-6 bg-gradient-to-br from-indigo-400 to-indigo-500 rounded-lg flex items-center justify-center mr-2">
-                      <Lightbulb className="w-4 h-4 text-white" />
-                    </div>
-                    Innovation Pillars
-                  </h3>
-                  <div className="bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-900/20 dark:to-purple-900/20 rounded-xl p-6 border border-indigo-200 dark:border-indigo-700">
-                    <div className="grid grid-cols-1 gap-3">
+                  {/* Section Header with Green Gradient Shadow */}
+                  <div className="relative mb-6">
+                    <div className="absolute inset-0 bg-gradient-to-r from-green-600/20 to-emerald-600/20 rounded-xl blur-xl"></div>
+                    <h3 className="relative text-xl font-semibold text-gray-900 dark:text-white flex items-center">
+                      <div className="w-6 h-6 bg-gradient-to-br from-indigo-400 to-indigo-500 rounded-lg flex items-center justify-center mr-2">
+                        <Zap className="w-4 h-4 text-white" />
+                      </div>
+                      Innovation Pillars
+                    </h3>
+                  </div>
+                  <div className="space-y-3">
                       {[
                         { 
                           title: "Advanced AI integration", 
                           description: "Machine learning algorithms for personalized support",
                           icon: "🤖",
-                          color: "indigo"
+                          color: "blue"
                         },
                         { 
                           title: "Personalized cognitive support", 
@@ -521,7 +528,7 @@ const InnovationExplore = () => {
                           title: "Real-time adaptation systems", 
                           description: "Dynamic response to user requirements",
                           icon: "⚡",
-                          color: "blue"
+                          color: "green"
                         },
                         { 
                           title: "Predictive assistance technology", 
@@ -533,14 +540,14 @@ const InnovationExplore = () => {
                           title: "Global accessibility standards", 
                           description: "Worldwide compliance and reach",
                           icon: "🌍",
-                          color: "green"
+                          color: "orange"
                         }
                       ].map((item, index) => (
                         <div key={index} className={`group p-4 bg-gradient-to-r from-${item.color}-50 to-${item.color}-100 dark:from-${item.color}-900/20 dark:to-${item.color}-800/30 rounded-xl border border-${item.color}-200 dark:border-${item.color}-700 hover:shadow-lg transition-all duration-300 hover:scale-102 cursor-pointer`}>
                           <div className="flex items-start space-x-3">
                             <div className="text-2xl group-hover:scale-110 transition-transform duration-300">{item.icon}</div>
                             <div className="flex-1">
-                              <h4 className={`font-semibold text-gray-900 dark:text-white mb-1 group-hover:text-${item.color}-600 dark:group-hover:text-${item.color}-400 transition-colors`}>
+                              <h4 className={`font-semibold text-${item.color}-700 dark:text-${item.color}-300 mb-1 group-hover:text-${item.color}-800 dark:group-hover:text-${item.color}-200 transition-colors`}>
                                 {item.title}
                               </h4>
                               <p className="text-sm text-gray-600 dark:text-gray-400">{item.description}</p>
@@ -549,7 +556,6 @@ const InnovationExplore = () => {
                         </div>
                       ))}
                     </div>
-                  </div>
                 </div>
               </div>
             </div>
@@ -719,7 +725,7 @@ const InnovationExplore = () => {
                           Colors
                         </label>
                         <div className="flex items-center space-x-1">
-                          {['purple', 'blue', 'green', 'orange', 'red', 'pink', 'yellow', 'indigo', 'teal', 'gray'].map(color => (
+                          {['red', 'green', 'blue', 'yellow', 'orange', 'purple', 'pink', 'indigo', 'teal', 'gray', 'cyan', 'emerald', 'rose', 'amber', 'lime'].map(color => (
                             <button
                               key={color}
                               onClick={() => {
@@ -743,6 +749,13 @@ const InnovationExplore = () => {
                                 color === 'yellow' ? 'bg-yellow-500' :
                                 color === 'indigo' ? 'bg-indigo-500' :
                                 color === 'teal' ? 'bg-teal-500' :
+                                color === 'gray' ? 'bg-gray-500' :
+                                color === 'aur' ? 'bg-aur-500' :
+                                color === 'cyan' ? 'bg-cyan-500' :
+                                color === 'emerald' ? 'bg-emerald-500' :
+                                color === 'rose' ? 'bg-rose-500' :
+                                color === 'amber' ? 'bg-amber-500' :
+                                color === 'lime' ? 'bg-lime-500' :
                                 'bg-gray-500'
                               }`}
                               title={color.charAt(0).toUpperCase() + color.slice(1)}
