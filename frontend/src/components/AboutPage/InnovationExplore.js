@@ -106,7 +106,7 @@ const InnovationExplore = () => {
       event: "Advanced AI Integration", 
       detail: "Deployed sophisticated AI algorithms with 85% accuracy for personalized cognitive support, revolutionizing user experience",
       side: "left",
-      color: "purple",
+      color: "red",
       icon: "🤖",
       impact: "High",
       category: "technology",
@@ -118,7 +118,7 @@ const InnovationExplore = () => {
       event: "Global Platform Launch", 
       detail: "Expanded to 50+ countries with multilingual support and cultural adaptation, breaking geographical barriers",
       side: "right", 
-      color: "blue",
+      color: "green",
       icon: "🌍",
       impact: "High",
       category: "expansion",
@@ -130,7 +130,7 @@ const InnovationExplore = () => {
       event: "Mobile App Release", 
       detail: "Launched iOS and Android apps with offline capabilities reaching 100K+ downloads in first month",
       side: "left",
-      color: "green",
+      color: "blue",
       icon: "📱",
       impact: "Medium",
       category: "development",
@@ -142,7 +142,7 @@ const InnovationExplore = () => {
       event: "Research Partnership", 
       detail: "Collaboration with 10 leading cognitive research institutions worldwide, advancing evidence-based practices",
       side: "right",
-      color: "orange",
+      color: "yellow",
       icon: "🎓",
       impact: "High",
       category: "research",
@@ -154,7 +154,7 @@ const InnovationExplore = () => {
       event: "AI Model Upgrade", 
       detail: "Next-generation AI models achieving 92% accuracy in cognitive pattern recognition and prediction",
       side: "left",
-      color: "red",
+      color: "orange",
       icon: "🧠",
       impact: "High",
       category: "technology",
@@ -166,7 +166,7 @@ const InnovationExplore = () => {
       event: "Accessibility Certification", 
       detail: "Achieved WCAG 2.1 AAA compliance certification across all platforms, setting industry standards",
       side: "right",
-      color: "pink",
+      color: "purple",
       icon: "♿",
       impact: "High",
       category: "development",
@@ -178,7 +178,7 @@ const InnovationExplore = () => {
       event: "Innovation Award", 
       detail: "Received international recognition for breakthrough cognitive accessibility technology at Global Tech Summit",
       side: "left",
-      color: "yellow",
+      color: "pink",
       icon: "🏆",
       impact: "Medium",
       category: "research",
@@ -203,7 +203,7 @@ const InnovationExplore = () => {
       detail: "Began pioneering research in brain-computer interface integration for advanced cognitive support",
       side: "left",
       color: "teal",
-      icon: "🔬",
+      icon: "🧬",
       impact: "Medium",
       category: "research",
       progress: 75,
@@ -214,7 +214,7 @@ const InnovationExplore = () => {
       event: "Real-time Adaptation", 
       detail: "Implemented real-time cognitive state adaptation with sub-second response times, enhancing user experience",
       side: "right",
-      color: "purple",
+      color: "gray",
       icon: "⚡",
       impact: "High",
       category: "technology",
@@ -226,7 +226,7 @@ const InnovationExplore = () => {
       event: "Predictive Analytics", 
       detail: "Launched predictive cognitive support system with 95% accuracy, anticipating user needs proactively",
       side: "left",
-      color: "blue",
+      color: "cyan",
       icon: "📊",
       impact: "High",
       category: "development",
@@ -238,7 +238,7 @@ const InnovationExplore = () => {
       event: "Global Expansion", 
       detail: "Reached 1M+ active users across 100+ countries worldwide, becoming market leader in cognitive support",
       side: "right",
-      color: "green",
+      color: "emerald",
       icon: "🚀",
       impact: "High",
       category: "expansion",
@@ -250,7 +250,7 @@ const InnovationExplore = () => {
       event: "Quantum Computing Integration", 
       detail: "Integrated quantum computing algorithms for complex cognitive pattern analysis, industry first",
       side: "left",
-      color: "orange",
+      color: "rose",
       icon: "⚛️",
       impact: "Medium",
       category: "research",
@@ -262,7 +262,7 @@ const InnovationExplore = () => {
       event: "Multimodal Learning", 
       detail: "Deployed advanced multimodal learning combining visual, auditory, and kinesthetic approaches",
       side: "right",
-      color: "red",
+      color: "amber",
       icon: "🎯",
       impact: "High",
       category: "development",
@@ -274,7 +274,7 @@ const InnovationExplore = () => {
       event: "AI Personalization Breakthrough", 
       detail: "Achieved 99% accuracy in hyper-personalized cognitive support recommendations, setting new benchmarks",
       side: "left",
-      color: "pink",
+      color: "lime",
       icon: "🎖️",
       impact: "High",
       category: "technology",
@@ -286,7 +286,7 @@ const InnovationExplore = () => {
       event: "Healthcare Integration", 
       detail: "Integrated with major healthcare systems for comprehensive cognitive care and medical support",
       side: "right",
-      color: "yellow",
+      color: "red",
       icon: "🏥",
       impact: "High",
       category: "development",
@@ -298,7 +298,7 @@ const InnovationExplore = () => {
       event: "Autonomous Support System", 
       detail: "Launched fully autonomous cognitive support system with self-learning capabilities and emotional intelligence",
       side: "left",
-      color: "indigo",
+      color: "green",
       icon: "🌟",
       impact: "High",
       category: "technology",
@@ -827,6 +827,12 @@ const InnovationExplore = () => {
                             item.color === 'pink' ? 'bg-gradient-to-br from-pink-200 to-pink-300 group-hover:from-pink-300 group-hover:to-pink-400' :
                             item.color === 'yellow' ? 'bg-gradient-to-br from-yellow-200 to-yellow-300 group-hover:from-yellow-300 group-hover:to-yellow-400' :
                             item.color === 'teal' ? 'bg-gradient-to-br from-teal-200 to-teal-300 group-hover:from-teal-300 group-hover:to-teal-400' :
+                            item.color === 'gray' ? 'bg-gradient-to-br from-gray-200 to-gray-300 group-hover:from-gray-300 group-hover:to-gray-400' :
+                            item.color === 'cyan' ? 'bg-gradient-to-br from-cyan-200 to-cyan-300 group-hover:from-cyan-300 group-hover:to-cyan-400' :
+                            item.color === 'emerald' ? 'bg-gradient-to-br from-emerald-200 to-emerald-300 group-hover:from-emerald-300 group-hover:to-emerald-400' :
+                            item.color === 'rose' ? 'bg-gradient-to-br from-rose-200 to-rose-300 group-hover:from-rose-300 group-hover:to-rose-400' :
+                            item.color === 'amber' ? 'bg-gradient-to-br from-amber-200 to-amber-300 group-hover:from-amber-300 group-hover:to-amber-400' :
+                            item.color === 'lime' ? 'bg-gradient-to-br from-lime-200 to-lime-300 group-hover:from-lime-300 group-hover:to-lime-400' :
                             'bg-gradient-to-br from-gray-200 to-gray-300 group-hover:from-gray-300 group-hover:to-gray-400'
                           }`}
                         ></div>
@@ -896,6 +902,12 @@ const InnovationExplore = () => {
                             item.color === 'pink' ? 'bg-gradient-to-br from-pink-100 to-pink-200 dark:from-pink-800 dark:to-pink-700' :
                             item.color === 'yellow' ? 'bg-gradient-to-br from-yellow-100 to-yellow-200 dark:from-yellow-800 dark:to-yellow-700' :
                             item.color === 'teal' ? 'bg-gradient-to-br from-teal-100 to-teal-200 dark:from-teal-800 dark:to-teal-700' :
+                            item.color === 'gray' ? 'bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700' :
+                            item.color === 'cyan' ? 'bg-gradient-to-br from-cyan-100 to-cyan-200 dark:from-cyan-800 dark:to-cyan-700' :
+                            item.color === 'emerald' ? 'bg-gradient-to-br from-emerald-100 to-emerald-200 dark:from-emerald-800 dark:to-emerald-700' :
+                            item.color === 'rose' ? 'bg-gradient-to-br from-rose-100 to-rose-200 dark:from-rose-800 dark:to-rose-700' :
+                            item.color === 'amber' ? 'bg-gradient-to-br from-amber-100 to-amber-200 dark:from-amber-800 dark:to-amber-700' :
+                            item.color === 'lime' ? 'bg-gradient-to-br from-lime-100 to-lime-200 dark:from-lime-800 dark:to-lime-700' :
                             'bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700'
                           }`}>
                             {item.icon}
@@ -1270,6 +1282,12 @@ const InnovationExplore = () => {
               selectedAchievement.color === 'yellow' ? 'bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900/50 dark:to-yellow-800/70 border-4 border-yellow-200 dark:border-yellow-700' :
               selectedAchievement.color === 'indigo' ? 'bg-gradient-to-br from-indigo-50 to-indigo-100 dark:from-indigo-900/50 dark:to-indigo-800/70 border-4 border-indigo-200 dark:border-indigo-700' :
               selectedAchievement.color === 'teal' ? 'bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/50 dark:to-teal-800/70 border-4 border-teal-200 dark:border-teal-700' :
+              selectedAchievement.color === 'gray' ? 'bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900/50 dark:to-gray-800/70 border-4 border-gray-200 dark:border-gray-700' :
+              selectedAchievement.color === 'cyan' ? 'bg-gradient-to-br from-cyan-50 to-cyan-100 dark:from-cyan-900/50 dark:to-cyan-800/70 border-4 border-cyan-200 dark:border-cyan-700' :
+              selectedAchievement.color === 'emerald' ? 'bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-900/50 dark:to-emerald-800/70 border-4 border-emerald-200 dark:border-emerald-700' :
+              selectedAchievement.color === 'rose' ? 'bg-gradient-to-br from-rose-50 to-rose-100 dark:from-rose-900/50 dark:to-rose-800/70 border-4 border-rose-200 dark:border-rose-700' :
+              selectedAchievement.color === 'amber' ? 'bg-gradient-to-br from-amber-50 to-amber-100 dark:from-amber-900/50 dark:to-amber-800/70 border-4 border-amber-200 dark:border-amber-700' :
+              selectedAchievement.color === 'lime' ? 'bg-gradient-to-br from-lime-50 to-lime-100 dark:from-lime-900/50 dark:to-lime-800/70 border-4 border-lime-200 dark:border-lime-700' :
               'bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900/50 dark:to-gray-800/70 border-4 border-gray-200 dark:border-gray-700'
             }`}
             onClick={(e) => e.stopPropagation()}
