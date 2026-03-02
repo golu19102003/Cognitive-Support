@@ -490,10 +490,10 @@ const InnovationExplore = () => {
                     </h3>
                   </div>
                   <div className="space-y-4">
-                    <p className="text-black dark:text-gray-300 leading-relaxed border-l-4 border-blue-500 pl-4 py-2 bg-blue-50/50 dark:bg-blue-900/10 rounded-r-lg mb-4">
+                    <p className="text-black dark:text-gray-300 leading-relaxed border-l-4 border-blue-500 pl-4 py-2 bg-blue-50/50 dark:bg-blue-900/10 rounded-r-lg mb-4 text-left">
                       Leveraging cutting-edge technology and evidence-based practices, we developed innovative solutions that adapt to individual needs. Our commitment to continuous improvement and ensures we remain at the forefront of cognitive support services. This technological revolution began when our research team identified critical gaps in existing cognitive support systems and recognized the transformative potential of artificial intelligence and machine learning in addressing these challenges.
                     </p>
-                    <p className="text-black dark:text-gray-300 leading-relaxed border-l-4 border-purple-500 pl-4 py-2 bg-purple-50/50 dark:bg-purple-900/10 rounded-r-lg">
+                    <p className="text-black dark:text-gray-300 leading-relaxed border-l-4 border-purple-500 pl-4 py-2 bg-purple-50/50 dark:bg-purple-900/10 rounded-r-lg text-left">
                       The innovation phase has been marked by breakthrough AI implementations, global expansion, and recognition as leaders in cognitive accessibility technology. Through extensive collaboration with neurodiversity advocates, cognitive specialists, and individuals with lived experiences, we've developed a comprehensive ecosystem that integrates advanced algorithms, personalized learning pathways, and real-time adaptation mechanisms. Our journey has involved countless iterations, user testing sessions, and breakthrough moments that have shaped our current platform into a beacon of innovation in cognitive support services.
                     </p>
                   </div>
@@ -814,7 +814,7 @@ const InnovationExplore = () => {
                         }`}
                         onMouseEnter={() => setHoveredMilestone(index)}
                         onMouseLeave={() => setHoveredMilestone(null)}
-                        onClick={() => setSelectedAchievement(achievements[index])}
+                        onClick={() => setSelectedAchievement(item)}
                       >
                         <div 
                           className={`absolute inset-0 rounded-full transition-all duration-300 ${
@@ -928,7 +928,24 @@ const InnovationExplore = () => {
                             {/* Interactive Progress Bar */}
                             <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 overflow-hidden">
                               <div 
-                                className={`bg-gradient-to-r from-${item.color}-500 to-${item.color}-600 h-full rounded-full transition-all duration-1000 ease-out`}
+                                className={`h-full rounded-full transition-all duration-1000 ease-out ${
+                                  item.color === 'indigo' ? 'bg-gradient-to-r from-indigo-500 to-indigo-600' :
+                                  item.color === 'blue' ? 'bg-gradient-to-r from-blue-500 to-blue-600' :
+                                  item.color === 'green' ? 'bg-gradient-to-r from-green-500 to-green-600' :
+                                  item.color === 'purple' ? 'bg-gradient-to-r from-purple-500 to-purple-600' :
+                                  item.color === 'orange' ? 'bg-gradient-to-r from-orange-500 to-orange-600' :
+                                  item.color === 'red' ? 'bg-gradient-to-r from-red-500 to-red-600' :
+                                  item.color === 'pink' ? 'bg-gradient-to-r from-pink-500 to-pink-600' :
+                                  item.color === 'yellow' ? 'bg-gradient-to-r from-yellow-500 to-yellow-600' :
+                                  item.color === 'teal' ? 'bg-gradient-to-r from-teal-500 to-teal-600' :
+                                  item.color === 'gray' ? 'bg-gradient-to-r from-gray-500 to-gray-600' :
+                                  item.color === 'cyan' ? 'bg-gradient-to-r from-cyan-500 to-cyan-600' :
+                                  item.color === 'emerald' ? 'bg-gradient-to-r from-emerald-500 to-emerald-600' :
+                                  item.color === 'rose' ? 'bg-gradient-to-r from-rose-500 to-rose-600' :
+                                  item.color === 'amber' ? 'bg-gradient-to-r from-amber-500 to-amber-600' :
+                                  item.color === 'lime' ? 'bg-gradient-to-r from-lime-500 to-lime-600' :
+                                  'bg-gradient-to-r from-gray-500 to-gray-600'
+                                }`}
                                 style={{ width: `${item.progress}%` }}
                               ></div>
                             </div>
@@ -994,6 +1011,12 @@ const InnovationExplore = () => {
                                   item.color === 'pink' ? 'bg-pink-600 text-white hover:bg-pink-700 dark:bg-pink-500 dark:hover:bg-pink-600' :
                                   item.color === 'yellow' ? 'bg-yellow-600 text-white hover:bg-yellow-700 dark:bg-yellow-500 dark:hover:bg-yellow-600' :
                                   item.color === 'teal' ? 'bg-teal-600 text-white hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-600' :
+                                  item.color === 'gray' ? 'bg-gray-600 text-white hover:bg-gray-700 dark:bg-gray-500 dark:hover:bg-gray-600' :
+                                  item.color === 'cyan' ? 'bg-cyan-600 text-white hover:bg-cyan-700 dark:bg-cyan-500 dark:hover:bg-cyan-600' :
+                                  item.color === 'emerald' ? 'bg-emerald-600 text-white hover:bg-emerald-700 dark:bg-emerald-500 dark:hover:bg-emerald-600' :
+                                  item.color === 'rose' ? 'bg-rose-600 text-white hover:bg-rose-700 dark:bg-rose-500 dark:hover:bg-rose-600' :
+                                  item.color === 'amber' ? 'bg-amber-600 text-white hover:bg-amber-700 dark:bg-amber-500 dark:hover:bg-amber-600' :
+                                  item.color === 'lime' ? 'bg-lime-600 text-white hover:bg-lime-700 dark:bg-lime-500 dark:hover:bg-lime-600' :
                                   'bg-gray-600 text-white hover:bg-gray-700 dark:bg-gray-500 dark:hover:bg-gray-600'
                                 }`}
                               >
@@ -1009,56 +1032,7 @@ const InnovationExplore = () => {
                 </div>
               </div>
               
-              {/* Enhanced Timeline Summary */}
-              <div className="mt-16 p-8 bg-gradient-to-r from-indigo-50 via-purple-50 to-indigo-50 dark:from-indigo-900/30 dark:via-purple-900/30 dark:to-indigo-900/30 rounded-2xl border-2 border-indigo-200 dark:border-indigo-700 shadow-xl">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-6 flex items-center">
-                  <TrendingUp className="w-6 h-6 mr-3 text-indigo-600" />
-                  5-Year Advanced Growth Summary
-                </h3>
-                <div className="grid md:grid-cols-4 gap-6">
-                  <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div className="text-3xl mb-2">🎯</div>
-                    <div className="text-2xl font-bold text-indigo-600 mb-2">17 Milestones</div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Strategic achievements</p>
-                    <div className="mt-3 text-xs text-green-600 font-semibold">+240% Growth</div>
-                  </div>
-                  <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div className="text-3xl mb-2">👥</div>
-                    <div className="text-2xl font-bold text-purple-600 mb-2">1M+ Users</div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Global reach</p>
-                    <div className="mt-3 text-xs text-green-600 font-semibold">+900% Growth</div>
-                  </div>
-                  <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div className="text-3xl mb-2">🤖</div>
-                    <div className="text-2xl font-bold text-green-600 mb-2">99% Accuracy</div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">AI performance</p>
-                    <div className="mt-3 text-xs text-green-600 font-semibold">+14% Improvement</div>
-                  </div>
-                  <div className="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <div className="text-3xl mb-2">🌍</div>
-                    <div className="text-2xl font-bold text-blue-600 mb-2">100+ Countries</div>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">Global presence</p>
-                    <div className="mt-3 text-xs text-green-600 font-semibold">+100% Expansion</div>
-                  </div>
-                </div>
-                
-                {/* Additional Metrics */}
-                <div className="mt-8 grid md:grid-cols-3 gap-4">
-                  <div className="bg-gradient-to-r from-indigo-100 to-indigo-200 dark:from-indigo-800/50 dark:to-indigo-700/50 rounded-lg p-4 text-center">
-                    <div className="text-lg font-bold text-indigo-700 dark:text-indigo-300">50+ Research Papers</div>
-                    <p className="text-sm text-indigo-600 dark:text-indigo-400">Academic contributions</p>
-                  </div>
-                  <div className="bg-gradient-to-r from-purple-100 to-purple-200 dark:from-purple-800/50 dark:to-purple-700/50 rounded-lg p-4 text-center">
-                    <div className="text-lg font-bold text-purple-700 dark:text-purple-300">12 Patents Filed</div>
-                    <p className="text-sm text-purple-600 dark:text-purple-400">Innovation protection</p>
-                  </div>
-                  <div className="bg-gradient-to-r from-green-100 to-green-200 dark:from-green-800/50 dark:to-green-700/50 rounded-lg p-4 text-center">
-                    <div className="text-lg font-bold text-green-700 dark:text-green-300">25+ Awards</div>
-                    <p className="text-sm text-green-600 dark:text-green-400">Industry recognition</p>
-                  </div>
-                </div>
-              </div>
-            </div>
+                          </div>
           </div>
         )}
 
@@ -1070,7 +1044,7 @@ const InnovationExplore = () => {
                 <div 
                   key={achievement.id}
                   className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl hover:scale-105 cursor-pointer`}
-                  onClick={() => setSelectedAchievement(achievement.id === selectedAchievement ? null : achievement.id)}
+                  onClick={() => setSelectedAchievement(achievement === selectedAchievement ? null : achievement)}
                 >
                   <div className="flex items-start space-x-4">
                     <div className="text-3xl">{achievement.icon}</div>
@@ -1308,6 +1282,12 @@ const InnovationExplore = () => {
                   selectedAchievement.color === 'yellow' ? 'bg-gradient-to-br from-yellow-600 to-yellow-700 dark:from-yellow-500 dark:to-yellow-600' :
                   selectedAchievement.color === 'indigo' ? 'bg-gradient-to-br from-indigo-600 to-indigo-700 dark:from-indigo-500 dark:to-indigo-600' :
                   selectedAchievement.color === 'teal' ? 'bg-gradient-to-br from-teal-600 to-teal-700 dark:from-teal-500 dark:to-teal-600' :
+                  selectedAchievement.color === 'gray' ? 'bg-gradient-to-br from-gray-600 to-gray-700 dark:from-gray-500 dark:to-gray-600' :
+                  selectedAchievement.color === 'cyan' ? 'bg-gradient-to-br from-cyan-600 to-cyan-700 dark:from-cyan-500 dark:to-cyan-600' :
+                  selectedAchievement.color === 'emerald' ? 'bg-gradient-to-br from-emerald-600 to-emerald-700 dark:from-emerald-500 dark:to-emerald-600' :
+                  selectedAchievement.color === 'rose' ? 'bg-gradient-to-br from-rose-600 to-rose-700 dark:from-rose-500 dark:to-rose-600' :
+                  selectedAchievement.color === 'amber' ? 'bg-gradient-to-br from-amber-600 to-amber-700 dark:from-amber-500 dark:to-amber-600' :
+                  selectedAchievement.color === 'lime' ? 'bg-gradient-to-br from-lime-600 to-lime-700 dark:from-lime-500 dark:to-lime-600' :
                   'bg-gradient-to-br from-gray-600 to-gray-700 dark:from-gray-500 dark:to-gray-600'
                 }`}>
                   {selectedAchievement.icon}
@@ -1539,6 +1519,12 @@ const InnovationExplore = () => {
                       selectedAchievement.color === 'yellow' ? 'bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700' :
                       selectedAchievement.color === 'indigo' ? 'bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700' :
                       selectedAchievement.color === 'teal' ? 'bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700' :
+                      selectedAchievement.color === 'gray' ? 'bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700' :
+                      selectedAchievement.color === 'cyan' ? 'bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700' :
+                      selectedAchievement.color === 'emerald' ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700' :
+                      selectedAchievement.color === 'rose' ? 'bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700' :
+                      selectedAchievement.color === 'amber' ? 'bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700' :
+                      selectedAchievement.color === 'lime' ? 'bg-gradient-to-r from-lime-500 to-lime-600 hover:from-lime-600 hover:to-lime-700' :
                       'bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700'
                     }`}
                   >
