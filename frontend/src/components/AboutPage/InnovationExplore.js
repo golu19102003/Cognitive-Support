@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Calendar, Users, Award, TrendingUp, Target, Zap, Globe, Shield, Star, ChevronRight, Clock, MapPin, ExternalLink, Rocket, Brain, Cpu, Lightbulb, BarChart, Filter, Search, ChevronDown, ChevronUp, Palette, ArrowUpDown, MessageCircle, X, FileText, Tag } from 'lucide-react';
+import { ArrowLeft, Calendar, Users, Award, TrendingUp, Target, Zap, Globe, Shield, Star, ChevronRight, Clock, MapPin, ExternalLink, Rocket, Brain, Cpu, Lightbulb, BarChart, Filter, Search, ChevronDown, ChevronUp, Palette, ArrowUpDown, MessageCircle, X, FileText, Tag, Sparkles, Download } from 'lucide-react';
 
 const InnovationExplore = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [activeTab, setActiveTab] = useState('overview');
   const [selectedAchievement, setSelectedAchievement] = useState(null);
+  const [hoveredAchievement, setHoveredAchievement] = useState(null);
+  const [showAchievementModal, setShowAchievementModal] = useState(false);
   
   // Advanced Timeline States
   const [showAdvanced, setShowAdvanced] = useState(false);
@@ -1039,45 +1041,92 @@ const InnovationExplore = () => {
         {/* Achievements Tab */}
         {activeTab === 'achievements' && (
           <div className="space-y-8">
-            <div className="grid md:grid-cols-2 gap-6">
-              {achievements.map((achievement) => (
+            {/* Achievements Header */}
+            <div className="text-center mb-8">
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full flex items-center justify-center animate-pulse">
+                <Award className="w-8 h-8 text-white" />
+              </div>
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Innovation Achievements</h2>
+              <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                Milestones that define our journey of innovation and excellence in cognitive support technology
+              </p>
+            </div>
+
+            {/* Innovation Achievements Grid */}
+            <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
+              {achievements.map((achievement, index) => (
                 <div 
                   key={achievement.id}
-                  className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transition-all duration-300 hover:shadow-xl hover:scale-105 cursor-pointer`}
-                  onClick={() => setSelectedAchievement(achievement === selectedAchievement ? null : achievement)}
+                  className={`bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-xl shadow-lg p-6 text-center transition-all duration-300 hover:shadow-xl hover:scale-105 border ${
+                    index === 0 ? 'border-blue-100 dark:border-blue-800' :
+                    index === 1 ? 'border-green-100 dark:border-green-800' :
+                    index === 2 ? 'border-purple-100 dark:border-purple-800' :
+                    index === 3 ? 'border-orange-100 dark:border-orange-800' :
+                    'border-indigo-100 dark:border-indigo-800'
+                  } group cursor-pointer relative`}
+                  onClick={() => {
+                    setSelectedAchievement(achievement);
+                    setShowAchievementModal(true);
+                  }}
                 >
-                  <div className="flex items-start space-x-4">
-                    <div className="text-3xl">{achievement.icon}</div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                        {achievement.title}
-                      </h3>
-                      <p className="text-gray-600 dark:text-gray-300 text-sm mb-3">
-                        {achievement.description}
-                      </p>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2 text-sm text-gray-500">
-                          <Calendar className="w-4 h-4" />
-                          <span>{achievement.date}</span>
-                        </div>
-                        <span className="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-700 dark:text-indigo-300 text-xs font-medium rounded-full">
-                          {achievement.impact}
-                        </span>
-                      </div>
-                    </div>
+                  {/* View Details Button - Top Right */}
+                  <div className="absolute top-4 right-4">
+                    <button className={`flex items-center space-x-2 px-3 py-2 text-white rounded-lg transition-all duration-300 text-sm font-medium ${
+                      index === 0 ? 'bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700' :
+                      index === 1 ? 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700' :
+                      index === 2 ? 'bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700' :
+                      index === 3 ? 'bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700' :
+                      'bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700'
+                    }`}>
+                      <Award className="w-4 h-4" />
+                      <span>View Details</span>
+                    </button>
                   </div>
                   
-                  {selectedAchievement === achievement.id && (
-                    <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-700">
-                      <div className="flex items-center space-x-2 mb-2">
-                        <Award className="w-5 h-5 text-indigo-600" />
-                        <span className="font-semibold text-gray-900 dark:text-white">Achievement Details</span>
-                      </div>
-                      <p className="text-gray-600 dark:text-gray-300 text-sm">
-                        This milestone represents our commitment to pushing the boundaries of what's possible in cognitive support technology and innovation.
-                      </p>
-                    </div>
-                  )}
+                  {/* Enhanced Icon */}
+                  <div className={`w-16 h-16 mx-auto mb-4 rounded-xl flex items-center justify-center text-3xl transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 ${
+                    index === 0 ? 'bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-800 dark:to-blue-700' :
+                    index === 1 ? 'bg-gradient-to-br from-green-100 to-green-200 dark:from-green-800 dark:to-green-700' :
+                    index === 2 ? 'bg-gradient-to-br from-purple-100 to-purple-200 dark:from-purple-800 dark:to-purple-700' :
+                    index === 3 ? 'bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-800 dark:to-orange-700' :
+                    'bg-gradient-to-br from-indigo-100 to-indigo-200 dark:from-indigo-800 dark:to-indigo-700'
+                  }`}>
+                    {achievement.icon}
+                  </div>
+                  
+                  {/* Enhanced Value */}
+                  <div className="text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:scale-105 transition-transform">
+                    {achievement.title}
+                  </div>
+                  
+                  {/* Enhanced Label */}
+                  <p className="text-gray-600 dark:text-gray-300 text-sm mb-3 font-medium">
+                    {achievement.description}
+                  </p>
+                  
+                  {/* Enhanced Date */}
+                  <div className="flex items-center justify-center space-x-2 text-sm text-gray-500 dark:text-gray-400 mb-2">
+                    <Calendar className="w-4 h-4" />
+                    <span>{achievement.date}</span>
+                  </div>
+                  
+                  {/* Enhanced Metrics */}
+                  <div className="flex items-center justify-center space-x-2 text-sm font-semibold text-indigo-600 mb-2">
+                    <Target className="w-4 h-4" />
+                    <span>{achievement.impact}</span>
+                  </div>
+                  
+                  {/* Category Tag */}
+                  <div className="flex items-center justify-center space-x-2 text-xs text-gray-500 dark:text-gray-400">
+                    <div className={`w-2 h-2 rounded-full ${
+                      achievement.category === 'expansion' ? 'bg-emerald-500' :
+                      achievement.category === 'research' ? 'bg-rose-500' :
+                      achievement.category === 'development' ? 'bg-amber-500' :
+                      achievement.category === 'technology' ? 'bg-lime-500' :
+                      'bg-indigo-500'
+                    }`}></div>
+                    <span>{achievement.category}</span>
+                  </div>
                 </div>
               ))}
             </div>
@@ -1239,314 +1288,248 @@ const InnovationExplore = () => {
         )}
       </div>
       
-      {/* Timeline Milestone Details Modal */}
-      {selectedAchievement && (
+      {/* Achievement Details Modal */}
+      {showAchievementModal && selectedAchievement && (
         <div 
           className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
-          onClick={() => setSelectedAchievement(null)}
+          onClick={() => setShowAchievementModal(false)}
         >
-          <div 
-            className={`rounded-2xl shadow-2xl p-8 max-w-2xl w-full max-h-[90vh] overflow-y-auto ${
-              selectedAchievement.color === 'purple' ? 'bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/50 dark:to-purple-800/70 border-4 border-purple-200 dark:border-purple-700' :
-              selectedAchievement.color === 'blue' ? 'bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/50 dark:to-blue-800/70 border-4 border-blue-200 dark:border-blue-700' :
-              selectedAchievement.color === 'green' ? 'bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/50 dark:to-green-800/70 border-4 border-green-200 dark:border-green-700' :
-              selectedAchievement.color === 'orange' ? 'bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/50 dark:to-orange-800/70 border-4 border-orange-200 dark:border-orange-700' :
-              selectedAchievement.color === 'red' ? 'bg-gradient-to-br from-red-50 to-red-100 dark:from-red-900/50 dark:to-red-800/70 border-4 border-red-200 dark:border-red-700' :
-              selectedAchievement.color === 'pink' ? 'bg-gradient-to-br from-pink-50 to-pink-100 dark:from-pink-900/50 dark:to-pink-800/70 border-4 border-pink-200 dark:border-pink-700' :
-              selectedAchievement.color === 'yellow' ? 'bg-gradient-to-br from-yellow-50 to-yellow-100 dark:from-yellow-900/50 dark:to-yellow-800/70 border-4 border-yellow-200 dark:border-yellow-700' :
-              selectedAchievement.color === 'indigo' ? 'bg-gradient-to-br from-indigo-50 to-indigo-100 dark:from-indigo-900/50 dark:to-indigo-800/70 border-4 border-indigo-200 dark:border-indigo-700' :
-              selectedAchievement.color === 'teal' ? 'bg-gradient-to-br from-teal-50 to-teal-100 dark:from-teal-900/50 dark:to-teal-800/70 border-4 border-teal-200 dark:border-teal-700' :
-              selectedAchievement.color === 'gray' ? 'bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900/50 dark:to-gray-800/70 border-4 border-gray-200 dark:border-gray-700' :
-              selectedAchievement.color === 'cyan' ? 'bg-gradient-to-br from-cyan-50 to-cyan-100 dark:from-cyan-900/50 dark:to-cyan-800/70 border-4 border-cyan-200 dark:border-cyan-700' :
-              selectedAchievement.color === 'emerald' ? 'bg-gradient-to-br from-emerald-50 to-emerald-100 dark:from-emerald-900/50 dark:to-emerald-800/70 border-4 border-emerald-200 dark:border-emerald-700' :
-              selectedAchievement.color === 'rose' ? 'bg-gradient-to-br from-rose-50 to-rose-100 dark:from-rose-900/50 dark:to-rose-800/70 border-4 border-rose-200 dark:border-rose-700' :
-              selectedAchievement.color === 'amber' ? 'bg-gradient-to-br from-amber-50 to-amber-100 dark:from-amber-900/50 dark:to-amber-800/70 border-4 border-amber-200 dark:border-amber-700' :
-              selectedAchievement.color === 'lime' ? 'bg-gradient-to-br from-lime-50 to-lime-100 dark:from-lime-900/50 dark:to-lime-800/70 border-4 border-lime-200 dark:border-lime-700' :
-              'bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900/50 dark:to-gray-800/70 border-4 border-gray-200 dark:border-gray-700'
-            }`}
-            onClick={(e) => e.stopPropagation()}
+          {(() => {
+            const achievementIndex = achievements.findIndex(a => a.id === selectedAchievement.id);
+            return (
+          <div className={`bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto ${
+            selectedAchievement.color === 'emerald' ? 'border-4 border-emerald-200 dark:border-emerald-700' :
+            selectedAchievement.color === 'rose' ? 'border-4 border-rose-200 dark:border-rose-700' :
+            selectedAchievement.color === 'amber' ? 'border-4 border-amber-200 dark:border-amber-700' :
+            selectedAchievement.color === 'lime' ? 'border-4 border-lime-200 dark:border-lime-700' :
+            selectedAchievement.color === 'red' ? 'border-4 border-red-200 dark:border-red-700' :
+            selectedAchievement.color === 'blue' ? 'border-4 border-blue-200 dark:border-blue-700' :
+            selectedAchievement.color === 'green' ? 'border-4 border-green-200 dark:border-green-700' :
+            selectedAchievement.color === 'purple' ? 'border-4 border-purple-200 dark:border-purple-700' :
+            selectedAchievement.color === 'orange' ? 'border-4 border-orange-200 dark:border-orange-700' :
+            selectedAchievement.color === 'pink' ? 'border-4 border-pink-200 dark:border-pink-700' :
+            selectedAchievement.color === 'indigo' ? 'border-4 border-indigo-200 dark:border-indigo-700' :
+            selectedAchievement.color === 'teal' ? 'border-4 border-teal-200 dark:border-teal-700' :
+            selectedAchievement.color === 'cyan' ? 'border-4 border-cyan-200 dark:border-cyan-700' :
+            'border-4 border-gray-200 dark:border-gray-700'
+          }`}
+          onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header */}
-            <div className="flex items-start justify-between mb-6">
-              <div className="flex items-center space-x-3">
-                <div className="w-4"></div>
-                <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl transition-all duration-300 ${
-                  hoveredMilestone ? 'scale-110 rotate-6' : 'scale-100'
-                } ${
-                  selectedAchievement.color === 'purple' ? 'bg-gradient-to-br from-purple-600 to-purple-700 dark:from-purple-500 dark:to-purple-600' :
-                  selectedAchievement.color === 'blue' ? 'bg-gradient-to-br from-blue-600 to-blue-700 dark:from-blue-500 dark:to-blue-600' :
-                  selectedAchievement.color === 'green' ? 'bg-gradient-to-br from-green-600 to-green-700 dark:from-green-500 dark:to-green-600' :
-                  selectedAchievement.color === 'orange' ? 'bg-gradient-to-br from-orange-600 to-orange-700 dark:from-orange-500 dark:to-orange-600' :
-                  selectedAchievement.color === 'red' ? 'bg-gradient-to-br from-red-600 to-red-700 dark:from-red-500 dark:to-red-600' :
-                  selectedAchievement.color === 'pink' ? 'bg-gradient-to-br from-pink-600 to-pink-700 dark:from-pink-500 dark:to-pink-600' :
-                  selectedAchievement.color === 'yellow' ? 'bg-gradient-to-br from-yellow-600 to-yellow-700 dark:from-yellow-500 dark:to-yellow-600' :
-                  selectedAchievement.color === 'indigo' ? 'bg-gradient-to-br from-indigo-600 to-indigo-700 dark:from-indigo-500 dark:to-indigo-600' :
-                  selectedAchievement.color === 'teal' ? 'bg-gradient-to-br from-teal-600 to-teal-700 dark:from-teal-500 dark:to-teal-600' :
-                  selectedAchievement.color === 'gray' ? 'bg-gradient-to-br from-gray-600 to-gray-700 dark:from-gray-500 dark:to-gray-600' :
-                  selectedAchievement.color === 'cyan' ? 'bg-gradient-to-br from-cyan-600 to-cyan-700 dark:from-cyan-500 dark:to-cyan-600' :
-                  selectedAchievement.color === 'emerald' ? 'bg-gradient-to-br from-emerald-600 to-emerald-700 dark:from-emerald-500 dark:to-emerald-600' :
-                  selectedAchievement.color === 'rose' ? 'bg-gradient-to-br from-rose-600 to-rose-700 dark:from-rose-500 dark:to-rose-600' :
-                  selectedAchievement.color === 'amber' ? 'bg-gradient-to-br from-amber-600 to-amber-700 dark:from-amber-500 dark:to-amber-600' :
-                  selectedAchievement.color === 'lime' ? 'bg-gradient-to-br from-lime-600 to-lime-700 dark:from-lime-500 dark:to-lime-600' :
-                  'bg-gradient-to-br from-gray-600 to-gray-700 dark:from-gray-500 dark:to-gray-600'
-                }`}>
-                  {selectedAchievement.icon}
+            <div className={`p-6 ${
+              achievementIndex === 0 ? 'bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-900/20 dark:to-blue-800/30' :
+              achievementIndex === 1 ? 'bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/30' :
+              achievementIndex === 2 ? 'bg-gradient-to-br from-purple-50 to-purple-100 dark:from-purple-900/20 dark:to-purple-800/30' :
+              achievementIndex === 3 ? 'bg-gradient-to-br from-orange-50 to-orange-100 dark:from-orange-900/20 dark:to-orange-800/30' :
+              'bg-gradient-to-br from-indigo-50 to-indigo-100 dark:from-indigo-900/20 dark:to-indigo-800/30'
+            }`}>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center space-x-3">
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-3xl ${
+                    achievementIndex === 0 ? 'bg-gradient-to-br from-blue-400 to-blue-600' :
+                    achievementIndex === 1 ? 'bg-gradient-to-br from-green-400 to-green-600' :
+                    achievementIndex === 2 ? 'bg-gradient-to-br from-purple-400 to-purple-600' :
+                    achievementIndex === 3 ? 'bg-gradient-to-br from-orange-400 to-orange-600' :
+                    'bg-gradient-to-br from-indigo-400 to-indigo-600'
+                  }`}>
+                    {selectedAchievement.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                      {selectedAchievement.title}
+                    </h3>
+                    <p className="text-gray-600 dark:text-gray-300">
+                      Innovation in Cognitive Support
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">{selectedAchievement.event}</h3>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">{selectedAchievement.month}</p>
+                <div className="flex items-center space-x-2">
+                  <button
+                    onClick={() => setShowAchievementModal(false)}
+                    className="text-gray-500 hover:text-blue-600 dark:text-gray-400 dark:hover:text-blue-400 transition-colors"
+                    title="Download PDF"
+                  >
+                    <Download className="w-6 h-6" />
+                  </button>
+                  <button
+                    onClick={() => setShowAchievementModal(false)}
+                    className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors"
+                  >
+                    <X className="w-5 h-5 text-gray-500" />
+                  </button>
                 </div>
               </div>
-              <button
-                onClick={() => setSelectedAchievement(null)}
-                className="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 transition-colors"
-              >
-                <X className="w-6 h-6" />
-              </button>
             </div>
-            
+
             {/* Modal Content */}
             <div className="p-6 space-y-6">
-              {/* Overview Section */}
+              {/* Overview */}
               <div>
                 <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
-                  <Target className="w-5 h-5 mr-2 text-blue-600" />
+                  <Lightbulb className="w-5 h-5 mr-2 text-indigo-600" />
                   Overview
                 </h4>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-4">
-                  {selectedAchievement.detail}
+                <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                  {selectedAchievement.description} This innovation milestone represents a significant breakthrough in cognitive support technology, demonstrating our commitment to pushing the boundaries of what's possible in assistive technology and user experience design. Our team has successfully implemented cutting-edge solutions that leverage evidence-based practices to create adaptive, personalized experiences for users with cognitive disabilities. We remain committed to continuous improvement and research to stay at the forefront of cognitive support services.
                 </p>
-                
-                {/* Quick Stats */}
-                <div className="grid grid-cols-2 gap-y-4 gap-x-4 mb-4">
-                  <div className="bg-white dark:bg-gray-800 rounded-lg p-3 text-center border border-gray-200 dark:border-gray-600">
-                    <div className={`text-2xl font-bold ${selectedAchievement.color === 'purple' ? 'text-purple-600' : selectedAchievement.color === 'blue' ? 'text-blue-600' : selectedAchievement.color === 'green' ? 'text-green-600' : selectedAchievement.color === 'orange' ? 'text-orange-600' : selectedAchievement.color === 'red' ? 'text-red-600' : selectedAchievement.color === 'pink' ? 'text-pink-600' : selectedAchievement.color === 'yellow' ? 'text-yellow-600' : selectedAchievement.color === 'indigo' ? 'text-indigo-600' : selectedAchievement.color === 'teal' ? 'text-teal-600' : 'text-gray-600'}`}>
-                      {selectedAchievement.progress}%
-                    </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Progress</div>
+              </div>
+
+              {/* Key Features */}
+              <div>
+                <h4 className={`text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center`}>
+                  <Star className="w-5 h-5 mr-2 text-yellow-600" />
+                  Key Features
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="p-3 rounded-lg border-l-4 bg-blue-50 dark:bg-blue-900/30 border-blue-400">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Advanced cognitive support algorithms</span>
                   </div>
-                  <div className="bg-white dark:bg-gray-800 rounded-lg p-3 text-center border border-gray-200 dark:border-gray-600">
-                    <div className={`text-2xl font-bold ${selectedAchievement.impact === 'High' ? 'text-red-600' : 'text-yellow-600'}`}>
-                      {selectedAchievement.impact}
-                    </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Impact</div>
+                  <div className="p-3 rounded-lg border-l-4 bg-green-50 dark:bg-green-900/30 border-green-400">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">User-centered design principles</span>
                   </div>
-                  <div className="bg-white dark:bg-gray-800 rounded-lg p-3 text-center border border-gray-200 dark:border-gray-600">
-                    <div className="text-2xl font-bold text-green-600">
-                      {selectedAchievement.category}
-                    </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Category</div>
+                  <div className="p-3 rounded-lg border-l-4 bg-purple-50 dark:bg-purple-900/30 border-purple-400">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Cutting-edge technology integration</span>
                   </div>
-                  <div className="bg-white dark:bg-gray-800 rounded-lg p-3 text-center border border-gray-200 dark:border-gray-600">
-                    <div className="text-2xl font-bold text-orange-600">
-                      {selectedAchievement.side}
-                    </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Timeline Side</div>
-                  </div>
-                  <div className="bg-white dark:bg-gray-800 rounded-lg p-3 text-center border border-gray-200 dark:border-gray-600">
-                    <div className="text-2xl font-bold text-red-600">
-                      #{selectedAchievement.month.replace(/\D/g, '').split(' ')[1]}
-                    </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Milestone ID</div>
+                  <div className="p-3 rounded-lg border-l-4 bg-orange-50 dark:bg-orange-900/30 border-orange-400">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Scalable architecture for global reach</span>
                   </div>
                 </div>
               </div>
-              
-              {/* Detailed Information */}
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                {/* Timeline Information */}
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-600">
-                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
-                    <Calendar className="w-5 h-5 mr-2 text-blue-600" />
-                    Timeline Information
-                  </h4>
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-600 dark:text-gray-400">Quarter</span>
-                      <span className="font-medium text-gray-900 dark:text-white">{selectedAchievement.month}</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-600 dark:text-gray-400">Date</span>
-                      <span className="font-medium text-gray-900 dark:text-white">{selectedAchievement.date}</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-600 dark:text-gray-400">Timeline Position</span>
-                      <span className="font-medium text-gray-900 dark:text-white capitalize">{selectedAchievement.side}</span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-600 dark:text-gray-400">Milestone ID</span>
-                      <span className="font-medium text-gray-900 dark:text-white">#{selectedAchievement.month.replace(/\D/g, '').split(' ')[1]}</span>
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Technical Details */}
-                <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-600">
-                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
-                    <Cpu className="w-5 h-5 mr-2 text-blue-600" />
-                    Technical Details
-                  </h4>
-                  <div className="space-y-3">
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-600 dark:text-gray-400">Complexity Level</span>
-                      <span className="font-medium text-gray-900 dark:text-white">
-                        {selectedAchievement.progress > 90 ? 'Expert' : 
-                         selectedAchievement.progress > 75 ? 'Advanced' : 
-                         selectedAchievement.progress > 50 ? 'Intermediate' : 'Beginner'}
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-600 dark:text-gray-400">Status</span>
-                      <span className={`font-medium ${
-                        selectedAchievement.progress === 100 ? 'text-green-600' : 
-                         selectedAchievement.progress >= 90 ? 'text-blue-600' : 
-                         selectedAchievement.progress >= 75 ? 'text-yellow-600' : 'text-orange-600'
-                      }`}>
-                        {selectedAchievement.progress === 100 ? 'Completed' : 
-                         selectedAchievement.progress >= 90 ? 'Near Complete' : 
-                         selectedAchievement.progress >= 75 ? 'In Progress' : 'Planning'}
-                      </span>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-600 dark:text-gray-400">Priority</span>
-                      <span className={`font-medium ${
-                        selectedAchievement.impact === 'High' ? 'text-red-600' : 'text-yellow-600'
-                      }`}>
-                        {selectedAchievement.impact}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Key Achievements */}
-              <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-600">
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
-                  <Star className="w-5 h-5 mr-2 text-blue-600" />
+
+              {/* Achievements */}
+              <div>
+                <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+                  <Award className="w-5 h-5 mr-2 text-indigo-600" />
                   Key Achievements
                 </h4>
-                <ul className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
-                  <li className="flex items-start space-x-2">
-                    <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 flex-shrink-0"></div>
-                    <span>Strategic milestone in our growth journey</span>
-                  </li>
-                  <li className="flex items-start space-x-2">
-                    <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 flex-shrink-0"></div>
-                    <span>Demonstrates commitment to innovation and excellence</span>
-                  </li>
-                  <li className="flex items-start space-x-2">
-                    <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 flex-shrink-0"></div>
-                    <span>Contributes to our mission of supporting cognitive disabilities</span>
-                  </li>
-                  <li className="flex items-start space-x-2">
-                    <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mt-1.5 flex-shrink-0"></div>
-                    <span>Represents significant advancement in cognitive support technology</span>
-                  </li>
-                </ul>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="p-3 rounded-lg border-l-4 bg-red-50 dark:bg-red-900/30 border-red-400">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Breakthrough in cognitive support technology</span>
+                  </div>
+                  <div className="p-3 rounded-lg border-l-4 bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Industry recognition and awards</span>
+                  </div>
+                  <div className="p-3 rounded-lg border-l-4 bg-pink-50 dark:bg-pink-900/30 border-pink-400">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Global user adoption and growth</span>
+                  </div>
+                  <div className="p-3 rounded-lg border-l-4 bg-teal-50 dark:bg-teal-900/30 border-teal-400">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Research publications and patents</span>
+                  </div>
+                </div>
               </div>
-              
-              {/* Impact Metrics */}
-              <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-600">
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
-                  <BarChart className="w-5 h-5 mr-2 text-purple-600" />
-                  Impact Metrics
+
+              {/* Future Goals */}
+              <div>
+                <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+                  <Target className="w-5 h-5 mr-2 text-green-600" />
+                  Future Goals
                 </h4>
-                <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-                  <div className="bg-white dark:bg-gray-700 rounded-lg p-3 text-center border border-gray-200 dark:border-gray-600">
-                    <div className="text-2xl font-bold text-purple-600">
-                      {selectedAchievement.progress}%
-                    </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Completion Rate</div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className="p-3 rounded-lg border-l-4 bg-emerald-50 dark:bg-emerald-900/30 border-emerald-400">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Expand to 100+ countries worldwide</span>
                   </div>
-                  <div className="bg-white dark:bg-gray-700 rounded-lg p-3 text-center border border-gray-200 dark:border-gray-600">
-                    <div className="text-2xl font-bold text-blue-600">
-                      {selectedAchievement.impact === 'High' ? '🔥' : '⭐'}
-                    </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Impact Level</div>
+                  <div className="p-3 rounded-lg border-l-4 bg-cyan-50 dark:bg-cyan-900/30 border-cyan-400">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Achieve 99% AI accuracy rate</span>
                   </div>
-                  <div className="bg-white dark:bg-gray-700 rounded-lg p-3 text-center border border-gray-200 dark:border-gray-600">
-                    <div className="text-2xl font-bold text-green-600">
-                      {selectedAchievement.category === 'technology' ? '🤖' : 
-                       selectedAchievement.category === 'research' ? '🔬' : 
-                       selectedAchievement.category === 'development' ? '💻' : 
-                       selectedAchievement.category === 'expansion' ? '🌍' : '📋'}
-                    </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Category Focus</div>
+                  <div className="p-3 rounded-lg border-l-4 bg-lime-50 dark:bg-lime-900/30 border-lime-400">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Integrate quantum computing capabilities</span>
                   </div>
-                  <div className="bg-white dark:bg-gray-700 rounded-lg p-3 text-center border border-gray-200 dark:border-gray-600">
-                    <div className="text-2xl font-bold text-orange-600">
-                      {selectedAchievement.side === 'left' ? '⬅️' : '⬆️'}
-                    </div>
-                    <div className="text-sm text-gray-600 dark:text-gray-400">Timeline Direction</div>
+                  <div className="p-3 rounded-lg border-l-4 bg-rose-50 dark:bg-rose-900/30 border-rose-400">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Launch mobile applications</span>
                   </div>
                 </div>
               </div>
-              
-              {/* Future Outlook */}
-              <div className="bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-600">
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
-                  <Rocket className="w-5 h-5 mr-2 text-green-600" />
-                  Future Outlook
+
+              {/* Get Involved */}
+              <div className={`p-4 rounded-lg bg-gradient-to-r border ${
+                achievementIndex === 0 ? 'from-blue-100 to-blue-200 dark:from-blue-900/30 dark:to-blue-800/40 border-blue-200 dark:border-blue-700' :
+                achievementIndex === 1 ? 'from-green-100 to-green-200 dark:from-green-900/30 dark:to-green-800/40 border-green-200 dark:border-green-700' :
+                achievementIndex === 2 ? 'from-purple-100 to-purple-200 dark:from-purple-900/30 dark:to-purple-800/40 border-purple-200 dark:border-purple-700' :
+                achievementIndex === 3 ? 'from-orange-100 to-orange-200 dark:from-orange-900/30 dark:to-orange-800/40 border-orange-200 dark:border-orange-700' :
+                'from-indigo-100 to-indigo-200 dark:from-indigo-900/30 dark:to-indigo-800/40 border-indigo-200 dark:border-indigo-700'
+              }`}>
+                <h4 className={`text-lg font-semibold text-gray-900 dark:text-white mb-2 flex items-center`}>
+                  <Rocket className={`w-5 h-5 mr-2 ${
+                    achievementIndex === 0 ? 'text-blue-600' :
+                    achievementIndex === 1 ? 'text-green-600' :
+                    achievementIndex === 2 ? 'text-purple-600' :
+                    achievementIndex === 3 ? 'text-orange-600' :
+                    'text-indigo-600'
+                  }`} />
+                  Get Involved
                 </h4>
-                <div className="space-y-3 text-sm text-gray-700 dark:text-gray-300">
-                  <div className="flex items-center space-x-2">
-                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full flex-shrink-0"></div>
-                    <span>Next phase: Advanced AI integration and optimization</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full flex-shrink-0"></div>
-                    <span>Expected impact: Transform cognitive support landscape</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full flex-shrink-0"></div>
-                    <span>Timeline continuation: Quarterly milestones through 2026</span>
-                  </div>
-                </div>
-              </div>
-              
-              {/* Action Buttons */}
-              <div className="flex items-start justify-start pt-4 border-t border-gray-200 dark:border-gray-600">
-                <div className="flex items-center space-x-3 w-full">
-                  <button
-                    onClick={() => handleShareViaGmail(selectedAchievement)}
-                    className={`w-[47.5%] flex items-center justify-center space-x-3 px-6 py-4 text-white rounded-lg transition-all duration-300 text-sm font-medium ${
-                      selectedAchievement.color === 'purple' ? 'bg-gradient-to-r from-purple-500 to-purple-600 hover:from-purple-600 hover:to-purple-700' :
-                      selectedAchievement.color === 'blue' ? 'bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700' :
-                      selectedAchievement.color === 'green' ? 'bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700' :
-                      selectedAchievement.color === 'orange' ? 'bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700' :
-                      selectedAchievement.color === 'red' ? 'bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700' :
-                      selectedAchievement.color === 'pink' ? 'bg-gradient-to-r from-pink-500 to-pink-600 hover:from-pink-600 hover:to-pink-700' :
-                      selectedAchievement.color === 'yellow' ? 'bg-gradient-to-r from-yellow-500 to-yellow-600 hover:from-yellow-600 hover:to-yellow-700' :
-                      selectedAchievement.color === 'indigo' ? 'bg-gradient-to-r from-indigo-500 to-indigo-600 hover:from-indigo-600 hover:to-indigo-700' :
-                      selectedAchievement.color === 'teal' ? 'bg-gradient-to-r from-teal-500 to-teal-600 hover:from-teal-600 hover:to-teal-700' :
-                      selectedAchievement.color === 'gray' ? 'bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700' :
-                      selectedAchievement.color === 'cyan' ? 'bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-600 hover:to-cyan-700' :
-                      selectedAchievement.color === 'emerald' ? 'bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700' :
-                      selectedAchievement.color === 'rose' ? 'bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700' :
-                      selectedAchievement.color === 'amber' ? 'bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700' :
-                      selectedAchievement.color === 'lime' ? 'bg-gradient-to-r from-lime-500 to-lime-600 hover:from-lime-600 hover:to-lime-700' :
-                      'bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700'
-                    }`}
-                  >
-                    <MessageCircle className="w-5 h-5" />
-                    <span>Share via Gmail</span>
-                  </button>
-                  <div className="flex-1"></div>
-                  <button
-                    onClick={() => setSelectedAchievement(null)}
-                    className="w-[47.5%] flex items-center justify-center space-x-3 px-6 py-4 text-white rounded-lg transition-all duration-300 text-sm font-medium bg-gradient-to-r from-gray-500 to-gray-600 hover:from-gray-600 hover:to-gray-700"
-                  >
-                    <X className="w-5 h-5" />
-                    <span>Close</span>
-                  </button>
-                </div>
+                <p className="text-gray-700 dark:text-gray-300">
+                  Join us in revolutionizing cognitive support technology. Whether you're a developer, researcher, or advocate, there are many ways to contribute to our mission of creating accessible and innovative solutions for cognitive disabilities.
+                </p>
               </div>
             </div>
           </div>
+            );
+          })()}
         </div>
       )}
+
+      {/* Innovation Era Section - Innovation Focused */}
+      <div className="mt-12 mb-8">
+        <div className="bg-gradient-to-br from-indigo-600 via-purple-700 to-pink-800 text-white rounded-2xl shadow-2xl p-8 relative overflow-hidden">
+          {/* Background Animation */}
+          <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-black/10"></div>
+          
+          {/* Floating Elements */}
+          <div className="absolute top-4 left-4 opacity-50">
+            <Lightbulb className="w-8 h-8 text-white/30 animate-pulse" />
+          </div>
+          <div className="absolute top-4 right-4 opacity-50">
+            <Zap className="w-8 h-8 text-white/30 animate-pulse" />
+          </div>
+          <div className="absolute bottom-4 left-4 opacity-50">
+            <Target className="w-8 h-8 text-white/30 animate-pulse" />
+          </div>
+          <div className="absolute bottom-4 right-4 opacity-50">
+            <Sparkles className="w-8 h-8 text-white/30 animate-pulse" />
+          </div>
+          
+          <div className="relative text-center">
+            {/* Main Icon */}
+            <div className="w-16 h-16 mx-auto mb-6 bg-white/20 rounded-full flex items-center justify-center animate-pulse">
+              <TrendingUp className="w-8 h-8 text-white" />
+            </div>
+            
+            {/* Unique Innovation Title */}
+            <h2 className="text-3xl font-bold mb-4">The Innovation Era</h2>
+            
+            {/* Innovation-Focused Tagline */}
+            <p className="text-xl text-white/90 max-w-4xl mx-auto leading-relaxed">
+              Where cutting-edge technology meets human creativity to revolutionize cognitive support
+            </p>
+            
+            {/* Innovation Values */}
+            <div className="mt-8 flex flex-wrap justify-center gap-8">
+              <div className="flex items-center space-x-2 bg-white/10 px-4 py-2 rounded-full">
+                <Lightbulb className="w-4 h-4 text-yellow-300" />
+                <span className="text-white/80 font-medium">Innovation</span>
+              </div>
+              <div className="flex items-center space-x-2 bg-white/10 px-4 py-2 rounded-full">
+                <Zap className="w-4 h-4 text-yellow-300" />
+                <span className="text-white/80 font-medium">Technology</span>
+              </div>
+              <div className="flex items-center space-x-2 bg-white/10 px-4 py-2 rounded-full">
+                <Target className="w-4 h-4 text-yellow-300" />
+                <span className="text-white/80 font-medium">Excellence</span>
+              </div>
+            </div>
+            
+            {/* Additional Innovation Message */}
+            <div className="mt-6 p-4 bg-white/5 rounded-xl border border-white/10">
+              <p className="text-white/70 text-sm">
+                Pushing boundaries, breaking barriers, transforming possibilities
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
-};
+}
 
 export default InnovationExplore;

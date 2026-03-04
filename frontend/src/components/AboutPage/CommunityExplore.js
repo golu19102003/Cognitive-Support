@@ -1640,6 +1640,16 @@ Generated on: ${new Date().toLocaleString()}
                 </div>
               </div>
               
+              <div className="text-center mb-8">
+                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-pink-600 to-rose-600 rounded-full flex items-center justify-center animate-pulse">
+                  <Award className="w-8 h-8 text-white" />
+                </div>
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Community Achievements</h2>
+                <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                  Milestones that define our journey of community and excellence in cognitive support technology
+                </p>
+              </div>
+
               <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
                 {achievements.map((achievement) => (
                   <div 
@@ -1683,7 +1693,7 @@ Generated on: ${new Date().toLocaleString()}
                     
                     {/* Enhanced Label */}
                     <p className="text-gray-600 dark:text-gray-300 text-sm mb-3 font-medium">
-                      {achievement.description}
+                      {achievement.detailedContent.overview}
                     </p>
                     
                     {/* Enhanced Date */}
@@ -3362,13 +3372,10 @@ Generated on: ${new Date().toLocaleString()}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {selectedAchievement.detailedContent.keyFeatures.map((feature, idx) => (
                     <div key={idx} className={`p-3 rounded-lg border-l-4 ${
-                      selectedAchievement.color === 'pink' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
-                      selectedAchievement.color === 'blue' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
-                      selectedAchievement.color === 'green' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
-                      selectedAchievement.color === 'yellow' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
-                      selectedAchievement.color === 'purple' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
-                      selectedAchievement.color === 'orange' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
-                      selectedAchievement.color === 'red' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                      idx === 0 ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                      idx === 1 ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                      idx === 2 ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                      idx === 3 ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
                       'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
                     }`}>
                       <span className="text-gray-700 dark:text-gray-300 font-medium">{feature}</span>
@@ -3395,13 +3402,10 @@ Generated on: ${new Date().toLocaleString()}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                   {selectedAchievement.detailedContent.achievements.map((achievement, idx) => (
                     <div key={idx} className={`p-3 rounded-lg border-l-4 ${
-                      selectedAchievement.color === 'pink' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
-                      selectedAchievement.color === 'blue' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
-                      selectedAchievement.color === 'green' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
-                      selectedAchievement.color === 'yellow' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
-                      selectedAchievement.color === 'purple' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
-                      selectedAchievement.color === 'orange' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
-                      selectedAchievement.color === 'red' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                      idx === 0 ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                      idx === 1 ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
+                      idx === 2 ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                      idx === 3 ? 'bg-teal-50 dark:bg-teal-900/30 border-teal-400' :
                       'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
                     }`}>
                       <span className="text-gray-700 dark:text-gray-300 font-medium">{achievement}</span>

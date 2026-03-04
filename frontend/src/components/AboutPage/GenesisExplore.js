@@ -700,10 +700,10 @@ Generated on: ${new Date().toLocaleString()}
                   
                   {/* Content with Enhanced Typography */}
                   <div className="space-y-4">
-                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify border-l-4 border-purple-400 pl-4 py-2 bg-purple-50/50 dark:bg-purple-900/10 rounded-r-lg">
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-justify border-l-4 border-purple-400 pl-4 py-2 bg-purple-50/50 dark:bg-purple-900/10 rounded-r-lg">
                       Our journey began when healthcare professionals, educators, and families recognized critical gaps in cognitive support services. Through countless conversations with individuals living with cognitive disabilities, we understood the urgent need for comprehensive, accessible, and personalized support solutions. This foundational research phase involved extensive literature reviews, stakeholder interviews, and needs assessments that shaped our entire approach.
                     </p>
-                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify border-l-4 border-blue-400 pl-4 py-2 bg-blue-50/50 dark:bg-blue-900/10 rounded-r-lg">
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-justify border-l-4 border-blue-400 pl-4 py-2 bg-blue-50/50 dark:bg-blue-900/10 rounded-r-lg">
                       The genesis phase was marked by intensive research, team building, and prototype development. We established the foundation for what would become a revolutionary approach to cognitive support services, setting new standards for accessibility and user-centered design.
                     </p>
                   </div>
@@ -778,7 +778,7 @@ Generated on: ${new Date().toLocaleString()}
                   
                   {/* Enhanced Content */}
                   <div className="space-y-4">
-                    <p className="text-gray-700 dark:text-gray-300 leading-relaxed text-justify border-l-4 border-green-400 pl-4 py-2 bg-green-50/50 dark:bg-green-900/10 rounded-r-lg">
+                    <p className="text-gray-600 dark:text-gray-300 leading-relaxed text-justify border-l-4 border-green-400 pl-4 py-2 bg-green-50/50 dark:bg-green-900/10 rounded-r-lg">
                       The genesis year wasn't just about building products—it was about reimagining how cognitive support could and should work. We challenged conventional approaches, embraced cutting-edge technology, and placed individuals with cognitive disabilities at the center of every decision, process, and innovation.
                     </p>
                   </div>
@@ -1320,19 +1320,19 @@ Generated on: ${new Date().toLocaleString()}
                     </div>
                     
                     {/* Enhanced Description */}
-                    <div className="text-sm text-gray-600 dark:text-gray-300 mb-4 line-clamp-3">
-                      {achievement.description}
+                    <div className="text-sm text-gray-600 dark:text-gray-300 mb-4 line-clamp-3 font-medium">
+                      {achievement.detailedContent?.overview || achievement.description}
                     </div>
                     
                     {/* Enhanced Metrics */}
                     <div className="flex items-center justify-center space-x-2 text-sm font-semibold text-pink-600 mb-2">
                       <Target className="w-4 h-4" />
-                      <span>{achievement.impact}</span>
+                      <span>{achievement.status}</span>
                     </div>
                     
                     {/* Enhanced Date */}
-                    <div className="flex items-center justify-center space-x-2 text-xs text-gray-500">
-                      <Calendar className="w-3 h-3" />
+                    <div className="flex items-center justify-center space-x-2 text-sm text-gray-500 dark:text-gray-400 mb-2">
+                      <Calendar className="w-4 h-4" />
                       <span>{achievement.date}</span>
                     </div>
                   </div>
@@ -1341,6 +1341,16 @@ Generated on: ${new Date().toLocaleString()}
             </div>
           </div>
         )}
+
+        <div className="text-center mb-8 mt-8">
+          <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center animate-pulse">
+            <Award className="w-8 h-8 text-white" />
+          </div>
+          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Genesis Achievements</h2>
+          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            Milestones that define our journey of foundation and excellence in cognitive support technology
+          </p>
+        </div>
 
         {/* Achievement Details Modal */}
         {showAchievementModal && selectedAchievement && (
@@ -1412,7 +1422,7 @@ Generated on: ${new Date().toLocaleString()}
                 {/* Overview */}
                 <div>
                   <h4 className={`text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center`}>
-                    <Target className={`w-5 h-5 mr-2 ${
+                    <Lightbulb className={`w-5 h-5 mr-2 ${
                       selectedAchievement.color === 'purple' ? 'text-purple-600' :
                       selectedAchievement.color === 'blue' ? 'text-blue-600' :
                       selectedAchievement.color === 'green' ? 'text-green-600' :
@@ -1429,25 +1439,17 @@ Generated on: ${new Date().toLocaleString()}
 
                 {/* Key Features */}
                 <div>
-                  <h4 className={`text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center`}>
-                    <Star className={`w-5 h-5 mr-2 ${
-                      selectedAchievement.color === 'purple' ? 'text-purple-600' :
-                      selectedAchievement.color === 'blue' ? 'text-blue-600' :
-                      selectedAchievement.color === 'green' ? 'text-green-600' :
-                      selectedAchievement.color === 'orange' ? 'text-orange-600' :
-                      selectedAchievement.color === 'red' ? 'text-red-600' :
-                      'text-gray-600'
-                    }`} />
+                  <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+                    <Star className="w-5 h-5 mr-2 text-yellow-600" />
                     Key Features
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {selectedAchievement.details?.keyFeatures?.map((feature, idx) => (
                       <div key={idx} className={`p-3 rounded-lg border-l-4 ${
-                        selectedAchievement.color === 'purple' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
-                        selectedAchievement.color === 'blue' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
-                        selectedAchievement.color === 'green' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
-                        selectedAchievement.color === 'orange' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
-                        selectedAchievement.color === 'red' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                        idx === 0 ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                        idx === 1 ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                        idx === 2 ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                        idx === 3 ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
                         'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
                       }`}>
                         <span className="text-gray-700 dark:text-gray-300 font-medium">{feature}</span>
@@ -1458,25 +1460,17 @@ Generated on: ${new Date().toLocaleString()}
 
                 {/* Achievements */}
                 <div>
-                  <h4 className={`text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center`}>
-                    <Award className={`w-5 h-5 mr-2 ${
-                      selectedAchievement.color === 'purple' ? 'text-purple-600' :
-                      selectedAchievement.color === 'blue' ? 'text-blue-600' :
-                      selectedAchievement.color === 'green' ? 'text-green-600' :
-                      selectedAchievement.color === 'orange' ? 'text-orange-600' :
-                      selectedAchievement.color === 'red' ? 'text-red-600' :
-                      'text-gray-600'
-                    }`} />
+                  <h4 className="text-xl font-semibold text-gray-900 dark:text-white mb-3 flex items-center">
+                    <Award className="w-5 h-5 mr-2 text-indigo-600" />
                     Key Achievements
                   </h4>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
                     {selectedAchievement.details?.achievements?.map((achievement, idx) => (
                       <div key={idx} className={`p-3 rounded-lg border-l-4 ${
-                        selectedAchievement.color === 'purple' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
-                        selectedAchievement.color === 'blue' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
-                        selectedAchievement.color === 'green' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
-                        selectedAchievement.color === 'orange' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
-                        selectedAchievement.color === 'red' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                        idx === 0 ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
+                        idx === 1 ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
+                        idx === 2 ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                        idx === 3 ? 'bg-teal-50 dark:bg-teal-900/30 border-teal-400' :
                         'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
                       }`}>
                         <span className="text-gray-700 dark:text-gray-300 font-medium">{achievement}</span>
