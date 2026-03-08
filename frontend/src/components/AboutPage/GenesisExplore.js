@@ -1256,24 +1256,34 @@ Generated on: ${new Date().toLocaleString()}
               {/* Background Animation */}
               <div className="absolute inset-0 bg-gradient-to-br from-pink-50/30 via-purple-50/30 to-indigo-50/30 dark:from-pink-900/5 dark:via-purple-900/5 dark:to-indigo-900/5"></div>
               
+              <div className="text-center mb-8">
+                <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-purple-400 via-purple-500 to-purple-600 rounded-full flex items-center justify-center animate-pulse">
+                  <Award className="w-8 h-8 text-white" />
+                </div>
+                <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Genesis Achievements</h2>
+                <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+                  Milestones that define our journey of foundation and excellence in cognitive support technology
+                </p>
+              </div>
+              
               {/* Enhanced Header */}
               <div className="relative mb-8">
                 <div className="flex items-center justify-between mb-4">
                   <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center">
-                    <div className="w-8 h-8 bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg flex items-center justify-center mr-3 shadow-lg animate-pulse">
+                    <div className="w-8 h-8 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center mr-3 shadow-lg animate-pulse">
                       <Award className="w-4 h-4 text-white" />
                     </div>
                     Key Achievements
                   </h2>
                   <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                    <div className="w-3 h-3 bg-purple-500 rounded-full animate-pulse"></div>
                     <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">Genesis Milestones</span>
                   </div>
                 </div>
                 
                 {/* Progress Bar */}
                 <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 rounded-full animate-pulse" style={{ width: '100%' }}></div>
+                  <div className="h-full bg-gradient-to-r from-purple-400 via-purple-500 to-purple-600 rounded-full animate-pulse" style={{ width: '100%' }}></div>
                 </div>
               </div>
               
@@ -1341,16 +1351,6 @@ Generated on: ${new Date().toLocaleString()}
             </div>
           </div>
         )}
-
-        <div className="text-center mb-8 mt-8">
-          <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-purple-600 to-pink-600 rounded-full flex items-center justify-center animate-pulse">
-            <Award className="w-8 h-8 text-white" />
-          </div>
-          <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Genesis Achievements</h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Milestones that define our journey of foundation and excellence in cognitive support technology
-          </p>
-        </div>
 
         {/* Achievement Details Modal */}
         {showAchievementModal && selectedAchievement && (

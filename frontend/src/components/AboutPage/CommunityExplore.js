@@ -1619,27 +1619,6 @@ Generated on: ${new Date().toLocaleString()}
               {/* Background Animation */}
               <div className="absolute inset-0 bg-gradient-to-br from-pink-50/30 via-purple-50/30 to-indigo-50/30 dark:from-pink-900/5 dark:via-purple-900/5 dark:to-indigo-900/5"></div>
               
-              {/* Enhanced Header */}
-              <div className="relative mb-8">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center">
-                    <div className="w-8 h-8 bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg flex items-center justify-center mr-3 shadow-lg animate-pulse">
-                      <Award className="w-4 h-4 text-white" />
-                    </div>
-                    Key Achievements
-                  </h2>
-                  <div className="flex items-center space-x-2">
-                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                    <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">Community Milestones</span>
-                  </div>
-                </div>
-                
-                {/* Progress Bar */}
-                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 overflow-hidden">
-                  <div className="h-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 rounded-full animate-pulse" style={{ width: '100%' }}></div>
-                </div>
-              </div>
-              
               <div className="text-center mb-8">
                 <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-pink-600 to-rose-600 rounded-full flex items-center justify-center animate-pulse">
                   <Award className="w-8 h-8 text-white" />
@@ -1649,6 +1628,27 @@ Generated on: ${new Date().toLocaleString()}
                   Milestones that define our journey of community and excellence in cognitive support technology
                 </p>
               </div>
+            
+            {/* Enhanced Header */}
+            <div className="relative mb-4">
+              <div className="flex items-center justify-between mb-2">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center">
+                  <div className="w-8 h-8 bg-gradient-to-br from-pink-500 to-pink-600 rounded-lg flex items-center justify-center mr-3 shadow-lg animate-pulse">
+                    <Award className="w-4 h-4 text-white" />
+                  </div>
+                  Key Achievements
+                </h2>
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                  <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">Community Milestones</span>
+                </div>
+              </div>
+              
+              {/* Progress Bar */}
+              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 rounded-full animate-pulse" style={{ width: '100%' }}></div>
+              </div>
+            </div>
 
               <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
                 {achievements.map((achievement) => (

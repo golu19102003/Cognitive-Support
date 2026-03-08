@@ -1033,17 +1033,33 @@ const InnovationExplore = () => {
                   ))}
                 </div>
               </div>
-              
-                          </div>
+                </div>
           </div>
         )}
 
         {/* Achievements Tab */}
         {activeTab === 'achievements' && (
           <div className="space-y-8">
-            {/* Achievements Header */}
+            {/* Main Container with Grid Background */}
+            <div className="relative bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 overflow-hidden">
+              {/* Grid Background Pattern */}
+              <div 
+                className="absolute inset-0 opacity-5 dark:opacity-10"
+                style={{
+                  backgroundImage: `
+                    linear-gradient(to right, #e5e7eb 1px, transparent 1px),
+                    linear-gradient(to bottom, #e5e7eb 1px, transparent 1px)
+                  `,
+                  backgroundSize: '40px 40px'
+                }}
+              ></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-purple-50/30 to-indigo-50/30 dark:from-blue-900/5 dark:via-purple-900/5 dark:to-indigo-900/5"></div>
+              
+              {/* Content Container */}
+              <div className="relative z-10">
+                {/* Achievements Header */}
             <div className="text-center mb-8">
-              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-indigo-600 to-purple-600 rounded-full flex items-center justify-center animate-pulse">
+              <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-blue-600 to-blue-600 rounded-full flex items-center justify-center animate-pulse">
                 <Award className="w-8 h-8 text-white" />
               </div>
               <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-2">Innovation Achievements</h2>
@@ -1051,7 +1067,28 @@ const InnovationExplore = () => {
                 Milestones that define our journey of innovation and excellence in cognitive support technology
               </p>
             </div>
-
+            
+            {/* Enhanced Header */}
+            <div className="relative mb-4">
+              <div className="flex items-center justify-between mb-2">
+                <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center">
+                  <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mr-3 shadow-lg animate-pulse">
+                    <Award className="w-4 h-4 text-white" />
+                  </div>
+                  Key Achievements
+                </h2>
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                  <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">Innovation Milestones</span>
+                </div>
+              </div>
+              
+              {/* Progress Bar */}
+              <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 overflow-hidden">
+                <div className="h-full bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 rounded-full animate-pulse" style={{ width: '100%' }}></div>
+              </div>
+            </div>
+            
             {/* Innovation Achievements Grid */}
             <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-6">
               {achievements.map((achievement, index) => (
@@ -1129,6 +1166,8 @@ const InnovationExplore = () => {
                   </div>
                 </div>
               ))}
+            </div>
+              </div>
             </div>
           </div>
         )}
@@ -1470,7 +1509,7 @@ const InnovationExplore = () => {
       )}
 
       {/* Innovation Era Section - Innovation Focused */}
-      <div className="mt-12 mb-8">
+      <div className="mt-2 mb-2">
         <div className="bg-gradient-to-br from-indigo-600 via-purple-700 to-pink-800 text-white rounded-2xl shadow-2xl p-8 relative overflow-hidden">
           {/* Background Animation */}
           <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-transparent to-black/10"></div>
