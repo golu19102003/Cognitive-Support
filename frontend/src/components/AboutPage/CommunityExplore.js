@@ -518,16 +518,16 @@ Generated on: ${new Date().toLocaleString()}
   ];
 
   const technologies = [
-    { name: "React.js", level: 85, category: "Intelligence", icon: "⚛️", description: "Component-based UI framework", experience: "3+ years", projects: "15+" },
-    { name: "Node.js", level: 80, category: "Backend", icon: "🟢", description: "JavaScript runtime environment", experience: "3+ years", projects: "12+" },
-    { name: "Firebase", level: 90, category: "Database", icon: "🔥", description: "Real-time database & authentication", experience: "4+ years", projects: "20+" },
-    { name: "AI/ML", level: 75, category: "Frontend", icon: "🤖", description: "Machine learning & cognitive AI", experience: "2+ years", projects: "8+" },
-    { name: "Tailwind CSS", level: 95, category: "Styling", icon: "🎨", description: "Utility-first CSS framework", experience: "3+ years", projects: "25+" },
-    { name: "Framer Motion", level: 85, category: "Animation", icon: "🎬", description: "React animation library", experience: "2+ years", projects: "10+" },
-    { name: "TypeScript", level: 88, category: "Language", icon: "📘", description: "Typed JavaScript superset", experience: "3+ years", projects: "18+" },
-    { name: "MongoDB", level: 82, category: "Database", icon: "🍃", description: "NoSQL document database", experience: "3+ years", projects: "14+" },
-    { name: "GraphQL", level: 78, category: "API", icon: "🔗", description: "Query language for APIs", experience: "2+ years", projects: "6+" },
-    { name: "Docker", level: 70, category: "DevOps", icon: "🐳", description: "Container platform", experience: "2+ years", projects: "5+" }
+    { name: "Discord.js", level: 88, category: "API", icon: "💬", description: "Community chat bot integration", experience: "2+ years", projects: "8+" },
+    { name: "Socket.io", level: 82, category: "Backend", icon: "⚡", description: "Real-time communication server", experience: "3+ years", projects: "12+" },
+    { name: "PostgreSQL", level: 85, category: "Database", icon: "🐘", description: "Relational database for user data", experience: "4+ years", projects: "16+" },
+    { name: "Vue.js", level: 78, category: "Frontend", icon: "💚", description: "Progressive web app framework", experience: "2+ years", projects: "10+" },
+    { name: "Bootstrap", level: 92, category: "Styling", icon: "🅱️", description: "Responsive CSS framework", experience: "5+ years", projects: "30+" },
+    { name: "GSAP", level: 80, category: "Animation", icon: "🎭", description: "Professional animation library", experience: "3+ years", projects: "14+" },
+    { name: "PHP", level: 75, category: "Language", icon: "🐘", description: "Server-side scripting language", experience: "4+ years", projects: "20+" },
+    { name: "MySQL", level: 83, category: "Database", icon: "🗄️", description: "Traditional relational database", experience: "5+ years", projects: "25+" },
+    { name: "REST API", level: 90, category: "API", icon: "🔌", description: "Standard web service interface", experience: "4+ years", projects: "18+" },
+    { name: "Kubernetes", level: 72, category: "DevOps", icon: "☸️", description: "Container orchestration platform", experience: "2+ years", projects: "6+" }
   ];
 
   const metrics = [
@@ -1952,7 +1952,7 @@ Generated on: ${new Date().toLocaleString()}
 
             {/* Modal Content */}
             <div className="p-6 space-y-6">
-              {/* Overview */}
+              {/* Technology Overview */}
               <div>
                 <h4 className={`text-xl font-bold mb-3 flex items-center ${
                   selectedTechnology.category === 'Frontend' ? 'text-blue-700 dark:text-blue-300' :
@@ -1981,150 +1981,8 @@ Generated on: ${new Date().toLocaleString()}
                   Technology Overview
                 </h4>
                 <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
-                  {selectedTechnology.name} is a {selectedTechnology.category.toLowerCase()} technology that plays a crucial role in our cognitive support platform. 
-                  With {selectedTechnology.level}% proficiency level and {selectedTechnology.experience} of experience, 
-                  we've successfully implemented {selectedTechnology.projects} projects using this technology.
+                  {selectedTechnology.name} is a {selectedTechnology.category.toLowerCase()} technology that powers our cognitive support platform with {selectedTechnology.level}% proficiency level. This technology enables advanced features and capabilities that enhance user experience and system performance.
                 </p>
-              </div>
-
-              {/* Technical Details */}
-              <div>
-                <h4 className={`text-xl font-bold mb-3 flex items-center ${
-                  selectedTechnology.category === 'Frontend' ? 'text-blue-700 dark:text-blue-300' :
-                  selectedTechnology.category === 'Backend' ? 'text-green-700 dark:text-green-300' :
-                  selectedTechnology.category === 'Database' ? 'text-orange-700 dark:text-orange-300' :
-                  selectedTechnology.category === 'Intelligence' ? 'text-purple-700 dark:text-purple-300' :
-                  selectedTechnology.category === 'Styling' ? 'text-pink-700 dark:text-pink-300' :
-                  selectedTechnology.category === 'Animation' ? 'text-indigo-700 dark:text-indigo-300' :
-                  selectedTechnology.category === 'Language' ? 'text-yellow-700 dark:text-yellow-300' :
-                  selectedTechnology.category === 'API' ? 'text-red-700 dark:text-red-300' :
-                  selectedTechnology.category === 'DevOps' ? 'text-gray-700 dark:text-gray-300' :
-                  'text-gray-700 dark:text-gray-300'
-                }`}>
-                  <Zap className={`w-6 h-6 mr-2 ${
-                    selectedTechnology.category === 'Frontend' ? 'text-blue-600' :
-                    selectedTechnology.category === 'Backend' ? 'text-green-600' :
-                    selectedTechnology.category === 'Database' ? 'text-orange-600' :
-                    selectedTechnology.category === 'Intelligence' ? 'text-purple-600' :
-                    selectedTechnology.category === 'Styling' ? 'text-pink-600' :
-                    selectedTechnology.category === 'Animation' ? 'text-indigo-600' :
-                    selectedTechnology.category === 'Language' ? 'text-yellow-600' :
-                    selectedTechnology.category === 'API' ? 'text-red-600' :
-                    selectedTechnology.category === 'DevOps' ? 'text-gray-600' :
-                    'text-gray-600'
-                  }`} />
-                  Technical Implementation
-                </h4>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div className={`p-4 rounded-lg border-l-4 ${
-                    selectedTechnology.category === 'Frontend' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
-                    selectedTechnology.category === 'Backend' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
-                    selectedTechnology.category === 'Database' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
-                    selectedTechnology.category === 'Intelligence' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
-                    selectedTechnology.category === 'Styling' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
-                    selectedTechnology.category === 'Animation' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
-                    selectedTechnology.category === 'Language' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
-                    selectedTechnology.category === 'API' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
-                    selectedTechnology.category === 'DevOps' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
-                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
-                  }`}>
-                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Proficiency Level</h5>
-                    <div className={`text-3xl font-bold ${
-                      selectedTechnology.category === 'Frontend' ? 'text-blue-600' :
-                      selectedTechnology.category === 'Backend' ? 'text-green-600' :
-                      selectedTechnology.category === 'Database' ? 'text-orange-600' :
-                      selectedTechnology.category === 'Intelligence' ? 'text-purple-600' :
-                      selectedTechnology.category === 'Styling' ? 'text-pink-600' :
-                      selectedTechnology.category === 'Animation' ? 'text-indigo-600' :
-                      selectedTechnology.category === 'Language' ? 'text-yellow-600' :
-                      selectedTechnology.category === 'API' ? 'text-red-600' :
-                      selectedTechnology.category === 'DevOps' ? 'text-gray-600' :
-                      'text-gray-600'
-                    }`}>{selectedTechnology.level}%</div>
-                    <p className="text-gray-600 dark:text-gray-300">Expert level with extensive project experience</p>
-                  </div>
-                  <div className={`p-4 rounded-lg border-l-4 ${
-                    selectedTechnology.category === 'Frontend' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
-                    selectedTechnology.category === 'Backend' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
-                    selectedTechnology.category === 'Database' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
-                    selectedTechnology.category === 'Intelligence' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
-                    selectedTechnology.category === 'Styling' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
-                    selectedTechnology.category === 'Animation' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
-                    selectedTechnology.category === 'Language' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
-                    selectedTechnology.category === 'API' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
-                    selectedTechnology.category === 'DevOps' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
-                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
-                  }`}>
-                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Experience</h5>
-                    <div className={`text-3xl font-bold ${
-                      selectedTechnology.category === 'Frontend' ? 'text-blue-600' :
-                      selectedTechnology.category === 'Backend' ? 'text-green-600' :
-                      selectedTechnology.category === 'Database' ? 'text-orange-600' :
-                      selectedTechnology.category === 'Intelligence' ? 'text-purple-600' :
-                      selectedTechnology.category === 'Styling' ? 'text-pink-600' :
-                      selectedTechnology.category === 'Animation' ? 'text-indigo-600' :
-                      selectedTechnology.category === 'Language' ? 'text-yellow-600' :
-                      selectedTechnology.category === 'API' ? 'text-red-600' :
-                      selectedTechnology.category === 'DevOps' ? 'text-gray-600' :
-                      'text-gray-600'
-                    }`}>{selectedTechnology.experience}</div>
-                    <p className="text-gray-600 dark:text-gray-300">Hands-on experience in production environments</p>
-                  </div>
-                  <div className={`p-4 rounded-lg border-l-4 ${
-                    selectedTechnology.category === 'Frontend' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
-                    selectedTechnology.category === 'Backend' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
-                    selectedTechnology.category === 'Database' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
-                    selectedTechnology.category === 'Intelligence' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
-                    selectedTechnology.category === 'Styling' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
-                    selectedTechnology.category === 'Animation' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
-                    selectedTechnology.category === 'Language' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
-                    selectedTechnology.category === 'API' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
-                    selectedTechnology.category === 'DevOps' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
-                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
-                  }`}>
-                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Projects Completed</h5>
-                    <div className={`text-3xl font-bold ${
-                      selectedTechnology.category === 'Frontend' ? 'text-blue-600' :
-                      selectedTechnology.category === 'Backend' ? 'text-green-600' :
-                      selectedTechnology.category === 'Database' ? 'text-orange-600' :
-                      selectedTechnology.category === 'Intelligence' ? 'text-purple-600' :
-                      selectedTechnology.category === 'Styling' ? 'text-pink-600' :
-                      selectedTechnology.category === 'Animation' ? 'text-indigo-600' :
-                      selectedTechnology.category === 'Language' ? 'text-yellow-600' :
-                      selectedTechnology.category === 'API' ? 'text-red-600' :
-                      selectedTechnology.category === 'DevOps' ? 'text-gray-600' :
-                      'text-gray-600'
-                    }`}>{selectedTechnology.projects}</div>
-                    <p className="text-gray-600 dark:text-gray-300">Successfully delivered projects</p>
-                  </div>
-                  <div className={`p-4 rounded-lg border-l-4 ${
-                    selectedTechnology.category === 'Frontend' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
-                    selectedTechnology.category === 'Backend' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
-                    selectedTechnology.category === 'Database' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
-                    selectedTechnology.category === 'Intelligence' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
-                    selectedTechnology.category === 'Styling' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
-                    selectedTechnology.category === 'Animation' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
-                    selectedTechnology.category === 'Language' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
-                    selectedTechnology.category === 'API' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
-                    selectedTechnology.category === 'DevOps' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
-                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
-                  }`}>
-                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Code Quality</h5>
-                    <div className={`text-3xl font-bold ${
-                      selectedTechnology.category === 'Frontend' ? 'text-blue-600' :
-                      selectedTechnology.category === 'Backend' ? 'text-green-600' :
-                      selectedTechnology.category === 'Database' ? 'text-orange-600' :
-                      selectedTechnology.category === 'Intelligence' ? 'text-purple-600' :
-                      selectedTechnology.category === 'Styling' ? 'text-pink-600' :
-                      selectedTechnology.category === 'Animation' ? 'text-indigo-600' :
-                      selectedTechnology.category === 'Language' ? 'text-yellow-600' :
-                      selectedTechnology.category === 'API' ? 'text-red-600' :
-                      selectedTechnology.category === 'DevOps' ? 'text-gray-600' :
-                      'text-gray-600'
-                    }`}>98%</div>
-                    <p className="text-gray-600 dark:text-gray-300">High-quality maintainable code</p>
-                  </div>
-                </div>
               </div>
 
               {/* Key Features */}
@@ -2153,69 +2011,25 @@ Generated on: ${new Date().toLocaleString()}
                     selectedTechnology.category === 'DevOps' ? 'text-gray-600' :
                     'text-gray-600'
                   }`} />
-                  Key Features & Benefits
+                  Key Features
                 </h4>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                  <div className={`p-3 rounded-lg border-l-4 ${
-                    selectedTechnology.category === 'Frontend' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
-                    selectedTechnology.category === 'Backend' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
-                    selectedTechnology.category === 'Database' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
-                    selectedTechnology.category === 'Intelligence' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
-                    selectedTechnology.category === 'Styling' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
-                    selectedTechnology.category === 'Animation' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
-                    selectedTechnology.category === 'Language' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
-                    selectedTechnology.category === 'API' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
-                    selectedTechnology.category === 'DevOps' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
-                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
-                  }`}>
-                    <span className="text-gray-700 dark:text-gray-300 font-medium">🚀 High Performance</span>
+                  <div className={`p-3 rounded-lg bg-${selectedTechnology.category === 'Frontend' ? 'blue' : selectedTechnology.category === 'Backend' ? 'green' : selectedTechnology.category === 'Database' ? 'orange' : selectedTechnology.category === 'Intelligence' ? 'purple' : selectedTechnology.category === 'Styling' ? 'pink' : selectedTechnology.category === 'Animation' ? 'indigo' : selectedTechnology.category === 'Language' ? 'yellow' : selectedTechnology.category === 'API' ? 'red' : selectedTechnology.category === 'DevOps' ? 'gray' : 'gray'}-50 dark:bg-${selectedTechnology.category === 'Frontend' ? 'blue' : selectedTechnology.category === 'Backend' ? 'green' : selectedTechnology.category === 'Database' ? 'orange' : selectedTechnology.category === 'Intelligence' ? 'purple' : selectedTechnology.category === 'Styling' ? 'pink' : selectedTechnology.category === 'Animation' ? 'indigo' : selectedTechnology.category === 'Language' ? 'yellow' : selectedTechnology.category === 'API' ? 'red' : selectedTechnology.category === 'DevOps' ? 'gray' : 'gray'}-900/30 border-l-4 border-${selectedTechnology.category === 'Frontend' ? 'blue' : selectedTechnology.category === 'Backend' ? 'green' : selectedTechnology.category === 'Database' ? 'orange' : selectedTechnology.category === 'Intelligence' ? 'purple' : selectedTechnology.category === 'Styling' ? 'pink' : selectedTechnology.category === 'Animation' ? 'indigo' : selectedTechnology.category === 'Language' ? 'yellow' : selectedTechnology.category === 'API' ? 'red' : selectedTechnology.category === 'DevOps' ? 'gray' : 'gray'}-400`}>
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Advanced performance optimization</span>
                   </div>
-                  <div className={`p-3 rounded-lg border-l-4 ${
-                    selectedTechnology.category === 'Frontend' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
-                    selectedTechnology.category === 'Backend' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
-                    selectedTechnology.category === 'Database' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
-                    selectedTechnology.category === 'Intelligence' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
-                    selectedTechnology.category === 'Styling' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
-                    selectedTechnology.category === 'Animation' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
-                    selectedTechnology.category === 'Language' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
-                    selectedTechnology.category === 'API' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
-                    selectedTechnology.category === 'DevOps' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
-                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
-                  }`}>
-                    <span className="text-gray-700 dark:text-gray-300 font-medium">🛡️ Secure & Reliable</span>
+                  <div className={`p-3 rounded-lg bg-${selectedTechnology.category === 'Frontend' ? 'blue' : selectedTechnology.category === 'Backend' ? 'green' : selectedTechnology.category === 'Database' ? 'orange' : selectedTechnology.category === 'Intelligence' ? 'purple' : selectedTechnology.category === 'Styling' ? 'pink' : selectedTechnology.category === 'Animation' ? 'indigo' : selectedTechnology.category === 'Language' ? 'yellow' : selectedTechnology.category === 'API' ? 'red' : selectedTechnology.category === 'DevOps' ? 'gray' : 'gray'}-50 dark:bg-${selectedTechnology.category === 'Frontend' ? 'blue' : selectedTechnology.category === 'Backend' ? 'green' : selectedTechnology.category === 'Database' ? 'orange' : selectedTechnology.category === 'Intelligence' ? 'purple' : selectedTechnology.category === 'Styling' ? 'pink' : selectedTechnology.category === 'Animation' ? 'indigo' : selectedTechnology.category === 'Language' ? 'yellow' : selectedTechnology.category === 'API' ? 'red' : selectedTechnology.category === 'DevOps' ? 'gray' : 'gray'}-900/30 border-l-4 border-${selectedTechnology.category === 'Frontend' ? 'blue' : selectedTechnology.category === 'Backend' ? 'green' : selectedTechnology.category === 'Database' ? 'orange' : selectedTechnology.category === 'Intelligence' ? 'purple' : selectedTechnology.category === 'Styling' ? 'pink' : selectedTechnology.category === 'Animation' ? 'indigo' : selectedTechnology.category === 'Language' ? 'yellow' : selectedTechnology.category === 'API' ? 'red' : selectedTechnology.category === 'DevOps' ? 'gray' : 'gray'}-400`}>
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Scalable architecture design</span>
                   </div>
-                  <div className={`p-3 rounded-lg border-l-4 ${
-                    selectedTechnology.category === 'Frontend' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
-                    selectedTechnology.category === 'Backend' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
-                    selectedTechnology.category === 'Database' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
-                    selectedTechnology.category === 'Intelligence' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
-                    selectedTechnology.category === 'Styling' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
-                    selectedTechnology.category === 'Animation' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
-                    selectedTechnology.category === 'Language' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
-                    selectedTechnology.category === 'API' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
-                    selectedTechnology.category === 'DevOps' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
-                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
-                  }`}>
-                    <span className="text-gray-700 dark:text-gray-300 font-medium">🔧 Easy Integration</span>
+                  <div className={`p-3 rounded-lg bg-${selectedTechnology.category === 'Frontend' ? 'blue' : selectedTechnology.category === 'Backend' ? 'green' : selectedTechnology.category === 'Database' ? 'orange' : selectedTechnology.category === 'Intelligence' ? 'purple' : selectedTechnology.category === 'Styling' ? 'pink' : selectedTechnology.category === 'Animation' ? 'indigo' : selectedTechnology.category === 'Language' ? 'yellow' : selectedTechnology.category === 'API' ? 'red' : selectedTechnology.category === 'DevOps' ? 'gray' : 'gray'}-50 dark:bg-${selectedTechnology.category === 'Frontend' ? 'blue' : selectedTechnology.category === 'Backend' ? 'green' : selectedTechnology.category === 'Database' ? 'orange' : selectedTechnology.category === 'Intelligence' ? 'purple' : selectedTechnology.category === 'Styling' ? 'pink' : selectedTechnology.category === 'Animation' ? 'indigo' : selectedTechnology.category === 'Language' ? 'yellow' : selectedTechnology.category === 'API' ? 'red' : selectedTechnology.category === 'DevOps' ? 'gray' : 'gray'}-900/30 border-l-4 border-${selectedTechnology.category === 'Frontend' ? 'blue' : selectedTechnology.category === 'Backend' ? 'green' : selectedTechnology.category === 'Database' ? 'orange' : selectedTechnology.category === 'Intelligence' ? 'purple' : selectedTechnology.category === 'Styling' ? 'pink' : selectedTechnology.category === 'Animation' ? 'indigo' : selectedTechnology.category === 'Language' ? 'yellow' : selectedTechnology.category === 'API' ? 'red' : selectedTechnology.category === 'DevOps' ? 'gray' : 'gray'}-400`}>
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Real-time data processing</span>
                   </div>
-                  <div className={`p-3 rounded-lg border-l-4 ${
-                    selectedTechnology.category === 'Frontend' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
-                    selectedTechnology.category === 'Backend' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
-                    selectedTechnology.category === 'Database' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
-                    selectedTechnology.category === 'Intelligence' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
-                    selectedTechnology.category === 'Styling' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
-                    selectedTechnology.category === 'Animation' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
-                    selectedTechnology.category === 'Language' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
-                    selectedTechnology.category === 'API' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
-                    selectedTechnology.category === 'DevOps' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
-                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
-                  }`}>
-                    <span className="text-gray-700 dark:text-gray-300 font-medium">📱 Responsive Design</span>
+                  <div className={`p-3 rounded-lg bg-${selectedTechnology.category === 'Frontend' ? 'blue' : selectedTechnology.category === 'Backend' ? 'green' : selectedTechnology.category === 'Database' ? 'orange' : selectedTechnology.category === 'Intelligence' ? 'purple' : selectedTechnology.category === 'Styling' ? 'pink' : selectedTechnology.category === 'Animation' ? 'indigo' : selectedTechnology.category === 'Language' ? 'yellow' : selectedTechnology.category === 'API' ? 'red' : selectedTechnology.category === 'DevOps' ? 'gray' : 'gray'}-50 dark:bg-${selectedTechnology.category === 'Frontend' ? 'blue' : selectedTechnology.category === 'Backend' ? 'green' : selectedTechnology.category === 'Database' ? 'orange' : selectedTechnology.category === 'Intelligence' ? 'purple' : selectedTechnology.category === 'Styling' ? 'pink' : selectedTechnology.category === 'Animation' ? 'indigo' : selectedTechnology.category === 'Language' ? 'yellow' : selectedTechnology.category === 'API' ? 'red' : selectedTechnology.category === 'DevOps' ? 'gray' : 'gray'}-900/30 border-l-4 border-${selectedTechnology.category === 'Frontend' ? 'blue' : selectedTechnology.category === 'Backend' ? 'green' : selectedTechnology.category === 'Database' ? 'orange' : selectedTechnology.category === 'Intelligence' ? 'purple' : selectedTechnology.category === 'Styling' ? 'pink' : selectedTechnology.category === 'Animation' ? 'indigo' : selectedTechnology.category === 'Language' ? 'yellow' : selectedTechnology.category === 'API' ? 'red' : selectedTechnology.category === 'DevOps' ? 'gray' : 'gray'}-400`}>
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Enterprise-grade security</span>
                   </div>
                 </div>
               </div>
 
-              {/* Use Cases */}
+              {/* Performance Metrics */}
               <div>
                 <h4 className={`text-xl font-bold mb-3 flex items-center ${
                   selectedTechnology.category === 'Frontend' ? 'text-blue-700 dark:text-blue-300' :
@@ -2229,100 +2043,63 @@ Generated on: ${new Date().toLocaleString()}
                   selectedTechnology.category === 'DevOps' ? 'text-gray-700 dark:text-gray-300' :
                   'text-gray-700 dark:text-gray-300'
                 }`}>
-                  <Target className={`w-6 h-6 mr-2 ${
-                    selectedTechnology.category === 'Frontend' ? 'text-blue-600' :
-                    selectedTechnology.category === 'Backend' ? 'text-green-600' :
-                    selectedTechnology.category === 'Database' ? 'text-orange-600' :
-                    selectedTechnology.category === 'Intelligence' ? 'text-purple-600' :
-                    selectedTechnology.category === 'Styling' ? 'text-pink-600' :
-                    selectedTechnology.category === 'Animation' ? 'text-indigo-600' :
-                    selectedTechnology.category === 'Language' ? 'text-yellow-600' :
-                    selectedTechnology.category === 'API' ? 'text-red-600' :
-                    selectedTechnology.category === 'DevOps' ? 'text-gray-600' :
-                    'text-gray-600'
-                  }`} />
-                  Real-World Applications
+                  <BarChart className="w-6 h-6 mr-2" />
+                  Performance Metrics
                 </h4>
                 <div className="space-y-3">
-                  <div className={`p-4 rounded-lg border-l-4 ${
-                    selectedTechnology.category === 'Frontend' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
-                    selectedTechnology.category === 'Backend' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
-                    selectedTechnology.category === 'Database' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
-                    selectedTechnology.category === 'Intelligence' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
-                    selectedTechnology.category === 'Styling' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
-                    selectedTechnology.category === 'Animation' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
-                    selectedTechnology.category === 'Language' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
-                    selectedTechnology.category === 'API' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
-                    selectedTechnology.category === 'DevOps' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
-                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
-                  }`}>
-                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">User Interface</h5>
-                    <p className="text-gray-700 dark:text-gray-300">Creating intuitive and accessible user interfaces for cognitive support</p>
+                  <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Proficiency Level</span>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-32 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                        <div 
+                          className={`h-2 rounded-full ${
+                            selectedTechnology.category === 'Frontend' ? 'bg-gradient-to-r from-blue-500 to-blue-600' :
+                            selectedTechnology.category === 'Backend' ? 'bg-gradient-to-r from-green-500 to-green-600' :
+                            selectedTechnology.category === 'Database' ? 'bg-gradient-to-r from-orange-500 to-orange-600' :
+                            selectedTechnology.category === 'Intelligence' ? 'bg-gradient-to-r from-purple-500 to-purple-600' :
+                            selectedTechnology.category === 'Styling' ? 'bg-gradient-to-r from-pink-500 to-pink-600' :
+                            selectedTechnology.category === 'Animation' ? 'bg-gradient-to-r from-indigo-500 to-indigo-600' :
+                            selectedTechnology.category === 'Language' ? 'bg-gradient-to-r from-yellow-500 to-yellow-600' :
+                            selectedTechnology.category === 'API' ? 'bg-gradient-to-r from-red-500 to-red-600' :
+                            selectedTechnology.category === 'DevOps' ? 'bg-gradient-to-r from-gray-500 to-gray-600' :
+                            'bg-gradient-to-r from-gray-500 to-gray-600'
+                          }`}
+                          style={{ width: `${selectedTechnology.level}%` }}
+                        ></div>
+                      </div>
+                      <span className="text-sm font-bold text-gray-700 dark:text-gray-300">{selectedTechnology.level}%</span>
+                    </div>
                   </div>
-                  <div className={`p-4 rounded-lg border-l-4 ${
-                    selectedTechnology.category === 'Frontend' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
-                    selectedTechnology.category === 'Backend' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
-                    selectedTechnology.category === 'Database' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
-                    selectedTechnology.category === 'Intelligence' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
-                    selectedTechnology.category === 'Styling' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
-                    selectedTechnology.category === 'Animation' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
-                    selectedTechnology.category === 'Language' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
-                    selectedTechnology.category === 'API' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
-                    selectedTechnology.category === 'DevOps' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
-                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
-                  }`}>
-                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Data Management</h5>
-                    <p className="text-gray-700 dark:text-gray-300">Secure storage and retrieval of user data and cognitive profiles</p>
+                  <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Experience</span>
+                    <span className="text-sm font-bold text-gray-700 dark:text-gray-300">{selectedTechnology.experience}</span>
                   </div>
-                  <div className={`p-4 rounded-lg border-l-4 ${
-                    selectedTechnology.category === 'Frontend' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
-                    selectedTechnology.category === 'Backend' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
-                    selectedTechnology.category === 'Database' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' :
-                    selectedTechnology.category === 'Intelligence' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
-                    selectedTechnology.category === 'Styling' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
-                    selectedTechnology.category === 'Animation' ? 'bg-indigo-50 dark:bg-indigo-900/30 border-indigo-400' :
-                    selectedTechnology.category === 'Language' ? 'bg-yellow-50 dark:bg-yellow-900/30 border-yellow-400' :
-                    selectedTechnology.category === 'API' ? 'bg-red-50 dark:bg-red-900/30 border-red-400' :
-                    selectedTechnology.category === 'DevOps' ? 'bg-gray-50 dark:bg-gray-900/30 border-gray-400' :
-                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
-                  }`}>
-                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Performance Optimization</h5>
-                    <p className="text-gray-700 dark:text-gray-300">Ensuring fast and responsive user experience across all devices</p>
+                  <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Projects Completed</span>
+                    <span className="text-sm font-bold text-gray-700 dark:text-gray-300">{selectedTechnology.projects}</span>
                   </div>
                 </div>
               </div>
 
-              {/* Learn More Section */}
-              <div className={`p-4 rounded-lg bg-gradient-to-r border ${
-                selectedTechnology.category === 'Frontend' ? 'from-blue-100 to-blue-200 dark:from-blue-900/30 dark:to-blue-800/40 border-blue-200 dark:border-blue-700' :
-                selectedTechnology.category === 'Backend' ? 'from-green-100 to-green-200 dark:from-green-900/30 dark:to-green-800/40 border-green-200 dark:border-green-700' :
-                selectedTechnology.category === 'Database' ? 'from-orange-100 to-orange-200 dark:from-orange-900/30 dark:to-orange-800/40 border-orange-200 dark:border-orange-700' :
-                selectedTechnology.category === 'Intelligence' ? 'from-purple-100 to-purple-200 dark:from-purple-900/30 dark:to-purple-800/40 border-purple-200 dark:border-purple-700' :
-                selectedTechnology.category === 'Styling' ? 'from-pink-100 to-pink-200 dark:from-pink-900/30 dark:to-pink-800/40 border-pink-200 dark:border-pink-700' :
-                selectedTechnology.category === 'Animation' ? 'from-indigo-100 to-indigo-200 dark:from-indigo-900/30 dark:to-indigo-800/40 border-indigo-200 dark:border-indigo-700' :
-                selectedTechnology.category === 'Language' ? 'from-yellow-100 to-yellow-200 dark:from-yellow-900/30 dark:to-yellow-800/40 border-yellow-200 dark:border-yellow-700' :
-                selectedTechnology.category === 'API' ? 'from-red-100 to-red-200 dark:from-red-900/30 dark:to-red-800/40 border-red-200 dark:border-red-700' :
-                selectedTechnology.category === 'DevOps' ? 'from-gray-100 to-gray-200 dark:from-gray-900/30 dark:to-gray-800/40 border-gray-200 dark:border-gray-700' :
-                'from-gray-100 to-gray-200 dark:from-gray-900/30 dark:to-gray-800/40 border-gray-200 dark:border-gray-700'
-              }`}>
-                <h4 className="text-lg font-semibold text-gray-900 dark:text-white mb-2 flex items-center">
-                  <Users className={`w-5 h-5 mr-2 ${
-                    selectedTechnology.category === 'Frontend' ? 'text-blue-600' :
-                    selectedTechnology.category === 'Backend' ? 'text-green-600' :
-                    selectedTechnology.category === 'Database' ? 'text-orange-600' :
-                    selectedTechnology.category === 'Intelligence' ? 'text-purple-600' :
-                    selectedTechnology.category === 'Styling' ? 'text-pink-600' :
-                    selectedTechnology.category === 'Animation' ? 'text-indigo-600' :
-                    selectedTechnology.category === 'Language' ? 'text-yellow-600' :
-                    selectedTechnology.category === 'API' ? 'text-red-600' :
-                    selectedTechnology.category === 'DevOps' ? 'text-gray-600' :
-                    'text-gray-600'
-                  }`} />
-                  Learn More About {selectedTechnology.name}
+              {/* Implementation Details */}
+              <div>
+                <h4 className={`text-xl font-bold mb-3 flex items-center ${
+                  selectedTechnology.category === 'Frontend' ? 'text-blue-700 dark:text-blue-300' :
+                  selectedTechnology.category === 'Backend' ? 'text-green-700 dark:text-green-300' :
+                  selectedTechnology.category === 'Database' ? 'text-orange-700 dark:text-orange-300' :
+                  selectedTechnology.category === 'Intelligence' ? 'text-purple-700 dark:text-purple-300' :
+                  selectedTechnology.category === 'Styling' ? 'text-pink-700 dark:text-pink-300' :
+                  selectedTechnology.category === 'Animation' ? 'text-indigo-700 dark:text-indigo-300' :
+                  selectedTechnology.category === 'Language' ? 'text-yellow-700 dark:text-yellow-300' :
+                  selectedTechnology.category === 'API' ? 'text-red-700 dark:text-red-300' :
+                  selectedTechnology.category === 'DevOps' ? 'text-gray-700 dark:text-gray-300' :
+                  'text-gray-700 dark:text-gray-300'
+                }`}>
+                  <Target className="w-6 h-6 mr-2" />
+                  Implementation Details
                 </h4>
-                <p className="text-gray-700 dark:text-gray-300">
-                  Discover how {selectedTechnology.name} powers our cognitive support platform and explore its technical capabilities. 
-                  Join our developer community to contribute to innovative solutions.
+                <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+                  This technology has been successfully integrated into our cognitive support platform, providing robust solutions for complex challenges. Our implementation follows industry best practices and ensures optimal performance across all use cases.
                 </p>
               </div>
             </div>

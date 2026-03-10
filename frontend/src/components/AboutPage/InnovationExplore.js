@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Calendar, Users, Award, TrendingUp, Target, Zap, Globe, Shield, Star, ChevronRight, Clock, MapPin, ExternalLink, Rocket, Brain, Cpu, Lightbulb, BarChart, Filter, Search, ChevronDown, ChevronUp, Palette, ArrowUpDown, MessageCircle, X, FileText, Tag, Sparkles, Download } from 'lucide-react';
+import { ArrowLeft, Calendar, Users, Award, TrendingUp, Target, Zap, Globe, Shield, Star, ChevronRight, Clock, MapPin, ExternalLink, Rocket, Brain, Cpu, Lightbulb, BarChart, Filter, Search, ChevronDown, ChevronUp, Palette, ArrowUpDown, MessageCircle, X, FileText, Tag, Sparkles, Download, Heart, HelpingHand } from 'lucide-react';
 
 const InnovationExplore = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -7,6 +7,20 @@ const InnovationExplore = () => {
   const [selectedAchievement, setSelectedAchievement] = useState(null);
   const [hoveredAchievement, setHoveredAchievement] = useState(null);
   const [showAchievementModal, setShowAchievementModal] = useState(false);
+  const [selectedTechnology, setSelectedTechnology] = useState(null);
+  const [showTechnologyModal, setShowTechnologyModal] = useState(false);
+  const [selectedMetric, setSelectedMetric] = useState(null);
+  const [showMetricModal, setShowMetricModal] = useState(false);
+  const [selectedInnovation, setSelectedInnovation] = useState(null);
+  const [showInnovationModal, setShowInnovationModal] = useState(false);
+  const [selectedResearch, setSelectedResearch] = useState(null);
+  const [showResearchModal, setShowResearchModal] = useState(false);
+  
+  // PDF Download Function
+  const downloadPDF = (modalData, modalType) => {
+    console.log(`Downloading PDF for ${modalType}:`, modalData);
+    // PDF download logic would go here
+  };
   
   // Advanced Timeline States
   const [showAdvanced, setShowAdvanced] = useState(false);
@@ -321,14 +335,18 @@ const InnovationExplore = () => {
   ];
 
   const metrics = [
-    { label: "AI Accuracy", value: "95%", icon: "🎯", trend: "+12%" },
-    { label: "User Satisfaction", value: "4.9/5", icon: "⭐", trend: "+8%" },
-    { label: "Response Time", value: "<1s", icon: "⚡", trend: "+25%" },
-    { label: "Global Reach", value: "50+", icon: "🌍", trend: "+40%" },
-    { label: "Research Papers", value: "25+", icon: "📚", trend: "+60%" },
-    { label: "Patents Filed", value: "8", icon: "💡", trend: "+100%" },
-    { label: "API Calls", value: "1M+", icon: "📊", trend: "+200%" },
-    { label: "Uptime", value: "99.9%", icon: "🔄", trend: "+5%" }
+    { label: "AI Accuracy", value: "95%", icon: "🎯", trend: "+12%", description: "Machine learning model precision rate", category: "research", impact: "Critical", timeframe: "Ongoing" },
+    { label: "User Satisfaction", value: "4.9/5", icon: "⭐", trend: "+8%", description: "Customer feedback and satisfaction rating", category: "quality", impact: "High", timeframe: "6 months" },
+    { label: "Response Time", value: "<1s", icon: "⚡", trend: "+25%", description: "Average system response time", category: "performance", impact: "High", timeframe: "3 months" },
+    { label: "Global Reach", value: "50+", icon: "🌍", trend: "+40%", description: "Countries with active users", category: "development", impact: "Medium", timeframe: "1 year" },
+    { label: "Research Papers", value: "25+", icon: "📚", trend: "+60%", description: "Published research contributions", category: "knowledge", impact: "High", timeframe: "2 years" },
+    { label: "Patents Filed", value: "8", icon: "💡", trend: "+100%", description: "Intellectual property applications", category: "research", impact: "High", timeframe: "18 months" },
+    { label: "API Calls", value: "1M+", icon: "📊", trend: "+200%", description: "Daily API request volume", category: "performance", impact: "Critical", timeframe: "Monthly" },
+    { label: "Uptime", value: "99.9%", icon: "🔄", trend: "+5%", description: "Service availability percentage", category: "devops", impact: "Critical", timeframe: "Ongoing" },
+    { label: "Processing Speed", value: "10TB", icon: "🚀", trend: "+150%", description: "Data processed per day", category: "performance", impact: "High", timeframe: "Daily" },
+    { label: "Model Training", value: "1000+", icon: "🧠", trend: "+80%", description: "AI models trained successfully", category: "research", impact: "Medium", timeframe: "Quarterly" },
+    { label: "Feature Updates", value: "50+", icon: "✨", trend: "+120%", description: "New features released", category: "development", impact: "Medium", timeframe: "Yearly" },
+    { label: "Test Coverage", value: "92%", icon: "🔬", trend: "+15%", description: "Code coverage in testing", category: "quality", impact: "High", timeframe: "6 months" }
   ];
 
   const achievements = [
@@ -380,28 +398,36 @@ const InnovationExplore = () => {
       description: "AI-powered assistant that adapts to individual cognitive needs and learning patterns",
       status: "Active",
       users: "5,000+",
-      accuracy: "95%"
+      accuracy: "95%",
+      icon: "🤖",
+      color: "blue"
     },
     {
       title: "Cognitive Analytics",
       description: "Advanced analytics platform for tracking cognitive progress and support effectiveness",
       status: "Active",
       users: "3,000+",
-      accuracy: "92%"
+      accuracy: "92%",
+      icon: "📊",
+      color: "purple"
     },
     {
       title: "Adaptive Interface",
       description: "Dynamic interface that adjusts based on user cognitive load and preferences",
       status: "Beta",
       users: "1,000+",
-      accuracy: "88%"
+      accuracy: "88%",
+      icon: "🎨",
+      color: "pink"
     },
     {
       title: "Predictive Support",
       description: "Predictive system that anticipates cognitive support needs before they arise",
       status: "Development",
       users: "500+",
-      accuracy: "85%"
+      accuracy: "85%",
+      icon: "🔮",
+      color: "green"
     }
   ];
 
@@ -410,25 +436,33 @@ const InnovationExplore = () => {
       area: "Cognitive Pattern Recognition",
       description: "Advanced algorithms for understanding individual cognitive patterns",
       progress: 85,
-      team: "12 researchers"
+      team: "12 researchers",
+      icon: "🎯",
+      color: "purple"
     },
     {
       area: "Neural Interface Integration",
       description: "Exploring brain-computer interface for cognitive support",
       progress: 60,
-      team: "8 researchers"
+      team: "8 researchers",
+      icon: "🧠",
+      color: "blue"
     },
     {
       area: "Multimodal Learning",
       description: "Combining visual, auditory, and kinesthetic learning approaches",
       progress: 75,
-      team: "10 researchers"
+      team: "10 researchers",
+      icon: "🎨",
+      color: "pink"
     },
     {
       area: "Real-time Adaptation",
       description: "Systems that adapt in real-time to cognitive state changes",
       progress: 70,
-      team: "15 researchers"
+      team: "15 researchers",
+      icon: "⚡",
+      color: "orange"
     }
   ];
 
@@ -1175,30 +1209,150 @@ const InnovationExplore = () => {
         {/* Technologies Tab */}
         {activeTab === 'technologies' && (
           <div className="space-y-8">
-            <div className={`bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8`}>
-              <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white flex items-center">
-                <Cpu className="w-6 h-6 mr-3 text-indigo-600" />
-                Advanced Technology Stack
-              </h2>
+            <div className={`bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 relative overflow-hidden`}>
+              {/* Background Animation */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-purple-50/30 to-indigo-50/30 dark:from-blue-900/5 dark:via-purple-900/5 dark:to-indigo-900/5"></div>
               
-              <div className="grid md:grid-cols-2 gap-6">
+              {/* Enhanced Header */}
+              <div className="relative mb-8">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center">
+                    <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mr-3 shadow-lg animate-pulse">
+                      <Cpu className="w-4 h-4 text-white" />
+                    </div>
+                    Technology Stack
+                  </h2>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">Active Technologies</span>
+                  </div>
+                </div>
+                
+                {/* Progress Bar */}
+                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 overflow-hidden">
+                  <div className="h-full bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 rounded-full animate-pulse" style={{ width: '85%' }}></div>
+                </div>
+              </div>
+              
+              {/* Technology Categories Overview */}
+              <div className="relative mb-8">
+                <div className="flex flex-wrap gap-2 justify-center">
+                  {['AI Framework', 'Mobile', 'Backend', 'Database', 'Cloud', 'Frontend', 'DevOps', 'Security'].map((category, index) => (
+                    <div key={index} className="px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-blue-100 to-purple-100 dark:from-blue-800 dark:to-purple-800 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-600">
+                      {category}
+                    </div>
+                  ))}
+                </div>
+              </div>
+              
+              <div className="relative grid md:grid-cols-2 gap-6">
                 {technologies.map((tech, index) => (
-                  <div key={index} className="space-y-3">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center space-x-3">
-                        <span className="text-2xl">{tech.icon}</span>
-                        <div>
-                          <h4 className="font-semibold text-gray-900 dark:text-white">{tech.name}</h4>
-                          <p className="text-sm text-gray-500">{tech.category}</p>
+                  <div key={index} className="group relative">
+                    {/* Card with Advanced Hover Effects */}
+                    <div 
+                      className="space-y-4 p-6 rounded-2xl transition-all duration-500 hover:shadow-2xl hover:scale-105 bg-white/60 dark:bg-gray-800/60 backdrop-blur-md border border-blue-100 dark:border-blue-800 relative overflow-hidden cursor-pointer"
+                      onClick={() => {
+                        setSelectedTechnology(tech);
+                        setShowTechnologyModal(true);
+                      }}
+                    >
+                      {/* Arrow Indicator - Top Right */}
+                      <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                        <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center shadow-lg">
+                          <ChevronRight className="w-4 h-4 text-white" />
                         </div>
                       </div>
-                      <span className="text-lg font-bold text-indigo-600">{tech.level}%</span>
-                    </div>
-                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3">
-                      <div 
-                        className="bg-gradient-to-r from-indigo-500 to-indigo-600 h-3 rounded-full transition-all duration-1000"
-                        style={{ width: `${tech.level}%` }}
-                      ></div>
+                      
+                      {/* Background Pattern */}
+                      <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 via-purple-500/5 to-indigo-500/5"></div>
+                        <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-400/10 to-transparent rounded-full blur-2xl"></div>
+                        <div className="absolute bottom-0 left-0 w-24 h-24 bg-gradient-to-br from-purple-400/10 to-transparent rounded-full blur-xl"></div>
+                      </div>
+                      
+                      {/* Technology Header */}
+                      <div className="relative flex items-center justify-between">
+                        <div className="flex items-center space-x-4">
+                          <div className={`w-14 h-14 rounded-2xl flex items-center justify-center text-3xl transition-all duration-500 group-hover:scale-125 group-hover:rotate-12 shadow-lg ${
+                            tech.category === 'AI Framework' ? 'bg-gradient-to-br from-purple-400 to-purple-600 text-white shadow-purple-500/50' :
+                            tech.category === 'Mobile' ? 'bg-gradient-to-br from-blue-400 to-blue-600 text-white shadow-blue-500/50' :
+                            tech.category === 'Backend' ? 'bg-gradient-to-br from-green-400 to-green-600 text-white shadow-green-500/50' :
+                            tech.category === 'Database' ? 'bg-gradient-to-br from-orange-400 to-orange-600 text-white shadow-orange-500/50' :
+                            tech.category === 'Cloud' ? 'bg-gradient-to-br from-cyan-400 to-cyan-600 text-white shadow-cyan-500/50' :
+                            tech.category === 'Frontend' ? 'bg-gradient-to-br from-pink-400 to-pink-600 text-white shadow-pink-500/50' :
+                            tech.category === 'DevOps' ? 'bg-gradient-to-br from-gray-400 to-gray-600 text-white shadow-gray-500/50' :
+                            tech.category === 'Security' ? 'bg-gradient-to-br from-red-400 to-red-600 text-white shadow-red-500/50' :
+                            'bg-gradient-to-br from-gray-400 to-gray-600 text-white shadow-gray-500/50'
+                          }`}>
+                            {tech.icon}
+                          </div>
+                          <div>
+                            <h4 className="font-bold text-gray-900 dark:text-white text-lg">{tech.name}</h4>
+                            <p className="text-sm text-gray-500 dark:text-gray-400">{tech.category}</p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <div className="text-2xl font-bold text-blue-600">{tech.level}%</div>
+                          <div className="text-xs text-gray-500">Proficiency</div>
+                        </div>
+                      </div>
+                      
+                      {/* Technology Description */}
+                      <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed">{tech.description}</p>
+                      
+                      {/* Enhanced Progress Bar */}
+                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 overflow-hidden">
+                        <div 
+                          className={`h-2 rounded-full transition-all duration-1000 relative overflow-hidden ${
+                            tech.category === 'AI Framework' ? 'bg-gradient-to-r from-purple-500 to-purple-600' :
+                            tech.category === 'Mobile' ? 'bg-gradient-to-r from-blue-500 to-blue-600' :
+                            tech.category === 'Backend' ? 'bg-gradient-to-r from-green-500 to-green-600' :
+                            tech.category === 'Database' ? 'bg-gradient-to-r from-orange-500 to-orange-600' :
+                            tech.category === 'Cloud' ? 'bg-gradient-to-r from-cyan-500 to-cyan-600' :
+                            tech.category === 'Frontend' ? 'bg-gradient-to-r from-pink-500 to-pink-600' :
+                            tech.category === 'DevOps' ? 'bg-gradient-to-r from-gray-500 to-gray-600' :
+                            tech.category === 'Security' ? 'bg-gradient-to-r from-red-500 to-red-600' :
+                            'bg-gradient-to-r from-gray-500 to-gray-600'
+                          }`}
+                          style={{ width: `${tech.level}%` }}
+                        >
+                          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-pulse"></div>
+                          <div className="absolute inset-0 bg-gradient-to-b from-white/20 to-transparent"></div>
+                        </div>
+                      </div>
+                      
+                      {/* Skill Level Badge */}
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-2">
+                          <div className={`px-3 py-1 rounded-full text-xs font-bold text-white ${
+                            tech.level >= 90 ? 'bg-gradient-to-r from-green-500 to-green-600' :
+                            tech.level >= 80 ? 'bg-gradient-to-r from-blue-500 to-blue-600' :
+                            tech.level >= 70 ? 'bg-gradient-to-r from-yellow-500 to-yellow-600' :
+                            'bg-gradient-to-r from-orange-500 to-orange-600'
+                          }`}>
+                            {tech.level >= 90 ? 'Expert' : tech.level >= 80 ? 'Advanced' : tech.level >= 70 ? 'Intermediate' : 'Beginner'}
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-1 text-xs text-gray-500 dark:text-gray-400">
+                          <Clock className="w-3 h-3" />
+                          <span>3+ years</span>
+                        </div>
+                      </div>
+                      
+                      {/* Projects & Status */}
+                      <div className="flex items-center justify-between pt-2 border-t border-gray-200 dark:border-gray-700">
+                        <div className="flex items-center space-x-2">
+                          <Target className="w-4 h-4 text-blue-500" />
+                          <span className="text-sm font-medium text-gray-700 dark:text-gray-300">15+ projects</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <Award className="w-4 h-4 text-green-500" />
+                          <span className="text-sm font-medium text-green-600">Production Ready</span>
+                        </div>
+                      </div>
+                      
+                      {/* Hover Glow Effect */}
+                      <div className="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/10 to-blue-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
                     </div>
                   </div>
                 ))}
@@ -1210,22 +1364,126 @@ const InnovationExplore = () => {
         {/* Metrics Tab */}
         {activeTab === 'metrics' && (
           <div className="space-y-8">
-            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-              {metrics.map((metric, index) => (
-                <div key={index} className={`bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 text-center`}>
-                  <div className="text-3xl mb-3">{metric.icon}</div>
-                  <div className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                    {metric.value}
-                  </div>
-                  <p className="text-gray-600 dark:text-gray-300 text-sm mb-3">
-                    {metric.label}
-                  </p>
-                  <div className="flex items-center justify-center space-x-1 text-green-600">
-                    <TrendingUp className="w-4 h-4" />
-                    <span className="text-sm font-medium">{metric.trend}</span>
+            <div className={`bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 relative overflow-hidden`}>
+              {/* Background Animation */}
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/30 via-purple-50/30 to-pink-50/30 dark:from-indigo-900/5 dark:via-purple-900/5 dark:to-pink-900/5"></div>
+              
+              {/* Enhanced Header */}
+              <div className="relative mb-8">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center">
+                    <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-lg flex items-center justify-center mr-3 shadow-lg animate-pulse">
+                      <BarChart className="w-4 h-4 text-white" />
+                    </div>
+                    Performance Metrics
+                  </h2>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">Live Analytics</span>
                   </div>
                 </div>
-              ))}
+                
+                {/* Progress Bar */}
+                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 overflow-hidden">
+                  <div className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full animate-pulse" style={{ width: '95%' }}></div>
+                </div>
+              </div>
+              
+              <div className="relative grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {metrics.map((metric, index) => (
+                  <div key={index} className={`bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-xl shadow-lg p-6 text-center transition-all duration-300 hover:shadow-xl hover:scale-105 border border-indigo-100 dark:border-indigo-800 group cursor-pointer relative`}
+                    onClick={() => {
+                      console.log('Metric clicked:', metric);
+                      setSelectedMetric(metric);
+                      setShowMetricModal(true);
+                    }}
+                  >
+                    {/* Arrow Indicator - Top Right */}
+                    <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center shadow-lg">
+                        <ChevronRight className="w-4 h-4 text-white" />
+                      </div>
+                    </div>
+                    
+                    {/* Enhanced Icon */}
+                    <div className={`w-16 h-16 mx-auto mb-4 rounded-xl flex items-center justify-center text-3xl transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 ${
+                      metric.category === 'research' ? 'bg-gradient-to-br from-purple-100 to-purple-200 dark:from-purple-800 dark:to-purple-700' :
+                      metric.category === 'team' ? 'bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-800 dark:to-blue-700' :
+                      metric.category === 'financial' ? 'bg-gradient-to-br from-green-100 to-green-200 dark:from-green-800 dark:to-green-700' :
+                      metric.category === 'development' ? 'bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-800 dark:to-orange-700' :
+                      metric.category === 'testing' ? 'bg-gradient-to-br from-red-100 to-red-200 dark:from-red-800 dark:to-red-700' :
+                      metric.category === 'accessibility' ? 'bg-gradient-to-br from-indigo-100 to-indigo-200 dark:from-indigo-800 dark:to-indigo-700' :
+                      metric.category === 'quality' ? 'bg-gradient-to-br from-pink-100 to-pink-200 dark:from-pink-800 dark:to-pink-700' :
+                      metric.category === 'performance' ? 'bg-gradient-to-br from-yellow-100 to-yellow-200 dark:from-yellow-800 dark:to-yellow-700' :
+                      metric.category === 'devops' ? 'bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700' :
+                      metric.category === 'support' ? 'bg-gradient-to-br from-teal-100 to-teal-200 dark:from-teal-800 dark:to-teal-700' :
+                      metric.category === 'knowledge' ? 'bg-gradient-to-br from-cyan-100 to-cyan-200 dark:from-cyan-800 dark:to-cyan-700' :
+                      'bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700'
+                    }`}>
+                      {metric.icon}
+                    </div>
+                    
+                    {/* Enhanced Value */}
+                    <div className="text-2xl font-bold text-gray-900 dark:text-white mb-2 group-hover:scale-105 transition-transform">
+                      {metric.value}
+                    </div>
+                    
+                    {/* Enhanced Label */}
+                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-3 font-medium">
+                      {metric.label}
+                    </p>
+                    
+                    {/* Enhanced Description */}
+                    <p className="text-xs text-gray-500 dark:text-gray-400 mb-3 line-clamp-2">
+                      {metric.description}
+                    </p>
+                    
+                    {/* Enhanced Trend */}
+                    <div className="flex items-center justify-center space-x-1 text-green-600 mb-2">
+                      <TrendingUp className="w-4 h-4 animate-bounce" />
+                      <span className="text-sm font-medium">{metric.trend}</span>
+                    </div>
+                    
+                    {/* Impact Level */}
+                    <div className="flex items-center justify-center space-x-2 mb-2">
+                      <div className={`w-2 h-2 rounded-full ${
+                        metric.impact === 'Critical' ? 'bg-red-500' :
+                        metric.impact === 'High' ? 'bg-orange-500' :
+                        metric.impact === 'Medium' ? 'bg-yellow-500' :
+                        'bg-green-500'
+                      }`}></div>
+                      <span className="text-xs font-medium text-gray-600 dark:text-gray-400">
+                        {metric.impact} Impact
+                      </span>
+                    </div>
+                    
+                    {/* Timeframe */}
+                    <div className="flex items-center justify-center space-x-1 text-xs text-gray-500 dark:text-gray-400 mb-2">
+                      <Clock className="w-3 h-3" />
+                      <span>{metric.timeframe}</span>
+                    </div>
+                    
+                    {/* Category Tag */}
+                    <div className="flex items-center justify-center space-x-2 text-xs text-gray-500 dark:text-gray-400">
+                      <div className={`w-2 h-2 rounded-full ${
+                        metric.category === 'research' ? 'bg-purple-500' :
+                        metric.category === 'team' ? 'bg-blue-500' :
+                        metric.category === 'financial' ? 'bg-green-500' :
+                        metric.category === 'development' ? 'bg-orange-500' :
+                        metric.category === 'testing' ? 'bg-red-500' :
+                        metric.category === 'accessibility' ? 'bg-indigo-500' :
+                        metric.category === 'quality' ? 'bg-pink-500' :
+                        metric.category === 'performance' ? 'bg-yellow-500' :
+                        metric.category === 'devops' ? 'bg-gray-500' :
+                        metric.category === 'support' ? 'bg-teal-500' :
+                        metric.category === 'knowledge' ? 'bg-cyan-500' :
+                        'bg-gray-500'
+                      }`}></div>
+                      <span>{metric.category}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         )}
@@ -1233,47 +1491,140 @@ const InnovationExplore = () => {
         {/* Innovations Tab */}
         {activeTab === 'innovations' && (
           <div className="space-y-8">
-            <div className={`bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8`}>
-              <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white flex items-center">
-                <Lightbulb className="w-6 h-6 mr-3 text-indigo-600" />
-                Innovation Products
-              </h2>
+            <div className={`bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 relative overflow-hidden`}>
+              {/* Background Animation */}
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-50/30 via-purple-50/30 to-pink-50/30 dark:from-indigo-900/5 dark:via-purple-900/5 dark:to-pink-900/5"></div>
               
-              <div className="grid md:grid-cols-2 gap-6">
+              {/* Enhanced Header */}
+              <div className="relative mb-8">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center">
+                    <div className="w-8 h-8 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-lg flex items-center justify-center mr-3 shadow-lg animate-pulse">
+                      <Lightbulb className="w-4 h-4 text-white" />
+                    </div>
+                    Innovation Products
+                  </h2>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                    <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">Active Development</span>
+                  </div>
+                </div>
+                
+                {/* Progress Bar */}
+                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 overflow-hidden">
+                  <div className="h-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-full animate-pulse" style={{ width: '88%' }}></div>
+                </div>
+              </div>
+              
+              <div className="relative grid md:grid-cols-2 gap-6">
                 {innovations.map((innovation, index) => (
-                  <div key={index} className="p-6 border border-indigo-200 dark:border-indigo-800 rounded-xl">
-                    <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-3">
+                  <div key={index} className={`bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-xl shadow-lg p-6 border transition-all duration-300 hover:shadow-xl hover:scale-105 group cursor-pointer relative ${
+                    innovation.color === 'green' ? 'border-green-100 dark:border-green-800' :
+                    innovation.color === 'blue' ? 'border-blue-100 dark:border-blue-800' :
+                    innovation.color === 'purple' ? 'border-purple-100 dark:border-purple-800' :
+                    innovation.color === 'pink' ? 'border-pink-100 dark:border-pink-800' :
+                    'border-gray-100 dark:border-gray-800'
+                  }`}
+                    onClick={() => {
+                      setSelectedInnovation(innovation);
+                      setShowInnovationModal(true);
+                    }}
+                  >
+                    {/* Arrow Indicator - Top Right */}
+                    <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center shadow-lg ${
+                        innovation.color === 'green' ? 'bg-gradient-to-r from-green-500 to-green-600' :
+                        innovation.color === 'blue' ? 'bg-gradient-to-r from-blue-500 to-blue-600' :
+                        innovation.color === 'purple' ? 'bg-gradient-to-r from-purple-500 to-purple-600' :
+                        innovation.color === 'pink' ? 'bg-gradient-to-r from-pink-500 to-pink-600' :
+                        'bg-gradient-to-r from-gray-500 to-gray-600'
+                      }`}>
+                        <ChevronRight className="w-4 h-4 text-white" />
+                      </div>
+                    </div>
+                    
+                    {/* Enhanced Icon */}
+                    <div className={`w-16 h-16 mx-auto mb-4 rounded-xl flex items-center justify-center text-3xl transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 ${
+                      innovation.color === 'green' ? 'bg-gradient-to-br from-green-100 to-green-200 dark:from-green-800 dark:to-green-700' :
+                      innovation.color === 'blue' ? 'bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-800 dark:to-blue-700' :
+                      innovation.color === 'purple' ? 'bg-gradient-to-br from-purple-100 to-purple-200 dark:from-purple-800 dark:to-purple-700' :
+                      innovation.color === 'pink' ? 'bg-gradient-to-br from-pink-100 to-pink-200 dark:from-pink-800 dark:to-pink-700' :
+                      'bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700'
+                    }`}>
+                      {innovation.icon}
+                    </div>
+                    
+                    <h3 className={`text-lg font-semibold text-gray-900 dark:text-white mb-3 transition-colors ${
+                      innovation.color === 'green' ? 'group-hover:text-green-600' :
+                      innovation.color === 'blue' ? 'group-hover:text-blue-600' :
+                      innovation.color === 'purple' ? 'group-hover:text-purple-600' :
+                      innovation.color === 'pink' ? 'group-hover:text-pink-600' :
+                      'group-hover:text-gray-600'
+                    }`}>
                       {innovation.title}
                     </h3>
-                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                    <p className="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">
                       {innovation.description}
                     </p>
-                    <div className="grid grid-cols-3 gap-4 mb-4">
-                      <div className="text-center">
+                    
+                    {/* Enhanced Stats Grid */}
+                    <div className="grid grid-cols-3 gap-3 mb-4">
+                      <div className={`text-center p-2 rounded-lg ${
+                        innovation.status === 'Active' ? 'bg-green-50 dark:bg-green-900/30' :
+                        innovation.status === 'Beta' ? 'bg-yellow-50 dark:bg-yellow-900/30' :
+                        'bg-gray-50 dark:bg-gray-900/30'
+                      }`}>
                         <div className="text-xs text-gray-500 mb-1">Status</div>
-                        <div className={`text-sm font-medium ${
-                          innovation.status === 'Active' 
-                            ? 'text-green-600' 
-                            : innovation.status === 'Beta' 
-                              ? 'text-yellow-600' 
-                              : 'text-gray-600'
+                        <div className={`text-sm font-bold ${
+                          innovation.status === 'Active' ? 'text-green-600' :
+                          innovation.status === 'Beta' ? 'text-yellow-600' :
+                          'text-gray-600'
                         }`}>
                           {innovation.status}
                         </div>
                       </div>
-                      <div className="text-center">
+                      <div className={`text-center p-2 rounded-lg ${
+                        innovation.color === 'green' ? 'bg-green-50 dark:bg-green-900/30' :
+                        innovation.color === 'blue' ? 'bg-blue-50 dark:bg-blue-900/30' :
+                        innovation.color === 'purple' ? 'bg-purple-50 dark:bg-purple-900/30' :
+                        innovation.color === 'pink' ? 'bg-pink-50 dark:bg-pink-900/30' :
+                        'bg-gray-50 dark:bg-gray-900/30'
+                      }`}>
                         <div className="text-xs text-gray-500 mb-1">Users</div>
-                        <div className="text-sm font-medium text-gray-900 dark:text-white">
-                          {innovation.users}
-                        </div>
+                        <div className={`text-sm font-bold ${
+                          innovation.color === 'green' ? 'text-green-600' :
+                          innovation.color === 'blue' ? 'text-blue-600' :
+                          innovation.color === 'purple' ? 'text-purple-600' :
+                          innovation.color === 'pink' ? 'text-pink-600' :
+                          'text-gray-600'
+                        }`}>{innovation.users}</div>
                       </div>
-                      <div className="text-center">
+                      <div className={`text-center p-2 rounded-lg ${
+                        innovation.color === 'green' ? 'bg-green-50 dark:bg-green-900/30' :
+                        innovation.color === 'blue' ? 'bg-blue-50 dark:bg-blue-900/30' :
+                        innovation.color === 'purple' ? 'bg-purple-50 dark:bg-purple-900/30' :
+                        innovation.color === 'pink' ? 'bg-pink-50 dark:bg-pink-900/30' :
+                        'bg-gray-50 dark:bg-gray-900/30'
+                      }`}>
                         <div className="text-xs text-gray-500 mb-1">Accuracy</div>
-                        <div className="text-sm font-medium text-indigo-600">
-                          {innovation.accuracy}
-                        </div>
+                        <div className={`text-sm font-bold ${
+                          innovation.color === 'green' ? 'text-green-600' :
+                          innovation.color === 'blue' ? 'text-blue-600' :
+                          innovation.color === 'purple' ? 'text-purple-600' :
+                          innovation.color === 'pink' ? 'text-pink-600' :
+                          'text-gray-600'
+                        }`}>{innovation.accuracy}</div>
                       </div>
                     </div>
+                    
+                    {/* Hover Effect Overlay */}
+                    <div className={`absolute inset-0 bg-gradient-to-br rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
+                      innovation.color === 'green' ? 'from-green-500/5 to-green-600/5' :
+                      innovation.color === 'blue' ? 'from-blue-500/5 to-blue-600/5' :
+                      innovation.color === 'purple' ? 'from-purple-500/5 to-purple-600/5' :
+                      innovation.color === 'pink' ? 'from-pink-500/5 to-pink-600/5' :
+                      'from-gray-500/5 to-gray-600/5'
+                    }`}></div>
                   </div>
                 ))}
               </div>
@@ -1284,41 +1635,127 @@ const InnovationExplore = () => {
         {/* Research Tab */}
         {activeTab === 'research' && (
           <div className="space-y-8">
-            <div className={`bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8`}>
-              <h2 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white flex items-center">
-                <Brain className="w-6 h-6 mr-3 text-indigo-600" />
-                Research Areas
-              </h2>
+            <div className={`bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-8 relative overflow-hidden`}>
+              {/* Background Animation */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-50/30 via-indigo-50/30 to-cyan-50/30 dark:from-blue-900/5 dark:via-indigo-900/5 dark:to-cyan-900/5"></div>
               
-              <div className="space-y-6">
+              {/* Enhanced Header */}
+              <div className="relative mb-8">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-2xl font-bold text-gray-900 dark:text-white flex items-center">
+                    <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mr-3 shadow-lg animate-pulse">
+                      <Brain className="w-4 h-4 text-white" />
+                    </div>
+                    Research Areas
+                  </h2>
+                  <div className="flex items-center space-x-2">
+                    <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
+                    <span className="text-sm text-gray-600 dark:text-gray-400 font-medium">Ongoing Studies</span>
+                  </div>
+                </div>
+                
+                {/* Progress Bar */}
+                <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-1.5 overflow-hidden">
+                  <div className="h-full bg-gradient-to-r from-blue-500 via-indigo-500 to-cyan-500 rounded-full animate-pulse" style={{ width: '76%' }}></div>
+                </div>
+              </div>
+              
+              <div className="relative grid md:grid-cols-2 gap-6">
                 {researchAreas.map((area, index) => (
-                  <div key={index} className="p-6 border border-indigo-200 dark:border-indigo-800 rounded-xl">
+                  <div key={index} className={`bg-white/70 dark:bg-gray-800/70 backdrop-blur-sm rounded-xl shadow-lg p-6 border transition-all duration-300 hover:shadow-xl hover:scale-102 group cursor-pointer relative ${
+                      area.color === 'orange' ? 'border-orange-100 dark:border-orange-800' : `border-${area.color}-100 dark:border-${area.color}-800`
+                    }`}
+                    onClick={() => {
+                      setSelectedResearch(area);
+                      setShowResearchModal(true);
+                    }}
+                  >
+                    {/* Arrow Indicator - Top Right */}
+                    <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center shadow-lg ${
+                        area.color === 'orange' ? 'bg-gradient-to-r from-orange-500 to-orange-600' : `bg-gradient-to-r from-${area.color}-500 to-${area.color}-600`
+                      }`}>
+                        <ChevronRight className="w-4 h-4 text-white" />
+                      </div>
+                    </div>
+                    
                     <div className="flex items-start justify-between mb-4">
                       <div className="flex-1">
-                        <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-                          {area.area}
-                        </h3>
-                        <p className="text-gray-600 dark:text-gray-300 text-sm">
-                          {area.description}
-                        </p>
+                        <div className="flex items-center mb-2">
+                          <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl mr-3 transition-all duration-300 group-hover:scale-110 ${
+                            area.color === 'orange' ? 'bg-gradient-to-br from-orange-100 to-orange-200 dark:from-orange-800 dark:to-orange-700' : `bg-gradient-to-br from-${area.color}-100 to-${area.color}-200 dark:from-${area.color}-800 dark:to-${area.color}-700`
+                          }`}>
+                            {area.icon}
+                          </div>
+                          <div>
+                            <h3 className={`text-lg font-semibold text-gray-900 dark:text-white mb-1 transition-colors ${
+                              area.color === 'orange' ? 'group-hover:text-orange-600' : `group-hover:text-${area.color}-600`
+                            }`}>
+                              {area.area}
+                            </h3>
+                            <p className="text-gray-600 dark:text-gray-300 text-sm line-clamp-2">
+                              {area.description}
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                    <div className="space-y-2">
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="text-gray-500">Progress</span>
-                        <span className="font-medium text-indigo-600">{area.progress}%</span>
+                    
+                    {/* Enhanced Progress Section */}
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <span className="text-sm font-medium text-gray-500">Research Progress</span>
+                        <div className="flex items-center space-x-2">
+                          <span className={`text-lg font-bold ${
+                            area.color === 'orange' ? 'text-orange-600' : `text-${area.color}-600`
+                          }`}>{area.progress}%</span>
+                          <div className={`w-2 h-2 rounded-full animate-pulse ${
+                            area.color === 'orange' ? 'bg-orange-500' : `bg-${area.color}-500`
+                          }`}></div>
+                        </div>
                       </div>
-                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                      <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-3 overflow-hidden">
                         <div 
-                          className="bg-gradient-to-r from-indigo-500 to-indigo-600 h-2 rounded-full transition-all duration-1000"
+                          className={`h-3 rounded-full transition-all duration-1000 relative ${
+                            area.color === 'orange' ? 'bg-gradient-to-r from-orange-500 to-orange-600' : `bg-gradient-to-r from-${area.color}-500 to-${area.color}-600`
+                          }`}
                           style={{ width: `${area.progress}%` }}
-                        ></div>
+                        >
+                          <div className="absolute inset-0 bg-white/20 animate-pulse"></div>
+                        </div>
                       </div>
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="text-gray-500">Research Team</span>
-                        <span className="font-medium text-gray-900 dark:text-white">{area.team}</span>
+                      
+                      {/* Team and Timeline Info */}
+                      <div className="grid grid-cols-2 gap-4 mt-4">
+                        <div className={`flex items-center space-x-2 p-2 rounded-lg ${
+                          area.color === 'orange' ? 'bg-orange-50 dark:bg-orange-900/30' : `bg-${area.color}-50 dark:bg-${area.color}-900/30`
+                        }`}>
+                          <Users className={`w-4 h-4 ${
+                            area.color === 'orange' ? 'text-orange-600' : `text-${area.color}-600`
+                          }`} />
+                          <div>
+                            <div className="text-xs text-gray-500">Research Team</div>
+                            <div className={`text-sm font-bold ${
+                              area.color === 'orange' ? 'text-orange-600' : `text-${area.color}-600`
+                            }`}>{area.team}</div>
+                          </div>
+                        </div>
+                        <div className="flex items-center space-x-2 p-2 bg-indigo-50 dark:bg-indigo-900/30 rounded-lg">
+                          <Clock className="w-4 h-4 text-indigo-600" />
+                          <div>
+                            <div className="text-xs text-gray-500">Est. Timeline</div>
+                            <div className="text-sm font-bold text-indigo-600">
+                              {area.progress >= 80 ? 'Q2 2026' : area.progress >= 60 ? 'Q3 2026' : 'Q4 2026'}
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
+                    
+                    {/* Hover Effect Overlay */}
+                    <div className={`absolute inset-0 bg-gradient-to-br rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
+                      area.color === 'orange' ? 'from-orange-500/5 to-orange-600/5' : `from-${area.color}-500/5 to-${area.color}-600/5`
+                    }`}></div>
                   </div>
                 ))}
               </div>
@@ -1567,8 +2004,700 @@ const InnovationExplore = () => {
           </div>
         </div>
       </div>
+
+      {/* Technology Details Modal */}
+      {showTechnologyModal && selectedTechnology && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          onClick={() => setShowTechnologyModal(false)}
+        >
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-100"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className={`p-6 rounded-t-2xl sticky top-0 z-10 ${
+              selectedTechnology.category === 'AI Framework' ? 'bg-gradient-to-r from-purple-500 to-purple-600' :
+              selectedTechnology.category === 'Mobile' ? 'bg-gradient-to-r from-blue-500 to-blue-600' :
+              selectedTechnology.category === 'Backend' ? 'bg-gradient-to-r from-green-500 to-green-600' :
+              selectedTechnology.category === 'Database' ? 'bg-gradient-to-r from-orange-500 to-orange-600' :
+              selectedTechnology.category === 'Cloud' ? 'bg-gradient-to-r from-cyan-500 to-cyan-600' :
+              selectedTechnology.category === 'Frontend' ? 'bg-gradient-to-r from-pink-500 to-pink-600' :
+              selectedTechnology.category === 'DevOps' ? 'bg-gradient-to-r from-gray-500 to-gray-600' :
+              selectedTechnology.category === 'Security' ? 'bg-gradient-to-r from-red-500 to-red-600' :
+              'bg-gradient-to-r from-gray-500 to-gray-600'
+            }`}>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <div className={`text-4xl animate-bounce ${
+                    selectedTechnology.category === 'AI Framework' ? 'bg-gradient-to-br from-purple-400 to-purple-500' :
+                    selectedTechnology.category === 'Mobile' ? 'bg-gradient-to-br from-blue-400 to-blue-500' :
+                    selectedTechnology.category === 'Backend' ? 'bg-gradient-to-br from-green-400 to-green-500' :
+                    selectedTechnology.category === 'Database' ? 'bg-gradient-to-br from-orange-400 to-orange-500' :
+                    selectedTechnology.category === 'Cloud' ? 'bg-gradient-to-br from-cyan-400 to-cyan-500' :
+                    selectedTechnology.category === 'Frontend' ? 'bg-gradient-to-br from-pink-400 to-pink-500' :
+                    selectedTechnology.category === 'DevOps' ? 'bg-gradient-to-br from-gray-400 to-gray-500' :
+                    selectedTechnology.category === 'Security' ? 'bg-gradient-to-br from-red-400 to-red-500' :
+                    'bg-gradient-to-br from-gray-400 to-gray-500'
+                  }`}>
+                    {selectedTechnology.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-white">{selectedTechnology.name}</h3>
+                    <p className="text-white/90 text-sm">{selectedTechnology.description}</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <button 
+                    onClick={() => downloadPDF(selectedTechnology, 'technology')}
+                    className="text-white hover:bg-white/20 p-2 rounded-lg transition-colors duration-200"
+                    title="Download PDF"
+                  >
+                    <Download className="w-5 h-5" />
+                  </button>
+                  <button 
+                    onClick={() => setShowTechnologyModal(false)}
+                    className="text-white hover:bg-white/20 p-2 rounded-lg transition-colors duration-200"
+                    title="Close"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6 space-y-6">
+              {/* Technology Overview */}
+              <div>
+                <h4 className={`text-xl font-bold mb-3 flex items-center ${
+                  selectedTechnology.category === 'AI Framework' ? 'text-purple-700 dark:text-purple-300' :
+                  selectedTechnology.category === 'Mobile' ? 'text-blue-700 dark:text-blue-300' :
+                  selectedTechnology.category === 'Backend' ? 'text-green-700 dark:text-green-300' :
+                  selectedTechnology.category === 'Database' ? 'text-orange-700 dark:text-orange-300' :
+                  selectedTechnology.category === 'Cloud' ? 'text-cyan-700 dark:text-cyan-300' :
+                  selectedTechnology.category === 'Frontend' ? 'text-pink-700 dark:text-pink-300' :
+                  selectedTechnology.category === 'DevOps' ? 'text-gray-700 dark:text-gray-300' :
+                  selectedTechnology.category === 'Security' ? 'text-red-700 dark:text-red-300' :
+                  'text-gray-700 dark:text-gray-300'
+                }`}>
+                  <Lightbulb className="w-6 h-6 mr-2" />
+                  Technology Overview
+                </h4>
+                <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+                  {selectedTechnology.name} is a {selectedTechnology.category.toLowerCase()} technology that powers our cognitive support platform with {selectedTechnology.level}% proficiency level. This technology enables advanced features and capabilities that enhance user experience and system performance.
+                </p>
+              </div>
+
+              {/* Key Features */}
+              <div>
+                <h4 className={`text-xl font-bold mb-3 flex items-center ${
+                  selectedTechnology.category === 'AI Framework' ? 'text-purple-700 dark:text-purple-300' :
+                  selectedTechnology.category === 'Mobile' ? 'text-blue-700 dark:text-blue-300' :
+                  selectedTechnology.category === 'Backend' ? 'text-green-700 dark:text-green-300' :
+                  selectedTechnology.category === 'Database' ? 'text-orange-700 dark:text-orange-300' :
+                  selectedTechnology.category === 'Cloud' ? 'text-cyan-700 dark:text-cyan-300' :
+                  selectedTechnology.category === 'Frontend' ? 'text-pink-700 dark:text-pink-300' :
+                  selectedTechnology.category === 'DevOps' ? 'text-gray-700 dark:text-gray-300' :
+                  selectedTechnology.category === 'Security' ? 'text-red-700 dark:text-red-300' :
+                  'text-gray-700 dark:text-gray-300'
+                }`}>
+                  <Star className="w-6 h-6 mr-2" />
+                  Key Features
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <div className={`p-3 rounded-lg bg-${selectedTechnology.category === 'AI Framework' ? 'purple' : selectedTechnology.category === 'Mobile' ? 'blue' : selectedTechnology.category === 'Backend' ? 'green' : selectedTechnology.category === 'Database' ? 'orange' : selectedTechnology.category === 'Cloud' ? 'cyan' : selectedTechnology.category === 'Frontend' ? 'pink' : selectedTechnology.category === 'DevOps' ? 'gray' : selectedTechnology.category === 'Security' ? 'red' : 'gray'}-50 dark:bg-${selectedTechnology.category === 'AI Framework' ? 'purple' : selectedTechnology.category === 'Mobile' ? 'blue' : selectedTechnology.category === 'Backend' ? 'green' : selectedTechnology.category === 'Database' ? 'orange' : selectedTechnology.category === 'Cloud' ? 'cyan' : selectedTechnology.category === 'Frontend' ? 'pink' : selectedTechnology.category === 'DevOps' ? 'gray' : selectedTechnology.category === 'Security' ? 'red' : 'gray'}-900/30 border-l-4 border-${selectedTechnology.category === 'AI Framework' ? 'purple' : selectedTechnology.category === 'Mobile' ? 'blue' : selectedTechnology.category === 'Backend' ? 'green' : selectedTechnology.category === 'Database' ? 'orange' : selectedTechnology.category === 'Cloud' ? 'cyan' : selectedTechnology.category === 'Frontend' ? 'pink' : selectedTechnology.category === 'DevOps' ? 'gray' : selectedTechnology.category === 'Security' ? 'red' : 'gray'}-400`}>
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Advanced performance optimization</span>
+                  </div>
+                  <div className={`p-3 rounded-lg bg-${selectedTechnology.category === 'AI Framework' ? 'purple' : selectedTechnology.category === 'Mobile' ? 'blue' : selectedTechnology.category === 'Backend' ? 'green' : selectedTechnology.category === 'Database' ? 'orange' : selectedTechnology.category === 'Cloud' ? 'cyan' : selectedTechnology.category === 'Frontend' ? 'pink' : selectedTechnology.category === 'DevOps' ? 'gray' : selectedTechnology.category === 'Security' ? 'red' : 'gray'}-50 dark:bg-${selectedTechnology.category === 'AI Framework' ? 'purple' : selectedTechnology.category === 'Mobile' ? 'blue' : selectedTechnology.category === 'Backend' ? 'green' : selectedTechnology.category === 'Database' ? 'orange' : selectedTechnology.category === 'Cloud' ? 'cyan' : selectedTechnology.category === 'Frontend' ? 'pink' : selectedTechnology.category === 'DevOps' ? 'gray' : selectedTechnology.category === 'Security' ? 'red' : 'gray'}-900/30 border-l-4 border-${selectedTechnology.category === 'AI Framework' ? 'purple' : selectedTechnology.category === 'Mobile' ? 'blue' : selectedTechnology.category === 'Backend' ? 'green' : selectedTechnology.category === 'Database' ? 'orange' : selectedTechnology.category === 'Cloud' ? 'cyan' : selectedTechnology.category === 'Frontend' ? 'pink' : selectedTechnology.category === 'DevOps' ? 'gray' : selectedTechnology.category === 'Security' ? 'red' : 'gray'}-400`}>
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Scalable architecture design</span>
+                  </div>
+                  <div className={`p-3 rounded-lg bg-${selectedTechnology.category === 'AI Framework' ? 'purple' : selectedTechnology.category === 'Mobile' ? 'blue' : selectedTechnology.category === 'Backend' ? 'green' : selectedTechnology.category === 'Database' ? 'orange' : selectedTechnology.category === 'Cloud' ? 'cyan' : selectedTechnology.category === 'Frontend' ? 'pink' : selectedTechnology.category === 'DevOps' ? 'gray' : selectedTechnology.category === 'Security' ? 'red' : 'gray'}-50 dark:bg-${selectedTechnology.category === 'AI Framework' ? 'purple' : selectedTechnology.category === 'Mobile' ? 'blue' : selectedTechnology.category === 'Backend' ? 'green' : selectedTechnology.category === 'Database' ? 'orange' : selectedTechnology.category === 'Cloud' ? 'cyan' : selectedTechnology.category === 'Frontend' ? 'pink' : selectedTechnology.category === 'DevOps' ? 'gray' : selectedTechnology.category === 'Security' ? 'red' : 'gray'}-900/30 border-l-4 border-${selectedTechnology.category === 'AI Framework' ? 'purple' : selectedTechnology.category === 'Mobile' ? 'blue' : selectedTechnology.category === 'Backend' ? 'green' : selectedTechnology.category === 'Database' ? 'orange' : selectedTechnology.category === 'Cloud' ? 'cyan' : selectedTechnology.category === 'Frontend' ? 'pink' : selectedTechnology.category === 'DevOps' ? 'gray' : selectedTechnology.category === 'Security' ? 'red' : 'gray'}-400`}>
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Real-time data processing</span>
+                  </div>
+                  <div className={`p-3 rounded-lg bg-${selectedTechnology.category === 'AI Framework' ? 'purple' : selectedTechnology.category === 'Mobile' ? 'blue' : selectedTechnology.category === 'Backend' ? 'green' : selectedTechnology.category === 'Database' ? 'orange' : selectedTechnology.category === 'Cloud' ? 'cyan' : selectedTechnology.category === 'Frontend' ? 'pink' : selectedTechnology.category === 'DevOps' ? 'gray' : selectedTechnology.category === 'Security' ? 'red' : 'gray'}-50 dark:bg-${selectedTechnology.category === 'AI Framework' ? 'purple' : selectedTechnology.category === 'Mobile' ? 'blue' : selectedTechnology.category === 'Backend' ? 'green' : selectedTechnology.category === 'Database' ? 'orange' : selectedTechnology.category === 'Cloud' ? 'cyan' : selectedTechnology.category === 'Frontend' ? 'pink' : selectedTechnology.category === 'DevOps' ? 'gray' : selectedTechnology.category === 'Security' ? 'red' : 'gray'}-900/30 border-l-4 border-${selectedTechnology.category === 'AI Framework' ? 'purple' : selectedTechnology.category === 'Mobile' ? 'blue' : selectedTechnology.category === 'Backend' ? 'green' : selectedTechnology.category === 'Database' ? 'orange' : selectedTechnology.category === 'Cloud' ? 'cyan' : selectedTechnology.category === 'Frontend' ? 'pink' : selectedTechnology.category === 'DevOps' ? 'gray' : selectedTechnology.category === 'Security' ? 'red' : 'gray'}-400`}>
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Enterprise-grade security</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Performance Metrics */}
+              <div>
+                <h4 className={`text-xl font-bold mb-3 flex items-center ${
+                  selectedTechnology.category === 'AI Framework' ? 'text-purple-700 dark:text-purple-300' :
+                  selectedTechnology.category === 'Mobile' ? 'text-blue-700 dark:text-blue-300' :
+                  selectedTechnology.category === 'Backend' ? 'text-green-700 dark:text-green-300' :
+                  selectedTechnology.category === 'Database' ? 'text-orange-700 dark:text-orange-300' :
+                  selectedTechnology.category === 'Cloud' ? 'text-cyan-700 dark:text-cyan-300' :
+                  selectedTechnology.category === 'Frontend' ? 'text-pink-700 dark:text-pink-300' :
+                  selectedTechnology.category === 'DevOps' ? 'text-gray-700 dark:text-gray-300' :
+                  selectedTechnology.category === 'Security' ? 'text-red-700 dark:text-red-300' :
+                  'text-gray-700 dark:text-gray-300'
+                }`}>
+                  <BarChart className="w-6 h-6 mr-2" />
+                  Performance Metrics
+                </h4>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Proficiency Level</span>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-32 bg-gray-200 dark:bg-gray-700 rounded-full h-2">
+                        <div 
+                          className={`h-2 rounded-full ${
+                            selectedTechnology.category === 'AI Framework' ? 'bg-gradient-to-r from-purple-500 to-purple-600' :
+                            selectedTechnology.category === 'Mobile' ? 'bg-gradient-to-r from-blue-500 to-blue-600' :
+                            selectedTechnology.category === 'Backend' ? 'bg-gradient-to-r from-green-500 to-green-600' :
+                            selectedTechnology.category === 'Database' ? 'bg-gradient-to-r from-orange-500 to-orange-600' :
+                            selectedTechnology.category === 'Cloud' ? 'bg-gradient-to-r from-cyan-500 to-cyan-600' :
+                            selectedTechnology.category === 'Frontend' ? 'bg-gradient-to-r from-pink-500 to-pink-600' :
+                            selectedTechnology.category === 'DevOps' ? 'bg-gradient-to-r from-gray-500 to-gray-600' :
+                            selectedTechnology.category === 'Security' ? 'bg-gradient-to-r from-red-500 to-red-600' :
+                            'bg-gradient-to-r from-gray-500 to-gray-600'
+                          }`}
+                          style={{ width: `${selectedTechnology.level}%` }}
+                        ></div>
+                      </div>
+                      <span className="text-sm font-bold text-gray-700 dark:text-gray-300">{selectedTechnology.level}%</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Experience</span>
+                    <span className="text-sm font-bold text-gray-700 dark:text-gray-300">3+ years</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Projects Completed</span>
+                    <span className="text-sm font-bold text-gray-700 dark:text-gray-300">15+ projects</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Implementation Details */}
+              <div>
+                <h4 className={`text-xl font-bold mb-3 flex items-center ${
+                  selectedTechnology.category === 'AI Framework' ? 'text-purple-700 dark:text-purple-300' :
+                  selectedTechnology.category === 'Mobile' ? 'text-blue-700 dark:text-blue-300' :
+                  selectedTechnology.category === 'Backend' ? 'text-green-700 dark:text-green-300' :
+                  selectedTechnology.category === 'Database' ? 'text-orange-700 dark:text-orange-300' :
+                  selectedTechnology.category === 'Cloud' ? 'text-cyan-700 dark:text-cyan-300' :
+                  selectedTechnology.category === 'Frontend' ? 'text-pink-700 dark:text-pink-300' :
+                  selectedTechnology.category === 'DevOps' ? 'text-gray-700 dark:text-gray-300' :
+                  selectedTechnology.category === 'Security' ? 'text-red-700 dark:text-red-300' :
+                  'text-gray-700 dark:text-gray-300'
+                }`}>
+                  <Target className="w-6 h-6 mr-2" />
+                  Implementation Details
+                </h4>
+                <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+                  This technology has been successfully integrated into our cognitive support platform, providing robust solutions for complex challenges. Our implementation follows industry best practices and ensures optimal performance across all use cases.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Metrics Details Modal */}
+      {showMetricModal && selectedMetric && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          onClick={() => setShowMetricModal(false)}
+        >
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-100"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className={`p-6 rounded-t-2xl sticky top-0 z-10 ${
+              selectedMetric.category === 'research' ? 'bg-gradient-to-r from-purple-500 to-purple-600' :
+              selectedMetric.category === 'team' ? 'bg-gradient-to-r from-blue-500 to-blue-600' :
+              selectedMetric.category === 'financial' ? 'bg-gradient-to-r from-green-500 to-green-600' :
+              selectedMetric.category === 'development' ? 'bg-gradient-to-r from-orange-500 to-orange-600' :
+              selectedMetric.category === 'testing' ? 'bg-gradient-to-r from-red-500 to-red-600' :
+              selectedMetric.category === 'accessibility' ? 'bg-gradient-to-r from-indigo-500 to-indigo-600' :
+              selectedMetric.category === 'quality' ? 'bg-gradient-to-r from-pink-500 to-pink-600' :
+              selectedMetric.category === 'performance' ? 'bg-gradient-to-r from-yellow-500 to-yellow-600' :
+              selectedMetric.category === 'devops' ? 'bg-gradient-to-r from-gray-500 to-gray-600' :
+              selectedMetric.category === 'support' ? 'bg-gradient-to-r from-teal-500 to-teal-600' :
+              selectedMetric.category === 'knowledge' ? 'bg-gradient-to-r from-cyan-500 to-cyan-600' :
+              'bg-gradient-to-r from-gray-500 to-gray-600'
+            }`}>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <div className={`text-4xl animate-bounce ${
+                    selectedMetric.category === 'research' ? 'bg-gradient-to-br from-purple-400 to-purple-500' :
+                    selectedMetric.category === 'team' ? 'bg-gradient-to-br from-blue-400 to-blue-500' :
+                    selectedMetric.category === 'financial' ? 'bg-gradient-to-br from-green-400 to-green-500' :
+                    selectedMetric.category === 'development' ? 'bg-gradient-to-br from-orange-400 to-orange-500' :
+                    selectedMetric.category === 'testing' ? 'bg-gradient-to-br from-red-400 to-red-500' :
+                    selectedMetric.category === 'accessibility' ? 'bg-gradient-to-br from-indigo-400 to-indigo-500' :
+                    selectedMetric.category === 'quality' ? 'bg-gradient-to-br from-pink-400 to-pink-500' :
+                    selectedMetric.category === 'performance' ? 'bg-gradient-to-br from-yellow-400 to-yellow-500' :
+                    selectedMetric.category === 'devops' ? 'bg-gradient-to-br from-gray-400 to-gray-500' :
+                    selectedMetric.category === 'support' ? 'bg-gradient-to-br from-teal-400 to-teal-500' :
+                    selectedMetric.category === 'knowledge' ? 'bg-gradient-to-br from-cyan-400 to-cyan-500' :
+                    'bg-gradient-to-br from-gray-400 to-gray-500'
+                  }`}>
+                    {selectedMetric.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-white">{selectedMetric.label}</h3>
+                    <p className="text-white/90 text-sm">{selectedMetric.description}</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <button 
+                    onClick={() => downloadPDF(selectedMetric, 'metric')}
+                    className="text-white hover:bg-white/20 p-2 rounded-lg transition-colors duration-200"
+                    title="Download PDF"
+                  >
+                    <Download className="w-5 h-5" />
+                  </button>
+                  <button 
+                    onClick={() => setShowMetricModal(false)}
+                    className="text-white hover:bg-white/20 p-2 rounded-lg transition-colors duration-200"
+                    title="Close"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6 space-y-6">
+              {/* Metric Overview */}
+              <div>
+                <h4 className={`text-xl font-bold mb-3 flex items-center ${
+                  selectedMetric.category === 'research' ? 'text-purple-700 dark:text-purple-300' :
+                  selectedMetric.category === 'team' ? 'text-blue-700 dark:text-blue-300' :
+                  selectedMetric.category === 'financial' ? 'text-green-700 dark:text-green-300' :
+                  selectedMetric.category === 'development' ? 'text-orange-700 dark:text-orange-300' :
+                  selectedMetric.category === 'testing' ? 'text-red-700 dark:text-red-300' :
+                  selectedMetric.category === 'accessibility' ? 'text-indigo-700 dark:text-indigo-300' :
+                  selectedMetric.category === 'quality' ? 'text-pink-700 dark:text-pink-300' :
+                  selectedMetric.category === 'performance' ? 'text-yellow-700 dark:text-yellow-300' :
+                  selectedMetric.category === 'devops' ? 'text-gray-700 dark:text-gray-300' :
+                  selectedMetric.category === 'support' ? 'text-teal-700 dark:text-teal-300' :
+                  selectedMetric.category === 'knowledge' ? 'text-cyan-700 dark:text-cyan-300' :
+                  'text-gray-700 dark:text-gray-300'
+                }`}>
+                  <Lightbulb className="w-6 h-6 mr-2" />
+                  Metric Overview
+                </h4>
+                <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+                  {selectedMetric.label} is a key performance indicator that tracks {selectedMetric.description.toLowerCase()}. 
+                  With a current value of {selectedMetric.value} and a growth trend of {selectedMetric.trend}, 
+                  this metric demonstrates our commitment to excellence in the {selectedMetric.category} domain.
+                </p>
+              </div>
+
+              {/* Performance Analysis */}
+              <div>
+                <h4 className={`text-xl font-bold mb-3 flex items-center ${
+                  selectedMetric.category === 'research' ? 'text-purple-700 dark:text-purple-300' :
+                  selectedMetric.category === 'team' ? 'text-blue-700 dark:text-blue-300' :
+                  selectedMetric.category === 'financial' ? 'text-green-700 dark:text-green-300' :
+                  selectedMetric.category === 'development' ? 'text-orange-700 dark:text-orange-300' :
+                  selectedMetric.category === 'testing' ? 'text-red-700 dark:text-red-300' :
+                  selectedMetric.category === 'accessibility' ? 'text-indigo-700 dark:text-indigo-300' :
+                  selectedMetric.category === 'quality' ? 'text-pink-700 dark:text-pink-300' :
+                  selectedMetric.category === 'performance' ? 'text-yellow-700 dark:text-yellow-300' :
+                  selectedMetric.category === 'devops' ? 'text-gray-700 dark:text-gray-300' :
+                  selectedMetric.category === 'support' ? 'text-teal-700 dark:text-teal-300' :
+                  selectedMetric.category === 'knowledge' ? 'text-cyan-700 dark:text-cyan-300' :
+                  'text-gray-700 dark:text-gray-300'
+                }`}>
+                  <BarChart className="w-6 h-6 mr-2" />
+                  Performance Analysis
+                </h4>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Current Value</span>
+                    <span className="text-sm font-bold text-gray-700 dark:text-gray-300">{selectedMetric.value}</span>
+                  </div>
+                  <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Growth Trend</span>
+                    <div className="flex items-center space-x-2">
+                      <TrendingUp className="w-4 h-4 text-green-600" />
+                      <span className="text-sm font-bold text-green-600">{selectedMetric.trend}</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Impact Level</span>
+                    <div className="flex items-center space-x-2">
+                      <div className={`w-3 h-3 rounded-full ${
+                        selectedMetric.impact === 'Critical' ? 'bg-red-500' :
+                        selectedMetric.impact === 'High' ? 'bg-orange-500' :
+                        selectedMetric.impact === 'Medium' ? 'bg-yellow-500' :
+                        'bg-green-500'
+                      }`}></div>
+                      <span className="text-sm font-bold text-gray-700 dark:text-gray-300">{selectedMetric.impact}</span>
+                    </div>
+                  </div>
+                  <div className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800 rounded-lg">
+                    <span className="text-gray-700 dark:text-gray-300 font-medium">Timeframe</span>
+                    <span className="text-sm font-bold text-gray-700 dark:text-gray-300">{selectedMetric.timeframe}</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Strategic Insights */}
+              <div>
+                <h4 className={`text-xl font-bold mb-3 flex items-center ${
+                  selectedMetric.category === 'research' ? 'text-purple-700 dark:text-purple-300' :
+                  selectedMetric.category === 'team' ? 'text-blue-700 dark:text-blue-300' :
+                  selectedMetric.category === 'financial' ? 'text-green-700 dark:text-green-300' :
+                  selectedMetric.category === 'development' ? 'text-orange-700 dark:text-orange-300' :
+                  selectedMetric.category === 'testing' ? 'text-red-700 dark:text-red-300' :
+                  selectedMetric.category === 'accessibility' ? 'text-indigo-700 dark:text-indigo-300' :
+                  selectedMetric.category === 'quality' ? 'text-pink-700 dark:text-pink-300' :
+                  selectedMetric.category === 'performance' ? 'text-yellow-700 dark:text-yellow-300' :
+                  selectedMetric.category === 'devops' ? 'text-gray-700 dark:text-gray-300' :
+                  selectedMetric.category === 'support' ? 'text-teal-700 dark:text-teal-300' :
+                  selectedMetric.category === 'knowledge' ? 'text-cyan-700 dark:text-cyan-300' :
+                  'text-gray-700 dark:text-gray-300'
+                }`}>
+                  <Target className="w-6 h-6 mr-2" />
+                  Strategic Insights
+                </h4>
+                <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+                  This metric plays a crucial role in our strategic decision-making process. The consistent growth trend 
+                  and {selectedMetric.impact.toLowerCase()} impact level indicate strong performance in the {selectedMetric.category} area. 
+                  Our team continuously monitors and optimizes this metric to ensure sustainable growth and excellence.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Innovation Details Modal */}
+      {showInnovationModal && selectedInnovation && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          onClick={() => setShowInnovationModal(false)}
+        >
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-100"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className={`p-6 rounded-t-2xl sticky top-0 z-10 ${
+              selectedInnovation.color === 'green' ? 'bg-gradient-to-r from-green-500 to-green-600' :
+              selectedInnovation.color === 'blue' ? 'bg-gradient-to-r from-blue-500 to-blue-600' :
+              selectedInnovation.color === 'purple' ? 'bg-gradient-to-r from-purple-500 to-purple-600' :
+              selectedInnovation.color === 'pink' ? 'bg-gradient-to-r from-pink-500 to-pink-600' :
+              'bg-gradient-to-r from-gray-500 to-gray-600'
+            }`}>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <div className={`text-4xl animate-bounce ${
+                    selectedInnovation.color === 'green' ? 'bg-gradient-to-br from-green-400 to-green-500' :
+                    selectedInnovation.color === 'blue' ? 'bg-gradient-to-br from-blue-400 to-blue-500' :
+                    selectedInnovation.color === 'purple' ? 'bg-gradient-to-br from-purple-400 to-purple-500' :
+                    selectedInnovation.color === 'pink' ? 'bg-gradient-to-br from-pink-400 to-pink-500' :
+                    'bg-gradient-to-br from-gray-400 to-gray-500'
+                  }`}>
+                    {selectedInnovation.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-white">{selectedInnovation.title}</h3>
+                    <p className="text-white/90 text-sm">{selectedInnovation.description}</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <button 
+                    onClick={() => downloadPDF(selectedInnovation, 'innovation')}
+                    className="text-white hover:bg-white/20 p-2 rounded-lg transition-colors duration-200"
+                    title="Download PDF"
+                  >
+                    <Download className="w-5 h-5" />
+                  </button>
+                  <button 
+                    onClick={() => setShowInnovationModal(false)}
+                    className="text-white hover:bg-white/20 p-2 rounded-lg transition-colors duration-200"
+                    title="Close"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6 space-y-6">
+              {/* Innovation Overview */}
+              <div>
+                <h4 className={`text-xl font-semibold mb-3 flex items-center ${
+                  selectedInnovation.color === 'green' ? 'text-green-700 dark:text-green-300' :
+                  selectedInnovation.color === 'blue' ? 'text-blue-700 dark:text-blue-300' :
+                  selectedInnovation.color === 'purple' ? 'text-purple-700 dark:text-purple-300' :
+                  selectedInnovation.color === 'pink' ? 'text-pink-700 dark:text-pink-300' :
+                  'text-gray-700 dark:text-gray-300'
+                }`}>
+                  <Lightbulb className={`w-5 h-5 mr-2 ${
+                    selectedInnovation.color === 'green' ? 'text-green-600' :
+                    selectedInnovation.color === 'blue' ? 'text-blue-600' :
+                    selectedInnovation.color === 'purple' ? 'text-purple-600' :
+                    selectedInnovation.color === 'pink' ? 'text-pink-600' :
+                    'text-gray-600'
+                  }`} />
+                  Innovation Overview
+                </h4>
+                <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+                  {selectedInnovation.title} is a groundbreaking innovation that represents our commitment to advancing cognitive support technology. 
+                  With {selectedInnovation.users} active users and {selectedInnovation.accuracy} accuracy, this innovation demonstrates our dedication to excellence.
+                </p>
+              </div>
+
+              {/* Performance Metrics */}
+              <div>
+                <h4 className={`text-xl font-semibold mb-3 flex items-center ${
+                  selectedInnovation.color === 'green' ? 'text-green-700 dark:text-green-300' :
+                  selectedInnovation.color === 'blue' ? 'text-blue-700 dark:text-blue-300' :
+                  selectedInnovation.color === 'purple' ? 'text-purple-700 dark:text-purple-300' :
+                  selectedInnovation.color === 'pink' ? 'text-pink-700 dark:text-pink-300' :
+                  'text-gray-700 dark:text-gray-300'
+                }`}>
+                  <BarChart className={`w-5 h-5 mr-2 ${
+                    selectedInnovation.color === 'green' ? 'text-green-600' :
+                    selectedInnovation.color === 'blue' ? 'text-blue-600' :
+                    selectedInnovation.color === 'purple' ? 'text-purple-600' :
+                    selectedInnovation.color === 'pink' ? 'text-pink-600' :
+                    'text-gray-600'
+                  }`} />
+                  Performance Metrics
+                </h4>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className={`p-4 rounded-lg border-l-4 ${
+                    selectedInnovation.color === 'green' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                    selectedInnovation.color === 'blue' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                    selectedInnovation.color === 'purple' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                    selectedInnovation.color === 'pink' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
+                  }`}>
+                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Current Status</h5>
+                    <div className={`text-3xl font-bold ${
+                      selectedInnovation.color === 'green' ? 'text-green-600' :
+                      selectedInnovation.color === 'blue' ? 'text-blue-600' :
+                      selectedInnovation.color === 'purple' ? 'text-purple-600' :
+                      selectedInnovation.color === 'pink' ? 'text-pink-600' :
+                      'text-gray-600'
+                    }`}>{selectedInnovation.status}</div>
+                  </div>
+                  <div className={`p-4 rounded-lg border-l-4 ${
+                    selectedInnovation.color === 'green' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                    selectedInnovation.color === 'blue' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                    selectedInnovation.color === 'purple' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                    selectedInnovation.color === 'pink' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
+                  }`}>
+                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Active Users</h5>
+                    <div className={`text-3xl font-bold ${
+                      selectedInnovation.color === 'green' ? 'text-green-600' :
+                      selectedInnovation.color === 'blue' ? 'text-blue-600' :
+                      selectedInnovation.color === 'purple' ? 'text-purple-600' :
+                      selectedInnovation.color === 'pink' ? 'text-pink-600' :
+                      'text-gray-600'
+                    }`}>{selectedInnovation.users}</div>
+                  </div>
+                  <div className={`p-4 rounded-lg border-l-4 ${
+                    selectedInnovation.color === 'green' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                    selectedInnovation.color === 'blue' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                    selectedInnovation.color === 'purple' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                    selectedInnovation.color === 'pink' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
+                  }`}>
+                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Accuracy Rate</h5>
+                    <div className={`text-3xl font-bold ${
+                      selectedInnovation.color === 'green' ? 'text-green-600' :
+                      selectedInnovation.color === 'blue' ? 'text-blue-600' :
+                      selectedInnovation.color === 'purple' ? 'text-purple-600' :
+                      selectedInnovation.color === 'pink' ? 'text-pink-600' :
+                      'text-gray-600'
+                    }`}>{selectedInnovation.accuracy}</div>
+                  </div>
+                  <div className={`p-4 rounded-lg border-l-4 ${
+                    selectedInnovation.color === 'green' ? 'bg-green-50 dark:bg-green-900/30 border-green-400' :
+                    selectedInnovation.color === 'blue' ? 'bg-blue-50 dark:bg-blue-900/30 border-blue-400' :
+                    selectedInnovation.color === 'purple' ? 'bg-purple-50 dark:bg-purple-900/30 border-purple-400' :
+                    selectedInnovation.color === 'pink' ? 'bg-pink-50 dark:bg-pink-900/30 border-pink-400' :
+                    'bg-gray-50 dark:bg-gray-900/30 border-gray-400'
+                  }`}>
+                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Performance Score</h5>
+                    <div className={`text-3xl font-bold ${
+                      selectedInnovation.color === 'green' ? 'text-green-600' :
+                      selectedInnovation.color === 'blue' ? 'text-blue-600' :
+                      selectedInnovation.color === 'purple' ? 'text-purple-600' :
+                      selectedInnovation.color === 'pink' ? 'text-pink-600' :
+                      'text-gray-600'
+                    }`}>95%</div>
+                    <p className="text-gray-600 dark:text-gray-300">Overall rating</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Strategic Insights */}
+              <div>
+                <h4 className={`text-xl font-semibold mb-3 flex items-center ${
+                  selectedInnovation.color === 'green' ? 'text-green-700 dark:text-green-300' :
+                  selectedInnovation.color === 'blue' ? 'text-blue-700 dark:text-blue-300' :
+                  selectedInnovation.color === 'purple' ? 'text-purple-700 dark:text-purple-300' :
+                  selectedInnovation.color === 'pink' ? 'text-pink-700 dark:text-pink-300' :
+                  'text-gray-700 dark:text-gray-300'
+                }`}>
+                  <Target className={`w-5 h-5 mr-2 ${
+                    selectedInnovation.color === 'green' ? 'text-green-600' :
+                    selectedInnovation.color === 'blue' ? 'text-blue-600' :
+                    selectedInnovation.color === 'purple' ? 'text-purple-600' :
+                    selectedInnovation.color === 'pink' ? 'text-pink-600' :
+                    'text-gray-600'
+                  }`} />
+                  Strategic Insights
+                </h4>
+                <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+                  This innovation represents a significant advancement in our cognitive support platform. 
+                  The {selectedInnovation.status.toLowerCase()} status indicates {selectedInnovation.status === 'Active' ? 'full deployment and optimization' : 'ongoing testing and refinement'}.
+                  Our team continues to monitor performance and gather user feedback to ensure continuous improvement.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Research Details Modal */}
+      {showResearchModal && selectedResearch && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4"
+          onClick={() => setShowResearchModal(false)}
+        >
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-100"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Modal Header */}
+            <div className={`p-6 rounded-t-2xl sticky top-0 z-10 ${
+              selectedResearch.color === 'orange' ? 'bg-gradient-to-r from-orange-500 to-orange-600' : `bg-gradient-to-r from-${selectedResearch.color}-500 to-${selectedResearch.color}-600`
+            }`}>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <div className={`text-4xl animate-bounce ${
+                    selectedResearch.color === 'orange' ? 'bg-gradient-to-br from-orange-400 to-orange-500' : `bg-gradient-to-br from-${selectedResearch.color}-400 to-${selectedResearch.color}-500`
+                  }`}>
+                    {selectedResearch.icon}
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold text-white">{selectedResearch.area}</h3>
+                    <p className="text-white/90 text-sm">{selectedResearch.description}</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <button 
+                    onClick={() => downloadPDF(selectedResearch, 'research')}
+                    className="text-white hover:bg-white/20 p-2 rounded-lg transition-colors duration-200"
+                    title="Download PDF"
+                  >
+                    <Download className="w-5 h-5" />
+                  </button>
+                  <button 
+                    onClick={() => setShowResearchModal(false)}
+                    className="text-white hover:bg-white/20 p-2 rounded-lg transition-colors duration-200"
+                    title="Close"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6 space-y-6">
+              {/* Research Overview */}
+              <div>
+                <h4 className={`text-xl font-semibold mb-3 flex items-center ${
+                  selectedResearch.color === 'orange' ? 'text-orange-700 dark:text-orange-300' : `text-${selectedResearch.color}-700 dark:text-${selectedResearch.color}-300`
+                }`}>
+                  <Brain className={`w-5 h-5 mr-2 ${
+                    selectedResearch.color === 'orange' ? 'text-orange-600' : `text-${selectedResearch.color}-600`
+                  }`} />
+                  Research Overview
+                </h4>
+                <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+                  {selectedResearch.area} is a critical research domain that drives innovation in our cognitive support platform. 
+                  With {selectedResearch.progress}% completion and a dedicated team of {selectedResearch.team}, 
+                  this research area is positioned to deliver breakthrough results.
+                </p>
+              </div>
+
+              {/* Research Progress */}
+              <div>
+                <h4 className={`text-xl font-semibold mb-3 flex items-center ${
+                  selectedResearch.color === 'orange' ? 'text-orange-700 dark:text-orange-300' : `text-${selectedResearch.color}-700 dark:text-${selectedResearch.color}-300`
+                }`}>
+                  <TrendingUp className={`w-5 h-5 mr-2 ${
+                    selectedResearch.color === 'orange' ? 'text-orange-600' : `text-${selectedResearch.color}-600`
+                  }`} />
+                  Research Progress
+                </h4>
+                <div className="space-y-4">
+                  <div className={`p-4 rounded-lg border-l-4 ${
+                    selectedResearch.color === 'orange' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' : `bg-${selectedResearch.color}-50 dark:bg-${selectedResearch.color}-900/30 border-${selectedResearch.color}-400`
+                  }`}>
+                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Completion Status</h5>
+                    <div className={`text-3xl font-bold ${
+                      selectedResearch.color === 'orange' ? 'text-orange-600' : `text-${selectedResearch.color}-600`
+                    }`}>{selectedResearch.progress}%</div>
+                    <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mt-2">
+                      <div 
+                        className={`h-2 rounded-full ${
+                          selectedResearch.color === 'orange' ? 'bg-gradient-to-r from-orange-500 to-orange-600' : `bg-gradient-to-r from-${selectedResearch.color}-500 to-${selectedResearch.color}-600`
+                        }`}
+                        style={{ width: `${selectedResearch.progress}%` }}
+                      ></div>
+                    </div>
+                  </div>
+                  <div className={`p-4 rounded-lg border-l-4 ${
+                    selectedResearch.color === 'orange' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' : `bg-${selectedResearch.color}-50 dark:bg-${selectedResearch.color}-900/30 border-${selectedResearch.color}-400`
+                  }`}>
+                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Research Team</h5>
+                    <div className={`text-2xl font-bold ${
+                      selectedResearch.color === 'orange' ? 'text-orange-600' : `text-${selectedResearch.color}-600`
+                    }`}>{selectedResearch.team}</div>
+                    <p className="text-gray-600 dark:text-gray-300">Dedicated researchers</p>
+                  </div>
+                  <div className={`p-4 rounded-lg border-l-4 ${
+                    selectedResearch.color === 'orange' ? 'bg-orange-50 dark:bg-orange-900/30 border-orange-400' : `bg-${selectedResearch.color}-50 dark:bg-${selectedResearch.color}-900/30 border-${selectedResearch.color}-400`
+                  }`}>
+                    <h5 className="font-semibold text-gray-900 dark:text-white mb-2">Estimated Timeline</h5>
+                    <div className={`text-2xl font-bold ${
+                      selectedResearch.color === 'orange' ? 'text-orange-600' : `text-${selectedResearch.color}-600`
+                    }`}>
+                      {selectedResearch.progress >= 80 ? 'Q2 2026' : selectedResearch.progress >= 60 ? 'Q3 2026' : 'Q4 2026'}
+                    </div>
+                    <p className="text-gray-600 dark:text-gray-300">Target completion</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Research Impact */}
+              <div>
+                <h4 className={`text-xl font-semibold mb-3 flex items-center ${
+                  selectedResearch.color === 'orange' ? 'text-orange-700 dark:text-orange-300' : `text-${selectedResearch.color}-700 dark:text-${selectedResearch.color}-300`
+                }`}>
+                  <Target className={`w-5 h-5 mr-2 ${
+                    selectedResearch.color === 'orange' ? 'text-orange-600' : `text-${selectedResearch.color}-600`
+                  }`} />
+                  Research Impact
+                </h4>
+                <p className="text-gray-700 dark:text-gray-300 text-lg leading-relaxed">
+                  This research initiative is expected to deliver significant advancements in cognitive support technology. 
+                  The {selectedResearch.progress}% progress indicates {selectedResearch.progress >= 80 ? 'near completion with promising results' : selectedResearch.progress >= 60 ? 'substantial progress with clear direction' : 'early stages with foundational work being established'}.
+                  Our research team is committed to delivering breakthrough outcomes that will transform user experiences.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
-}
+};
 
 export default InnovationExplore;
