@@ -403,6 +403,35 @@ const Chatbot = () => {
       ? { text: content, sender, timestamp: new Date() }
       : { ...content, sender, timestamp: new Date() };
     setMessages((prev) => [...prev, message]);
+    
+    // Scroll to show both user question and bot answer
+    setTimeout(() => {
+      const messagesContainer = document.getElementById('chatbot-messages');
+      if (messagesContainer) {
+        // If it's a bot message (answer), scroll to show both question and answer
+        if (sender === "bot") {
+          const messageElements = messagesContainer.getElementsByClassName('message-item');
+          if (messageElements.length >= 2) {
+            // Get the user question (second to last message)
+            const userQuestion = messageElements[messageElements.length - 2];
+            if (userQuestion) {
+              userQuestion.scrollIntoView({ behavior: 'smooth', block: 'center' });
+              // Adjust scroll position to show both messages
+              setTimeout(() => {
+                messagesContainer.scrollTop = userQuestion.offsetTop - 50;
+              }, 200);
+            }
+          }
+        } else {
+          // For user messages, just ensure they're visible
+          const messageElements = messagesContainer.getElementsByClassName('message-item');
+          const lastMessage = messageElements[messageElements.length - 1];
+          if (lastMessage) {
+            lastMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }
+      }
+    }, 100);
   };
 
   const handleFileUpload = (event) => {
@@ -472,8 +501,16 @@ const Chatbot = () => {
     }, 1000);
   };
 
-  const formatMessage = (text) =>
-    text.replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>");
+  const formatMessage = (text) => {
+  return text
+    .replace(/\*\*(.*?)\*\*/g, "<strong>$1</strong>")
+    .replace(/\n\n/g, "<br><br>")
+    .replace(/\n/g, "<br>")
+    .replace(/• (.*?)(<br>|$)/g, "<li>$1</li>")
+    .replace(/(<li>.*<\/li>)/gs, "<ul class='list-disc pl-4 space-y-1'>$1</ul>")
+    .replace(/<br><\/ul>/g, "</ul><br>")
+    .replace(/<li>/g, "<li class='text-sm'>");
+};
 
   return (
     <div className="z-50" onClick={() => {
@@ -785,7 +822,7 @@ const Chatbot = () => {
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: i * 0.1 }}
-                    className={`flex items-start space-x-2 ${
+                    className={`message-item flex items-start space-x-2 ${
                       msg.sender === "user" ? "flex-row-reverse space-x-reverse" : ""
                     }`}
                   >

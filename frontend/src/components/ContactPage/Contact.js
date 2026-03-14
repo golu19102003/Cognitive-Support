@@ -1,886 +1,1084 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Mail, Phone, MapPin, MessageSquare, Send, Clock, Globe, Users, ChevronRight, CheckCircle, AlertCircle, Star, Zap, Shield, Award, TrendingUp, Copy, ExternalLink, Calendar, User } from 'lucide-react';
+import { 
+  Mail, Phone, MapPin, Clock, Send, User, MessageSquare, 
+  CheckCircle, AlertCircle, Award, Zap, TrendingUp, Calendar,
+  Headphones, Shield, Globe, Users, Star, ChevronRight,
+  Copy, Check, X, Menu, ArrowUp, MessageCircle, Heart,
+  BarChart3, PieChart, Activity, Target, Timer, Settings,
+  HelpCircle, FileText, Download, Upload, Filter, Search,
+  Plus, Minus, Edit, Trash2, Save, Refresh, Eye, EyeOff
+} from 'lucide-react';
 
 const Contact = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  
-  // Check for theme preference
-  useEffect(() => {
-    const checkTheme = () => {
-      const theme = localStorage.getItem('theme') || 
-                   localStorage.getItem('darkMode') || 
-                   localStorage.getItem('isDarkMode');
-      setIsDarkMode(theme === 'dark' || theme === 'true');
-    };
-
-    checkTheme();
-    
-    // Listen for theme changes
-    window.addEventListener('storage', checkTheme);
-    window.addEventListener('themechange', checkTheme);
-    window.addEventListener('darkModeChange', checkTheme);
-    
-    // Poll every 500ms as backup
-    const interval = setInterval(checkTheme, 500);
-    
-    return () => {
-      window.removeEventListener('storage', checkTheme);
-      window.removeEventListener('themechange', checkTheme);
-      window.removeEventListener('darkModeChange', checkTheme);
-      clearInterval(interval);
-    };
-  }, []);
-
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    subject: '',
-    message: '',
-    priority: 'normal',
-    company: '',
     phone: '',
-    preferredContact: 'email'
+    company: '',
+    subject: '',
+    message: ''
   });
-  const [isLoading, setIsLoading] = useState(false);
+  
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState('');
-  const [errors, setErrors] = useState({});
-  const [touched, setTouched] = useState({});
-  const [charCount, setCharCount] = useState(0);
-  const [copiedEmail, setCopiedEmail] = useState(false);
-  const [copiedPhone, setCopiedPhone] = useState(false);
   const [submitCount, setSubmitCount] = useState(0);
-  const [showConfetti, setShowConfetti] = useState(false);
+  const [charCount, setCharCount] = useState(0);
+  const [copied, setCopied] = useState('');
+  
+  // Advanced state variables
+  const [activeSection, setActiveSection] = useState('overview');
+  const [inquiryType, setInquiryType] = useState('general');
+  const [urgency, setUrgency] = useState('normal');
+  const [budget, setBudget] = useState('');
+  const [timeline, setTimeline] = useState('');
+  const [selectedPlan, setSelectedPlan] = useState('');
+  const [showAnimation, setShowAnimation] = useState(false);
+  const [viewMode, setViewMode] = useState('grid');
+  const [selectedFeature, setSelectedFeature] = useState(null);
+  const [showAdvancedForm, setShowAdvancedForm] = useState(false);
+  const [liveChatStatus, setLiveChatStatus] = useState('online');
+  const [supportStats, setSupportStats] = useState({
+    avgResponseTime: '2 min',
+    satisfactionRate: '98%',
+    activeAgents: 12,
+    ticketsResolved: 1247
+  });
+
   const formRef = useRef(null);
+
+  useEffect(() => {
+    const checkDarkMode = () => {
+      const theme = localStorage.getItem('theme');
+      const darkMode = localStorage.getItem('darkMode');
+      const isDark = localStorage.getItem('isDarkMode');
+      
+      if (theme === 'dark' || darkMode === 'true' || isDark === 'true') {
+        setIsDarkMode(true);
+      }
+    };
+    
+    checkDarkMode();
+    
+    const interval = setInterval(() => {
+      setSupportStats(prev => ({
+        ...prev,
+        avgResponseTime: Math.floor(Math.random() * 3 + 1) + ' min',
+        ticketsResolved: prev.ticketsResolved + Math.floor(Math.random() * 3)
+      }));
+    }, 10000);
+    
+    return () => clearInterval(interval);
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({
-      ...formData,
-      [name]: value
-    });
+    setFormData(prev => ({ ...prev, [name]: value }));
     
-    // Clear error when user starts typing
-    if (errors[name]) {
-      setErrors({
-        ...errors,
-        [name]: ''
-      });
-    }
-    
-    // Character count for message
     if (name === 'message') {
       setCharCount(value.length);
     }
   };
-  
-  const handleBlur = (e) => {
-    const { name } = e.target;
-    setTouched({
-      ...touched,
-      [name]: true
-    });
-    validateField(name, e.target.value);
-  };
-  
-  const copyToClipboard = async (text, type) => {
-    try {
-      await navigator.clipboard.writeText(text);
-      if (type === 'email') {
-        setCopiedEmail(true);
-        setTimeout(() => setCopiedEmail(false), 2000);
-      } else if (type === 'phone') {
-        setCopiedPhone(true);
-        setTimeout(() => setCopiedPhone(false), 2000);
-      }
-    } catch (err) {
-      console.error('Failed to copy text: ', err);
+
+  const validateForm = () => {
+    if (!formData.name.trim()) {
+      setSuccess('❌ Please enter your name');
+      return false;
     }
-  };
-
-  const scrollToForm = () => {
-    formRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const resetForm = () => {
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: '',
-      priority: 'normal',
-      company: '',
-      phone: '',
-      preferredContact: 'email'
-    });
-    setErrors({});
-    setTouched({});
-    setCharCount(0);
-  };
-
-  const generateUniqueId = () => {
-    return 'contact_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-  };
-
-  const validateField = (name, value) => {
-    const newErrors = { ...errors };
-    
-    switch (name) {
-      case 'name':
-        if (!value.trim()) {
-          newErrors.name = 'Name is required';
-        } else if (value.length < 2) {
-          newErrors.name = 'Name must be at least 2 characters';
-        }
-        break;
-      case 'email':
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!value.trim()) {
-          newErrors.email = 'Email is required';
-        } else if (!emailRegex.test(value)) {
-          newErrors.email = 'Please enter a valid email';
-        }
-        break;
-      case 'subject':
-        if (!value.trim()) {
-          newErrors.subject = 'Subject is required';
-        } else if (value.length < 5) {
-          newErrors.subject = 'Subject must be at least 5 characters';
-        }
-        break;
-      case 'message':
-        if (!value.trim()) {
-          newErrors.message = 'Message is required';
-        } else if (value.length < 10) {
-          newErrors.message = 'Message must be at least 10 characters';
-        }
-        break;
-      case 'phone':
-        if (value && !/^\+?[\d\s-()]+$/.test(value)) {
-          newErrors.phone = 'Please enter a valid phone number';
-        }
-        break;
+    if (!formData.email.trim()) {
+      setSuccess('❌ Please enter your email');
+      return false;
     }
-    
-    setErrors(newErrors);
-    return !newErrors[name];
+    if (!formData.message.trim()) {
+      setSuccess('❌ Please enter your message');
+      return false;
+    }
+    if (formData.message.length < 10) {
+      setSuccess('❌ Message must be at least 10 characters');
+      return false;
+    }
+    return true;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    // Validate all fields
-    const fields = ['name', 'email', 'subject', 'message'];
-    let isValid = true;
+    if (!validateForm()) return;
     
-    for (const field of fields) {
-      if (!validateField(field, formData[field])) {
-        isValid = false;
-      }
-    }
-    
-    if (!isValid) {
-      setTouched({
-        name: true,
-        email: true,
-        subject: true,
-        message: true,
-        phone: true
-      });
-      return;
-    }
-    
-    setIsLoading(true);
+    setLoading(true);
     setSuccess('');
-    setSubmitCount(prev => prev + 1);
-
+    
     try {
       await new Promise(resolve => setTimeout(resolve, 2000));
       
-      const ticketId = generateUniqueId();
-      setSuccess(`✅ Message sent successfully! Ticket ID: ${ticketId}. We'll get back to you within 24 hours.`);
-      setShowConfetti(true);
-      setTimeout(() => setShowConfetti(false), 3000);
+      const submitData = {
+        ...formData,
+        inquiryType,
+        urgency,
+        budget,
+        timeline,
+        selectedPlan,
+        timestamp: new Date().toISOString()
+      };
       
+      console.log('Form submitted:', submitData);
+      
+      setSuccess('✅ Message sent successfully! We\'ll get back to you within 24 hours.');
+      setSubmitCount(prev => prev + 1);
       setFormData({
         name: '',
         email: '',
-        subject: '',
-        message: '',
-        priority: 'normal',
-        company: '',
         phone: '',
-        preferredContact: 'email'
+        company: '',
+        subject: '',
+        message: ''
       });
       setCharCount(0);
-      setErrors({});
-      setTouched({});
+      setShowAnimation(true);
+      
+      setTimeout(() => setShowAnimation(false), 3000);
       
     } catch (error) {
-      setSuccess('❌ Failed to send message. Please try again later.');
+      setSuccess('❌ Failed to send message. Please try again.');
     } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
-  return (
-    <div className="space-y-6">
-      {/* Advanced Header Section */}
-      <div className="text-center mb-8">
-        <div className="flex justify-center mb-4">
-          <img 
-            src={isDarkMode ? "/image.png" : "/short_logo.png"} 
-            alt="PriHub Logo" 
-            className="h-16 w-auto mr-3 transition-all duration-300"
-          />
-        </div>
-        <h1 className="text-4xl font-bold mb-4">
-          <span style={{ color: '#16808D' }}>Contact</span>
-          <span className={`transition-colors duration-300 ${
-            isDarkMode ? 'text-white' : ''
-          }`} style={{ color: isDarkMode ? '#ffffff' : '#000000' }}> Us</span>
-        </h1>
-        <p className={`text-xl transition-colors duration-300 ${
-          isDarkMode ? 'text-gray-300' : 'text-gray-600'
-        }`}>Get in touch with PriHub team</p>
-        
-        {/* Advanced Stats Section with More Details */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mt-8">
-          <div className={`p-6 rounded-lg transition-all duration-300 hover:shadow-lg hover:scale-105 ${
-            isDarkMode ? 'bg-gray-800' : 'bg-blue-50'
-          }`}>
-            <div className="flex items-center justify-center mb-3">
-              <Users className="h-6 w-6 text-[#1B9AAA]" />
-            </div>
-            <div className="text-2xl font-bold" style={{ color: '#1B9AAA' }}>10K+</div>
-            <div className={`text-sm transition-colors duration-300 ${
-              isDarkMode ? 'text-gray-400' : 'text-gray-600'
-            }`}>Happy Clients</div>
-            <div className={`text-xs mt-3 transition-colors duration-300 ${
-              isDarkMode ? 'text-gray-500' : 'text-gray-500'
-            }`}>Since 2020</div>
-          </div>
-          <div className={`p-6 rounded-lg transition-all duration-300 hover:shadow-lg hover:scale-105 ${
-            isDarkMode ? 'bg-gray-800' : 'bg-blue-50'
-          }`}>
-            <div className="flex items-center justify-center mb-3">
-              <Star className="h-6 w-6 text-[#1B9AAA]" />
-            </div>
-            <div className="text-2xl font-bold" style={{ color: '#1B9AAA' }}>4.9</div>
-            <div className={`text-sm transition-colors duration-300 ${
-              isDarkMode ? 'text-gray-400' : 'text-gray-600'
-            }`}>Rating</div>
-            <div className={`text-xs mt-3 transition-colors duration-300 ${
-              isDarkMode ? 'text-gray-500' : 'text-gray-500'
-            }`}>2,847 reviews</div>
-          </div>
-          <div className={`p-6 rounded-lg transition-all duration-300 hover:shadow-lg hover:scale-105 ${
-            isDarkMode ? 'bg-gray-800' : 'bg-blue-50'
-          }`}>
-            <div className="flex items-center justify-center mb-3">
-              <Clock className="h-6 w-6 text-[#1B9AAA]" />
-            </div>
-            <div className="text-2xl font-bold" style={{ color: '#1B9AAA' }}>24h</div>
-            <div className={`text-sm transition-colors duration-300 ${
-              isDarkMode ? 'text-gray-400' : 'text-gray-600'
-            }`}>Response Time</div>
-            <div className={`text-xs mt-3 transition-colors duration-300 ${
-              isDarkMode ? 'text-gray-500' : 'text-gray-500'
-            }`}>Business days</div>
-          </div>
-          <div className={`p-6 rounded-lg transition-all duration-300 hover:shadow-lg hover:scale-105 ${
-            isDarkMode ? 'bg-gray-800' : 'bg-blue-50'
-          }`}>
-            <div className="flex items-center justify-center mb-3">
-              <Shield className="h-6 w-6 text-[#1B9AAA]" />
-            </div>
-            <div className="text-2xl font-bold" style={{ color: '#1B9AAA' }}>100%</div>
-            <div className={`text-sm transition-colors duration-300 ${
-              isDarkMode ? 'text-gray-400' : 'text-gray-600'
-            }`}>Secure</div>
-            <div className={`text-xs mt-3 transition-colors duration-300 ${
-              isDarkMode ? 'text-gray-500' : 'text-gray-500'
-            }`}>SSL Encrypted</div>
-          </div>
-        </div>
+  const copyToClipboard = async (text, type) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopied(type);
+      setTimeout(() => setCopied(''), 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  };
 
-        <div className="mt-12">
-          {/* Additional Info Bar */}
-          <div className={`p-6 rounded-lg border transition-colors duration-300 ${
-            isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-blue-50 border-blue-200'
-          }`}>
-            <div className="flex flex-wrap items-center justify-center gap-8 text-sm">
-              <div className="flex items-center space-x-2">
-                <Zap className="h-4 w-4 text-[#1B9AAA]" />
-                <span className={isDarkMode ? 'text-gray-300' : 'text-gray-700'}>Instant Response</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <TrendingUp className="h-4 w-4 text-green-500" />
-                <span className={isDarkMode ? 'text-gray-300' : 'text-gray-700'}>98% Satisfaction</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Award className="h-4 w-4 text-yellow-500" />
-                <span className={isDarkMode ? 'text-gray-300' : 'text-gray-700'}>Award Winning</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <Calendar className="h-4 w-4 text-[#1B9AAA]" />
-                <span className={isDarkMode ? 'text-gray-300' : 'text-gray-700'}>24/7 Support</span>
-              </div>
-            </div>
-          </div>
-        </div>
+  const contactFeatures = [
+    {
+      icon: <Zap className="h-6 w-6" />,
+      title: 'Instant Response',
+      description: 'Get immediate assistance from our AI-powered support system',
+      color: 'text-blue-500'
+    },
+    {
+      icon: <Users className="h-6 w-6" />,
+      title: 'Expert Team',
+      description: 'Connect with certified professionals specializing in cognitive support',
+      color: 'text-green-500'
+    },
+    {
+      icon: <Shield className="h-6 w-6" />,
+      title: 'Secure Platform',
+      description: 'Your data is protected with enterprise-grade security measures',
+      color: 'text-purple-500'
+    },
+    {
+      icon: <Globe className="h-6 w-6" />,
+      title: 'Global Support',
+      description: '24/7 assistance available in multiple languages',
+      color: 'text-orange-500'
+    }
+  ];
+
+  const supportPlans = [
+    {
+      name: 'Basic',
+      price: 'Free',
+      features: ['Email Support', 'Community Access', 'Basic Resources'],
+      recommended: false
+    },
+    {
+      name: 'Premium',
+      price: '$29/month',
+      features: ['Priority Support', 'Live Chat', 'Personalized Assistance', 'Progress Tracking'],
+      recommended: true
+    },
+    {
+      name: 'Enterprise',
+      price: 'Custom',
+      features: ['Dedicated Support', 'Custom Solutions', 'API Access', 'Training Sessions'],
+      recommended: false
+    }
+  ];
+
+  const faqItems = [
+    {
+      category: 'Getting Started',
+      question: 'How do I create an account?',
+      answer: 'Click on the Sign Up button and follow the registration process. You\'ll need to provide basic information and verify your email.'
+    },
+    {
+      category: 'Support',
+      question: 'What support options are available?',
+      answer: 'We offer email support, live chat, and phone support. Premium users get priority assistance with faster response times.'
+    },
+    {
+      category: 'Features',
+      question: 'Can I customize the interface?',
+      answer: 'Yes! You can adjust text size, color themes, and layout preferences to suit your specific needs and accessibility requirements.'
+    }
+  ];
+
+  return (
+    <div className={`space-y-6 transition-colors duration-300 ${isDarkMode ? 'bg-gray-900' : 'bg-gradient-to-br from-blue-50 via-white to-purple-50'}`}>
+      {/* Animated Background Elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className={`absolute top-20 left-10 w-72 h-72 rounded-full opacity-20 animate-pulse ${isDarkMode ? 'bg-blue-600' : 'bg-blue-400'}`}></div>
+        <div className={`absolute bottom-20 right-10 w-96 h-96 rounded-full opacity-20 animate-pulse delay-1000 ${isDarkMode ? 'bg-purple-600' : 'bg-purple-400'}`}></div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-        <div ref={formRef} className={`bg-white rounded-lg shadow p-8 transition-colors duration-300 ${
-          isDarkMode ? 'bg-gray-800' : 'bg-white'
-        }`}>
-          <div className="flex items-center justify-between mb-6">
-            <h2 className={`text-2xl font-bold transition-colors duration-300 ${
-              isDarkMode ? 'text-white' : 'text-gray-900'
-            }`}>Send us a Message</h2>
-            {submitCount > 0 && (
-              <div className="flex items-center space-x-2">
-                <Award className="h-5 w-5 text-green-500" />
-                <span className="text-sm text-green-500">{submitCount} submitted</span>
-              </div>
-            )}
+      <div className="relative z-10 container mx-auto px-4 py-8 max-w-7xl">
+        {/* Enhanced Header */}
+        <div className="text-center mb-12">
+          <div className="flex justify-center mb-6">
+            <div className="flex items-center space-x-4">
+              <img 
+                src={isDarkMode ? "/image.png" : "/short_logo.png"} 
+                alt="Prihub Logo" 
+                className="h-16 w-auto mr-3 transition-all duration-300"
+              />
+              <h1 className="text-4xl font-bold">
+                <span style={{ color: '#16808D' }}>Contact</span>
+                <span className={`transition-colors duration-300 ${
+                  isDarkMode ? 'text-white' : ''
+                }`} style={{ color: isDarkMode ? '#ffffff' : '#000000' }}> Support Center</span>
+              </h1>
+            </div>
           </div>
-          
-          {success && (
-            <div className={`border px-4 py-3 rounded mb-6 flex items-center space-x-2 ${
-              success.includes('✅') 
-                ? 'bg-green-50 border-green-200 text-green-600' 
-                : 'bg-red-50 border-red-200 text-red-600'
-            }`}>
-              {success.includes('✅') ? <CheckCircle className="h-5 w-5" /> : <AlertCircle className="h-5 w-5" />}
-              <span>{success}</span>
+          <p className={`text-xl ${isDarkMode ? 'text-gray-300' : 'text-gray-600'} animate-fadeIn delay-200`}>
+            We're here to help you every step of the way
+          </p>
+        </div>
+
+        {/* Navigation Tabs */}
+        <div className="grid grid-cols-5 gap-4 mb-12">
+          {['overview', 'features', 'plans', 'faq', 'stats'].map((tab, index) => {
+            const colors = [
+              { ring: 'ring-[#16808D]', icon: 'text-[#16808D]', name: 'Overview' },
+              { ring: 'ring-purple-600', icon: 'text-purple-600', name: 'Features' },
+              { ring: 'ring-red-500', icon: 'text-red-500', name: 'Plans' },
+              { ring: 'ring-blue-600', icon: 'text-blue-600', name: 'FAQ' },
+              { ring: 'ring-green-600', icon: 'text-green-600', name: 'Stats' }
+            ];
+            const color = colors[index];
+            const icons = [Zap, Star, Award, HelpCircle, BarChart3];
+            const Icon = icons[index];
+            
+            return (
+              <div 
+                key={tab}
+                onClick={() => setActiveSection(tab)}
+                className={`bg-white rounded-lg shadow-lg p-4 transition-all duration-300 hover:shadow-xl hover:scale-105 flex items-center justify-center text-center cursor-pointer ${
+                  activeSection === tab ? `ring-2 ${color.ring}` : ''
+                } ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}
+              >
+                <Icon className={`h-8 w-8 ${color.icon} mr-2`} />
+                <h2 className={`text-sm font-bold transition-colors duration-300 ${
+                  isDarkMode ? 'text-white' : 'text-gray-900'
+                }`}>{color.name}</h2>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Overview Section */}
+        {activeSection === 'overview' && (
+          <div className="animate-fadeIn">
+            <div className="text-center py-12 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-[#16808D]/10 to-purple-500/10 animate-pulse"></div>
+              <div className="relative z-10">
+                <Headphones className="h-16 w-16 text-[#16808D] mx-auto mb-4 animate-bounce" />
+                <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-[#16808D] to-purple-600 bg-clip-text text-transparent">
+                  <span style={{ color: '#16808D' }}>Contact Support</span>
+                </h2>
+                <p className="text-lg max-w-3xl mx-auto italic leading-relaxed">
+                  Get in touch with our dedicated support team. We're committed to providing comprehensive assistance and resources for individuals and families seeking cognitive support services.
+                </p>
+              </div>
             </div>
-          )}
-
-          <form className="space-y-5" onSubmit={handleSubmit}>
-            {/* Personal Information Section */}
-            <div className={`p-4 rounded-lg border transition-colors duration-300 ${
-              isDarkMode ? 'border-gray-700 bg-gray-900' : 'border-gray-200 bg-gray-50'
-            }`}>
-              <h3 className={`text-lg font-semibold mb-4 flex items-center transition-colors duration-300 ${
-                isDarkMode ? 'text-white' : 'text-gray-900'
+            
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
+              <div className={`p-4 rounded-lg border transition-all duration-300 hover:shadow-lg hover:scale-105 ${
+                isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
               }`}>
-                <User className="h-5 w-5 mr-2 text-[#1B9AAA]" />
-                Personal Information
-              </h3>
-              <div className="space-y-4">
-                <div>
-                  <label htmlFor="name" className={`block text-sm font-medium mb-2 transition-colors duration-300 ${
-                    isDarkMode ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
-                    Your Name <span className="text-red-500">*</span>
-                  </label>
-                  <div className="relative">
-                    <input
-                      id="name"
-                      name="name"
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#1B9AAA] transition-colors duration-300 ${
-                        errors.name && touched.name 
-                          ? 'border-red-500 bg-red-50' 
-                          : isDarkMode 
-                            ? 'bg-gray-800 border-gray-600 text-white' 
-                            : 'bg-white border-gray-300'
-                      }`}
-                      placeholder="Enter your full name"
-                    />
-                    {errors.name && touched.name && (
-                      <div className="absolute mt-1 text-xs text-red-500 flex items-center">
-                        <AlertCircle className="h-3 w-3 mr-1" />
-                        {errors.name}
-                      </div>
-                    )}
-                    {!errors.name && formData.name && touched.name && (
-                      <div className="absolute mt-1 text-xs text-green-500 flex items-center">
-                        <CheckCircle className="h-3 w-3 mr-1" />
-                        Looks good!
-                      </div>
-                    )}
-                  </div>
+                <div className="text-center">
+                  <Zap className="h-8 w-8 text-[#16808D] mx-auto mb-2" />
+                  <p className={`font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Instant Response</p>
+                  <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>Get immediate assistance</p>
                 </div>
-
-                <div>
-                  <label htmlFor="email" className={`block text-sm font-medium mb-2 transition-colors duration-300 ${
-                    isDarkMode ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
-                    Email Address <span className="text-red-500">*</span>
-                  </label>
-                  <div className="relative">
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      value={formData.email}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#1B9AAA] transition-colors duration-300 ${
-                        errors.email && touched.email 
-                          ? 'border-red-500 bg-red-50' 
-                          : isDarkMode 
-                            ? 'bg-gray-800 border-gray-600 text-white' 
-                            : 'bg-white border-gray-300'
-                      }`}
-                      placeholder="your.email@example.com"
-                    />
-                    {errors.email && touched.email && (
-                      <div className="absolute mt-1 text-xs text-red-500 flex items-center">
-                        <AlertCircle className="h-3 w-3 mr-1" />
-                        {errors.email}
-                      </div>
-                    )}
-                    {!errors.email && formData.email && touched.email && (
-                      <div className="absolute mt-1 text-xs text-green-500 flex items-center">
-                        <CheckCircle className="h-3 w-3 mr-1" />
-                        Valid email!
-                      </div>
-                    )}
-                  </div>
+              </div>
+              <div className={`p-4 rounded-lg border transition-all duration-300 hover:shadow-lg hover:scale-105 ${
+                isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+              }`}>
+                <div className="text-center">
+                  <TrendingUp className="h-8 w-8 text-green-500 mx-auto mb-2" />
+                  <p className={`font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>98% Satisfaction</p>
+                  <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>Customer success rate</p>
                 </div>
-
-                <div>
-                  <label htmlFor="phone" className={`block text-sm font-medium mb-2 transition-colors duration-300 ${
-                    isDarkMode ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
-                    Phone Number
-                  </label>
-                  <div className="relative">
-                    <input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#1B9AAA] transition-colors duration-300 ${
-                        errors.phone && touched.phone 
-                          ? 'border-red-500 bg-red-50' 
-                          : isDarkMode 
-                            ? 'bg-gray-800 border-gray-600 text-white' 
-                            : 'bg-white border-gray-300'
-                      }`}
-                      placeholder="+91 98765 43210"
-                    />
-                    {errors.phone && touched.phone && (
-                      <div className="absolute mt-1 text-xs text-red-500 flex items-center">
-                        <AlertCircle className="h-3 w-3 mr-1" />
-                        {errors.phone}
-                      </div>
-                    )}
-                  </div>
+              </div>
+              <div className={`p-4 rounded-lg border transition-all duration-300 hover:shadow-lg hover:scale-105 ${
+                isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+              }`}>
+                <div className="text-center">
+                  <Award className="h-8 w-8 text-yellow-500 mx-auto mb-2" />
+                  <p className={`font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Award Winning</p>
+                  <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>Excellence in service</p>
                 </div>
-
-                <div>
-                  <label htmlFor="company" className={`block text-sm font-medium mb-2 transition-colors duration-300 ${
-                    isDarkMode ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
-                    Company Name
-                  </label>
-                  <input
-                    id="company"
-                    name="company"
-                    type="text"
-                    value={formData.company}
-                    onChange={handleChange}
-                    className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#1B9AAA] transition-colors duration-300 ${
-                      isDarkMode 
-                        ? 'bg-gray-800 border-gray-600 text-white' 
-                        : 'bg-white border-gray-300'
-                    }`}
-                    placeholder="Your company name (optional)"
-                  />
+              </div>
+              <div className={`p-4 rounded-lg border transition-all duration-300 hover:shadow-lg hover:scale-105 ${
+                isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+              }`}>
+                <div className="text-center">
+                  <Calendar className="h-8 w-8 text-purple-500 mx-auto mb-2" />
+                  <p className={`font-semibold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>24/7 Support</p>
+                  <p className={`text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>Always available</p>
                 </div>
               </div>
             </div>
 
-            {/* Message Details Section */}
-            <div className={`p-4 rounded-lg border transition-colors duration-300 ${
-              isDarkMode ? 'border-gray-700 bg-gray-900' : 'border-gray-200 bg-gray-50'
-            }`}>
-              <h3 className={`text-lg font-semibold mb-4 flex items-center transition-colors duration-300 ${
-                isDarkMode ? 'text-white' : 'text-gray-900'
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Contact Form */}
+              <div ref={formRef} className={`bg-white rounded-lg shadow-lg p-8 transition-all duration-300 hover:shadow-xl transform hover:scale-[1.02] ${
+                isDarkMode ? 'bg-gray-800' : 'bg-white'
               }`}>
-                <MessageSquare className="h-5 w-5 mr-2 text-[#1B9AAA]" />
-                Message Details
-              </h3>
-              
-              <div className="space-y-4">
-                <div>
-                  <label htmlFor="priority" className={`block text-sm font-medium mb-2 transition-colors duration-300 ${
-                    isDarkMode ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
-                    Priority Level
-                  </label>
-                  <div className="grid grid-cols-3 gap-2">
-                    {['low', 'normal', 'high'].map((priority) => (
-                      <label
-                        key={priority}
-                        className={`flex items-center justify-center px-3 py-2 border rounded-md cursor-pointer transition-all duration-300 ${
-                          formData.priority === priority
-                            ? 'bg-[#1B9AAA] text-white border-[#1B9AAA] shadow-md'
-                            : isDarkMode
-                              ? 'bg-gray-800 border-gray-600 text-gray-300 hover:bg-gray-700'
-                              : 'bg-gray-50 border-gray-300 text-gray-700 hover:bg-gray-100'
-                        }`}
-                      >
-                        <input
-                          type="radio"
-                          name="priority"
-                          value={priority}
-                          checked={formData.priority === priority}
-                          onChange={handleChange}
-                          className="sr-only"
-                        />
-                        <span className="capitalize">{priority}</span>
-                      </label>
-                    ))}
-                  </div>
+                <div className="flex items-center mb-6">
+                  <Mail className="h-8 w-8 text-[#16808D] mr-3 animate-pulse" />
+                  <h2 className={`text-2xl font-bold transition-colors duration-300 ${
+                    isDarkMode ? 'text-white' : 'text-gray-900'
+                  }`}>Send us a Message</h2>
                 </div>
-
-                <div>
-                  <label htmlFor="subject" className={`block text-sm font-medium mb-2 transition-colors duration-300 ${
-                    isDarkMode ? 'text-gray-300' : 'text-gray-700'
+                
+                {success && (
+                  <div className={`border px-4 py-3 rounded mb-6 flex items-center space-x-2 ${
+                    success.includes('✅') 
+                      ? 'bg-green-50 border-green-200 text-green-600' 
+                      : 'bg-red-50 border-red-200 text-red-600'
                   }`}>
-                    Subject <span className="text-red-500">*</span>
-                  </label>
-                  <div className="relative">
-                    <input
-                      id="subject"
-                      name="subject"
-                      type="text"
-                      required
-                      value={formData.subject}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#1B9AAA] transition-colors duration-300 ${
-                        errors.subject && touched.subject 
-                          ? 'border-red-500 bg-red-50' 
-                          : isDarkMode 
-                            ? 'bg-gray-800 border-gray-600 text-white' 
-                            : 'bg-white border-gray-300'
-                      }`}
-                      placeholder="How can we help you?"
-                    />
-                    {errors.subject && touched.subject && (
-                      <div className="absolute mt-1 text-xs text-red-500 flex items-center">
-                        <AlertCircle className="h-3 w-3 mr-1" />
-                        {errors.subject}
-                      </div>
-                    )}
+                    {success.includes('✅') ? <CheckCircle className="h-5 w-5" /> : <AlertCircle className="h-5 w-5" />}
+                    <span>{success}</span>
                   </div>
-                </div>
+                )}
 
-                <div>
-                  <label htmlFor="preferredContact" className={`block text-sm font-medium mb-2 transition-colors duration-300 ${
-                    isDarkMode ? 'text-gray-300' : 'text-gray-700'
+                <form className="space-y-5" onSubmit={handleSubmit}>
+                  <div className={`p-4 rounded-lg border transition-colors duration-300 ${
+                    isDarkMode ? 'border-gray-700 bg-gray-900' : 'border-gray-200 bg-gray-50'
                   }`}>
-                    Preferred Contact Method
-                  </label>
-                  <div className="grid grid-cols-2 gap-2">
-                    {['email', 'phone'].map((method) => (
-                      <label
-                        key={method}
-                        className={`flex items-center justify-center px-3 py-2 border rounded-md cursor-pointer transition-all duration-300 ${
-                          formData.preferredContact === method
-                            ? 'bg-[#1B9AAA] text-white border-[#1B9AAA] shadow-md'
-                            : isDarkMode
-                              ? 'bg-gray-800 border-gray-600 text-gray-300 hover:bg-gray-700'
-                              : 'bg-gray-50 border-gray-300 text-gray-700 hover:bg-gray-100'
-                        }`}
-                      >
-                        <input
-                          type="radio"
-                          name="preferredContact"
-                          value={method}
-                          checked={formData.preferredContact === method}
-                          onChange={handleChange}
-                          className="sr-only"
-                        />
-                        <span className="capitalize">{method}</span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="message" className={`block text-sm font-medium mb-2 transition-colors duration-300 ${
-                    isDarkMode ? 'text-gray-300' : 'text-gray-700'
-                  }`}>
-                    Message <span className="text-red-500">*</span>
-                  </label>
-                  <div className="relative">
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows="5"
-                      required
-                      value={formData.message}
-                      onChange={handleChange}
-                      onBlur={handleBlur}
-                      className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-[#1B9AAA] transition-colors duration-300 ${
-                        errors.message && touched.message 
-                          ? 'border-red-500 bg-red-50' 
-                          : isDarkMode 
-                            ? 'bg-gray-800 border-gray-600 text-white' 
-                            : 'bg-white border-gray-300'
-                      }`}
-                      placeholder="Tell us more about your needs..."
-                    ></textarea>
-                    <div className={`absolute bottom-2 right-2 text-xs transition-colors duration-300 ${
-                      charCount > 500 ? 'text-red-500' : isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                    <h3 className={`text-lg font-semibold mb-4 flex items-center transition-colors duration-300 ${
+                      isDarkMode ? 'text-white' : 'text-gray-900'
                     }`}>
-                      {charCount}/500
-                    </div>
-                    {errors.message && touched.message && (
-                      <div className="absolute mt-1 text-xs text-red-500 flex items-center">
-                        <AlertCircle className="h-3 w-3 mr-1" />
-                        {errors.message}
+                      <User className="h-5 w-5 mr-2 text-[#1B9AAA]" />
+                      Personal Information
+                    </h3>
+                    <div className="space-y-4">
+                      <div>
+                        <label className={`block text-sm font-medium mb-2 transition-colors duration-300 ${
+                          isDarkMode ? 'text-gray-300' : 'text-gray-700'
+                        }`}>
+                          Full Name *
+                        </label>
+                        <input
+                          type="text"
+                          name="name"
+                          value={formData.name}
+                          onChange={handleChange}
+                          className={`w-full px-4 py-3 rounded-lg border transition-all duration-300 ${
+                            isDarkMode 
+                              ? 'bg-gray-800 border-gray-600 text-white focus:border-blue-500' 
+                              : 'bg-white border-gray-300 text-gray-900 focus:border-blue-500'
+                          } focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50`}
+                          placeholder="John Doe"
+                          required
+                        />
                       </div>
+                      <div>
+                        <label className={`block text-sm font-medium mb-2 transition-colors duration-300 ${
+                          isDarkMode ? 'text-gray-300' : 'text-gray-700'
+                        }`}>
+                          Email Address *
+                        </label>
+                        <input
+                          type="email"
+                          name="email"
+                          value={formData.email}
+                          onChange={handleChange}
+                          className={`w-full px-4 py-3 rounded-lg border transition-all duration-300 ${
+                            isDarkMode 
+                              ? 'bg-gray-800 border-gray-600 text-white focus:border-blue-500' 
+                              : 'bg-white border-gray-300 text-gray-900 focus:border-blue-500'
+                          } focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50`}
+                          placeholder="john@example.com"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label className={`block text-sm font-medium mb-2 transition-colors duration-300 ${
+                          isDarkMode ? 'text-gray-300' : 'text-gray-700'
+                        }`}>
+                          Phone Number
+                        </label>
+                        <input
+                          type="tel"
+                          name="phone"
+                          value={formData.phone}
+                          onChange={handleChange}
+                          className={`w-full px-4 py-3 rounded-lg border transition-all duration-300 ${
+                            isDarkMode 
+                              ? 'bg-gray-800 border-gray-600 text-white focus:border-blue-500' 
+                              : 'bg-white border-gray-300 text-gray-900 focus:border-blue-500'
+                          } focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50`}
+                          placeholder="+1 (555) 123-4567"
+                        />
+                      </div>
+                      <div>
+                        <label className={`block text-sm font-medium mb-2 transition-colors duration-300 ${
+                          isDarkMode ? 'text-gray-300' : 'text-gray-700'
+                        }`}>
+                          Company/Organization
+                        </label>
+                        <input
+                          type="text"
+                          name="company"
+                          value={formData.company || ''}
+                          onChange={handleChange}
+                          className={`w-full px-4 py-3 rounded-lg border transition-all duration-300 ${
+                            isDarkMode 
+                              ? 'bg-gray-800 border-gray-600 text-white focus:border-blue-500' 
+                              : 'bg-white border-gray-300 text-gray-900 focus:border-blue-500'
+                          } focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50`}
+                          placeholder="Acme Corporation"
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className={`p-4 rounded-lg border transition-colors duration-300 ${
+                    isDarkMode ? 'border-gray-700 bg-gray-900' : 'border-gray-200 bg-gray-50'
+                  }`}>
+                    <h3 className={`text-lg font-semibold mb-4 flex items-center transition-colors duration-300 ${
+                      isDarkMode ? 'text-white' : 'text-gray-900'
+                    }`}>
+                      <MessageSquare className="h-5 w-5 mr-2 text-[#1B9AAA]" />
+                      Message Details
+                    </h3>
+                    <div className="space-y-4">
+                      <div>
+                        <label className={`block text-sm font-medium mb-2 transition-colors duration-300 ${
+                          isDarkMode ? 'text-gray-300' : 'text-gray-700'
+                        }`}>
+                          Subject
+                        </label>
+                        <input
+                          type="text"
+                          name="subject"
+                          value={formData.subject}
+                          onChange={handleChange}
+                          className={`w-full px-4 py-3 rounded-lg border transition-all duration-300 ${
+                            isDarkMode 
+                              ? 'bg-gray-800 border-gray-600 text-white focus:border-blue-500' 
+                              : 'bg-white border-gray-300 text-gray-900 focus:border-blue-500'
+                          } focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50`}
+                          placeholder="How can we help you?"
+                        />
+                      </div>
+                      <div>
+                        <label className={`block text-sm font-medium mb-2 transition-colors duration-300 ${
+                          isDarkMode ? 'text-gray-300' : 'text-gray-700'
+                        }`}>
+                          Message *
+                        </label>
+                        <textarea
+                          name="message"
+                          value={formData.message}
+                          onChange={handleChange}
+                          rows="5"
+                          className={`w-full px-4 py-3 rounded-lg border transition-all duration-300 ${
+                            isDarkMode 
+                              ? 'bg-gray-800 border-gray-600 text-white focus:border-blue-500' 
+                              : 'bg-white border-gray-300 text-gray-900 focus:border-blue-500'
+                          } focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50`}
+                          placeholder="Please describe your issue or question in detail..."
+                          required
+                        />
+                        <div className={`text-sm mt-2 text-right transition-colors duration-300 ${
+                          isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                        }`}>
+                          {charCount}/500 characters
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className={`w-full py-4 px-6 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-2 ${
+                      loading
+                        ? 'bg-gray-400 cursor-not-allowed'
+                        : 'bg-gradient-to-r from-[#16808D] to-teal-600 hover:from-[#1a9caa] hover:to-teal-700 transform hover:scale-105'
+                    } text-white shadow-lg`}
+                  >
+                    {loading ? (
+                      <>
+                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                        <span>Sending...</span>
+                      </>
+                    ) : (
+                      <>
+                        <Send className="h-5 w-5" />
+                        <span>Send Message</span>
+                      </>
                     )}
+                  </button>
+                </form>
+              </div>
+
+              {/* Contact Information */}
+              <div className="space-y-6">
+                <div className={`bg-white rounded-lg shadow-lg p-8 transition-colors duration-300 ${
+                  isDarkMode ? 'bg-gray-800' : 'bg-white'
+                }`}>
+                  <h2 className={`text-2xl font-bold mb-6 transition-colors duration-300 ${
+                    isDarkMode ? 'text-white' : 'text-gray-900'
+                  }`}>Contact Information</h2>
+                  
+                  <div className="space-y-4">
+                    <div className={`p-4 rounded-lg border transition-colors duration-300 ${
+                      isDarkMode ? 'border-gray-700 bg-gray-900' : 'border-gray-200 bg-gray-50'
+                    }`}>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                          <Mail className="h-5 w-5 text-[#1B9AAA]" />
+                          <div>
+                            <p className={`font-semibold transition-colors duration-300 ${
+                              isDarkMode ? 'text-white' : 'text-gray-900'
+                            }`}>Email</p>
+                            <p className={`transition-colors duration-300 ${
+                              isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                            }`}>info@supportsystem.com</p>
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => copyToClipboard('info@supportsystem.com', 'email')}
+                          className={`p-2 rounded-lg transition-colors duration-300 ${
+                            isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
+                          }`}
+                        >
+                          {copied === 'email' ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className={`p-4 rounded-lg border transition-colors duration-300 ${
+                      isDarkMode ? 'border-gray-700 bg-gray-900' : 'border-gray-200 bg-gray-50'
+                    }`}>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                          <Phone className="h-5 w-5 text-[#1B9AAA]" />
+                          <div>
+                            <p className={`font-semibold transition-colors duration-300 ${
+                              isDarkMode ? 'text-white' : 'text-gray-900'
+                            }`}>Phone</p>
+                            <p className={`transition-colors duration-300 ${
+                              isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                            }`}>+91 9680211602</p>
+                          </div>
+                        </div>
+                        <button
+                          onClick={() => copyToClipboard('+91 9680211602', 'phone')}
+                          className={`p-2 rounded-lg transition-colors duration-300 ${
+                            isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-100'
+                          }`}
+                        >
+                          {copied === 'phone' ? <Check className="h-4 w-4 text-green-500" /> : <Copy className="h-4 w-4" />}
+                        </button>
+                      </div>
+                    </div>
+
+                    <div className={`p-4 rounded-lg border transition-colors duration-300 ${
+                      isDarkMode ? 'border-gray-700 bg-gray-900' : 'border-gray-200 bg-gray-50'
+                    }`}>
+                      <div className="flex items-center space-x-3">
+                        <MapPin className="h-5 w-5 text-[#1B9AAA]" />
+                        <div>
+                          <p className={`font-semibold transition-colors duration-300 ${
+                            isDarkMode ? 'text-white' : 'text-gray-900'
+                          }`}>Address</p>
+                          <p className={`transition-colors duration-300 ${
+                            isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                          }`}>
+                            123 Support Street<br />
+                            Kota, Rajasthan 324005<br />
+                            India
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className={`p-4 rounded-lg border transition-colors duration-300 ${
+                      isDarkMode ? 'border-gray-700 bg-gray-900' : 'border-gray-200 bg-gray-50'
+                    }`}>
+                      <div className="flex items-center space-x-3">
+                        <Clock className="h-5 w-5 text-[#1B9AAA]" />
+                        <div>
+                          <p className={`font-semibold transition-colors duration-300 ${
+                            isDarkMode ? 'text-white' : 'text-gray-900'
+                          }`}>Support Hours</p>
+                          <p className={`transition-colors duration-300 ${
+                            isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                          }`}>
+                            Monday - Friday: 9:00 AM - 6:00 PM IST<br />
+                            Saturday: 10:00 AM - 4:00 PM IST<br />
+                            Sunday: Emergency Support Only
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Office Locations */}
+                <div className={`bg-white rounded-lg shadow-lg p-8 transition-colors duration-300 ${
+                  isDarkMode ? 'bg-gray-800' : 'bg-white'
+                }`}>
+                  <h2 className={`text-2xl font-bold mb-6 transition-colors duration-300 ${
+                    isDarkMode ? 'text-white' : 'text-gray-900'
+                  }`}>Office Locations</h2>
+                  
+                  <div className="space-y-4">
+                    <div className={`p-4 rounded-lg border transition-colors duration-300 ${
+                      isDarkMode ? 'border-gray-700 bg-gray-900' : 'border-gray-200 bg-gray-50'
+                    }`}>
+                      <h3 className={`font-semibold mb-2 transition-colors duration-300 ${
+                        isDarkMode ? 'text-white' : 'text-gray-900'
+                      }`}>Headquarters - Kota</h3>
+                      <p className={`transition-colors duration-300 ${
+                        isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                      }`}>
+                        Main Support Center<br />
+                        Rajasthan Technical University Campus<br />
+                        Kota, Rajasthan 324005
+                      </p>
+                    </div>
+
+                    <div className={`p-4 rounded-lg border transition-colors duration-300 ${
+                      isDarkMode ? 'border-gray-700 bg-gray-900' : 'border-gray-200 bg-gray-50'
+                    }`}>
+                      <h3 className={`font-semibold mb-2 transition-colors duration-300 ${
+                        isDarkMode ? 'text-white' : 'text-gray-900'
+                      }`}>Regional Office - Delhi</h3>
+                      <p className={`transition-colors duration-300 ${
+                        isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                      }`}>
+                        North India Support Hub<br />
+                        Connaught Place<br />
+                        New Delhi 110001
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
+          </div>
+        )}
 
-            {/* Action Buttons Section */}
-            <div className={`p-4 rounded-lg border transition-colors duration-300 ${
-              isDarkMode ? 'border-gray-700 bg-gray-900' : 'border-gray-200 bg-gray-50'
-            }`}>
-              <div className="flex flex-col sm:flex-row gap-3">
-                <button
-                  type="submit"
-                  disabled={isLoading}
-                  className={`flex-1 flex justify-center items-center py-3 px-6 border border-transparent rounded-md shadow-sm text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
-                    isLoading 
-                      ? 'bg-gray-400 cursor-not-allowed' 
-                      : 'bg-gradient-to-r from-[#1B9AAA] to-[#4C97A8] hover:from-[#4C97A8] hover:to-[#1B9AAA] text-white'
-                  } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#1B9AAA]`}
+        {/* Features Section */}
+        {activeSection === 'features' && (
+          <div className="animate-fadeIn">
+            <div className="text-center py-12 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-blue-500/10 animate-pulse"></div>
+              <div className="relative z-10">
+                <Star className="h-16 w-16 text-purple-600 mx-auto mb-4 animate-bounce" />
+                <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                  <span style={{ color: 'purple' }}>Advanced Features</span>
+                </h2>
+                <p className="text-lg max-w-3xl mx-auto italic leading-relaxed">
+                  Discover our comprehensive suite of features designed to provide exceptional support and assistance for cognitive disabilities.
+                </p>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {contactFeatures.map((feature, index) => (
+                <div
+                  key={index}
+                  className={`p-6 rounded-lg border transition-all duration-300 hover:shadow-xl hover:scale-105 cursor-pointer ${
+                    selectedFeature === index 
+                      ? 'ring-2 ring-purple-500 bg-gradient-to-r from-purple-50 to-blue-50' 
+                      : isDarkMode 
+                        ? 'bg-gray-800 border-gray-700 hover:border-purple-600' 
+                        : 'bg-white border-gray-200 hover:border-purple-300'
+                  }`}
+                  onClick={() => setSelectedFeature(selectedFeature === index ? null : index)}
                 >
-                  {isLoading ? (
-                    <>
-                      <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      <Send className="h-4 w-4 mr-2" />
-                      Send Message
-                    </>
-                  )}
-                </button>
-                <button
-                  type="button"
-                  onClick={resetForm}
-                  className={`flex-1 flex justify-center items-center py-3 px-6 border rounded-md text-sm font-medium transition-all duration-300 transform hover:scale-105 ${
-                    isDarkMode 
-                      ? 'border-gray-600 text-gray-300 hover:bg-gray-700' 
-                      : 'border-gray-300 text-gray-700 hover:bg-gray-100'
+                  <div className="flex items-start space-x-4">
+                    <div className={`p-3 rounded-full ${
+                      index === 0 ? 'bg-blue-100 text-blue-600' :
+                      index === 1 ? 'bg-green-100 text-green-600' :
+                      index === 2 ? 'bg-purple-100 text-purple-600' :
+                      'bg-orange-100 text-orange-600'
+                    }`}>
+                      {feature.icon}
+                    </div>
+                    <div className="flex-1">
+                      <h3 className={`text-xl font-bold mb-3 transition-colors duration-300 ${
+                        isDarkMode ? 'text-white' : 'text-gray-900'
+                      }`}>{feature.title}</h3>
+                      <p className={`mb-4 leading-relaxed transition-colors duration-300 ${
+                        isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                      }`}>{feature.description}</p>
+                      {selectedFeature === index && (
+                        <div className={`mt-4 p-4 rounded-lg border-l-4 ${
+                          index === 0 ? 'border-blue-500 bg-blue-50' :
+                          index === 1 ? 'border-green-500 bg-green-50' :
+                          index === 2 ? 'border-purple-500 bg-purple-50' :
+                          'border-orange-500 bg-orange-50'
+                        }`}>
+                          <p className="text-sm font-semibold">
+                            {index === 0 && 'Get instant AI-powered responses within seconds'}
+                            {index === 1 && 'Connect with certified professionals 24/7'}
+                            {index === 2 && 'Enterprise-grade security with end-to-end encryption'}
+                            {index === 3 && 'Multi-language support with real-time translation'}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                    <ChevronRight className={`h-5 w-5 transition-transform duration-300 flex-shrink-0 ${
+                      selectedFeature === index ? 'rotate-90 text-purple-600' : 'text-gray-400'
+                    }`} />
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* Plans Section */}
+        {activeSection === 'plans' && (
+          <div className="animate-fadeIn">
+            <div className="text-center py-12 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-orange-500/10 animate-pulse"></div>
+              <div className="relative z-10">
+                <Award className="h-16 w-16 text-red-500 mx-auto mb-4 animate-bounce" />
+                <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
+                  <span style={{ color: 'red' }}>Support Plans</span>
+                </h2>
+                <p className="text-lg max-w-3xl mx-auto italic leading-relaxed">
+                  Choose the perfect support plan tailored to your needs. From basic assistance to enterprise solutions, we have options for everyone.
+                </p>
+              </div>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {supportPlans.map((plan, index) => (
+                <div
+                  key={index}
+                  className={`p-6 rounded-lg border transition-all duration-300 hover:shadow-xl hover:scale-105 relative ${
+                    plan.recommended
+                      ? 'ring-2 ring-red-500 border-red-500 bg-gradient-to-br from-red-50 to-orange-50'
+                      : selectedPlan === plan.name
+                        ? 'ring-2 ring-green-500 border-green-500'
+                        : isDarkMode 
+                          ? 'bg-gray-800 border-gray-700 hover:border-red-600' 
+                          : 'bg-white border-gray-200 hover:border-red-300'
                   }`}
                 >
-                  Reset Form
-                </button>
-              </div>
-            </div>
-          </form>
-        </div>
-
-        <div className="space-y-6">
-          <div className={`bg-white rounded-lg shadow p-8 transition-colors duration-300 ${
-          isDarkMode ? 'bg-gray-800' : 'bg-white'
-        }`}>
-            <h2 className={`text-2xl font-bold mb-6 transition-colors duration-300 ${
-              isDarkMode ? 'text-white' : 'text-gray-900'
-            }`}>Get in Touch</h2>
-            <div className="space-y-4">
-              <div className={`flex items-center space-x-3 p-3 rounded-lg transition-colors duration-300 hover:bg-gray-50 cursor-pointer ${
-                isDarkMode ? 'hover:bg-gray-700' : ''
-              }`}>
-                <div className="flex-shrink-0">
-                  <Mail className="h-5 w-5 text-[#1B9AAA]" />
+                  {plan.recommended && (
+                    <div className="absolute -top-3 left-1/2 transform -translate-x-1/2">
+                      <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white text-sm px-4 py-1 rounded-full text-center shadow-lg animate-pulse">
+                        ⭐ Most Popular
+                      </div>
+                    </div>
+                  )}
+                  
+                  <div className="text-center mb-6">
+                    <div className={`inline-flex p-3 rounded-full mb-4 ${
+                      index === 0 ? 'bg-gray-100 text-gray-600' :
+                      index === 1 ? 'bg-red-100 text-red-600' :
+                      'bg-orange-100 text-orange-600'
+                    }`}>
+                      <Award className="h-8 w-8" />
+                    </div>
+                    <h3 className={`text-2xl font-bold mb-2 transition-colors duration-300 ${
+                      isDarkMode ? 'text-white' : 'text-gray-900'
+                    }`}>{plan.name}</h3>
+                    <p className={`text-3xl font-bold mb-4 transition-colors duration-300 ${
+                      index === 0 ? 'text-gray-600' :
+                      index === 1 ? 'text-red-600' :
+                      'text-orange-600'
+                    }`}>{plan.price}</p>
+                  </div>
+                  
+                  <ul className="space-y-3 mb-6">
+                    {plan.features.map((feature, idx) => (
+                      <li key={idx} className="flex items-center space-x-3">
+                        <div className={`p-1 rounded-full ${
+                          index === 0 ? 'bg-gray-200' :
+                          index === 1 ? 'bg-red-200' :
+                          'bg-orange-200'
+                        }`}>
+                          <CheckCircle className={`h-4 w-4 ${
+                            index === 0 ? 'text-gray-600' :
+                            index === 1 ? 'text-red-600' :
+                            'text-orange-600'
+                          }`} />
+                        </div>
+                        <span className={`transition-colors duration-300 ${
+                          isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                        }`}>{feature}</span>
+                      </li>
+                    ))}
+                  </ul>
+                  
+                  <button
+                    onClick={() => setSelectedPlan(plan.name)}
+                    className={`w-full py-3 px-4 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 ${
+                      selectedPlan === plan.name
+                        ? 'bg-green-500 text-white shadow-lg'
+                        : index === 0
+                          ? 'bg-gray-500 text-white hover:bg-gray-600'
+                          : index === 1
+                            ? 'bg-gradient-to-r from-red-500 to-orange-500 text-white hover:from-red-600 hover:to-orange-600 shadow-lg'
+                            : 'bg-gradient-to-r from-orange-500 to-yellow-500 text-white hover:from-orange-600 hover:to-yellow-600 shadow-lg'
+                    }`}
+                  >
+                    {selectedPlan === plan.name ? '✓ Selected' : `Choose ${plan.name}`}
+                  </button>
                 </div>
-                <div className="flex-1">
-                  <p className={`font-medium transition-colors duration-300 ${
-                    isDarkMode ? 'text-white' : 'text-gray-900'
-                  }`}>Email</p>
-                  <p className={`transition-colors duration-300 ${
-                    isDarkMode ? 'text-gray-300' : 'text-gray-600'
-                  }`}>info@supportsystem.com</p>
-                  <p className={`text-xs transition-colors duration-300 ${
-                    isDarkMode ? 'text-gray-400' : 'text-gray-500'
-                  }`}>Response time: 24 hours</p>
-                </div>
-                <ChevronRight className="h-4 w-4 text-gray-400" />
-              </div>
-
-              <div className={`flex items-center space-x-3 p-3 rounded-lg transition-colors duration-300 hover:bg-gray-50 cursor-pointer ${
-                isDarkMode ? 'hover:bg-gray-700' : ''
-              }`}>
-                <div className="flex-shrink-0">
-                  <Phone className="h-5 w-5 text-[#1B9AAA]" />
-                </div>
-                <div className="flex-1">
-                  <p className={`font-medium transition-colors duration-300 ${
-                    isDarkMode ? 'text-white' : 'text-gray-900'
-                  }`}>Phone</p>
-                  <p className={`transition-colors duration-300 ${
-                    isDarkMode ? 'text-gray-300' : 'text-gray-600'
-                  }`}>+91 9680211602</p>
-                  <p className={`text-xs transition-colors duration-300 ${
-                    isDarkMode ? 'text-gray-400' : 'text-gray-500'
-                  }`}>Available 9 AM - 6 PM</p>
-                </div>
-                <ChevronRight className="h-4 w-4 text-gray-400" />
-              </div>
-
-              <div className={`flex items-center space-x-3 p-3 rounded-lg transition-colors duration-300 hover:bg-gray-50 cursor-pointer ${
-                isDarkMode ? 'hover:bg-gray-700' : ''
-              }`}>
-                <div className="flex-shrink-0">
-                  <MapPin className="h-5 w-5 text-[#1B9AAA]" />
-                </div>
-                <div className="flex-1">
-                  <p className={`font-medium transition-colors duration-300 ${
-                    isDarkMode ? 'text-white' : 'text-gray-900'
-                  }`}>Address</p>
-                  <p className={`transition-colors duration-300 ${
-                    isDarkMode ? 'text-gray-300' : 'text-gray-600'
-                  }`}>Jaipur, Rajasthan</p>
-                  <p className={`text-xs transition-colors duration-300 ${
-                    isDarkMode ? 'text-gray-400' : 'text-gray-500'
-                  }`}>Get directions on map</p>
-                </div>
-                <ChevronRight className="h-4 w-4 text-gray-400" />
-              </div>
-
-              <div className={`flex items-center space-x-3 p-3 rounded-lg transition-colors duration-300 hover:bg-gray-50 cursor-pointer ${
-                isDarkMode ? 'hover:bg-gray-700' : ''
-              }`}>
-                <div className="flex-shrink-0">
-                  <MessageSquare className="h-5 w-5 text-[#1B9AAA]" />
-                </div>
-                <div className="flex-1">
-                  <p className={`font-medium transition-colors duration-300 ${
-                    isDarkMode ? 'text-white' : 'text-gray-900'
-                  }`}>Support Hours</p>
-                  <p className={`transition-colors duration-300 ${
-                    isDarkMode ? 'text-gray-300' : 'text-gray-600'
-                  }`}>Monday - Friday: 9:00 AM - 6:00 PM</p>
-                  <p className={`text-xs transition-colors duration-300 ${
-                    isDarkMode ? 'text-gray-400' : 'text-gray-500'
-                  }`}>Saturday: 10:00 AM - 4:00 PM</p>
-                </div>
-                <ChevronRight className="h-4 w-4 text-gray-400" />
-              </div>
+              ))}
             </div>
           </div>
+        )}
 
-          <div className={`bg-white rounded-lg shadow p-8 transition-colors duration-300 ${
-          isDarkMode ? 'bg-gray-800' : 'bg-white'
-        }`}>
-            <h2 className={`text-2xl font-bold mb-6 transition-colors duration-300 ${
-              isDarkMode ? 'text-white' : 'text-gray-900'
-            }`}>Office Locations</h2>
+        {/* FAQ Section */}
+        {activeSection === 'faq' && (
+          <div className="animate-fadeIn">
+            <div className="text-center py-12 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 to-indigo-500/10 animate-pulse"></div>
+              <div className="relative z-10">
+                <HelpCircle className="h-16 w-16 text-blue-600 mx-auto mb-4 animate-bounce" />
+                <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text text-transparent">
+                  <span style={{ color: 'blue' }}>Frequently Asked Questions</span>
+                </h2>
+                <p className="text-lg max-w-3xl mx-auto italic leading-relaxed">
+                  Find answers to common questions about our cognitive support services, features, and how we can help you or your loved ones.
+                </p>
+              </div>
+            </div>
+            
             <div className="space-y-4">
-              <div className={`p-4 rounded-lg border transition-colors duration-300 ${
-                isDarkMode ? 'border-gray-700' : 'border-gray-200'
-              }`}>
-                <div className="flex items-start space-x-3">
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-3 h-3 bg-[#1B9AAA] rounded-full"></div>
-                  </div>
-                  <div>
-                    <h3 className={`font-semibold mb-2 transition-colors duration-300 ${
-                      isDarkMode ? 'text-white' : 'text-gray-900'
-                    }`}>Head Office</h3>
-                    <p className={`transition-colors duration-300 ${
-                      isDarkMode ? 'text-gray-300' : 'text-gray-600'
-                    }`}>Jaipur, Rajasthan</p>
-                    <p className={`text-sm transition-colors duration-300 ${
-                      isDarkMode ? 'text-gray-400' : 'text-gray-500'
-                    }`}>Main operations and development center</p>
-                    <div className="flex items-center space-x-4 mt-2">
-                      <span className={`inline-flex items-center text-xs px-2 py-1 rounded-full transition-colors duration-300 ${
-                        isDarkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-600'
+              {faqItems.map((item, index) => (
+                <div
+                  key={index}
+                  className={`p-6 rounded-lg border transition-all duration-300 hover:shadow-xl hover:scale-[1.02] ${
+                    isDarkMode 
+                      ? 'bg-gray-800 border-gray-700 hover:border-blue-600' 
+                      : 'bg-white border-gray-200 hover:border-blue-300'
+                  }`}
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <div className="flex items-center space-x-3 mb-3">
+                        <div className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                          item.category === 'Getting Started' 
+                            ? 'bg-blue-100 text-blue-700'
+                            : item.category === 'Support'
+                              ? 'bg-green-100 text-green-700'
+                              : 'bg-purple-100 text-purple-700'
+                        }`}>
+                          {item.category}
+                        </div>
+                        <div className={`p-2 rounded-full ${
+                          index === 0 ? 'bg-blue-100 text-blue-600' :
+                          index === 1 ? 'bg-green-100 text-green-600' :
+                          'bg-purple-100 text-purple-600'
+                        }`}>
+                          <HelpCircle className="h-4 w-4" />
+                        </div>
+                      </div>
+                      <h3 className={`text-xl font-bold mb-3 transition-colors duration-300 ${
+                        isDarkMode ? 'text-white' : 'text-gray-900'
+                      }`}>{item.question}</h3>
+                      <div className={`p-4 rounded-lg border-l-4 mb-3 ${
+                        index === 0 ? 'border-blue-500 bg-blue-50' :
+                        index === 1 ? 'border-green-500 bg-green-50' :
+                        'border-purple-500 bg-purple-50'
                       }`}>
-                        <Globe className="h-3 w-3 mr-1" />
-                        India
-                      </span>
-                      <span className={`inline-flex items-center text-xs px-2 py-1 rounded-full transition-colors duration-300 ${
-                        isDarkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-600'
-                      }`}>
-                        <Users className="h-3 w-3 mr-1" />
-                        50+ Staff
-                      </span>
+                        <p className={`leading-relaxed ${
+                          isDarkMode ? 'text-gray-300' : 'text-gray-700'
+                        }`}>{item.answer}</p>
+                      </div>
+                      <div className="flex items-center space-x-4 text-sm">
+                        <span className={`flex items-center space-x-1 ${
+                          isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                        }`}>
+                          <Clock className="h-4 w-4" />
+                          <span>Updated recently</span>
+                        </span>
+                        <span className={`flex items-center space-x-1 ${
+                          isDarkMode ? 'text-gray-400' : 'text-gray-500'
+                        }`}>
+                          <Star className="h-4 w-4" />
+                          <span>Helpful</span>
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </div>
+              ))}
+            </div>
+            
+            <div className={`mt-8 p-6 rounded-lg border text-center ${
+              isDarkMode 
+                ? 'bg-gray-800 border-gray-700' 
+                : 'bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200'
+            }`}>
+              <HelpCircle className="h-12 w-12 text-blue-600 mx-auto mb-3" />
+              <h3 className={`text-xl font-bold mb-2 ${
+                isDarkMode ? 'text-white' : 'text-gray-900'
+              }`}>Still have questions?</h3>
+              <p className={`mb-4 ${
+                isDarkMode ? 'text-gray-300' : 'text-gray-600'
+              }`}>Can't find the answer you're looking for? Our support team is here to help.</p>
+              <button
+                onClick={() => setActiveSection('overview')}
+                className="px-6 py-3 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
+              >
+                Contact Support Team
+              </button>
+            </div>
+          </div>
+        )}
+
+        {/* Stats Section */}
+        {activeSection === 'stats' && (
+          <div className="animate-fadeIn">
+            <div className="text-center py-12 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-teal-500/10 animate-pulse"></div>
+              <div className="relative z-10">
+                <BarChart3 className="h-16 w-16 text-green-600 mx-auto mb-4 animate-bounce" />
+                <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-green-600 to-teal-600 bg-clip-text text-transparent">
+                  <span style={{ color: 'green' }}>Live Performance Analytics</span>
+                </h2>
+                <p className="text-lg max-w-3xl mx-auto italic leading-relaxed">
+                  Real-time metrics and performance data showing our commitment to excellence in cognitive support services.
+                </p>
               </div>
-              
-              <div className={`p-4 rounded-lg border transition-colors duration-300 ${
-                isDarkMode ? 'border-gray-700' : 'border-gray-200'
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              <div className={`p-6 rounded-lg border text-center transition-all duration-300 hover:shadow-xl hover:scale-105 ${
+                isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
               }`}>
-                <div className="flex items-start space-x-3">
-                  <div className="flex-shrink-0 mt-1">
-                    <div className="w-3 h-3 bg-[#4C97A8] rounded-full"></div>
-                  </div>
-                  <div>
-                    <h3 className={`font-semibold mb-2 transition-colors duration-300 ${
-                      isDarkMode ? 'text-white' : 'text-gray-900'
-                    }`}>Regional Office</h3>
-                    <p className={`transition-colors duration-300 ${
-                      isDarkMode ? 'text-gray-300' : 'text-gray-600'
-                    }`}>Mumbai, Maharashtra</p>
-                    <p className={`text-sm transition-colors duration-300 ${
-                      isDarkMode ? 'text-gray-400' : 'text-gray-500'
-                    }`}>Sales and customer support</p>
-                    <div className="flex items-center space-x-4 mt-2">
-                      <span className={`inline-flex items-center text-xs px-2 py-1 rounded-full transition-colors duration-300 ${
-                        isDarkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-600'
-                      }`}>
-                        <Globe className="h-3 w-3 mr-1" />
-                        India
-                      </span>
-                      <span className={`inline-flex items-center text-xs px-2 py-1 rounded-full transition-colors duration-300 ${
-                        isDarkMode ? 'bg-gray-700 text-gray-300' : 'bg-gray-100 text-gray-600'
-                      }`}>
-                        <Users className="h-3 w-3 mr-1" />
-                        20+ Staff
-                      </span>
-                    </div>
-                  </div>
+                <div className="inline-flex p-4 rounded-full bg-blue-100 text-blue-600 mb-4">
+                  <Activity className="h-8 w-8" />
+                </div>
+                <h3 className={`text-3xl font-bold mb-2 transition-colors duration-300 ${
+                  isDarkMode ? 'text-white' : 'text-gray-900'
+                }`}>{supportStats.avgResponseTime}</h3>
+                <p className={`font-semibold text-blue-600 mb-2`}>Avg Response Time</p>
+                <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Lightning fast replies</p>
+              </div>
+
+              <div className={`p-6 rounded-lg border text-center transition-all duration-300 hover:shadow-xl hover:scale-105 ${
+                isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+              }`}>
+                <div className="inline-flex p-4 rounded-full bg-green-100 text-green-600 mb-4">
+                  <TrendingUp className="h-8 w-8" />
+                </div>
+                <h3 className={`text-3xl font-bold mb-2 transition-colors duration-300 ${
+                  isDarkMode ? 'text-white' : 'text-gray-900'
+                }`}>{supportStats.satisfactionRate}</h3>
+                <p className={`font-semibold text-green-600 mb-2`}>Satisfaction Rate</p>
+                <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Customer happiness</p>
+              </div>
+
+              <div className={`p-6 rounded-lg border text-center transition-all duration-300 hover:shadow-xl hover:scale-105 ${
+                isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+              }`}>
+                <div className="inline-flex p-4 rounded-full bg-purple-100 text-purple-600 mb-4">
+                  <Users className="h-8 w-8" />
+                </div>
+                <h3 className={`text-3xl font-bold mb-2 transition-colors duration-300 ${
+                  isDarkMode ? 'text-white' : 'text-gray-900'
+                }`}>{supportStats.activeAgents}</h3>
+                <p className={`font-semibold text-purple-600 mb-2`}>Active Agents</p>
+                <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Ready to help you</p>
+              </div>
+
+              <div className={`p-6 rounded-lg border text-center transition-all duration-300 hover:shadow-xl hover:scale-105 ${
+                isDarkMode ? 'bg-gray-800 border-gray-700' : 'bg-white border-gray-200'
+              }`}>
+                <div className="inline-flex p-4 rounded-full bg-orange-100 text-orange-600 mb-4">
+                  <CheckCircle className="h-8 w-8" />
+                </div>
+                <h3 className={`text-3xl font-bold mb-2 transition-colors duration-300 ${
+                  isDarkMode ? 'text-white' : 'text-gray-900'
+                }`}>{supportStats.ticketsResolved}</h3>
+                <p className={`font-semibold text-orange-600 mb-2`}>Tickets Resolved</p>
+                <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Issues solved successfully</p>
+              </div>
+            </div>
+            
+            <div className={`mt-8 p-6 rounded-lg border ${
+              isDarkMode 
+                ? 'bg-gray-800 border-gray-700' 
+                : 'bg-gradient-to-r from-green-50 to-teal-50 border-green-200'
+            }`}>
+              <div className="flex items-center justify-between">
+                <div>
+                  <h3 className={`text-xl font-bold mb-2 ${
+                    isDarkMode ? 'text-white' : 'text-gray-900'
+                  }`}>Real-Time Monitoring</h3>
+                  <p className={`${
+                    isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                  }`}>Our systems update every 10 seconds to provide you with the most current performance metrics.</p>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+                  <span className={`text-sm font-semibold ${
+                    isDarkMode ? 'text-gray-300' : 'text-gray-600'
+                  }`}>Live</span>
                 </div>
               </div>
             </div>
           </div>
-
-          <div className={`bg-gradient-to-r from-[#1B9AAA] to-[#4C97A8] rounded-lg shadow p-8 text-white`}>
-            <div className="flex items-center space-x-3 mb-4">
-              <Clock className="h-6 w-6" />
-              <h3 className="text-xl font-bold">Quick Response</h3>
-            </div>
-            <p className="mb-4">We typically respond to all inquiries within 24 hours during business days.</p>
-            <div className="grid grid-cols-2 gap-4 text-sm">
-              <div>
-                <p className="font-semibold">Email Response</p>
-                <p className="opacity-90">Within 24 hours</p>
-              </div>
-              <div>
-                <p className="font-semibold">Phone Support</p>
-                <p className="opacity-90">9 AM - 6 PM IST</p>
-              </div>
-            </div>
-          </div>
-        </div>
+        )}
       </div>
+
+      {/* Floating Action Buttons */}
+      <div className="fixed bottom-8 right-8 space-y-3">
+        <button
+          onClick={() => formRef.current?.scrollIntoView({ behavior: 'smooth' })}
+          className={`p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${
+            isDarkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-500 hover:bg-blue-600'
+          } text-white`}
+        >
+          <ArrowUp className="h-6 w-6" />
+        </button>
+        
+        <button
+          onClick={() => setLiveChatStatus(liveChatStatus === 'online' ? 'offline' : 'online')}
+          className={`p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${
+            liveChatStatus === 'online'
+              ? 'bg-green-500 hover:bg-green-600'
+              : 'bg-gray-500 hover:bg-gray-600'
+          } text-white`}
+        >
+          <MessageCircle className="h-6 w-6" />
+        </button>
+      </div>
+
+      {/* Success Animation */}
+      {showAnimation && (
+        <div className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none">
+          <div className="text-center">
+            <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4 animate-bounce" />
+            <p className="text-2xl font-bold text-green-500">Message Sent Successfully!</p>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

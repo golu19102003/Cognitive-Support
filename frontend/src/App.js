@@ -52,7 +52,7 @@ function Application() {
           <Route path="/care-plans" element={<UserDashboard />} />
           <Route path="/ai-assistant" element={<UserDashboard />} />
           <Route path="/accessibility" element={<UserDashboard />} />
-          <Route path="/conditions" element={<ConditionsPage />} />
+          <Route path="/conditions" element={<AllFeatures />} />
           <Route path="/conditions/learning-disabilities" element={<LearningDisabilities />} />
           <Route path="/conditions/adhd" element={<ADHD />} />
           <Route path="/conditions/autism" element={<AutismSpectrum />} />
