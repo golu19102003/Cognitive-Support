@@ -8,9 +8,9 @@ import CommunityExplore from './components/AboutPage/CommunityExplore';
 import InnovationExplore from './components/AboutPage/InnovationExplore';
 import ContactPage from './components/ContactPage/Contact';
 import SignInPage from './components/AuthPages/Login';
+import InteractiveDashboard from './components/Dashboard/InteractiveDashboard';
 import Register from './components/AuthPages/Register';
 import ForgotPassword from './components/AuthPages/ForgotPassword';
-import UserDashboard from './components/UserDashboard/Dashboard'; // Dashboard component for PriHub
 import TermsOfService from './components/TermsPage/Terms';
 import PrivacyPolicy from './components/PrivacyPage/Privacy';
 import HelpCenter from './components/HelpCenter/Support';
@@ -46,12 +46,7 @@ function Application() {
           <Route path="/about/genesis" element={<GenesisExplore />} />
           <Route path="/about/community" element={<CommunityExplore />} />
           <Route path="/about/innovation" element={<InnovationExplore />} />
-          <Route path="/dashboard" element={<UserDashboard />} />
-          <Route path="/residents" element={<UserDashboard />} />
-          <Route path="/therapy" element={<UserDashboard />} />
-          <Route path="/care-plans" element={<UserDashboard />} />
-          <Route path="/ai-assistant" element={<UserDashboard />} />
-          <Route path="/accessibility" element={<UserDashboard />} />
+                    <Route path="/dashboard" element={<InteractiveDashboard />} />
           <Route path="/conditions" element={<AllFeatures />} />
           <Route path="/conditions/learning-disabilities" element={<LearningDisabilities />} />
           <Route path="/conditions/adhd" element={<ADHD />} />

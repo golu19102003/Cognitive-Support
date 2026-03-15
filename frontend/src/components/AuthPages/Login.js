@@ -68,11 +68,19 @@ const Login = () => {
       console.log('✅ Email login successful');
       console.log('👤 Mock user:', mockUser);
       
+      // Navigate to dashboard after successful login
+      navigate('/dashboard');
+      
     } catch (err) {
       console.error('🔥 Login error:', err);
       setError('Login failed. Please check your credentials and try again.');
     } finally {
       setIsLoading(false);
+    }
+    
+    // Add success notification
+    if (localStorage.getItem('token')) {
+      console.log('🎉 Login successful, redirecting to dashboard...');
     }
   };
 

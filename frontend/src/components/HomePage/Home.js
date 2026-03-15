@@ -525,7 +525,7 @@ const Home = () => {
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              to="/dashboard"
+              to="/conditions"
               className="flex items-center justify-center px-8 py-3 bg-white text-[#1B9AAA] rounded-lg font-semibold hover:bg-gradient-to-r hover:from-[#142C52] hover:to-[#16808D] hover:text-white transition-all transform hover:scale-105 shadow-lg"
             >
               <Brain className="mr-2 h-5 w-5" />
