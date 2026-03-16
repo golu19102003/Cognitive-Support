@@ -1,9 +1,37 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, Brain, Activity, Users, Heart, CheckCircle, AlertTriangle, Clock, Target, Shield, Lightbulb, BookOpen, Stethoscope, Pill, Eye, MessageSquare } from 'lucide-react';
 
 const MemoryDisorders = () => {
   const [activeSection, setActiveSection] = useState('overview');
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Check for theme preference
+  useEffect(() => {
+    const checkTheme = () => {
+      const theme = localStorage.getItem('theme') || 
+                   localStorage.getItem('darkMode') || 
+                   localStorage.getItem('isDarkMode');
+      setIsDarkMode(theme === 'dark' || theme === 'true');
+    };
+
+    checkTheme();
+    
+    // Listen for theme changes
+    window.addEventListener('storage', checkTheme);
+    window.addEventListener('themechange', checkTheme);
+    window.addEventListener('darkModeChange', checkTheme);
+    
+    // Poll every 500ms as backup
+    const interval = setInterval(checkTheme, 500);
+    
+    return () => {
+      window.removeEventListener('storage', checkTheme);
+      window.removeEventListener('themechange', checkTheme);
+      window.removeEventListener('darkModeChange', checkTheme);
+      clearInterval(interval);
+    };
+  }, []);
 
   const scrollToSection = (sectionId) => {
     setActiveSection(sectionId);
@@ -14,9 +42,16 @@ const MemoryDisorders = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <div className="bg-gradient-to-r from-[#142C52] to-[#0F172A] text-white py-16">
+    <div className={`min-h-screen transition-colors duration-300 ${isDarkMode ? 'bg-gray-900' : 'bg-gradient-to-br from-blue-50 via-white to-purple-50'}`}>
+      {/* Animated Background Elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className={`absolute top-20 left-10 w-72 h-72 rounded-full opacity-20 animate-pulse ${isDarkMode ? 'bg-blue-600' : 'bg-blue-400'}`}></div>
+        <div className={`absolute bottom-20 right-10 w-96 h-96 rounded-full opacity-20 animate-pulse delay-1000 ${isDarkMode ? 'bg-purple-600' : 'bg-purple-400'}`}></div>
+      </div>
+
+      <div className="relative z-10">
+        {/* Header */}
+        <div className="bg-gradient-to-r from-[#142C52] to-[#0F172A] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex justify-center mb-6">
@@ -616,6 +651,7 @@ const MemoryDisorders = () => {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );

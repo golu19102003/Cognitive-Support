@@ -36,9 +36,16 @@ const About = () => {
     };
   }, []);
   return (
-    <div className="space-y-6">
-      {/* Hero Section */}
-      <div className="text-center mb-12">
+    <div className={`space-y-6 transition-colors duration-300 ${isDarkMode ? 'bg-gray-900' : 'bg-gradient-to-br from-blue-50 via-white to-purple-50'}`}>
+      {/* Animated Background Elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className={`absolute top-20 left-10 w-72 h-72 rounded-full opacity-20 animate-pulse ${isDarkMode ? 'bg-blue-600' : 'bg-blue-400'}`}></div>
+        <div className={`absolute bottom-20 right-10 w-96 h-96 rounded-full opacity-20 animate-pulse delay-1000 ${isDarkMode ? 'bg-purple-600' : 'bg-purple-400'}`}></div>
+      </div>
+
+      <div className="relative z-10">
+        {/* Hero Section */}
+        <div className="text-center mb-12">
         <div className="flex justify-center mb-6">
           <div className="flex items-center space-x-4">
             <img 
@@ -1770,6 +1777,7 @@ const About = () => {
       {explorePage === 'genesis' && <GenesisExplore />}
       {explorePage === 'community' && <CommunityExplore />}
       {explorePage === 'innovation' && <InnovationExplore />}
+      </div>
     </div>
   );
 };

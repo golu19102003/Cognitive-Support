@@ -516,7 +516,7 @@ const Contact = () => {
                     className={`w-full py-4 px-6 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-2 ${
                       loading
                         ? 'bg-gray-400 cursor-not-allowed'
-                        : 'bg-gradient-to-r from-[#16808D] to-teal-600 hover:from-[#1a9caa] hover:to-teal-700 transform hover:scale-105'
+                        : 'bg-gradient-to-r from-[#142C52] to-[#16808D] hover:from-[#16808D] hover:to-[#142C52] transform hover:scale-105'
                     } text-white shadow-lg`}
                   >
                     {loading ? (
@@ -1045,29 +1045,6 @@ const Contact = () => {
             </div>
           </div>
         )}
-      </div>
-
-      {/* Floating Action Buttons */}
-      <div className="fixed bottom-8 right-8 space-y-3">
-        <button
-          onClick={() => formRef.current?.scrollIntoView({ behavior: 'smooth' })}
-          className={`p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${
-            isDarkMode ? 'bg-blue-600 hover:bg-blue-700' : 'bg-blue-500 hover:bg-blue-600'
-          } text-white`}
-        >
-          <ArrowUp className="h-6 w-6" />
-        </button>
-        
-        <button
-          onClick={() => setLiveChatStatus(liveChatStatus === 'online' ? 'offline' : 'online')}
-          className={`p-4 rounded-full shadow-lg transition-all duration-300 hover:scale-110 ${
-            liveChatStatus === 'online'
-              ? 'bg-green-500 hover:bg-green-600'
-              : 'bg-gray-500 hover:bg-gray-600'
-          } text-white`}
-        >
-          <MessageCircle className="h-6 w-6" />
-        </button>
       </div>
 
       {/* Success Animation */}

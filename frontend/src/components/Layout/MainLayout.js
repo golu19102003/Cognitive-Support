@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Users, DollarSign, MessageSquare, LogIn, Info, Menu, X, MapPin, Phone, Mail, Globe, BarChart3, FileText, BookOpen } from 'lucide-react';
+import { Home, Users, DollarSign, MessageSquare, LogIn, Info, Menu, X, MapPin, Phone, Mail, Globe, BarChart3, FileText, BookOpen, Target, Eye, Languages } from 'lucide-react';
 import ScrollArrows from '../ScrollArrows/ScrollArrows';
 import Translate from '../Translate/Translate.js';
 import Chatbot from '../Chatbot/Chatbot.js';
@@ -53,11 +53,11 @@ const MainLayout = ({ children }) => {
   const navigationItems = [
     { path: '/', label: 'Home', icon: Home },
     { path: '/about', label: 'About', icon: Info },
-    { path: '/dashboard', label: 'Dashboard', icon: BarChart3 },
-    { path: '/conditions', label: 'Conditions', icon: FileText },
+    { path: '/conditions', label: 'Conditions', icon: Users },
+    { path: '/multilingual', label: 'Languages', icon: Languages },
     { path: '/resources', label: 'Resources', icon: BookOpen },
     { path: '/contact', label: 'Contact', icon: MessageSquare },
-    { path: '/signin', label: 'Sign In', icon: LogIn },
+    { path: '/dashboard', label: 'Dashboard', icon: BarChart3 },
   ];
 
 

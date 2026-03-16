@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Moon, Sun, Type, Pill, Volume2, Square, MessageSquare, FileText } from 'lucide-react';
+import { Moon, Sun, Type, Pill, Volume2, Square, MessageSquare, FileText, Target, Eye, X, Contrast } from 'lucide-react';
 import MedicationReminder from '../MedicationReminder/MedicationReminder';
+import FocusMode from '../Gamification/FocusMode';
+import EyeTrackingNavigation from '../EyeTracking/EyeTrackingNavigation';
 
 const AccessibilitySidebar = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -10,8 +12,12 @@ const AccessibilitySidebar = () => {
   const [medicationReminder, setMedicationReminder] = useState(null);
   const [showMedicationModal, setShowMedicationModal] = useState(false);
   const [notification, setNotification] = useState({ show: false, message: '' });
+  const [showFocusMode, setShowFocusMode] = useState(false);
+  const [showEyeTracking, setShowEyeTracking] = useState(false);
+  const [isHighContrast, setIsHighContrast] = useState(false);
   const speechRef = useRef(null);
-  // Theme toggle
+
+  // Load saved settings
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
@@ -19,19 +25,31 @@ const AccessibilitySidebar = () => {
       document.documentElement.classList.add('dark');
     }
   }, []);
-  const toggleTheme = () => {
-    const newTheme = !isDarkMode;
-    setIsDarkMode(newTheme);
-    if (newTheme) {
-      document.documentElement.classList.add('dark');
-      localStorage.setItem('theme', 'dark');
-      showNotification('🌙 Dark mode enabled');
-    } else {
-      document.documentElement.classList.remove('dark');
-      localStorage.setItem('theme', 'light');
-      showNotification('☀️ Light mode enabled');
+
+  // Load high contrast setting
+  useEffect(() => {
+    const savedHighContrast = localStorage.getItem('highContrast');
+    if (savedHighContrast === 'enabled') {
+      setIsHighContrast(true);
+      document.documentElement.classList.add('high-contrast');
     }
+  }, []);
+
+  const toggleTheme = () => {
+    setIsDarkMode(!isDarkMode);
+    document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', isDarkMode ? 'light' : 'dark');
+    showNotification(isDarkMode ? '☀️ Light Mode' : '🌙 Dark Mode');
   };
+
+  // High contrast toggle
+  const toggleHighContrast = () => {
+    setIsHighContrast(!isHighContrast);
+    document.documentElement.classList.toggle('high-contrast');
+    localStorage.setItem('highContrast', !isHighContrast ? 'enabled' : 'disabled');
+    showNotification(isHighContrast ? '🎨 Normal Contrast' : '🔳 High Contrast');
+  };
+
   // Dyslexia font toggle
   const toggleDyslexiaFont = () => {
     const newState = !isDyslexiaFont;
@@ -311,12 +329,31 @@ const AccessibilitySidebar = () => {
             </button>
           )}
 
-          {/* Help/Chat */}
+          {/* Focus Mode Toggle */}
           <button
+            onClick={() => setShowFocusMode(!showFocusMode)}
             className="w-12 h-12 bg-gradient-to-r from-[#142C52] to-[#16808D] hover:from-[#16808D] hover:to-[#142C52] rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg"
-            title="Help & Support"
+            title={showFocusMode ? 'Close Focus Mode' : 'Open Focus Mode'}
           >
-            <MessageSquare className="w-5 h-5" />
+            {showFocusMode ? <X className="w-5 h-5" /> : <Target className="w-5 h-5" />}
+          </button>
+
+          {/* Eye Tracking Toggle */}
+          <button
+            onClick={() => setShowEyeTracking(!showEyeTracking)}
+            className="w-12 h-12 bg-gradient-to-r from-[#142C52] to-[#16808D] hover:from-[#16808D] hover:to-[#142C52] rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg"
+            title={showEyeTracking ? 'Close Eye Tracking' : 'Open Eye Tracking'}
+          >
+            {showEyeTracking ? <X className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+          </button>
+
+          {/* High Contrast Toggle */}
+          <button
+            onClick={toggleHighContrast}
+            className="w-12 h-12 bg-gradient-to-r from-[#142C52] to-[#16808D] hover:from-[#16808D] hover:to-[#142C52] rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg"
+            title={isHighContrast ? 'Disable High Contrast' : 'Enable High Contrast'}
+          >
+            <Contrast className="w-5 h-5" />
           </button>
         </div>
       </div>
@@ -336,6 +373,44 @@ const AccessibilitySidebar = () => {
         onClose={handleCloseMedicationModal}
         onSetReminder={handleMedicationReminderSet}
       />
+
+      {/* Focus Mode Modal */}
+      {showFocusMode && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 z-[9999] flex items-center justify-center p-4">
+          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="p-6">
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-2xl font-bold text-gray-900">Focus Mode</h2>
+                <button
+                  onClick={() => setShowFocusMode(false)}
+                  className="text-gray-500 hover:text-gray-700 transition-colors"
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+              <FocusMode onClose={() => setShowFocusMode(false)} />
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Eye Tracking Modal */}
+      {showEyeTracking && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-[9999]">
+          <div className="bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto">
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-2xl font-bold text-gray-900">Eye Tracking Navigation</h2>
+              <button
+                onClick={() => setShowEyeTracking(false)}
+                className="text-gray-500 hover:text-gray-700 transition-colors"
+              >
+                <X className="w-6 h-6" />
+              </button>
+            </div>
+            <EyeTrackingNavigation onClose={() => setShowEyeTracking(false)} />
+          </div>
+        </div>
+      )}
 
       {/* Custom Styles */}
       <style dangerouslySetInnerHTML={{
@@ -530,6 +605,70 @@ const AccessibilitySidebar = () => {
         
         .dark .border-gray-200 {
           border-color: #404040 !important;
+        }
+        
+        /* High contrast styles */
+        .high-contrast {
+          background-color: #000000 !important;
+          color: #FFFFFF !important;
+        }
+        
+        .high-contrast .bg-white {
+          background-color: #000000 !important;
+          color: #FFFFFF !important;
+        }
+        
+        .high-contrast .bg-gray-50 {
+          background-color: #000000 !important;
+        }
+        
+        .high-contrast .bg-gray-100 {
+          background-color: #1a1a1a !important;
+        }
+        
+        .high-contrast .bg-blue-50 {
+          background-color: #000033 !important;
+        }
+        
+        .high-contrast .text-gray-700 {
+          color: #FFFFFF !important;
+        }
+        
+        .high-contrast .text-gray-600 {
+          color: #FFFFFF !important;
+        }
+        
+        .high-contrast .text-gray-900 {
+          color: #FFFFFF !important;
+        }
+        
+        .high-contrast .border-gray-200 {
+          border-color: #FFFFFF !important;
+        }
+        
+        .high-contrast .border-blue-200 {
+          border-color: #FFFFFF !important;
+        }
+        
+        .high-contrast button {
+          border: 2px solid #FFFFFF !important;
+        }
+        
+        .high-contrast input,
+        .high-contrast textarea,
+        .high-contrast select {
+          background-color: #000000 !important;
+          color: #FFFFFF !important;
+          border: 2px solid #FFFFFF !important;
+        }
+        
+        .high-contrast a {
+          color: #FFFF00 !important;
+          text-decoration: underline !important;
+        }
+        
+        .high-contrast a:hover {
+          color: #00FFFF !important;
         }
         `
       }} />
