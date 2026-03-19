@@ -487,6 +487,18 @@ const DevelopmentalDisorders = () => {
           </div>
         </div>
       </div>
+
+      {/* Inspirational Quote Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="text-center">
+          <blockquote className="text-xl italic text-gray-700 dark:text-gray-300 max-w-4xl mx-auto border-l-4 border-green-600 pl-6 py-4">
+            "Development is not a race, but a unique journey. Every milestone reached, no matter when, is a celebration of the remarkable resilience and potential within each growing mind."
+          </blockquote>
+          <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
+            Early support and understanding create the foundation for growth. With patience, love, and the right interventions, every child can flourish in their own time and in their own beautiful way.
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

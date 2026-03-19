@@ -62,7 +62,7 @@ const ExecutiveFunctioningDisorders = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* HERO SECTION */}
-      <div className="bg-gradient-to-r from-[#4F46E5] to-[#3730A3] text-white py-16">
+      <div className="bg-gradient-to-r from-[#4F46E5] to-[#4338CA] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex justify-center mb-6">
@@ -660,6 +660,18 @@ const ExecutiveFunctioningDisorders = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Inspirational Quote Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="text-center">
+          <blockquote className="text-xl italic text-gray-700 dark:text-gray-300 max-w-4xl mx-auto border-l-4 border-indigo-600 pl-6 py-4">
+            "Executive functioning challenges are not about being disorganized—they're about having a brain that works differently. With the right systems and strategies, order can emerge from chaos and potential can be unlocked."
+          </blockquote>
+          <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
+            The mind that struggles with planning may excel at creative problem-solving. By embracing different approaches and building personalized systems, individuals can harness their unique strengths and thrive.
+          </p>
         </div>
       </div>
     </div>

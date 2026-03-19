@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Users, DollarSign, MessageSquare, LogIn, Info, Menu, X, MapPin, Phone, Mail, Globe, BarChart3, FileText, BookOpen, Target, Eye, Languages } from 'lucide-react';
+import { Home, Users, DollarSign, MessageSquare, LogIn, Info, Menu, X, MapPin, Phone, Mail, Globe, BarChart3, FileText, BookOpen, Target, Eye, Languages, Brain, Zap } from 'lucide-react';
 import ScrollArrows from '../ScrollArrows/ScrollArrows';
 import Translate from '../Translate/Translate.js';
 import Chatbot from '../Chatbot/Chatbot.js';
 import Notifications from '../Notifications/Notifications';
 import AccessibilitySidebar from '../AccessibilitySidebar/AccessibilitySidebar';
+import RightAccessibilitySidebar from '../AccessibilitySidebar/RightAccessibilitySidebar';
 import { NotificationsProvider } from '../../contexts/NotificationsContext';
 const MainLayout = ({ children }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -53,11 +54,11 @@ const MainLayout = ({ children }) => {
   const navigationItems = [
     { path: '/', label: 'Home', icon: Home },
     { path: '/about', label: 'About', icon: Info },
-    { path: '/conditions', label: 'Conditions', icon: Users },
-    { path: '/multilingual', label: 'Languages', icon: Languages },
+    { path: '/conditions', label: 'Conditions', icon: Brain },
     { path: '/resources', label: 'Resources', icon: BookOpen },
+    { path: '/advanced-features', label: 'Advanced Features', icon: Zap },
     { path: '/contact', label: 'Contact', icon: MessageSquare },
-    { path: '/dashboard', label: 'Dashboard', icon: BarChart3 },
+    { path: '/signin', label: 'Sign In', icon: LogIn },
   ];
 
 
@@ -97,7 +98,7 @@ const MainLayout = ({ children }) => {
               </div>
 
             <div className="hidden md:flex items-center space-x-4 ml-auto">
-              {navigationItems.slice(0, 5).map((item) => {
+              {navigationItems.slice(0, 4).map((item) => {
                 const Icon = item.icon;
                 return (
                   <Link
@@ -137,7 +138,7 @@ const MainLayout = ({ children }) => {
                 );
               })}
               
-              {navigationItems.slice(5).map((item) => {
+              {navigationItems.slice(4).map((item) => {
                 const Icon = item.icon;
                 return (
                   <Link
@@ -302,7 +303,7 @@ const MainLayout = ({ children }) => {
                 <div className="space-y-2">
                   <Link to="/" className={`block transition-colors ${isDarkMode ? 'text-gray-400 hover:text-[#4C97A8]' : 'text-gray-600 hover:text-[#4C97A8]'}`} onClick={() => window.scrollTo(0, 0)}>Home</Link>
                   <Link to="/about" className={`block transition-colors ${isDarkMode ? 'text-gray-400 hover:text-[#4C97A8]' : 'text-gray-600 hover:text-[#4C97A8]'}`} onClick={() => window.scrollTo(0, 0)}>About</Link>
-                  <Link to="/dashboard" className={`block transition-colors ${isDarkMode ? 'text-gray-400 hover:text-[#4C97A8]' : 'text-gray-600 hover:text-[#4C97A8]'}`} onClick={() => window.scrollTo(0, 0)}>Dashboard</Link>
+                  <Link to="/signin" className={`block transition-colors ${isDarkMode ? 'text-gray-400 hover:text-[#4C97A8]' : 'text-gray-600 hover:text-[#4C97A8]'}`} onClick={() => window.scrollTo(0, 0)}>Sign In</Link>
                   <Link to="/conditions" className={`block transition-colors ${isDarkMode ? 'text-gray-400 hover:text-[#4C97A8]' : 'text-gray-600 hover:text-[#4C97A8]'}`} onClick={() => window.scrollTo(0, 0)}>Conditions</Link>
                 </div>
                 <div className="space-y-2">
@@ -369,6 +370,7 @@ const MainLayout = ({ children }) => {
       <ScrollArrows />
       
       <AccessibilitySidebar />
+      <RightAccessibilitySidebar />
     </div>
     </NotificationsProvider>
   );

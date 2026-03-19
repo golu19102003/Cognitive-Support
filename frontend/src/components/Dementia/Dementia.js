@@ -16,7 +16,7 @@ const Dementia = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* HERO SECTION */}
-      <div className="bg-gradient-to-r from-[#DC2626] to-[#EA580C] text-white py-16">
+      <div className="bg-gradient-to-r from-[#DC2626] to-[#B91C1C] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex justify-center mb-6">
@@ -586,6 +586,18 @@ const Dementia = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Inspirational Quote Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="text-center">
+          <blockquote className="text-xl italic text-gray-700 dark:text-gray-300 max-w-4xl mx-auto border-l-4 border-orange-600 pl-6 py-4">
+            "Memory may fade, but love remains. The essence of a person transcends the fragments of forgotten moments, and in the heart, the most important memories are forever etched."
+          </blockquote>
+          <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
+            Even as cognitive abilities change, the capacity for joy, connection, and meaning persists. With compassion, patience, and understanding, we can honor the person who remains and celebrate the life they continue to live.
+          </p>
         </div>
       </div>
     </div>

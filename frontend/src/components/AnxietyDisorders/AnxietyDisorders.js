@@ -53,7 +53,7 @@ const AnxietyDisorders = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-[#BE123C] to-[#991B1B] text-white py-16">
+      <div className="bg-gradient-to-r from-[#BE123C] to-[#9F1239] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex justify-center mb-6">
@@ -583,6 +583,18 @@ const AnxietyDisorders = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Inspirational Quote Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="text-center">
+          <blockquote className="text-xl italic text-gray-700 dark:text-gray-300 max-w-4xl mx-auto border-l-4 border-red-600 pl-6 py-4">
+            "Anxiety is not a sign of weakness, but a sign that you have been strong for too long. Your mind is trying to protect you, and with the right tools, you can learn to calm the storm within."
+          </blockquote>
+          <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
+            Recovery is possible, and every step toward managing anxiety is a step toward reclaiming your peace. You are stronger than your anxiety, and you deserve to live a life filled with calm and confidence.
+          </p>
         </div>
       </div>
     </div>

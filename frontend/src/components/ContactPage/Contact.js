@@ -37,6 +37,9 @@ const Contact = () => {
   const [viewMode, setViewMode] = useState('grid');
   const [selectedFeature, setSelectedFeature] = useState(null);
   const [showAdvancedForm, setShowAdvancedForm] = useState(false);
+  const [iconPosition, setIconPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const [liveChatStatus, setLiveChatStatus] = useState('online');
   const [supportStats, setSupportStats] = useState({
     avgResponseTime: '2 min',
@@ -70,6 +73,39 @@ const Contact = () => {
     
     return () => clearInterval(interval);
   }, []);
+
+  // Drag handlers for movable icon
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    setDragStart({
+      x: e.clientX - iconPosition.x,
+      y: e.clientY - iconPosition.y
+    });
+  };
+
+  const handleMouseMove = (e) => {
+    if (isDragging) {
+      setIconPosition({
+        x: e.clientX - dragStart.x,
+        y: e.clientY - dragStart.y
+      });
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  useEffect(() => {
+    if (isDragging) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+      return () => {
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+      };
+    }
+  }, [isDragging, dragStart]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -222,23 +258,76 @@ const Contact = () => {
   ];
 
   return (
-    <div className={`space-y-6 transition-colors duration-300 ${isDarkMode ? 'bg-gray-900' : 'bg-gradient-to-br from-blue-50 via-white to-purple-50'}`}>
-      {/* Animated Background Elements */}
+    <div className={`min-h-screen transition-colors duration-300 ${isDarkMode ? 'bg-gray-900' : 'bg-gradient-to-br from-blue-50 via-white to-purple-50'}`}>
+      {/* Enhanced Animated Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className={`absolute top-20 left-10 w-72 h-72 rounded-full opacity-20 animate-pulse ${isDarkMode ? 'bg-blue-600' : 'bg-blue-400'}`}></div>
-        <div className={`absolute bottom-20 right-10 w-96 h-96 rounded-full opacity-20 animate-pulse delay-1000 ${isDarkMode ? 'bg-purple-600' : 'bg-purple-400'}`}></div>
+        {/* Floating Orbs with Complex Animation */}
+        <div className={`absolute top-20 left-10 w-72 h-72 rounded-full opacity-30 animate-pulse ${isDarkMode ? 'bg-blue-600' : 'bg-blue-400'} shadow-2xl`}>
+          <div className="absolute inset-0 rounded-full animate-ping opacity-20"></div>
+        </div>
+        <div className={`absolute bottom-20 right-10 w-96 h-96 rounded-full opacity-30 animate-pulse delay-1000 ${isDarkMode ? 'bg-purple-600' : 'bg-purple-400'} shadow-2xl`}>
+          <div className="absolute inset-0 rounded-full animate-ping opacity-20 delay-1000"></div>
+        </div>
+        
+        {/* Additional Floating Elements */}
+        <div className={`absolute top-1/2 left-1/4 w-48 h-48 rounded-full opacity-20 animate-bounce ${isDarkMode ? 'bg-indigo-600' : 'bg-indigo-400'} shadow-xl`}></div>
+        <div className={`absolute top-1/3 right-1/4 w-36 h-36 rounded-full opacity-25 animate-pulse delay-500 ${isDarkMode ? 'bg-cyan-600' : 'bg-cyan-400'} shadow-lg`}></div>
+        
+        {/* Moving Gradient Orbs */}
+        <div className="absolute top-10 left-1/2 w-64 h-64 rounded-full opacity-20 animate-spin" style={{ animationDuration: '20s' }}>
+          <div className={`w-full h-full rounded-full bg-gradient-to-r ${isDarkMode ? 'from-blue-600 to-purple-600' : 'from-blue-400 to-purple-400'} shadow-2xl`}></div>
+        </div>
+        <div className="absolute bottom-10 left-1/3 w-56 h-56 rounded-full opacity-20 animate-spin" style={{ animationDuration: '15s', animationDirection: 'reverse' }}>
+          <div className={`w-full h-full rounded-full bg-gradient-to-br ${isDarkMode ? 'from-purple-600 to-indigo-600' : 'from-purple-400 to-indigo-400'} shadow-2xl`}></div>
+        </div>
+        
+        {/* Particle Effects */}
+        <div className="absolute top-20 right-1/3 w-4 h-4 bg-blue-400 rounded-full opacity-60 animate-pulse"></div>
+        <div className="absolute top-40 left-1/3 w-3 h-3 bg-purple-400 rounded-full opacity-50 animate-bounce delay-300"></div>
+        <div className="absolute bottom-40 right-1/4 w-5 h-5 bg-indigo-400 rounded-full opacity-40 animate-pulse delay-700"></div>
+        <div className="absolute top-60 left-1/2 w-2 h-2 bg-cyan-400 rounded-full opacity-70 animate-ping"></div>
+        
+        {/* Communication-Themed Elements */}
+        <div className="absolute top-32 right-20 w-8 h-8 border-2 border-blue-400 rounded-full opacity-40 animate-pulse"></div>
+        <div className="absolute bottom-32 left-20 w-6 h-6 border-2 border-purple-400 rounded-lg opacity-30 animate-spin" style={{ animationDuration: '8s' }}></div>
+        <div className="absolute top-1/2 right-1/3 w-4 h-4 bg-indigo-400 rounded opacity-50 animate-bounce delay-500"></div>
+        
+        {/* Wave Effects */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 opacity-10">
+          <div className={`h-full bg-gradient-to-t ${isDarkMode ? 'from-blue-600 to-transparent' : 'from-blue-400 to-transparent'} animate-pulse`}></div>
+        </div>
+        <div className="absolute top-0 left-0 right-0 h-24 opacity-10">
+          <div className={`h-full bg-gradient-to-b ${isDarkMode ? 'from-purple-600 to-transparent' : 'from-purple-400 to-transparent'} animate-pulse delay-500`}></div>
+        </div>
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 py-8 max-w-7xl">
-        {/* Enhanced Header */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Hero Section */}
         <div className="text-center mb-12">
           <div className="flex justify-center mb-6">
             <div className="flex items-center space-x-4">
-              <img 
-                src={isDarkMode ? "/image.png" : "/short_logo.png"} 
-                alt="Prihub Logo" 
-                className="h-16 w-auto mr-3 transition-all duration-300"
-              />
+              <div 
+                className="relative group"
+                style={{
+                  position: 'relative',
+                  transform: `translate(${iconPosition.x}px, ${iconPosition.y}px)`,
+                  transition: isDragging ? 'none' : 'transform 0.3s ease'
+                }}
+              >
+                <div 
+                  className="relative transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 cursor-move select-none"
+                  onMouseDown={handleMouseDown}
+                  style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+                >
+                  <img 
+                    src={isDarkMode ? "/image.png" : "/short_logo.png"} 
+                    alt="Prihub Logo" 
+                    className="h-16 w-auto mr-3 transform transition-all duration-300 group-hover:scale-105"
+                  />
+                </div>
+                {/* Floating animation when not dragging */}
+                <div className={`absolute inset-0 rounded-full ${isDragging ? '' : 'animate-bounce'}`} style={{ animationDuration: '3s' }}></div>
+              </div>
               <h1 className="text-4xl font-bold">
                 <span style={{ color: '#16808D' }}>Contact</span>
                 <span className={`transition-colors duration-300 ${
@@ -247,9 +336,11 @@ const Contact = () => {
               </h1>
             </div>
           </div>
-          <p className={`text-xl ${isDarkMode ? 'text-gray-300' : 'text-gray-600'} animate-fadeIn delay-200`}>
-            We're here to help you every step of the way
-          </p>
+          <p className={`text-xl max-w-3xl mx-auto italic transition-colors duration-300 ${
+          isDarkMode ? 'text-gray-300' : 'text-gray-600'
+        }`}>
+          Comprehensive contact support and assistance services for individuals and families seeking cognitive accessibility guidance. We provide expert communication, dedicated support, and personalized solutions to ensure effective connection and professional assistance throughout your support journey with us.
+        </p>
         </div>
 
         {/* Navigation Tabs */}
@@ -293,9 +384,20 @@ const Contact = () => {
                 <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-[#16808D] to-purple-600 bg-clip-text text-transparent">
                   <span style={{ color: '#16808D' }}>Contact Support</span>
                 </h2>
-                <p className="text-lg max-w-3xl mx-auto italic leading-relaxed">
+                <p className="text-lg max-w-3xl mx-auto italic leading-relaxed mb-4">
                   Get in touch with our dedicated support team. We're committed to providing comprehensive assistance and resources for individuals and families seeking cognitive support services.
                 </p>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-blue-900/50 text-blue-300 border border-blue-700' : 'bg-blue-100 text-blue-700 border border-blue-200'}`}>
+                    24/7 Support
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-purple-900/50 text-purple-300 border border-purple-700' : 'bg-purple-100 text-purple-700 border border-purple-200'}`}>
+                    Expert Assistance
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-green-900/50 text-green-300 border border-green-700' : 'bg-green-100 text-green-700 border border-green-200'}`}>
+                    Personalized Solutions
+                  </div>
+                </div>
               </div>
             </div>
             
@@ -680,6 +782,16 @@ const Contact = () => {
                 </div>
               </div>
             </div>
+            
+            {/* Inspirational Quote Section */}
+            <div className="text-center py-8">
+              <blockquote className="text-xl italic text-gray-700 dark:text-gray-300 max-w-4xl mx-auto border-l-4 border-teal-600 pl-6 py-4">
+                "Support is not just about answering questions—it's about building bridges of understanding that connect individuals with the resources, guidance, and compassion they need to thrive on their unique cognitive journey."
+              </blockquote>
+              <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
+                Every conversation is an opportunity to empower, educate, and uplift. Through dedicated support and genuine care, we transform challenges into stepping stones toward growth and independence.
+              </p>
+            </div>
           </div>
         )}
 
@@ -693,9 +805,20 @@ const Contact = () => {
                 <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
                   <span style={{ color: 'purple' }}>Advanced Features</span>
                 </h2>
-                <p className="text-lg max-w-3xl mx-auto italic leading-relaxed">
+                <p className="text-lg max-w-3xl mx-auto italic leading-relaxed mb-4">
                   Discover our comprehensive suite of features designed to provide exceptional support and assistance for cognitive disabilities.
                 </p>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-blue-900/50 text-blue-300 border border-blue-700' : 'bg-blue-100 text-blue-700 border border-blue-200'}`}>
+                    AI-Powered Technology
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-purple-900/50 text-purple-300 border border-purple-700' : 'bg-purple-100 text-purple-700 border border-purple-200'}`}>
+                    Advanced Accessibility
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-green-900/50 text-green-300 border border-green-700' : 'bg-green-100 text-green-700 border border-green-200'}`}>
+                    Comprehensive Support
+                  </div>
+                </div>
               </div>
             </div>
             
@@ -750,6 +873,16 @@ const Contact = () => {
                   </div>
                 </div>
               ))}
+            </div>
+            
+            {/* Inspirational Quote Section */}
+            <div className="text-center py-8">
+              <blockquote className="text-xl italic text-gray-700 dark:text-gray-300 max-w-4xl mx-auto border-l-4 border-purple-600 pl-6 py-4">
+                "Innovation in cognitive support is not just about technology—it's about creating tools that adapt to human needs, celebrate diverse abilities, and open doors to new possibilities for every individual."
+              </blockquote>
+              <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
+                The right features can transform daily challenges into opportunities for growth and independence. With thoughtful design and user-centered innovation, technology becomes a bridge to empowerment and inclusion.
+              </p>
             </div>
           </div>
         )}
@@ -847,6 +980,16 @@ const Contact = () => {
                   </button>
                 </div>
               ))}
+            </div>
+            
+            {/* Inspirational Quote Section */}
+            <div className="text-center py-8">
+              <blockquote className="text-xl italic text-gray-700 dark:text-gray-300 max-w-4xl mx-auto border-l-4 border-orange-600 pl-6 py-4">
+                "Support plans are not just about services—they're about creating pathways to independence, dignity, and quality of life. Every plan is a commitment to empowering individuals to reach their full potential."
+              </blockquote>
+              <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
+                The right support plan can transform daily living from challenge to opportunity. With personalized care and comprehensive resources, every individual can build a foundation for growth and success.
+              </p>
             </div>
           </div>
         )}
@@ -948,6 +1091,16 @@ const Contact = () => {
                 Contact Support Team
               </button>
             </div>
+            
+            {/* Inspirational Quote Section */}
+            <div className="text-center py-8">
+              <blockquote className="text-xl italic text-gray-700 dark:text-gray-300 max-w-4xl mx-auto border-l-4 border-blue-600 pl-6 py-4">
+                "Questions are not signs of uncertainty—they are stepping stones to understanding. Every inquiry opens doors to knowledge, empowerment, and the confidence to make informed decisions about cognitive support."
+              </blockquote>
+              <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
+                Knowledge is the foundation of empowerment. By providing clear answers and thoughtful guidance, we help individuals and families navigate their cognitive journey with confidence and hope.
+              </p>
+            </div>
           </div>
         )}
 
@@ -1042,6 +1195,16 @@ const Contact = () => {
                   }`}>Live</span>
                 </div>
               </div>
+            </div>
+            
+            {/* Inspirational Quote Section */}
+            <div className="text-center py-8">
+              <blockquote className="text-xl italic text-gray-700 dark:text-gray-300 max-w-4xl mx-auto border-l-4 border-green-600 pl-6 py-4">
+                "Numbers tell stories of impact, but behind every statistic is a human life transformed. Our success is measured not in data points, but in the dignity, independence, and joy we help individuals achieve every day."
+              </blockquote>
+              <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
+                Performance metrics reflect our commitment to excellence, but the true measure of success lies in the empowered lives and strengthened communities we build through compassionate, effective cognitive support.
+              </p>
             </div>
           </div>
         )}

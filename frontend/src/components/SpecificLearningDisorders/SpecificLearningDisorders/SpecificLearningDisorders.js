@@ -27,7 +27,7 @@ const SpecificLearningDisorders = () => {
     <div className="min-h-screen bg-gray-50">
       
       {/* HERO SECTION */}
-      <div className="bg-gradient-to-r from-[#9333EA] to-[#7C3AED] text-white py-16">
+      <div className="bg-gradient-to-r from-[#9333EA] to-[#7E22CE] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex justify-center mb-6">
@@ -428,6 +428,18 @@ const SpecificLearningDisorders = () => {
             </div>
           </div>
 
+        </div>
+      </div>
+
+      {/* Inspirational Quote Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="text-center">
+          <blockquote className="text-xl italic text-gray-700 dark:text-gray-300 max-w-4xl mx-auto border-l-4 border-purple-600 pl-6 py-4">
+            "Specific learning disorders are not barriers to intelligence, but different pathways to knowledge. The brain that learns differently often sees the world through a unique lens that can lead to extraordinary insights and innovations."
+          </blockquote>
+          <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
+            When we embrace diverse learning styles, we discover that academic challenges can become creative strengths. With the right support and understanding, every individual can unlock their unique potential and find their own path to success.
+          </p>
         </div>
       </div>
     </div>

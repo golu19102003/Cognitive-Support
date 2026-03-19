@@ -16,7 +16,7 @@ const TraumaticBrainInjury = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#178740] to-[#145A32] text-white py-16">
+      <div className="bg-gradient-to-r from-[#178740] to-[#14532D] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex justify-center mb-6">
@@ -666,6 +666,18 @@ const TraumaticBrainInjury = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Inspirational Quote Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="text-center">
+          <blockquote className="text-xl italic text-gray-700 dark:text-gray-300 max-w-4xl mx-auto border-l-4 border-green-700 pl-6 py-4">
+            "The brain that has been injured is not broken, but adapting. Every step of recovery, no matter how small, is a testament to the incredible resilience of the human spirit and the brain's remarkable capacity to heal and rewire itself."
+          </blockquote>
+          <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
+            Recovery from brain injury is a journey of rediscovery, where new pathways are forged and new strengths emerge. With determination, support, and time, individuals can rebuild their lives and find new ways to thrive.
+          </p>
         </div>
       </div>
     </div>

@@ -12,6 +12,9 @@ const About = () => {
   const [hoveredMilestone, setHoveredMilestone] = useState(null);
   const [selectedStat, setSelectedStat] = useState(null);
   const [explorePage, setExplorePage] = useState(null);
+  const [iconPosition, setIconPosition] = useState({ x: 0, y: 0 });
+  const [isDragging, setIsDragging] = useState(false);
+  const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
   const navigate = useNavigate();
   // Check for theme preference
   useEffect(() => {
@@ -35,37 +38,117 @@ const About = () => {
       clearInterval(interval);
     };
   }, []);
+
+  // Drag handlers for movable icon
+  const handleMouseDown = (e) => {
+    setIsDragging(true);
+    setDragStart({
+      x: e.clientX - iconPosition.x,
+      y: e.clientY - iconPosition.y
+    });
+  };
+
+  const handleMouseMove = (e) => {
+    if (isDragging) {
+      setIconPosition({
+        x: e.clientX - dragStart.x,
+        y: e.clientY - dragStart.y
+      });
+    }
+  };
+
+  const handleMouseUp = () => {
+    setIsDragging(false);
+  };
+
+  useEffect(() => {
+    if (isDragging) {
+      document.addEventListener('mousemove', handleMouseMove);
+      document.addEventListener('mouseup', handleMouseUp);
+      return () => {
+        document.removeEventListener('mousemove', handleMouseMove);
+        document.removeEventListener('mouseup', handleMouseUp);
+      };
+    }
+  }, [isDragging, dragStart]);
   return (
-    <div className={`space-y-6 transition-colors duration-300 ${isDarkMode ? 'bg-gray-900' : 'bg-gradient-to-br from-blue-50 via-white to-purple-50'}`}>
-      {/* Animated Background Elements */}
+    <div className={`min-h-screen transition-colors duration-300 ${isDarkMode ? 'bg-gray-900' : 'bg-gradient-to-br from-blue-50 via-white to-purple-50'}`}>
+      {/* Enhanced Animated Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className={`absolute top-20 left-10 w-72 h-72 rounded-full opacity-20 animate-pulse ${isDarkMode ? 'bg-blue-600' : 'bg-blue-400'}`}></div>
-        <div className={`absolute bottom-20 right-10 w-96 h-96 rounded-full opacity-20 animate-pulse delay-1000 ${isDarkMode ? 'bg-purple-600' : 'bg-purple-400'}`}></div>
+        {/* Floating Orbs with Complex Animation */}
+        <div className={`absolute top-20 left-10 w-72 h-72 rounded-full opacity-30 animate-pulse ${isDarkMode ? 'bg-blue-600' : 'bg-blue-400'} shadow-2xl`}>
+          <div className="absolute inset-0 rounded-full animate-ping opacity-20"></div>
+        </div>
+        <div className={`absolute bottom-20 right-10 w-96 h-96 rounded-full opacity-30 animate-pulse delay-1000 ${isDarkMode ? 'bg-purple-600' : 'bg-purple-400'} shadow-2xl`}>
+          <div className="absolute inset-0 rounded-full animate-ping opacity-20 delay-1000"></div>
+        </div>
+        
+        {/* Additional Floating Elements */}
+        <div className={`absolute top-1/2 left-1/4 w-48 h-48 rounded-full opacity-20 animate-bounce ${isDarkMode ? 'bg-indigo-600' : 'bg-indigo-400'} shadow-xl`}></div>
+        <div className={`absolute top-1/3 right-1/4 w-36 h-36 rounded-full opacity-25 animate-pulse delay-500 ${isDarkMode ? 'bg-cyan-600' : 'bg-cyan-400'} shadow-lg`}></div>
+        
+        {/* Moving Gradient Orbs */}
+        <div className="absolute top-10 left-1/2 w-64 h-64 rounded-full opacity-20 animate-spin" style={{ animationDuration: '20s' }}>
+          <div className={`w-full h-full rounded-full bg-gradient-to-r ${isDarkMode ? 'from-blue-600 to-purple-600' : 'from-blue-400 to-purple-400'} shadow-2xl`}></div>
+        </div>
+        <div className="absolute bottom-10 left-1/3 w-56 h-56 rounded-full opacity-20 animate-spin" style={{ animationDuration: '15s', animationDirection: 'reverse' }}>
+          <div className={`w-full h-full rounded-full bg-gradient-to-br ${isDarkMode ? 'from-purple-600 to-indigo-600' : 'from-purple-400 to-indigo-400'} shadow-2xl`}></div>
+        </div>
+        
+        {/* Particle Effects */}
+        <div className="absolute top-20 right-1/3 w-4 h-4 bg-blue-400 rounded-full opacity-60 animate-pulse"></div>
+        <div className="absolute top-40 left-1/3 w-3 h-3 bg-purple-400 rounded-full opacity-50 animate-bounce delay-300"></div>
+        <div className="absolute bottom-40 right-1/4 w-5 h-5 bg-indigo-400 rounded-full opacity-40 animate-pulse delay-700"></div>
+        <div className="absolute top-60 left-1/2 w-2 h-2 bg-cyan-400 rounded-full opacity-70 animate-ping"></div>
+        
+        {/* Wave Effects */}
+        <div className="absolute bottom-0 left-0 right-0 h-32 opacity-10">
+          <div className={`h-full bg-gradient-to-t ${isDarkMode ? 'from-blue-600 to-transparent' : 'from-blue-400 to-transparent'} animate-pulse`}></div>
+        </div>
+        <div className="absolute top-0 left-0 right-0 h-24 opacity-10">
+          <div className={`h-full bg-gradient-to-b ${isDarkMode ? 'from-purple-600 to-transparent' : 'from-purple-400 to-transparent'} animate-pulse delay-500`}></div>
+        </div>
       </div>
 
-      <div className="relative z-10">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Hero Section */}
         <div className="text-center mb-12">
-        <div className="flex justify-center mb-6">
+          <div className="flex justify-center mb-6">
           <div className="flex items-center space-x-4">
-            <img 
-              src={isDarkMode ? "/image.png" : "/short_logo.png"} 
-              alt="Prihub Logo" 
-              className="h-16 w-auto mr-3 transition-all duration-300"
-            />
+            <div 
+              className="relative group"
+              style={{
+                position: 'relative',
+                transform: `translate(${iconPosition.x}px, ${iconPosition.y}px)`,
+                transition: isDragging ? 'none' : 'transform 0.3s ease'
+              }}
+            >
+              <div 
+                className="relative transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 cursor-move select-none"
+                onMouseDown={handleMouseDown}
+                style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+              >
+                <img 
+                  src={isDarkMode ? "/image.png" : "/short_logo.png"} 
+                  alt="Prihub Logo" 
+                  className="h-16 w-auto mr-3 transform transition-all duration-300 group-hover:scale-105"
+                />
+              </div>
+              {/* Floating animation when not dragging */}
+              <div className={`absolute inset-0 rounded-full ${isDragging ? '' : 'animate-bounce'}`} style={{ animationDuration: '3s' }}></div>
+            </div>
             <h1 className="text-4xl font-bold">
               <span style={{ color: '#16808D' }}>About</span>
               <span className={`transition-colors duration-300 ${
                 isDarkMode ? 'text-white' : ''
-              }`} style={{ color: isDarkMode ? '#ffffff' : '#000000' }}> Cognitive Disabilities</span>
+              }`} style={{ color: isDarkMode ? '#ffffff' : '#000000' }}> Prihub Platform</span>
             </h1>
           </div>
         </div>
         <p className={`text-xl max-w-3xl mx-auto italic transition-colors duration-300 ${
           isDarkMode ? 'text-gray-300' : 'text-gray-600'
         }`}>
-          Cognitive disabilities affect how a person learns, remembers, processes information, and makes decisions. 
-          We're here to provide Support, understanding, and resources for individuals and families affected by cognitive disabilities.
+          Cognitive disabilities affect learning, memory, and decision-making. As service providers, we deliver support, expertise, and resources for individuals and families affected by cognitive disabilities. Our mission empowers through innovative solutions, guidance, and tools creating inclusive opportunities and independence.
         </p>
       </div>
       {/* Single Grid with All 5 Sections */}
@@ -78,7 +161,7 @@ const About = () => {
           } ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}
         >
           <Brain className="h-8 w-8 text-[#16808D] mr-2" />
-          <h2 className={`text-sm font-bold transition-colors duration-300 ${
+          <h2 className={`text-base font-bold transition-colors duration-300 ${
             isDarkMode ? 'text-white' : 'text-gray-900'
           }`}>Mission</h2>
         </div>
@@ -90,7 +173,7 @@ const About = () => {
           } ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}
         >
           <BookOpen className="h-8 w-8 text-purple-600 mr-2" />
-          <h2 className={`text-sm font-bold transition-colors duration-300 ${
+          <h2 className={`text-base font-bold transition-colors duration-300 ${
             isDarkMode ? 'text-white' : 'text-gray-900'
           }`}>Story</h2>
         </div>
@@ -102,7 +185,7 @@ const About = () => {
           } ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}
         >
           <Heart className="h-8 w-8 text-red-500 mr-2" />
-          <h2 className={`text-sm font-bold transition-colors duration-300 ${
+          <h2 className={`text-base font-bold transition-colors duration-300 ${
             isDarkMode ? 'text-white' : 'text-gray-900'
           }`}>Values</h2>
         </div>
@@ -114,7 +197,7 @@ const About = () => {
           } ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}
         >
           <Shield className="h-8 w-8 text-blue-600 mr-2" />
-          <h2 className={`text-sm font-bold transition-colors duration-300 ${
+          <h2 className={`text-base font-bold transition-colors duration-300 ${
             isDarkMode ? 'text-white' : 'text-gray-900'
           }`}>Technology</h2>
         </div>
@@ -126,7 +209,7 @@ const About = () => {
           } ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}
         >
           <Users2 className="h-8 w-8 text-green-600 mr-2" />
-          <h2 className={`text-sm font-bold transition-colors duration-300 ${
+          <h2 className={`text-base font-bold transition-colors duration-300 ${
             isDarkMode ? 'text-white' : 'text-gray-900'
           }`}>Team</h2>
         </div>
@@ -141,9 +224,20 @@ const About = () => {
               <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-[#16808D] to-purple-600 bg-clip-text text-transparent">
                 <span style={{ color: '#16808D' }}>Our Mission</span>
               </h2>
-              <p className="text-lg max-w-3xl mx-auto italic leading-relaxed">
+              <p className="text-lg max-w-3xl mx-auto italic leading-relaxed mb-4">
                 Founded with deep understanding of cognitive challenges, we provide comprehensive support and essential resources for individuals and families. We're committed to creating an inclusive society where everyone thrives and flourishes, regardless of cognitive abilities.
               </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-blue-900/50 text-blue-300 border border-blue-700' : 'bg-blue-100 text-blue-700 border border-blue-200'}`}>
+                  Inclusive Society
+                </div>
+                <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-purple-900/50 text-purple-300 border border-purple-700' : 'bg-purple-100 text-purple-700 border border-purple-200'}`}>
+                  Comprehensive Support
+                </div>
+                <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-green-900/50 text-green-300 border border-green-700' : 'bg-green-100 text-green-700 border border-green-200'}`}>
+                  Essential Resources
+                </div>
+              </div>
             </div>
           </div>
           {/* Mission Pillars - Single Unified Grid */}
@@ -473,12 +567,23 @@ const About = () => {
                   isDarkMode ? 'text-white' : 'text-gray-900'
                 }`}>Neurodiverse Community Hub</h2>
               </div>
-              <p className={`leading-relaxed transition-colors duration-300 mb-6 ${
+              <p className={`leading-relaxed transition-colors duration-300 mb-4 ${
                 isDarkMode ? 'text-gray-300' : 'text-gray-600'
               }`}>
                 Connecting with a neurodiverse community where individuals share similar cognitive experiences is fundamental to psychological well-being and social integration. 
                 Our inclusive ecosystem fosters authentic belonging, reduces isolation through meaningful connections, and provides mutual understanding, peer support, and collective empowerment for individuals across the cognitive spectrum.
               </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-blue-900/50 text-blue-300 border border-blue-700' : 'bg-blue-100 text-blue-700 border border-blue-200'}`}>
+                  Community Building
+                </div>
+                <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-purple-900/50 text-purple-300 border border-purple-700' : 'bg-purple-100 text-purple-700 border border-purple-200'}`}>
+                  Peer Support
+                </div>
+                <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-green-900/50 text-green-300 border border-green-700' : 'bg-green-100 text-green-700 border border-green-200'}`}>
+                  Inclusive Environment
+                </div>
+              </div>
               <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div className="group relative bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-800/30 dark:to-pink-800/30 rounded-xl p-4 border border-purple-200 dark:border-purple-700 transition-all duration-300 hover:shadow-lg hover:scale-[1.02]">
                   <div className="text-center">
@@ -552,9 +657,20 @@ const About = () => {
             <div className="relative z-10">
               <BookOpen className="h-16 w-16 text-purple-600 mx-auto mb-4 animate-bounce" />
               <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">Our Story</h2>
-              <p className="text-lg max-w-3xl mx-auto italic leading-relaxed">
-                Founded with deep understanding of cognitive challenges, our journey began when passionate professionals and families united to create support services. Through collaboration, innovation, and unwavering dedication, we've grown into a trusted resource that empowers lives and transforms communities through inclusive support.
+              <p className="text-lg max-w-3xl mx-auto italic leading-relaxed mb-4">
+                Born from deep understanding of cognitive challenges, we united passionate professionals and families to create transformative support services. Through collaboration and innovation, we've become a trusted resource empowering lives and communities through inclusive support.
               </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-blue-900/50 text-blue-300 border border-blue-700' : 'bg-blue-100 text-blue-700 border border-blue-200'}`}>
+                  Cognitive Support
+                </div>
+                <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-purple-900/50 text-purple-300 border border-purple-700' : 'bg-purple-100 text-purple-700 border border-purple-200'}`}>
+                  Inclusive Design
+                </div>
+                <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-green-900/50 text-green-300 border border-green-700' : 'bg-green-100 text-green-700 border border-green-200'}`}>
+                  Accessibility First
+                </div>
+              </div>
             </div>
           </div>
           {/* Story Journey Timeline */}
@@ -866,10 +982,10 @@ const About = () => {
           </div>
           {/* Inspirational Quote */}
           <div className="text-center py-8">
-            <blockquote className="text-xl italic text-gray-700 dark:text-gray-300 max-w-5xl mx-auto border-l-4 border-purple-600 pl-6 py-4">
+            <blockquote className="text-xl italic text-gray-700 dark:text-gray-300 max-w-3xl mx-auto border-l-4 border-purple-600 pl-6 py-4">
               "Founded with a deep understanding of challenges faced by individuals with cognitive disabilities, our journey began when passionate professionals and families came together to create comprehensive support services."
             </blockquote>
-            <p className="mt-6 text-lg text-gray-600 dark:text-gray-300 max-w-5xl mx-auto">
+            <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
               Through collaboration, innovation, and unwavering dedication, we've grown into a trusted resource that empowers lives and transforms communities through inclusive support and understanding.
             </p>
           </div>
@@ -884,7 +1000,17 @@ const About = () => {
               <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-transparent">Our Core Values</h2>
               <p className="text-lg max-w-3xl mx-auto italic mb-8">
                 Our core values guide everything we do, ensuring we provide the best possible support and resources for our community members. These principles empower individuals with cognitive disabilities to reach their full potential through dedicated service and unwavering support.
-              </p>
+              </p>              <div className="flex flex-wrap justify-center gap-4">
+                <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-blue-900/50 text-blue-300 border border-blue-700' : 'bg-blue-100 text-blue-700 border border-blue-200'}`}>
+                  Ethical Standards
+                </div>
+                <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-purple-900/50 text-purple-300 border border-purple-700' : 'bg-purple-100 text-purple-700 border border-purple-200'}`}>
+                  User-Centered Care
+                </div>
+                <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-green-900/50 text-green-300 border border-green-700' : 'bg-green-100 text-green-700 border border-green-200'}`}>
+                  Quality Assurance
+                </div>
+              </div>
             </div>
           </div>
           {/* Values Grid - Enhanced */}
@@ -1127,6 +1253,17 @@ const About = () => {
               <p className="text-lg max-w-3xl mx-auto italic mb-8">
                 We leverage cutting-edge technology to provide accessible, user-friendly tools and resources that enhance quality of life for individuals with cognitive disabilities. Through innovative solutions and adaptive technologies, we break down barriers and create opportunities.
               </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-blue-900/50 text-blue-300 border border-blue-700' : 'bg-blue-100 text-blue-700 border border-blue-200'}`}>
+                  AI-Powered Tools
+                </div>
+                <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-purple-900/50 text-purple-300 border border-purple-700' : 'bg-purple-100 text-purple-700 border border-purple-200'}`}>
+                  Adaptive Systems
+                </div>
+                <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-green-900/50 text-green-300 border border-green-700' : 'bg-green-100 text-green-700 border border-green-200'}`}>
+                  Smart Interfaces
+                </div>
+              </div>
             </div>
           </div>
           {/* Technology Grid - Enhanced */}
@@ -1419,6 +1556,17 @@ const About = () => {
               <p className="text-lg max-w-3xl mx-auto italic mb-8">
                 Our dedicated team of professionals brings together expertise in healthcare, education, technology, and lived experience to provide comprehensive support. With diverse backgrounds and shared passion, we collaborate to deliver innovative solutions that make a difference.
               </p>
+              <div className="flex flex-wrap justify-center gap-4">
+                <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-blue-900/50 text-blue-300 border border-blue-700' : 'bg-blue-100 text-blue-700 border border-blue-200'}`}>
+                  Expert Leadership
+                </div>
+                <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-purple-900/50 text-purple-300 border border-purple-700' : 'bg-purple-100 text-purple-700 border border-purple-200'}`}>
+                  Diverse Expertise
+                </div>
+                <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-green-900/50 text-green-300 border border-green-700' : 'bg-green-100 text-green-700 border border-green-200'}`}>
+                  Collaborative Spirit
+                </div>
+              </div>
             </div>
           </div>
           {/* Team Structure - Enhanced */}

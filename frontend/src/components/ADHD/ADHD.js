@@ -524,6 +524,18 @@ const ADHD = () => {
           </div>
         </div>
       </div>
+
+      {/* Inspirational Quote Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="text-center">
+          <blockquote className="text-xl italic text-gray-700 dark:text-gray-300 max-w-4xl mx-auto border-l-4 border-green-600 pl-6 py-4">
+            "ADHD is not a deficit of attention, but a different way of experiencing the world. The same mind that struggles to focus on routine tasks can hyperfocus with incredible intensity on what truly matters."
+          </blockquote>
+          <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
+            With understanding, support, and the right strategies, individuals with ADHD can harness their unique energy, creativity, and passion to achieve extraordinary things in their own way.
+          </p>
+        </div>
+      </div>
       </div>
     </div>
   );

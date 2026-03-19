@@ -51,7 +51,7 @@ const MemoryDisorders = () => {
 
       <div className="relative z-10">
         {/* Header */}
-        <div className="bg-gradient-to-r from-[#142C52] to-[#0F172A] text-white py-16">
+        <div className="bg-gradient-to-r from-[#142C52] to-[#1E293B] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex justify-center mb-6">
@@ -650,6 +650,18 @@ const MemoryDisorders = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Inspirational Quote Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="text-center">
+          <blockquote className="text-xl italic text-gray-700 dark:text-gray-300 max-w-4xl mx-auto border-l-4 border-blue-800 pl-6 py-4">
+            "Memory is the diary that we all carry about with us, but when pages fade, the story of who we are remains written in the hearts of those who love us and in the moments we've shared."
+          </blockquote>
+          <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
+            Even as memory changes, the capacity for joy, connection, and meaning persists. Each day brings new opportunities to create precious moments and strengthen the bonds that define us beyond memory.
+          </p>
         </div>
       </div>
       </div>

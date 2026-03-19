@@ -51,7 +51,7 @@ const LearningDisabilities = () => {
 
       <div className="relative z-10">
         {/* HERO SECTION */}
-        <div className="bg-gradient-to-r from-[#16808D] to-[#1B9AAA] text-white py-16">
+        <div className="bg-gradient-to-r from-[#16808D] to-[#0F766E] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex justify-center mb-6">
@@ -574,6 +574,18 @@ const LearningDisabilities = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Inspirational Quote Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="text-center">
+          <blockquote className="text-xl italic text-gray-700 dark:text-gray-300 max-w-4xl mx-auto border-l-4 border-teal-600 pl-6 py-4">
+            "Learning disabilities are not disabilities to learn, but different ways of learning. The mind that struggles with traditional methods may excel with alternative approaches, revealing unique pathways to knowledge and understanding."
+          </blockquote>
+          <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
+            Every individual has the capacity to learn; sometimes we just need to discover the right key. With patience, creativity, and the right support, learning differences can become learning strengths.
+          </p>
         </div>
       </div>
       </div>

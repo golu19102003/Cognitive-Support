@@ -16,7 +16,7 @@ const IntellectualDisability = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* HERO SECTION */}
-      <div className="bg-gradient-to-r from-[#DB2777] to-[#EC4899] text-white py-16">
+      <div className="bg-gradient-to-r from-[#DB2777] to-[#BE185D] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex justify-center mb-6">
@@ -623,6 +623,18 @@ const IntellectualDisability = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Inspirational Quote Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="text-center">
+          <blockquote className="text-xl italic text-gray-700 dark:text-gray-300 max-w-4xl mx-auto border-l-4 border-pink-600 pl-6 py-4">
+            "Intellectual disability is not about what someone cannot do, but about celebrating what they can do in their own unique way. Every person has inherent worth and the capacity to learn, grow, and contribute meaningfully."
+          </blockquote>
+          <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
+            With the right support, understanding, and opportunities, individuals with intellectual disabilities can lead fulfilling lives, form meaningful relationships, and achieve their personal definition of success.
+          </p>
         </div>
       </div>
     </div>

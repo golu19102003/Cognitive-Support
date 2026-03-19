@@ -16,7 +16,7 @@ const SpeechLanguageDisorders = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* HERO SECTION */}
-      <div className="bg-gradient-to-r from-[#F97316] to-[#EA580C] text-white py-16">
+      <div className="bg-gradient-to-r from-[#F97316] to-[#C2410C] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex justify-center mb-6">
@@ -629,6 +629,18 @@ const SpeechLanguageDisorders = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Inspirational Quote Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="text-center">
+          <blockquote className="text-xl italic text-gray-700 dark:text-gray-300 max-w-4xl mx-auto border-l-4 border-orange-600 pl-6 py-4">
+            "Speech is not the only language we speak. Every form of communication—whether spoken, signed, written, or expressed through movement—has the power to connect hearts and bridge understanding between minds."
+          </blockquote>
+          <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
+            Communication challenges are opportunities to discover deeper ways of connecting. With patience, creativity, and support, every voice can be heard and every story can be told in its own beautiful way.
+          </p>
         </div>
       </div>
     </div>

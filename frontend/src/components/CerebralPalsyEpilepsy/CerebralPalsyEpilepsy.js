@@ -53,7 +53,7 @@ const CerebralPalsyEpilepsy = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-[#7C3AED] to-[#3730A3] text-white py-16">
+      <div className="bg-gradient-to-r from-[#7C3AED] to-[#6D28D9] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex justify-center mb-6">
@@ -531,6 +531,18 @@ const CerebralPalsyEpilepsy = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Inspirational Quote Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="text-center">
+          <blockquote className="text-xl italic text-gray-700 dark:text-gray-300 max-w-4xl mx-auto border-l-4 border-purple-600 pl-6 py-4">
+            "The body may face challenges, but the human spirit knows no bounds. Every movement, every milestone, every moment of progress is a testament to incredible strength and determination."
+          </blockquote>
+          <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
+            With comprehensive care, adaptive technologies, and unwavering support, individuals can overcome physical limitations and live full, meaningful lives filled with joy, achievement, and purpose.
+          </p>
         </div>
       </div>
     </div>

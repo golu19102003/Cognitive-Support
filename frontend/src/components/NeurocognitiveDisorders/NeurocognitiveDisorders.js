@@ -16,7 +16,7 @@ const NeurocognitiveDisorders = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-gradient-to-r from-[#4C97A8] to-[#3A8B9C] text-white py-16">
+      <div className="bg-gradient-to-r from-[#4C97A8] to-[#0F766E] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex justify-center mb-6">
@@ -594,6 +594,18 @@ const NeurocognitiveDisorders = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Inspirational Quote Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="text-center">
+          <blockquote className="text-xl italic text-gray-700 dark:text-gray-300 max-w-4xl mx-auto border-l-4 border-cyan-600 pl-6 py-4">
+            "The brain's remarkable capacity for adaptation reminds us that even in the face of cognitive challenges, the human spirit finds ways to connect, create, and contribute meaningfully to the world around us."
+          </blockquote>
+          <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
+            Neurocognitive changes may alter how we process information, but they cannot diminish the essence of who we are. With support, understanding, and adaptive strategies, individuals can continue to live rich, purposeful lives.
+          </p>
         </div>
       </div>
     </div>

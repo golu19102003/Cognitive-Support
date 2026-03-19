@@ -58,7 +58,7 @@ const SocialCommunication = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* HERO SECTION */}
-      <div className="bg-gradient-to-r from-[#0891B2] to-[#0E7490] text-white py-16">
+      <div className="bg-gradient-to-r from-[#0891B2] to-[#0C4A6E] text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <div className="flex justify-center mb-6">
@@ -593,6 +593,18 @@ const SocialCommunication = () => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Inspirational Quote Section */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="text-center">
+          <blockquote className="text-xl italic text-gray-700 dark:text-gray-300 max-w-4xl mx-auto border-l-4 border-cyan-700 pl-6 py-4">
+            "Communication is not just about words, but about connection. Every person has a unique voice that deserves to be heard, understood, and valued, regardless of how they choose to express themselves."
+          </blockquote>
+          <p className="mt-6 text-lg text-gray-600 dark:text-gray-300">
+            Social communication challenges are not barriers to relationships, but invitations to find new ways of connecting. With patience, creativity, and understanding, we can build bridges of communication that honor every individual's unique way of sharing their world.
+          </p>
         </div>
       </div>
     </div>

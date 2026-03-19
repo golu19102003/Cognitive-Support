@@ -36,6 +36,7 @@ import EyeTrackingNavigation from './components/EyeTracking/EyeTrackingNavigatio
 import MultilingualSupport from './components/Multilingual/MultilingualSupport';
 import { MultilingualProvider } from './components/Multilingual/MultilingualSupport';
 import FeaturesPage from './components/FeaturesPage/FeaturesPage';
+import AdvancedFeatures from './components/AdvancedFeatures/AdvancedFeatures';
 
 import './App.css';
 
@@ -70,6 +71,7 @@ function Application() {
             <Route path="/conditions/epilepsy-cerebral-palsy" element={<CerebralPalsyEpilepsy />} />
             <Route path="/all-features" element={<AllFeatures />} />
             <Route path="/resources" element={<ResourcesPage />} />
+            <Route path="/advanced-features" element={<AdvancedFeatures />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/signup" element={<Register />} />
             <Route path="/forgotpassword" element={<ForgotPassword />} />
