@@ -22,6 +22,9 @@ const AnxietyDisorders = () => {
   const [activeSection, setActiveSection] = useState('overview');
 
   useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo(0, 0);
+    
     const handleScroll = () => {
       const sections = ['overview', 'types', 'symptoms', 'causes', 'diagnosis', 'treatment', 'prevention', 'living-with'];
       const scrollPosition = window.scrollY + 100;

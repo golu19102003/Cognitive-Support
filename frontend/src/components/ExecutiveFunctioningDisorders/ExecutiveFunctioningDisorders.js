@@ -32,6 +32,9 @@ const ExecutiveFunctioningDisorders = () => {
   const [activeSection, setActiveSection] = useState('overview');
 
   useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo(0, 0);
+    
     const handleScroll = () => {
       const sections = ['overview', 'types', 'symptoms', 'causes', 'diagnosis', 'treatment', 'strategies', 'resources'];
       const scrollPosition = window.scrollY + 100;

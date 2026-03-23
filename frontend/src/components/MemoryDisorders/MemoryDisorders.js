@@ -6,8 +6,10 @@ const MemoryDisorders = () => {
   const [activeSection, setActiveSection] = useState('overview');
   const [isDarkMode, setIsDarkMode] = useState(false);
 
-  // Check for theme preference
+  // Check for theme preference and scroll to top
   useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo(0, 0);
     const checkTheme = () => {
       const theme = localStorage.getItem('theme') || 
                    localStorage.getItem('darkMode') || 

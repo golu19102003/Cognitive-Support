@@ -148,7 +148,7 @@ const About = () => {
         <p className={`text-xl max-w-3xl mx-auto italic transition-colors duration-300 ${
           isDarkMode ? 'text-gray-300' : 'text-gray-600'
         }`}>
-          Cognitive disabilities affect learning, memory, and decision-making. As service providers, we deliver support, expertise, and resources for individuals and families affected by cognitive disabilities. Our mission empowers through innovative solutions, guidance, and tools creating inclusive opportunities and independence.
+          Cognitive disabilities affect learning, memory, and decision-making. As service providers, we deliver support, expertise, and resources for individuals and families affected by cognitive disabilities. Our mission empowers through innovative solutions, guidance, and tools creating inclusive opportunities and independence always guaranteed success.
         </p>
       </div>
       {/* Single Grid with All 5 Sections */}

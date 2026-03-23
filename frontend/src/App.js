@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import MainLayout from './components/Layout/MainLayout';
 import HomePage from './components/HomePage/Home';
 import AboutPage from './components/AboutPage/About';
@@ -40,11 +40,23 @@ import AdvancedFeatures from './components/AdvancedFeatures/AdvancedFeatures';
 
 import './App.css';
 
-function Application() {
+// Scroll to top component
+const ScrollToTop = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+  return null;
+};
+
+function App() {
   return (
     <MultilingualProvider>
       <Router future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <MainLayout>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/login" element={<SignInPage />} />
@@ -89,4 +101,4 @@ function Application() {
   );
 }
 
-export default Application;
+export default App;

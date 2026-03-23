@@ -391,69 +391,245 @@ const AdvancedFeatures = () => {
       </div>
 
       {/* Hero Section Content */}
-      <div className="mb-12">
-        <div className="text-center py-12 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-[#16808D]/10 to-purple-500/10 animate-pulse"></div>
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Hero Section */}
+        <div className="text-center mb-4">
           <div className="relative z-10">
-            <div className="flex items-center justify-center mb-4">
-              <Zap className="h-16 w-16 text-[#16808D] mr-4 animate-bounce" />
-              <h2 className="text-3xl font-bold bg-gradient-to-r from-[#16808D] to-purple-600 bg-clip-text text-transparent">
-                <span>
-                  <span style={{ color: '#16808D' }}>Advanced</span>{' '}
-                  <span style={{ color: 'black' }}>Features</span>
-                </span>
-              </h2>
+            <div className="flex flex-col items-center justify-center space-y-6">
+              <div className="flex items-center justify-center space-x-4">
+                <div 
+                  className="relative group"
+                  style={{
+                    position: 'relative',
+                    transform: `translate(${iconPosition.x}px, ${iconPosition.y}px)`,
+                    transition: isDragging ? 'none' : 'transform 0.3s ease'
+                  }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-400 rounded-full blur-xl opacity-50 animate-pulse group-hover:opacity-70 transition-opacity duration-300"></div>
+                  <div 
+                    className="relative bg-gradient-to-r from-[#142C52] to-[#16808D] p-3 rounded-full transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 cursor-move select-none"
+                    onMouseDown={handleMouseDown}
+                    style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
+                  >
+                    <Zap className="h-8 w-8 text-white transform transition-all duration-300 group-hover:scale-105" />
+                  </div>
+                  {/* Additional hover effect ring */}
+                  <div className="absolute inset-0 rounded-full border-2 border-white opacity-0 group-hover:opacity-30 transition-opacity duration-300 animate-pulse"></div>
+                  {/* Floating animation when not dragging */}
+                  <div className={`absolute inset-0 rounded-full ${isDragging ? '' : 'animate-bounce'}`} style={{ animationDuration: '3s' }}></div>
+                </div>
+                <h1 className="text-4xl font-bold">
+                  <span style={{ color: '#16808D' }}>Advanced</span>
+                  <span className={`transition-colors duration-300 ${
+                    isDarkMode ? 'text-white' : ''
+                  }`} style={{ color: isDarkMode ? '#ffffff' : '#000000' }}> Features</span>
+                </h1>
+              </div>
+              <p className={`text-xl max-w-3xl mx-auto italic transition-colors duration-300 ${
+                isDarkMode ? 'text-gray-300' : 'text-gray-600'
+              }`}>
+                Discover cutting-edge accessibility technologies and AI-powered features designed to transform your digital experience. From smart assistants to voice control and gesture recognition, we're pioneering truly innovative inclusive technology that adapts to your unique needs and empowers revolutionary digital interactions.
+              </p>
             </div>
-            <p className="text-lg max-w-3xl mx-auto italic leading-relaxed">
-              Discover cutting-edge accessibility technologies and AI-powered features designed to transform your digital experience. From smart assistants and eye tracking to voice control and gesture recognition, we're pioneering the future of inclusive technology that adapts to your unique needs and empowers you to interact with digital content in revolutionary ways.
-            </p>
+            
+            {/* Search Bar and Categories */}
+            <div className="mt-12">
+              
+              {/* First Row: Search Bar */}
+              <div className="flex justify-center mb-6">
+                <div className={`w-full max-w-2xl p-3.5 rounded-xl shadow-lg`}>
+                  <div className="relative">
+                    <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 h-4.5 w-4.5 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`} />
+                    <input
+                      type="text"
+                      placeholder="Search advanced features and accessibility tools..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className={`w-full pl-10 pr-3.5 py-2.5 rounded-lg border ${isDarkMode ? 'bg-gray-700 border-[#16808D] text-white' : 'bg-gray-50 border-[#16808D] text-gray-900'} focus:outline-none focus:ring-2 focus:ring-[#16808D] text-base`}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              {/* Second Row: Categories */}
+              <div className="grid grid-cols-5 gap-4">
+                {/* All Features Category */}
+                <div 
+                  onClick={() => setSelectedCategory('all')}
+                  className={`bg-white rounded-lg shadow-lg p-4 transition-all duration-300 hover:shadow-xl hover:scale-105 flex items-center justify-center text-center cursor-pointer h-full ${
+                    selectedCategory === 'all' ? 'ring-2 ring-[#16808D]' : ''
+                  } ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}
+                >
+                  <Zap className="h-8 w-8 mr-2" style={{ color: '#16808D' }} />
+                  <h2 className={`text-base font-bold transition-colors duration-300 ${
+                    isDarkMode ? 'text-white' : 'text-gray-900'
+                  }`}>All Features</h2>
+                </div>
+                
+                {/* Other Categories */}
+                {categories.slice(1).map((category) => {
+                    const Icon = category.icon;
+                    return (
+                      <div 
+                        key={category.id}
+                        onClick={() => setSelectedCategory(category.id)}
+                        className={`bg-white rounded-lg shadow-lg p-4 transition-all duration-300 hover:shadow-xl hover:scale-105 flex items-center justify-center text-center cursor-pointer h-full ${
+                          selectedCategory === category.id ? 'ring-2' : ''
+                        } ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}
+                        style={selectedCategory === category.id ? { '--tw-ring-color': category.color } : {}}
+                      >
+                        <Icon className="h-8 w-8 mr-2" style={{ color: category.color }} />
+                        <h2 className={`text-base font-bold transition-colors duration-300 ${
+                          isDarkMode ? 'text-white' : 'text-gray-900'
+                        }`}>{category.name}</h2>
+                      </div>
+                    );
+                  })}
+              </div>
+            </div>
+
           </div>
         </div>
       </div>
 
-      {/* Categories and Search Bar */}
-        <div className="mb-8">
-          {/* Search Bar */}
-          <div className={`p-3.5 rounded-xl ${isDarkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg mb-4`}>
-            <div className="relative">
-              <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 h-4.5 w-4.5 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`} />
-              <input
-                type="text"
-                placeholder="Search features..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className={`w-full pl-10 pr-3.5 py-2.5 rounded-lg border ${isDarkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-gray-50 border-gray-300 text-gray-900'} focus:outline-none focus:ring-2 focus:ring-blue-500 text-base`}
-              />
-            </div>
-          </div>
-
-          {/* Categories Row */}
-          <div className="grid grid-cols-5 gap-3 mb-12">
-            {categories.map((category) => {
-                const Icon = category.icon;
-                return (
-                  <div 
-                    key={category.id}
-                    onClick={() => setSelectedCategory(category.id)}
-                    className={`bg-white rounded-lg shadow-lg p-4 transition-all duration-300 hover:shadow-xl hover:scale-105 flex items-center justify-center cursor-pointer h-full ${
-                      selectedCategory === category.id ? 'ring-2' : ''
-                    } ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}
-                    style={selectedCategory === category.id ? { '--tw-ring-color': category.color } : {}}
-                  >
-                    <Icon className="h-8 w-8 mr-2" style={{ color: category.color }} />
-                    <span className={`text-base font-bold transition-colors duration-300 whitespace-nowrap ${
-                      isDarkMode ? 'text-white' : 'text-gray-900'
-                    }`}>{category.name}</span>
+        {/* Category Description Content */}
+        <div className="px-4 sm:px-6 lg:px-8">
+          {selectedCategory === 'all' && (
+            <div className="text-center py-12 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-[#16808D]/10 to-purple-500/10 animate-pulse"></div>
+              <div className="relative z-10">
+                <Zap className="h-16 w-16 text-[#16808D] mx-auto mb-4 animate-bounce" style={{ color: '#16808D' }} />
+                <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-[#16808D] to-purple-600 bg-clip-text text-transparent">
+                  <span style={{ color: '#16808D' }}>All Features</span>
+                </h2>
+                <p className="text-lg max-w-3xl mx-auto italic leading-relaxed mb-4">
+                  Comprehensive collection of advanced accessibility features including AI-powered technologies, accessibility tools, control methods, and system enhancements. We provide innovative solutions for inclusive digital experiences and adaptive interactions.
+                </p>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-blue-900/50 text-blue-300 border border-blue-700' : 'bg-blue-100 text-blue-700 border border-blue-200'}`}>
+                    AI Technologies
                   </div>
-                );
-              })}
-          </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-purple-900/50 text-purple-300 border border-purple-700' : 'bg-purple-100 text-purple-700 border border-purple-200'}`}>
+                    Accessibility Tools
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-green-900/50 text-green-300 border border-green-700' : 'bg-green-100 text-green-700 border border-green-200'}`}>
+                    Control Methods
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {selectedCategory === 'ai-powered' && (
+            <div className="text-center py-12 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-blue-500/10 animate-pulse"></div>
+              <div className="relative z-10">
+                <Brain className="h-16 w-16 text-purple-600 mx-auto mb-4 animate-bounce" style={{ color: 'purple' }} />
+                <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                  <span style={{ color: 'purple' }}>AI-Powered Features</span>
+                </h2>
+                <p className="text-lg max-w-3xl mx-auto italic leading-relaxed mb-4">
+                  Advanced artificial intelligence technologies including smart assistants, predictive text, voice recognition, and machine learning algorithms. We provide intelligent automation and adaptive learning for personalized accessibility experiences.
+                </p>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-purple-900/50 text-purple-300 border border-purple-700' : 'bg-purple-100 text-purple-700 border border-purple-200'}`}>
+                    Smart Assistants
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-blue-900/50 text-blue-300 border border-blue-700' : 'bg-blue-100 text-blue-700 border border-blue-200'}`}>
+                    Voice Recognition
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-green-900/50 text-green-300 border border-green-700' : 'bg-green-100 text-green-700 border border-green-200'}`}>
+                    Machine Learning
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {selectedCategory === 'accessibility' && (
+            <div className="text-center py-12 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-teal-500/10 animate-pulse"></div>
+              <div className="relative z-10">
+                <Eye className="h-16 w-16 text-green-600 mx-auto mb-4 animate-bounce" style={{ color: 'green' }} />
+                <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-green-600 to-teal-600 bg-clip-text text-transparent">
+                  <span style={{ color: 'green' }}>Accessibility Features</span>
+                </h2>
+                <p className="text-lg max-w-3xl mx-auto italic leading-relaxed mb-4">
+                  Comprehensive accessibility tools including screen readers, text-to-speech, visual aids, and cognitive support systems. We ensure inclusive design and equal access for users with diverse abilities and accessibility needs.
+                </p>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-green-900/50 text-green-300 border border-green-700' : 'bg-green-100 text-green-700 border border-green-200'}`}>
+                    Screen Readers
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-teal-900/50 text-teal-300 border border-teal-700' : 'bg-teal-100 text-teal-700 border border-teal-200'}`}>
+                    Visual Aids
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-blue-900/50 text-blue-300 border border-blue-700' : 'bg-blue-100 text-blue-700 border border-blue-200'}`}>
+                    Cognitive Support
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {selectedCategory === 'control' && (
+            <div className="text-center py-12 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 to-yellow-500/10 animate-pulse"></div>
+              <div className="relative z-10">
+                <Hand className="h-16 w-16 text-orange-600 mx-auto mb-4 animate-bounce" style={{ color: 'orange' }} />
+                <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-orange-600 to-yellow-600 bg-clip-text text-transparent">
+                  <span style={{ color: 'orange' }}>Control Methods</span>
+                </h2>
+                <p className="text-lg max-w-3xl mx-auto italic leading-relaxed mb-4">
+                  Innovative control methods including eye tracking, gesture recognition, voice commands, and adaptive input systems. We provide multiple interaction options for users with mobility or dexterity challenges.
+                </p>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-orange-900/50 text-orange-300 border border-orange-700' : 'bg-orange-100 text-orange-700 border border-orange-200'}`}>
+                    Eye Tracking
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-yellow-900/50 text-yellow-300 border border-yellow-700' : 'bg-yellow-100 text-yellow-700 border border-yellow-200'}`}>
+                    Gesture Recognition
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-red-900/50 text-red-300 border border-red-700' : 'bg-red-100 text-red-700 border border-red-200'}`}>
+                    Voice Commands
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {selectedCategory === 'enhancement' && (
+            <div className="text-center py-12 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-pink-500/10 animate-pulse"></div>
+              <div className="relative z-10">
+                <Settings className="h-16 w-16 text-red-600 mx-auto mb-4 animate-bounce" style={{ color: 'red' }} />
+                <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-red-600 to-pink-600 bg-clip-text text-transparent">
+                  <span style={{ color: 'red' }}>System Enhancements</span>
+                </h2>
+                <p className="text-lg max-w-3xl mx-auto italic leading-relaxed mb-4">
+                  Advanced system enhancements including performance optimization, memory management, and resource allocation for improved accessibility. We optimize system resources to ensure smooth and responsive accessibility features.
+                </p>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-red-900/50 text-red-300 border border-red-700' : 'bg-red-100 text-red-700 border border-red-200'}`}>
+                    Performance Optimization
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-pink-900/50 text-pink-300 border border-pink-700' : 'bg-pink-100 text-pink-700 border border-pink-200'}`}>
+                    Memory Management
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-purple-900/50 text-purple-300 border border-purple-700' : 'bg-purple-100 text-purple-700 border border-purple-200'}`}>
+                    Resource Allocation
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
       {/* Main Content */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        
         {/* Features Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {searchFilteredFeatures.map((feature) => {
             const Icon = feature.icon;
             const isExpanded = expandedFeature === feature.id;
@@ -463,7 +639,7 @@ const AdvancedFeatures = () => {
                 key={feature.id}
                 onMouseEnter={() => setHoveredCard(feature.id)}
                 onMouseLeave={() => setHoveredCard(null)}
-                className={`relative group ${isDarkMode ? 'bg-gray-800' : 'bg-white'} rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden`}
+                className={`relative group rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden`}
                 style={{
                   transform: hoveredCard === feature.id ? 'translateY(-8px)' : 'translateY(0)',
                 }}
@@ -493,7 +669,9 @@ const AdvancedFeatures = () => {
                 </div>
 
                 {/* Card Body */}
-                <div className="p-6">
+                <div className={`p-6 relative overflow-hidden ${isDarkMode ? 'bg-gray-800' : 'bg-white'}`}>
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#16808D]/5 via-purple-500/5 to-blue-500/5 animate-pulse"></div>
+                  <div className="relative z-10">
                   {/* Stats */}
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center">
@@ -598,6 +776,7 @@ const AdvancedFeatures = () => {
                       </div>
                     </div>
                   )}
+                </div>
                 </div>
               </div>
             );

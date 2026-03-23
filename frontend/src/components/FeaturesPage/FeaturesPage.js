@@ -74,13 +74,7 @@ const FeaturesPage = () => {
         {/* Header */}
         <div className="bg-gradient-to-r from-[#142C52] to-[#16808D] text-white py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center mb-6">
-              <Link to="/" className="flex items-center text-white hover:text-gray-200 transition-colors">
-                <ArrowLeft className="h-6 w-6 mr-2" />
-                Back to Home
-              </Link>
-            </div>
-            
+                        
             <div className="text-center">
               <div className="flex justify-center mb-6">
                 <div className="bg-white/20 p-4 rounded-full">

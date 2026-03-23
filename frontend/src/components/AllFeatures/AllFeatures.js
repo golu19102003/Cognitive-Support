@@ -38,9 +38,10 @@ const AllFeatures = () => {
 
 
 
-  // Check for theme preference
-
+  // Check for theme preference and scroll to top
   useEffect(() => {
+    // Scroll to top when component mounts
+    window.scrollTo(0, 0);
 
     const checkTheme = () => {
 
@@ -190,7 +191,7 @@ const AllFeatures = () => {
 
   const categories = [
 
-    { id: 'all', name: 'All Cognitive Conditions', icon: Users, color: '#16808D' },
+    { id: 'all', name: 'All Conditions', icon: Users, color: '#16808D' },
 
     { id: 'learning', name: 'Learning', icon: BookOpen, color: '#8B5CF6' },
 
@@ -200,7 +201,7 @@ const AllFeatures = () => {
 
     { id: 'cognitive', name: 'Cognitive', icon: Clock, color: 'orange' },
 
-    { id: 'emotional', name: 'Mental Health', icon: Heart, color: '#F43F5E' }
+    { id: 'emotional', name: 'Emotional', icon: Heart, color: '#F43F5E' }
 
   ];
 
@@ -741,7 +742,7 @@ const AllFeatures = () => {
 
                 >
 
-                  <Brain className="h-10 w-10 text-white transform transition-all duration-300 group-hover:scale-105" />
+                  <Brain className="h-8 w-8 text-white transform transition-all duration-300 group-hover:scale-105" />
 
                 </div>
 
@@ -777,7 +778,7 @@ const AllFeatures = () => {
 
           }`}>
 
-            Cognitive support systems for learning disabilities, developmental disorders, memory impairments, and accessibility challenges. We provide innovative solutions, expert guidance, and resources to empower individuals and families with equal access and independence opportunities.
+            Cognitive support systems for learning disabilities, developmental disorders, memory impairments, and accessibility challenges. We provide innovative solutions, expert guidance, and resources to empower individuals and families with equal access and independence opportunities worldwide always guaranteed.
 
           </p>
 
@@ -785,17 +786,13 @@ const AllFeatures = () => {
 
 
 
-        {/* Categories and Search Bar */}
+        {/* Search Bar and Categories */}
 
         <div className="mb-8">
 
-          {/* First Row: Search + All Features */}
-
-          <div className="flex items-center gap-4 mb-4">
-
-            {/* Search Bar */}
-
-            <div className={`flex-1 p-3.5 rounded-xl ${isDarkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg h-full`}>
+          {/* First Row: Search Bar */}
+          <div className="flex justify-center mb-6">
+            <div className={`w-full max-w-2xl p-3.5 rounded-xl shadow-lg`}>
               <div className="relative">
                 <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 h-4.5 w-4.5 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`} />
                 <input
@@ -803,12 +800,16 @@ const AllFeatures = () => {
                   placeholder="Search cognitive conditions, learning disabilities, and support features..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className={`w-full pl-10 pr-3.5 py-2.5 rounded-lg border ${isDarkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-gray-50 border-gray-300 text-gray-900'} focus:outline-none focus:ring-2 focus:ring-blue-500 text-base`}
+                  className={`w-full pl-10 pr-3.5 py-2.5 rounded-lg border ${isDarkMode ? 'bg-gray-700 border-[#16808D] text-white' : 'bg-gray-50 border-[#16808D] text-gray-900'} focus:outline-none focus:ring-2 focus:ring-[#16808D] text-base`}
                 />
               </div>
             </div>
+          </div>
 
-            {/* All Features Category */}
+          {/* Second Row: Categories */}
+          <div className="grid grid-cols-6 gap-4">
+
+            {/* All Cognitive Conditions Category */}
 
             <div 
 
@@ -828,17 +829,13 @@ const AllFeatures = () => {
 
                 isDarkMode ? 'text-white' : 'text-gray-900'
 
-              }`}>All Cognitive Conditions</h2>
+              }`}>All Conditions</h2>
 
             </div>
 
-          </div>
+            
 
-
-
-          {/* Second Row: 5 Categories */}
-
-          <div className="grid grid-cols-5 gap-4 mb-12">
+            {/* Other Categories */}
 
             {categories.slice(1).map((category) => {
 
@@ -1387,30 +1384,7 @@ const AllFeatures = () => {
 
         {/* Back Button */}
 
-        <div className="text-center">
-
-          <Link to="/">
-
-            <button className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg font-medium transition-all ${
-
-              isDarkMode 
-
-                ? 'bg-gray-800 text-white hover:bg-gray-700' 
-
-                : 'bg-white text-gray-900 hover:bg-gray-50'
-
-            } shadow-lg hover:shadow-xl`}>
-
-              <ArrowLeft className="h-5 w-5" />
-
-              Back to Home
-
-            </button>
-
-          </Link>
-
-        </div>
-
+        
       </div>
 
     </div>

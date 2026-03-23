@@ -450,9 +450,12 @@ const AccessibilitySidebar = () => {
     window.gazeInterval = gazeInterval;
   };
 
-  const stopGazeTracking = () => {
+  const stopGazeTracking = (showNotificationOnStop = true) => {
     setShowGazePoint(false);
-    showNotification('👁️ Eye tracking stopped');
+    
+    if (showNotificationOnStop) {
+      showNotification('👁️ Eye tracking stopped');
+    }
     
     if (window.gazeInterval) {
       clearInterval(window.gazeInterval);
@@ -471,11 +474,11 @@ const AccessibilitySidebar = () => {
     if (showGazePoint && isEnabled) {
       startGazeTracking();
     } else {
-      stopGazeTracking();
+      stopGazeTracking(false);
     }
     
     return () => {
-      stopGazeTracking();
+      stopGazeTracking(false);
     };
   }, [showGazePoint, isEnabled, cameraPermission]);
 

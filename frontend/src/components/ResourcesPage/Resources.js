@@ -13,7 +13,7 @@ const Resources = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [hoveredCard, setHoveredCard] = useState(null);
-  const [activeSection, setActiveSection] = useState('guides');
+  const [activeSection, setActiveSection] = useState('all');
   const [iconPosition, setIconPosition] = useState({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
@@ -73,11 +73,11 @@ const Resources = () => {
   }, [isDragging, dragStart]);
 
   const categories = [
-    { id: 'guides', name: 'Guides', icon: BookOpen, color: '#16808D' },
+    { id: 'guides', name: 'Guides', icon: FileText, color: '#6D28D9' },
     { id: 'tools', name: 'Tools', icon: Wrench, color: 'purple' },
     { id: 'support', name: 'Support', icon: Headphones, color: 'red' },
     { id: 'community', name: 'Community', icon: Users, color: 'green' },
-    { id: 'education', name: 'Education', icon: GraduationCap, color: 'orange' }
+    { id: 'education', name: 'Education', icon: GraduationCap, color: '#EA580C' }
   ];
 
   const resources = [
@@ -87,8 +87,8 @@ const Resources = () => {
       description: 'Complete step-by-step guide explaining how to use PriHub features like accessibility tools, chatbot assistance, reminders, and community support.',
       category: 'guides',
       icon: BookOpen,
-      color: 'blue',
-      features: ['Step-by-step tutorials', 'Visual guides', 'Accessibility features', 'Community support'],
+      color: 'from-blue-800 to-blue-900',
+      features: ['Step-by-step tutorials', 'Visual guides', 'Accessibility features', 'Community support', 'Expert assistance'],
       rating: 4.8,
       downloads: '12.5K',
       action: 'Read More',
@@ -100,11 +100,23 @@ const Resources = () => {
       description: 'Frequently asked questions related to accessibility features, therapy support, AI tools, and platform usage with comprehensive detailed answers.',
       category: 'guides',
       icon: HelpCircle,
-      color: 'green',
-      features: ['Common questions', 'Quick answers', 'Troubleshooting', 'Platform usage'],
+      color: 'from-emerald-700 to-emerald-800',
+      features: ['Common questions', 'Quick answers', 'Troubleshooting', 'Platform usage', 'Expert guidance'],
       rating: 4.6,
       downloads: '8.2K',
       action: 'View FAQ'
+    },
+    {
+      id: 4,
+      title: 'Therapy Sessions',
+      description: 'Access comprehensive online therapy programs including cognitive therapy, mental wellness programs, and guided therapy sessions.',
+      category: 'support',
+      icon: Calendar,
+      color: 'from-pink-700 to-pink-800',
+      features: ['Cognitive therapy', 'Mental wellness', 'Guided sessions', 'Professional help', 'Flexible scheduling'],
+      rating: 4.7,
+      downloads: '7.4K',
+      action: 'Book Session'
     },
     {
       id: 3,
@@ -112,8 +124,8 @@ const Resources = () => {
       description: 'Comprehensive visual tutorials explaining how to use screen reader tools, reminders, AI chatbot, and accessibility settings effectively with examples.',
       category: 'guides',
       icon: Play,
-      color: 'purple',
-      features: ['Video guides', 'Screen reader tutorials', 'AI assistant demos', 'Accessibility settings'],
+      color: 'from-orange-700 to-orange-800',
+      features: ['Video guides', 'Screen reader tutorials', 'AI assistant demos', 'Accessibility settings', 'Interactive learning'],
       rating: 4.9,
       downloads: '15.3K',
       action: 'Watch Videos',
@@ -125,8 +137,8 @@ const Resources = () => {
       description: 'Neuroplasticity-based cognitive training using gamified exercises to strengthen neural pathways enhance mental performance adaptive challenges.',
       category: 'tools',
       icon: Target,
-      color: 'orange',
-      features: ['Memory games', 'Focus training', 'Cognitive exercises', 'Progress tracking'],
+      color: 'from-rose-600 to-rose-700',
+      features: ['Memory games', 'Focus training', 'Cognitive exercises', 'Progress tracking', 'Adaptive challenges'],
       rating: 4.8,
       downloads: '11.2K',
       action: 'Start Training'
@@ -136,37 +148,25 @@ const Resources = () => {
       title: 'One-to-One Counselling',
       description: 'Users can easily search therapists and specialists by condition and PIN code to book personalized secure online counselling sessions.',
       category: 'support',
-      icon: Users,
-      color: 'teal',
-      features: ['Therapist search', 'PIN code based', 'Online sessions', 'Personalized care'],
+      icon: Phone,
+      color: 'from-teal-700 to-teal-800',
+      features: ['Therapist search', 'PIN code filter', 'Secure sessions', 'Personalized counseling', 'Professional help'],
       rating: 4.9,
       downloads: '6.7K',
       action: 'Find a Counselor'
     },
     {
-      id: 4,
+      id: 7,
       title: 'AI Smart Assistant',
       description: 'An AI-powered intelligent chatbot that helps users navigate the platform, answer questions, and provide personalized accessibility guidance.',
       category: 'tools',
       icon: Bot,
-      color: 'indigo',
-      features: ['24/7 availability', 'Personalized guidance', 'Accessibility help', 'Platform navigation'],
+      color: 'from-indigo-700 to-indigo-800',
+      features: ['24/7 availability', 'Personalized guidance', 'Accessibility help', 'Platform navigation', 'Smart assistance'],
       rating: 4.7,
       downloads: '9.8K',
       action: 'Try AI Assistant',
       badge: 'New'
-    },
-    {
-      id: 7,
-      title: 'Therapy Sessions',
-      description: 'Access comprehensive online therapy programs including cognitive therapy, mental wellness programs, and guided therapy sessions.',
-      category: 'support',
-      icon: Calendar,
-      color: 'pink',
-      features: ['Cognitive therapy', 'Mental wellness', 'Guided sessions', 'Professional help'],
-      rating: 4.7,
-      downloads: '7.4K',
-      action: 'Book Session'
     },
     {
       id: 8,
@@ -174,8 +174,8 @@ const Resources = () => {
       description: 'Join supportive peer communities for ADHD, autism, dementia, and other conditions to share valuable experiences and receive support.',
       category: 'community',
       icon: MessageSquare,
-      color: 'cyan',
-      features: ['Peer support', 'Condition specific', 'Experience sharing', 'Emotional help'],
+      color: 'from-cyan-700 to-cyan-800',
+      features: ['Peer support', 'Condition specific', 'Experience sharing', 'Emotional help', 'Community connection'],
       rating: 4.8,
       downloads: '10.1K',
       action: 'Join Group'
@@ -183,47 +183,47 @@ const Resources = () => {
     {
       id: 9,
       title: 'Educational Support',
-      description: 'Learning resources, study assistance, and simplified educational content for people with cognitive challenges.',
+      description: 'Comprehensive learning resources, personalized study assistance, and simplified educational content for people with cognitive challenges.',
       category: 'education',
       icon: GraduationCap,
-      color: 'amber',
-      features: ['Study assistance', 'Simplified content', 'Learning resources', 'Cognitive support'],
+      color: 'from-yellow-700 to-yellow-800',
+      features: ['Study assistance', 'Simplified content', 'Learning resources', 'Cognitive support', 'Personalized learning'],
       rating: 4.6,
       downloads: '8.9K',
       action: 'Explore Resources'
     },
     {
+      id: 11,
+      title: 'Academic Collaboration Network',
+      description: 'Partnership with schools, colleges, and training centers promoting inclusive learning environments through adaptive technologies and support.',
+      category: 'education',
+      icon: School,
+      color: 'from-teal-700 to-teal-800',
+      features: ['Inclusive learning', 'School partnerships', 'Training programs', 'Educational support', 'Resource sharing'],
+      rating: 4.7,
+      downloads: '4.8K',
+      action: 'Learn More'
+    },
+    {
       id: 10,
       title: 'NGO Partnerships',
-      description: 'Collaboration with NGOs working in disability support to provide verified resources, awareness programs, and assistance.',
+      description: 'Collaboration with dedicated NGOs working in disability support to provide verified resources, awareness programs, and assistance.',
       category: 'community',
       icon: Heart,
-      color: 'red',
+      color: 'from-red-700 to-red-800',
       features: ['Verified resources', 'Awareness programs', 'Disability support', 'NGO network'],
       rating: 4.8,
       downloads: '5.3K',
       action: 'View Partners'
     },
     {
-      id: 11,
-      title: 'Educational Institution Partnerships',
-      description: 'Partnership with schools, colleges, and training centers promoting inclusive learning environments.',
-      category: 'education',
-      icon: School,
-      color: 'blue',
-      features: ['Inclusive learning', 'School partnerships', 'Training programs', 'Educational support'],
-      rating: 4.7,
-      downloads: '4.8K',
-      action: 'Learn More'
-    },
-    {
       id: 12,
       title: 'Community Forum',
-      description: 'A discussion space where users, caregivers, and experts can share experiences, advice, and resources.',
+      description: 'A supportive discussion space where users, caregivers, and experts can share valuable experiences, helpful advice, and resources.',
       category: 'community',
       icon: Users2,
-      color: 'green',
-      features: ['Discussion space', 'Expert advice', 'Experience sharing', 'Community support'],
+      color: 'from-lime-700 to-lime-800',
+      features: ['Discussion space', 'Expert advice', 'Experience sharing', 'Community support', 'Active participation'],
       rating: 4.6,
       downloads: '7.2K',
       action: 'Join Forum'
@@ -234,8 +234,8 @@ const Resources = () => {
       description: 'Direct immediate assistance from the dedicated PriHub support team for technical help or accessibility issues and questions with guidance.',
       category: 'support',
       icon: Headphones,
-      color: 'purple',
-      features: ['Technical help', 'Accessibility support', 'Direct assistance', 'Expert team'],
+      color: 'from-purple-800 to-purple-900',
+      features: ['Technical help', 'Accessibility support', 'Direct assistance', 'Expert team', '24/7 availability', 'Quick response'],
       rating: 4.9,
       downloads: '9.1K',
       action: 'Get Support',
@@ -244,11 +244,11 @@ const Resources = () => {
     {
       id: 14,
       title: 'Accessibility Tools Hub',
-      description: 'Collection comprehensive tools like text-to-speech, speech-to-text, high-contrast mode, dyslexia fonts, and advanced screen readers.',
+      description: 'Collection comprehensive accessible tools like text-to-speech, speech-to-text, high-contrast mode, dyslexia fonts, and advanced screen readers.',
       category: 'tools',
       icon: Wrench,
-      color: 'indigo',
-      features: ['Text-to-speech', 'Speech-to-text', 'High contrast', 'Screen readers'],
+      color: 'from-pink-800 to-pink-900',
+      features: ['Text-to-speech', 'Speech-to-text', 'High contrast', 'Screen readers', 'Customizable settings'],
       rating: 4.8,
       downloads: '13.7K',
       action: 'Explore Tools',
@@ -260,8 +260,8 @@ const Resources = () => {
       description: 'Comprehensive technical documentation with practical guides and detailed code examples for integrating PriHub accessibility services.',
       category: 'tools',
       icon: Code,
-      color: 'gray',
-      features: ['Developer docs', 'API integration', 'Technical guides', 'Code examples'],
+      color: 'from-zinc-700 to-zinc-800',
+      features: ['Developer docs', 'API integration', 'Technical guides', 'Code examples', 'Implementation support'],
       rating: 4.5,
       downloads: '3.2K',
       action: 'View Docs'
@@ -272,8 +272,8 @@ const Resources = () => {
       description: 'Complete comprehensive screen reader compatibility guide with JAWS, NVDA, and VoiceOver for seamless navigation experience.',
       category: 'tools',
       icon: Eye,
-      color: 'teal',
-      features: ['JAWS support', 'NVDA compatibility', 'VoiceOver integration', 'Navigation shortcuts'],
+      color: 'from-teal-500 to-teal-600',
+      features: ['Comprehensive support', 'Visual impairments', 'Braille integration', 'Audio descriptions', 'Visual accessibility', 'Navigation shortcuts', 'Screen reader setup'],
       rating: 4.9,
       downloads: '18.7K',
       action: 'Setup Guide',
@@ -282,11 +282,11 @@ const Resources = () => {
     {
       id: 17,
       title: 'Visual Accessibility Suite',
-      description: 'Comprehensive advanced visual impairment tools including high contrast modes, magnification, and color blindness support features.',
+      description: 'Comprehensive advanced visual impairment tools including high contrast modes, magnification, and color blindness support features adaptive settings.',
       category: 'tools',
       icon: Monitor,
-      color: 'purple',
-      features: ['High contrast', 'Screen magnifier', 'Color blind mode', 'Font adjustment'],
+      color: 'from-amber-700 to-amber-800',
+      features: ['High contrast', 'Screen magnifier', 'Color blind mode', 'Font adjustment', 'Visual enhancements'],
       rating: 4.8,
       downloads: '14.2K',
       action: 'Configure Tools'
@@ -297,8 +297,8 @@ const Resources = () => {
       description: 'AI-powered intelligent navigation assistant that simplifies complex interfaces and provides personalized step-by-step guidance.',
       category: 'tools',
       icon: Brain,
-      color: 'indigo',
-      features: ['Simplified interface', 'Step-by-step help', 'Cognitive shortcuts', 'Memory aids'],
+      color: 'from-blue-900 to-blue-950',
+      features: ['Simplified interface', 'Step-by-step help', 'Cognitive shortcuts', 'Memory aids', 'Smart navigation'],
       rating: 4.7,
       downloads: '11.5K',
       action: 'Start Assistant',
@@ -307,11 +307,11 @@ const Resources = () => {
     {
       id: 19,
       title: 'Accessibility Testing Tools',
-      description: 'Professional comprehensive accessibility testing suite for WCAG compliance validation and detailed cognitive load assessment with automated reporting.',
+      description: 'Professional comprehensive accessibility testing suite for WCAG compliance validation and detailed cognitive load assessment with automated checks.',
       category: 'tools',
       icon: Shield,
-      color: 'green',
-      features: ['WCAG testing', 'Cognitive load analysis', 'Accessibility audit', 'Compliance reports'],
+      color: 'from-lime-700 to-lime-800',
+      features: ['WCAG testing', 'Cognitive load analysis', 'Accessibility audit', 'Compliance reports', 'Automated checks'],
       rating: 4.6,
       downloads: '7.8K',
       action: 'Run Tests'
@@ -322,8 +322,8 @@ const Resources = () => {
       description: 'Comprehensive design principles and proven best practices for creating accessible digital experiences with practical implementation examples.',
       category: 'guides',
       icon: BookOpen,
-      color: 'blue',
-      features: ['Design principles', 'Best practices', 'Implementation guide', 'Case studies'],
+      color: 'from-stone-700 to-stone-800',
+      features: ['Design principles', 'Best practices', 'Implementation guide', 'Case studies', 'Design patterns'],
       rating: 4.8,
       downloads: '9.3K',
       action: 'View Guidelines'
@@ -334,8 +334,8 @@ const Resources = () => {
       description: 'Dedicated supportive community for users with cognitive and visual impairments to share valuable experiences and build meaningful connections.',
       category: 'community',
       icon: Users,
-      color: 'orange',
-      features: ['Peer support', 'Expert moderators', 'Resource sharing', 'Live discussions'],
+      color: 'from-violet-700 to-violet-800',
+      features: ['Peer support', 'Expert moderators', 'Resource sharing', 'Live discussions', 'Community guidelines'],
       rating: 4.9,
       downloads: '16.4K',
       action: 'Join Network',
@@ -347,11 +347,23 @@ const Resources = () => {
       description: 'Professional comprehensive training programs for developers and designers on modern accessibility best practices with hands-on workshops.',
       category: 'education',
       icon: GraduationCap,
-      color: 'red',
-      features: ['Developer training', 'Design workshops', 'Certification courses', 'Live sessions'],
+      color: 'from-red-700 to-red-800',
+      features: ['Professional training', 'Hands-on workshops', 'Best practices', 'Accessibility standards', 'Certification programs'],
       rating: 4.7,
       downloads: '8.1K',
       action: 'Enroll Now'
+    },
+    {
+      id: 29,
+      title: 'Accessibility Research Hub',
+      description: 'Latest cutting-edge research and developments in cognitive and visual accessibility technologies and proven best practices for inclusive design.',
+      category: 'education',
+      icon: FileText,
+      color: 'from-blue-800 to-blue-900',
+      features: ['Research papers', 'Case studies', 'Technology trends', 'Best practices'],
+      rating: 4.6,
+      downloads: '7.4K',
+      action: 'Explore Research'
     },
     {
       id: 23,
@@ -359,8 +371,8 @@ const Resources = () => {
       description: 'Centralized comprehensive hub for assistive technologies, device compatibility testing, and detailed integration guides with expert support.',
       category: 'tools',
       icon: Wrench,
-      color: 'cyan',
-      features: ['Device compatibility', 'Integration guides', 'Setup tutorials', 'Troubleshooting'],
+      color: 'from-cyan-500 to-cyan-600',
+      features: ['Device compatibility', 'Integration guides', 'Setup tutorials', 'Troubleshooting', 'Technical support'],
       rating: 4.6,
       downloads: '12.3K',
       action: 'Explore Hub'
@@ -371,7 +383,7 @@ const Resources = () => {
       description: 'Specialized comprehensive resources for cognitive accessibility including advanced memory aids, attention tools, and focus enhancement techniques.',
       category: 'education',
       icon: Target,
-      color: 'pink',
+      color: 'from-rose-500 to-rose-600',
       features: ['Memory aids', 'Attention tools', 'Focus techniques', 'Cognitive strategies'],
       rating: 4.8,
       downloads: '10.7K',
@@ -383,7 +395,7 @@ const Resources = () => {
       description: 'Comprehensive specialized support resources for visual impairments including advanced braille integration and rich audio descriptions.',
       category: 'support',
       icon: Eye,
-      color: 'amber',
+      color: 'from-yellow-500 to-yellow-600',
       features: ['Braille support', 'Audio descriptions', 'Visual aids', 'Navigation help'],
       rating: 4.9,
       downloads: '13.8K',
@@ -396,7 +408,7 @@ const Resources = () => {
       description: 'Complete comprehensive compliance tools for ADA, Section 508, and international accessibility standards with automated testing and detailed.',
       category: 'tools',
       icon: Shield,
-      color: 'emerald',
+      color: 'from-green-700 to-green-800',
       features: ['ADA compliance', 'Section 508', 'International standards', 'Audit reports'],
       rating: 4.5,
       downloads: '6.9K',
@@ -405,10 +417,10 @@ const Resources = () => {
     {
       id: 27,
       title: 'Inclusive Communication Tools',
-      description: 'Communication tools designed for users with cognitive and visual impairments including simplified messaging.',
+      description: 'Adaptive intelligent communication tools designed for users with cognitive and visual impairments including simplified accessible messaging.',
       category: 'tools',
       icon: MessageSquare,
-      color: 'violet',
+      color: 'from-purple-700 to-purple-800',
       features: ['Simplified messaging', 'Voice commands', 'Visual indicators', 'Communication aids'],
       rating: 4.7,
       downloads: '11.1K',
@@ -420,7 +432,7 @@ const Resources = () => {
       description: 'Platform-wide comprehensive digital inclusion features ensuring equal access for users with disabilities through adaptive technologies.',
       category: 'community',
       icon: Globe,
-      color: 'teal',
+      color: 'from-blue-800 to-blue-900',
       features: ['Universal access', 'Inclusive features', 'Equal opportunity', 'Digital rights'],
       rating: 4.8,
       downloads: '15.6K',
@@ -428,24 +440,12 @@ const Resources = () => {
       badge: 'Featured'
     },
     {
-      id: 29,
-      title: 'Accessibility Research Hub',
-      description: 'Latest cutting-edge research and developments in cognitive and visual accessibility technologies and best practices for inclusive design.',
-      category: 'education',
-      icon: FileText,
-      color: 'blue',
-      features: ['Research papers', 'Case studies', 'Technology trends', 'Best practices'],
-      rating: 4.6,
-      downloads: '7.4K',
-      action: 'Explore Research'
-    },
-    {
       id: 30,
       title: 'Community Engagement Tools',
-      description: 'Interactive adaptive tools designed to increase meaningful engagement and active participation for users with cognitive challenges.',
+      description: 'Interactive adaptive tools designed to increase meaningful engagement and active participation for users with cognitive challenges support.',
       category: 'community',
       icon: Heart,
-      color: 'rose',
+      color: 'from-rose-700 to-rose-800',
       features: ['Engagement analytics', 'Participation tools', 'Community building', 'Social features'],
       rating: 4.7,
       downloads: '9.8K',
@@ -517,26 +517,6 @@ const Resources = () => {
     return matchesSearch && matchesCategory;
   });
 
-  const getColorClasses = (color) => {
-    const colors = {
-      blue: 'from-blue-500 to-blue-600',
-      green: 'from-green-500 to-green-600',
-      purple: 'from-purple-500 to-purple-600',
-      indigo: 'from-indigo-500 to-indigo-600',
-      orange: 'from-orange-500 to-orange-600',
-      teal: 'from-teal-500 to-teal-600',
-      pink: 'from-pink-500 to-pink-600',
-      cyan: 'from-cyan-500 to-cyan-600',
-      amber: 'from-amber-500 to-amber-600',
-      red: 'from-red-500 to-red-600',
-      gray: 'from-gray-500 to-gray-600',
-      emerald: 'from-emerald-500 to-emerald-600',
-      violet: 'from-violet-500 to-violet-600',
-      rose: 'from-rose-500 to-rose-600'
-    };
-    return colors[color] || colors.blue;
-  };
-
   return (
     <div className={`min-h-screen transition-colors duration-300 ${isDarkMode ? 'bg-gray-900' : 'bg-gradient-to-br from-blue-50 via-white to-purple-50'}`}>
       {/* Enhanced Animated Background Elements */}
@@ -600,7 +580,7 @@ const Resources = () => {
                   onMouseDown={handleMouseDown}
                   style={{ cursor: isDragging ? 'grabbing' : 'grab' }}
                 >
-                  <BookOpen className="h-10 w-10 text-white transform transition-all duration-300 group-hover:scale-105" />
+                  <BookOpen className="h-8 w-8 text-white transform transition-all duration-300 group-hover:scale-105" />
                 </div>
                 {/* Additional hover effect ring */}
                 <div className="absolute inset-0 rounded-full border-2 border-white opacity-0 group-hover:opacity-30 transition-opacity duration-300 animate-pulse"></div>
@@ -618,16 +598,15 @@ const Resources = () => {
           <p className={`text-xl max-w-3xl mx-auto italic transition-colors duration-300 ${
             isDarkMode ? 'text-gray-300' : 'text-gray-600'
           }`}>
-            Comprehensive cognitive accessibility resources including assistive technologies, educational materials, therapeutic tools, and community support. We provide innovative solutions and expert guidance for individuals and families seeking inclusive learning environments and independence.
+            Comprehensive cognitive accessibility resources including assistive technologies, educational materials, therapeutic tools, and community support. We provide innovative solutions and expert guidance for individuals and families seeking inclusive learning environments and independence worldwide always guaranteed.
           </p>
         </div>
 
-        {/* Categories and Search Bar */}
+        {/* Search Bar and Categories */}
         <div className="mb-8">
-          {/* First Row: Search + All Resources */}
-          <div className="flex items-center gap-4 mb-4">
-            {/* Search Bar */}
-            <div className={`flex-1 p-3.5 rounded-xl ${isDarkMode ? 'bg-gray-800' : 'bg-white'} shadow-lg h-full`}>
+          {/* First Row: Search Bar */}
+          <div className="flex justify-center mb-6">
+            <div className={`w-full max-w-2xl p-3.5 rounded-xl shadow-lg`}>
               <div className="relative">
                 <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 h-4.5 w-4.5 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`} />
                 <input
@@ -635,11 +614,14 @@ const Resources = () => {
                   placeholder="Search resources..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className={`w-full pl-10 pr-3.5 py-2.5 rounded-lg border ${isDarkMode ? 'bg-gray-700 border-gray-600 text-white' : 'bg-gray-50 border-gray-300 text-gray-900'} focus:outline-none focus:ring-2 focus:ring-blue-500 text-base`}
+                  className={`w-full pl-10 pr-3.5 py-2.5 rounded-lg border ${isDarkMode ? 'bg-gray-700 border-[#16808D] text-white' : 'bg-gray-50 border-[#16808D] text-gray-900'} focus:outline-none focus:ring-2 focus:ring-[#16808D] text-base`}
                 />
               </div>
             </div>
+          </div>
 
+          {/* Second Row: Categories */}
+          <div className="grid grid-cols-6 gap-4">
             {/* All Resources Category */}
             <div 
               onClick={() => setActiveSection('all')}
@@ -652,10 +634,8 @@ const Resources = () => {
                 isDarkMode ? 'text-white' : 'text-gray-900'
               }`}>All Resources</h2>
             </div>
-          </div>
-
-          {/* Second Row: 5 Categories */}
-          <div className="grid grid-cols-5 gap-4 mb-12">
+            
+            {/* Other Categories */}
             {categories.map((category) => {
                 const Icon = category.icon;
                 return (
@@ -675,6 +655,166 @@ const Resources = () => {
                 );
               })}
           </div>
+
+        </div>
+
+        {/* Category Description Content */}
+        <div className="mb-12">
+          {activeSection === 'all' && (
+            <div className="text-center py-12 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-[#16808D]/10 to-purple-500/10 animate-pulse"></div>
+              <div className="relative z-10">
+                <BookOpen className="h-16 w-16 text-[#16808D] mx-auto mb-4 animate-bounce" style={{ color: '#16808D' }} />
+                <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-[#16808D] to-purple-600 bg-clip-text text-transparent">
+                  <span style={{ color: '#16808D' }}>All Resources</span>
+                </h2>
+                <p className="text-lg max-w-3xl mx-auto italic leading-relaxed mb-4">
+                  Comprehensive accessibility resources featuring guides, tools, support services, community networks, and educational materials. We deliver innovative solutions and expert guidance for individuals and families seeking inclusive learning environments and independent living.
+                </p>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-blue-900/50 text-blue-300 border border-blue-700' : 'bg-blue-100 text-blue-700 border border-blue-200'}`}>
+                    Step-by-Step Guides
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-purple-900/50 text-purple-300 border border-purple-700' : 'bg-purple-100 text-purple-700 border border-purple-200'}`}>
+                    Accessibility Tools
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-red-900/50 text-red-300 border border-red-700' : 'bg-red-100 text-red-700 border border-red-200'}`}>
+                    Expert Support
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeSection === 'guides' && (
+            <div className="text-center py-12 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-blue-500/10 animate-pulse"></div>
+              <div className="relative z-10">
+                <FileText className="h-16 w-16 text-purple-600 mx-auto mb-4 animate-bounce" style={{ color: '#6D28D9' }} />
+                <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
+                  <span style={{ color: '#6D28D9' }}>Comprehensive Guides</span>
+                </h2>
+                <p className="text-lg max-w-3xl mx-auto italic leading-relaxed mb-4">
+                  Detailed step-by-step guides and comprehensive documentation for navigating accessibility features, using assistive technologies, and implementing inclusive design practices. We provide comprehensive instructions with detailed visual examples and expert recommendations.
+                </p>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-purple-900/50 text-purple-300 border border-purple-700' : 'bg-purple-100 text-purple-700 border border-purple-200'}`}>
+                    User Manuals
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-blue-900/50 text-blue-300 border border-blue-700' : 'bg-blue-100 text-blue-700 border border-blue-200'}`}>
+                    Video Tutorials
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-green-900/50 text-green-300 border border-green-700' : 'bg-green-100 text-green-700 border border-green-200'}`}>
+                    FAQ Resources
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeSection === 'tools' && (
+            <div className="text-center py-12 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 animate-pulse"></div>
+              <div className="relative z-10">
+                <Wrench className="h-16 w-16 text-purple-600 mx-auto mb-4 animate-bounce" style={{ color: 'purple' }} />
+                <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+                  <span style={{ color: 'purple' }}>Accessibility Tools</span>
+                </h2>
+                <p className="text-lg max-w-3xl mx-auto italic leading-relaxed mb-4">
+                  Advanced assistive technology tools and cutting-edge software solutions designed to enhance accessibility for users with cognitive and visual impairments. We offer powerful screen readers, text-to-speech, magnification tools, and advanced cognitive navigation aids for everyone.
+                </p>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-purple-900/50 text-purple-300 border border-purple-700' : 'bg-purple-100 text-purple-700 border border-purple-200'}`}>
+                    Screen Readers
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-pink-900/50 text-pink-300 border border-pink-700' : 'bg-pink-100 text-pink-700 border border-pink-200'}`}>
+                    Text-to-Speech
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-blue-900/50 text-blue-300 border border-blue-700' : 'bg-blue-100 text-blue-700 border border-blue-200'}`}>
+                    Cognitive Aids
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeSection === 'support' && (
+            <div className="text-center py-12 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-orange-500/10 animate-pulse"></div>
+              <div className="relative z-10">
+                <Headphones className="h-16 w-16 text-red-600 mx-auto mb-4 animate-bounce" style={{ color: 'red' }} />
+                <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-red-600 to-orange-600 bg-clip-text text-transparent">
+                  <span style={{ color: 'red' }}>Professional Support</span>
+                </h2>
+                <p className="text-lg max-w-3xl mx-auto italic leading-relaxed mb-4">
+                  Dedicated support services including one-to-one counselling, therapy sessions, and expert assistance for cognitive and accessibility challenges. We provide compassionate care, professional guidance, and personalized support plans for all users worldwide anytime anywhere guaranteed.
+                </p>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-red-900/50 text-red-300 border border-red-700' : 'bg-red-100 text-red-700 border border-red-200'}`}>
+                    Expert Counselling
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-orange-900/50 text-orange-300 border border-orange-700' : 'bg-orange-100 text-orange-700 border border-orange-200'}`}>
+                    Therapy Sessions
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-blue-900/50 text-blue-300 border border-blue-700' : 'bg-blue-100 text-blue-700 border border-blue-200'}`}>
+                    24/7 Support
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeSection === 'community' && (
+            <div className="text-center py-12 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-green-500/10 to-teal-500/10 animate-pulse"></div>
+              <div className="relative z-10">
+                <Users className="h-16 w-16 text-green-600 mx-auto mb-4 animate-bounce" style={{ color: 'green' }} />
+                <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-green-600 to-teal-600 bg-clip-text text-transparent">
+                  <span style={{ color: 'green' }}>Community Networks</span>
+                </h2>
+                <p className="text-lg max-w-3xl mx-auto italic leading-relaxed mb-4">
+                  Supportive community networks for sharing experiences, building connections, and accessing peer support. We foster inclusive environments where users with cognitive challenges can connect, learn, and grow together safely and securely with confidence always guaranteed success.
+                </p>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-green-900/50 text-green-300 border border-green-700' : 'bg-green-100 text-green-700 border border-green-200'}`}>
+                    Peer Support
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-teal-900/50 text-teal-300 border border-teal-700' : 'bg-teal-100 text-teal-700 border border-teal-200'}`}>
+                    Expert Forums
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-blue-900/50 text-blue-300 border border-blue-700' : 'bg-blue-100 text-blue-700 border border-blue-200'}`}>
+                    Group Activities
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {activeSection === 'education' && (
+            <div className="text-center py-12 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-orange-500/10 to-yellow-500/10 animate-pulse"></div>
+              <div className="relative z-10">
+                <GraduationCap className="h-16 w-16 text-orange-600 mx-auto mb-4 animate-bounce" style={{ color: '#EA580C' }} />
+                <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-orange-600 to-yellow-600 bg-clip-text text-transparent">
+                  <span style={{ color: '#EA580C' }}>Educational Resources</span>
+                </h2>
+                <p className="text-lg max-w-3xl mx-auto italic leading-relaxed mb-4">
+                  Comprehensive educational materials and learning resources for cognitive accessibility and inclusive design. We offer innovative training programs, strategic academic partnerships, and specialized content for students and educators worldwide always available instantly.
+                </p>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-orange-900/50 text-orange-300 border border-orange-700' : 'bg-orange-100 text-orange-700 border border-orange-200'}`}>
+                    Training Programs
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-yellow-900/50 text-yellow-300 border border-yellow-700' : 'bg-yellow-100 text-yellow-700 border border-yellow-200'}`}>
+                    Academic Partnerships
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-green-900/50 text-green-300 border border-green-700' : 'bg-green-100 text-green-700 border border-green-200'}`}>
+                    Learning Materials
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         
@@ -693,7 +833,7 @@ const Resources = () => {
                 }}
               >
                 {/* Card Header */}
-                <div className={`p-6 bg-gradient-to-r ${getColorClasses(resource.color)} text-white relative overflow-hidden`}>
+                <div className={`p-6 bg-gradient-to-r ${resource.color} text-white relative overflow-hidden`}>
                   <div className="absolute top-0 right-0 w-32 h-32 bg-white opacity-10 rounded-full -mr-16 -mt-16"></div>
                   <div className="relative z-10">
                     <div className="flex items-center justify-between mb-4">
@@ -753,7 +893,7 @@ const Resources = () => {
                   </div>
 
                   {/* Action Button */}
-                  <button className={`w-full py-3 rounded-lg font-medium transition-all flex items-center justify-center gap-2 bg-gradient-to-r ${getColorClasses(resource.color)} text-white hover:shadow-lg transform hover:scale-105`}>
+                  <button className={`w-full py-3 rounded-lg font-medium transition-all flex items-center justify-center gap-2 bg-gradient-to-r ${resource.color} text-white hover:shadow-lg transform hover:scale-105`}>
                     {resource.action}
                     <ArrowRight className="h-4 w-4" />
                   </button>
