@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Moon, Sun, Type, Square, MessageSquare, FileText, X, Contrast, Target, Eye, Settings, Timer, Play, Pause, RotateCcw, Award, Brain, Zap, Volume2, CheckCircle, AlertCircle } from 'lucide-react';
+import { Moon, Sun, Type, Square, MessageSquare, FileText, X, Contrast, Target, Eye, Settings, Timer, Play, Pause, RotateCcw, Award, Brain, Zap, Volume2, CheckCircle, AlertCircle, StickyNote, PenTool, BookOpen, Edit, Phone } from 'lucide-react';
 
 const AccessibilitySidebar = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -9,6 +9,9 @@ const AccessibilitySidebar = () => {
   const [isHighContrast, setIsHighContrast] = useState(false);
   const [showFocusMode, setShowFocusMode] = useState(false);
   const [showEyeTracking, setShowEyeTracking] = useState(false);
+  const [showGeneralSettingsModal, setShowGeneralSettingsModal] = useState(false);
+  const [showQuickNotesModal, setShowQuickNotesModal] = useState(false);
+  const [quickNotes, setQuickNotes] = useState('');
   
   // Focus Mode State
   const [isActive, setIsActive] = useState(false);
@@ -601,58 +604,40 @@ const AccessibilitySidebar = () => {
       {/* Accessibility Sidebar */}
       <div className="accessibility-sidebar fixed left-2 top-[45%] -translate-y-1/2 z-[9998] bg-white rounded-2xl p-3 shadow-2xl border border-gray-200" style={{ position: 'fixed', zIndex: 9998, left: '8px', top: '45%', transform: 'translateY(-50%)', visibility: 'visible', opacity: 1 }}>
         <div className="flex flex-col space-y-2">
-          {/* Theme Toggle */}
+          {/* General Settings */}
           <button
-            onClick={toggleTheme}
-            className="w-12 h-12 bg-gradient-to-r from-[#142C52] to-[#16808D] hover:from-[#16808D] hover:to-[#142C52] rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg"
-            title={isDarkMode ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
+            onClick={() => setShowGeneralSettingsModal(true)}
+            className="w-11 h-11 bg-gradient-to-r from-[#142C52] to-[#16808D] hover:from-[#16808D] hover:to-[#142C52] rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg"
+            title="General Settings"
           >
-            {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            <Settings className="w-4 h-4" />
           </button>
 
-          {/* Dyslexia Font Toggle */}
+          {/* Quick Notes */}
           <button
-            onClick={toggleDyslexiaFont}
-            className="w-12 h-12 bg-gradient-to-r from-[#142C52] to-[#16808D] hover:from-[#16808D] hover:to-[#142C52] rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg"
-            title={isDyslexiaFont ? 'Disable Dyslexia Font' : 'Enable Dyslexia Font'}
+            onClick={() => setShowQuickNotesModal(true)}
+            className="w-11 h-11 bg-gradient-to-r from-[#142C52] to-[#16808D] hover:from-[#16808D] hover:to-[#142C52] rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg"
+            title="Quick Notes"
           >
-            <Type className="w-5 h-5" />
-          </button>
-
-          {/* Simplified Text Toggle */}
-          <button
-            onClick={toggleSimplifiedText}
-            className="w-12 h-12 bg-gradient-to-r from-[#142C52] to-[#16808D] hover:from-[#16808D] hover:to-[#142C52] rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg"
-            title={simplifyText ? 'Disable Simplified Text' : 'Enable Simplified Text'}
-          >
-            <FileText className="w-5 h-5" />
+            <Edit className="w-4 h-4" />
           </button>
 
           {/* Focus Mode Toggle */}
           <button
             onClick={() => setShowFocusMode(!showFocusMode)}
-            className="w-12 h-12 bg-gradient-to-r from-[#142C52] to-[#16808D] hover:from-[#16808D] hover:to-[#142C52] rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg"
+            className="w-11 h-11 bg-gradient-to-r from-[#142C52] to-[#16808D] hover:from-[#16808D] hover:to-[#142C52] rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg"
             title={showFocusMode ? 'Close Focus Mode' : 'Open Focus Mode'}
           >
-            {showFocusMode ? <X className="w-5 h-5" /> : <Target className="w-5 h-5" />}
+            {showFocusMode ? <X className="w-4 h-4" /> : <Target className="w-4 h-4" />}
           </button>
 
           {/* Eye Tracking Toggle */}
           <button
             onClick={() => setShowEyeTracking(!showEyeTracking)}
-            className="w-12 h-12 bg-gradient-to-r from-[#142C52] to-[#16808D] hover:from-[#16808D] hover:to-[#142C52] rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg"
+            className="w-11 h-11 bg-gradient-to-r from-[#142C52] to-[#16808D] hover:from-[#16808D] hover:to-[#142C52] rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg"
             title={showEyeTracking ? 'Close Eye Tracking' : 'Open Eye Tracking'}
           >
-            {showEyeTracking ? <X className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
-          </button>
-
-          {/* High Contrast Toggle */}
-          <button
-            onClick={toggleHighContrast}
-            className="w-12 h-12 bg-gradient-to-r from-[#142C52] to-[#16808D] hover:from-[#16808D] hover:to-[#142C52] rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg"
-            title={isHighContrast ? 'Disable High Contrast' : 'Enable High Contrast'}
-          >
-            <Contrast className="w-5 h-5" />
+            {showEyeTracking ? <X className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
           </button>
         </div>
       </div>
@@ -665,6 +650,309 @@ const AccessibilitySidebar = () => {
           </div>
         </div>
       )}
+
+      {/* General Settings Modal */}
+      {showGeneralSettingsModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[10000]" onClick={() => setShowGeneralSettingsModal(false)}>
+          <div className="bg-white rounded-2xl p-8 max-w-2xl w-full mx-4 shadow-2xl max-h-[90vh] overflow-y-auto transition-all duration-300" onClick={(e) => e.stopPropagation()}>
+            <div className="relative -mt-8 -mx-8 mb-8">
+              <div 
+                className="absolute inset-0 rounded-t-2xl"
+                style={{ 
+                  background: 'linear-gradient(to right, #142C52, #16808D)',
+                  zIndex: 0
+                }}
+              />
+              <div className="relative z-10 flex items-center justify-between p-4">
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold shadow-lg" style={{ background: 'linear-gradient(to right, #142C52, #16808D)' }}>
+                    <Settings className="w-6 h-6" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-white">General Settings</h2>
+                </div>
+                <button 
+                  onClick={() => setShowGeneralSettingsModal(false)}
+                  className="p-2 rounded-full transition-colors text-white hover:bg-white hover:bg-opacity-20" 
+                  style={{ backgroundColor: 'transparent' }}
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+            </div>
+
+            <div className="max-h-[60vh] overflow-y-auto pr-2 scrollbar-hide">
+              <div className="space-y-6">
+                {/* Theme Toggle */}
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Display Theme</h3>
+                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:shadow-lg transition-all duration-300 cursor-pointer group" onClick={toggleTheme}>
+                    <div className="flex items-center">
+                      <div className="w-10 h-10 bg-gradient-to-r from-[#142C52] to-[#16808D] rounded-full flex items-center justify-center mr-3">
+                        {isDarkMode ? <Moon className="w-5 h-5 text-white" /> : <Sun className="w-5 h-5 text-white" />}
+                      </div>
+                      <div>
+                        <p className="font-medium text-gray-900">Dark Mode</p>
+                        <p className="text-sm text-gray-600">Switch between light and dark theme</p>
+                      </div>
+                    </div>
+                    <button className={`w-12 h-6 rounded-full transition-all duration-300 transform hover:scale-105 ${
+                      isDarkMode ? 'bg-[#16808D]' : 'bg-gray-300'
+                    }`}>
+                      <div className={`w-5 h-5 bg-white rounded-full transition-transform duration-300 ${
+                        isDarkMode ? 'translate-x-6' : 'translate-x-0.5'
+                      }`}></div>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Dyslexia Font */}
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Reading Preferences</h3>
+                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:shadow-lg transition-all duration-300 cursor-pointer group" onClick={toggleDyslexiaFont}>
+                    <div className="flex items-center">
+                      <div className="w-10 h-10 bg-gradient-to-r from-[#142C52] to-[#16808D] rounded-full flex items-center justify-center mr-3">
+                        <Type className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-gray-900">Dyslexia Font</p>
+                        <p className="text-sm text-gray-600">Use dyslexia-friendly font</p>
+                      </div>
+                    </div>
+                    <button className={`w-12 h-6 rounded-full transition-all duration-300 transform hover:scale-105 ${
+                      isDyslexiaFont ? 'bg-[#16808D]' : 'bg-gray-300'
+                    }`}>
+                      <div className={`w-5 h-5 bg-white rounded-full transition-transform duration-300 ${
+                        isDyslexiaFont ? 'translate-x-6' : 'translate-x-0.5'
+                      }`}></div>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Simplified Text */}
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Content Display</h3>
+                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:shadow-lg transition-all duration-300 cursor-pointer group" onClick={toggleSimplifiedText}>
+                    <div className="flex items-center">
+                      <div className="w-10 h-10 bg-gradient-to-r from-[#142C52] to-[#16808D] rounded-full flex items-center justify-center mr-3">
+                        <FileText className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-gray-900">Simplified Text</p>
+                        <p className="text-sm text-gray-600">Show simplified version of text content</p>
+                      </div>
+                    </div>
+                    <button className={`w-12 h-6 rounded-full transition-all duration-300 transform hover:scale-105 ${
+                      simplifyText ? 'bg-[#16808D]' : 'bg-gray-300'
+                    }`}>
+                      <div className={`w-5 h-5 bg-white rounded-full transition-transform duration-300 ${
+                        simplifyText ? 'translate-x-6' : 'translate-x-0.5'
+                      }`}></div>
+                    </button>
+                  </div>
+                </div>
+
+                {/* High Contrast */}
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Visual Accessibility</h3>
+                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg hover:shadow-lg transition-all duration-300 cursor-pointer group" onClick={toggleHighContrast}>
+                    <div className="flex items-center">
+                      <div className="w-10 h-10 bg-gradient-to-r from-[#142C52] to-[#16808D] rounded-full flex items-center justify-center mr-3">
+                        <Contrast className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-gray-900">High Contrast Mode</p>
+                        <p className="text-sm text-gray-600">Increase contrast for better visibility</p>
+                      </div>
+                    </div>
+                    <button className={`w-12 h-6 rounded-full transition-all duration-300 transform hover:scale-105 ${
+                      isHighContrast ? 'bg-[#16808D]' : 'bg-gray-300'
+                    }`}>
+                      <div className={`w-5 h-5 bg-white rounded-full transition-transform duration-300 ${
+                        isHighContrast ? 'translate-x-6' : 'translate-x-0.5'
+                      }`}></div>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Quick Notes Modal */}
+      {showQuickNotesModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-[10000]" onClick={() => setShowQuickNotesModal(false)}>
+          <div className="bg-white rounded-2xl p-8 max-w-2xl w-full mx-4 shadow-2xl max-h-[90vh] flex flex-col transition-all duration-300" onClick={(e) => e.stopPropagation()}>
+            <div className="relative -mt-8 -mx-8 mb-8 flex-shrink-0">
+              <div 
+                className="absolute inset-0 rounded-t-2xl"
+                style={{ 
+                  background: 'linear-gradient(to right, #142C52, #16808D)',
+                  zIndex: 0
+                }}
+              />
+              <div className="relative z-10 flex items-center justify-between p-4">
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 rounded-full flex items-center justify-center text-white font-semibold shadow-lg" style={{ background: 'linear-gradient(to right, #142C52, #16808D)' }}>
+                    <Edit className="w-6 h-6" />
+                  </div>
+                  <h2 className="text-2xl font-bold text-white">Quick Notes</h2>
+                </div>
+                <button 
+                  onClick={() => setShowQuickNotesModal(false)}
+                  className="p-2 rounded-full transition-colors text-white hover:bg-white hover:bg-opacity-20" 
+                  style={{ backgroundColor: 'transparent' }}
+                >
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+            </div>
+
+            <div className="flex-1 overflow-y-auto pr-2 scrollbar-hide">
+              <div className="space-y-6">
+                {/* Notes Input */}
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                    <div className="w-8 h-8 bg-gradient-to-r from-[#142C52] to-[#16808D] rounded-full flex items-center justify-center text-white mr-3">
+                      <Edit className="w-4 h-4" />
+                    </div>
+                    Write Your Notes
+                  </h3>
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <textarea
+                      value={quickNotes}
+                      onChange={(e) => setQuickNotes(e.target.value)}
+                      placeholder="Type your notes here... You can write reminders, thoughts, or important information."
+                      className="w-full h-40 p-4 border border-gray-300 rounded-lg resize-none focus:outline-none focus:ring-2 focus:ring-[#16808D] focus:border-transparent"
+                      style={{ backgroundColor: 'white' }}
+                    />
+                    <div className="flex justify-between items-center mt-3">
+                      <span className="text-sm text-gray-500">
+                        {quickNotes.length} characters
+                      </span>
+                      <button
+                        onClick={() => setQuickNotes('')}
+                        className="text-sm text-red-600 hover:text-red-700 transition-colors"
+                      >
+                        Clear All
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Quick Actions */}
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                    <div className="w-8 h-8 bg-gradient-to-r from-[#142C52] to-[#16808D] rounded-full flex items-center justify-center text-white mr-3">
+                      <Zap className="w-4 h-4" />
+                    </div>
+                    Quick Actions
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <button
+                      onClick={() => {
+                        navigator.clipboard.writeText(quickNotes);
+                        showNotification('📋 Notes copied to clipboard!');
+                      }}
+                      className="flex items-center justify-center p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-all duration-300 group"
+                    >
+                      <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center mr-3">
+                        <FileText className="w-4 h-4 text-blue-600" />
+                      </div>
+                      <span className="text-blue-900 font-medium">Copy Notes</span>
+                    </button>
+                    <button
+                      onClick={() => {
+                        const blob = new Blob([quickNotes], { type: 'text/plain' });
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = 'quick-notes.txt';
+                        a.click();
+                        URL.revokeObjectURL(url);
+                        showNotification('💾 Notes downloaded successfully!');
+                      }}
+                      className="flex items-center justify-center p-4 bg-green-50 rounded-lg hover:bg-green-100 transition-all duration-300 group"
+                    >
+                      <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center mr-3">
+                        <FileText className="w-4 h-4 text-green-600" />
+                      </div>
+                      <span className="text-green-900 font-medium">Download Notes</span>
+                    </button>
+                  </div>
+                </div>
+
+                {/* Note Templates */}
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3 flex items-center">
+                    <div className="w-8 h-8 bg-gradient-to-r from-[#142C52] to-[#16808D] rounded-full flex items-center justify-center text-white mr-3">
+                      <Type className="w-4 h-4" />
+                    </div>
+                    Quick Templates
+                  </h3>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <button
+                      onClick={() => setQuickNotes('Meeting Notes:\n\nDate: \nAttendees: \nTopics: \nAction Items: \n\n')}
+                      className="p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-300 text-left"
+                    >
+                      <p className="font-medium text-gray-900">Meeting Notes</p>
+                      <p className="text-sm text-gray-600">Structured meeting format</p>
+                    </button>
+                    <button
+                      onClick={() => setQuickNotes('To-Do List:\n\n☐ \n☐ \n☐ \n☐ \n☐ \n\nPriority Tasks:\n- \n- \n')}
+                      className="p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-300 text-left"
+                    >
+                      <p className="font-medium text-gray-900">To-Do List</p>
+                      <p className="text-sm text-gray-600">Task checklist format</p>
+                    </button>
+                    <button
+                      onClick={() => setQuickNotes('Reminder:\n\nTask: \nDue Date: \nPriority: \nNotes: \n\n')}
+                      className="p-3 bg-gray-50 rounded-lg hover:bg-gray-100 transition-all duration-300 text-left"
+                    >
+                      <p className="font-medium text-gray-900">Reminder</p>
+                      <p className="text-sm text-gray-600">Quick reminder format</p>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex justify-end space-x-3 mt-6 pt-4 border-t border-gray-200 flex-shrink-0">
+              <button
+                onClick={() => setShowQuickNotesModal(false)}
+                className="px-6 py-3 bg-gray-500 text-white rounded-lg hover:bg-gray-600 transition-all duration-300 transform hover:scale-105"
+              >
+                Close
+              </button>
+              <button
+                onClick={() => {
+                  localStorage.setItem('quickNotes', quickNotes);
+                  showNotification('💾 Notes saved successfully!');
+                }}
+                className="px-6 py-3 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white rounded-lg hover:from-[#16808D] hover:to-[#142C52] transition-all duration-300 transform hover:scale-105"
+              >
+                Save Notes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* 24*7 Crisis Support Button */}
+      <div className="fixed left-2 top-[95%] -translate-y-1/2 z-[9999]" style={{ position: 'fixed', zIndex: 9999, left: '8px', top: '95%', transform: 'translateY(-50%)', visibility: 'visible', opacity: 1 }}>
+        <button
+          onClick={() => {
+            // Handle crisis support - could open modal, make phone call, or redirect
+            window.open('tel:911', '_blank'); // Emergency number
+            showNotification('🚨 Crisis support activated - Emergency services contacted!');
+          }}
+          className="w-12 h-12 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg animate-pulse"
+          title="24*7 Crisis Support - Emergency"
+        >
+          <Phone className="w-5 h-5" />
+        </button>
+      </div>
 
       {/* Focus Mode Modal */}
       {showFocusMode && (
@@ -1448,7 +1736,7 @@ const AccessibilitySidebar = () => {
                     <div className="grid grid-cols-5 gap-2 mb-4">
                       {[1, 2, 3, 4, 5].map((step) => (
                         <div key={step} className="text-center">
-                          <div className={`w-8 h-8 rounded-full mx-auto mb-1 flex items-center justify-center text-xs font-medium ${
+                          <div className={`w-7 h-7 rounded-full mx-auto mb-1 flex items-center justify-center text-xs font-medium ${
                             calibrationStep >= step 
                               ? 'bg-green-100 text-green-800' 
                               : step === calibrationStep + 1 && isCalibrating

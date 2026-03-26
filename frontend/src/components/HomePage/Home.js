@@ -72,7 +72,7 @@ const Home = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentFeatureIndex((prev) => 
-        prev === allFeatures.length - 3 ? 0 : prev + 1
+        prev === cognitiveFeatures.length - 3 ? 0 : prev + 1
       );
     }, 5000); // Change every 5 seconds
 
@@ -88,46 +88,46 @@ const Home = () => {
     return () => clearInterval(interval);
   }, []);
 
-  const allFeatures = [
+  const cognitiveFeatures = [
     {
       featureIcon: BookOpen,
       featureTitle: "Learning Disabilities",
-      featureDescription: "Learning disabilities affect reading, writing, math, and information processing. These neurological conditions impact academic performance and daily functioning, requiring specialized educational support and accommodations to help individuals succeed in school and life.",
+      featureDescription: "Learning disabilities affect reading, writing, math, and information processing. These neurological conditions impact academic performance and daily functioning, requiring specialized educational support and accommodations for success.",
       featureColor: "#16808D",
       featureLink: "/conditions/learning-disabilities"
     },
     {
       featureIcon: Target,
       featureTitle: "ADHD",
-      featureDescription: "ADHD is a neurodevelopmental disorder affecting focus, hyperactivity, and impulse control. It impacts academic performance, social relationships, and daily functioning throughout life, requiring behavioral therapy, medication, and coping strategies for successful management.",
+      featureDescription: "ADHD is a neurodevelopmental disorder affecting focus, hyperactivity, and impulse control. It impacts academic performance, social relationships, and daily functioning throughout life, requiring behavioral therapy and coping strategies.",
       featureColor: "#22C55E",
       featureLink: "/conditions/adhd"
     },
     {
       featureIcon: Users,
       featureTitle: "Autism Spectrum",
-      featureDescription: "Autism Spectrum Disorder affects social communication, behavior, and sensory processing. Individuals experience unique challenges with social interaction, communication patterns, and repetitive behaviors, requiring personalized support and understanding to thrive in their environment.",
+      featureDescription: "Autism Spectrum Disorder affects social communication, behavior, and sensory processing. Individuals experience unique challenges with social interaction, communication patterns, and repetitive behaviors, requiring personalized support and understanding.",
       featureColor: "#1B9AAA",
       featureLink: "/conditions/autism"
     },
     {
       featureIcon: Brain,
       featureTitle: "Memory Disorders",
-      featureDescription: "Memory disorders impair recall and cognitive function, including Alzheimer's, dementia, and amnesia. These conditions affect daily living, independence, and quality of life, requiring medical treatment, cognitive therapy, and caregiver support for optimal management.",
+      featureDescription: "Memory disorders impair recall and cognitive function, including Alzheimer's, dementia, and amnesia. These conditions affect daily living, independence, and quality of life, requiring medical treatment, cognitive therapy, and caregiver support.",
       featureColor: "#142C52",
       featureLink: "/conditions/memory-disorders"
     },
     {
       featureIcon: Activity,
       featureTitle: "Developmental Disorders",
-      featureDescription: "Developmental Disorders impact brain development, affecting language, social skills, and learning abilities. These lifelong conditions require early intervention, specialized education, and therapeutic support to maximize potential and improve daily functioning throughout life.",
+      featureDescription: "Developmental Disorders impact brain development, affecting language, social skills, and learning abilities. These lifelong conditions require early intervention, specialized education, and therapeutic support to maximize potential and improve daily functioning.",
       featureColor: "#059669",
       featureLink: "/conditions/developmental-disorders"
     },
     {
       featureIcon: AlertTriangle,
       featureTitle: "Neurocognitive disorders",
-      featureDescription: "Neurocognitive disorders cause progressive brain function decline, affecting memory, attention, and language. Conditions like Alzheimer's, stroke, and epilepsy range from mild to severe, impacting independence and requiring medical treatment, cognitive rehabilitation, and long-term care.",
+      featureDescription: "Neurocognitive disorders cause progressive brain function decline, affecting memory, attention, and language. Conditions like Alzheimer's, stroke, and epilepsy range from mild to severe, impacting independence and requiring medical treatment and cognitive rehabilitation.",
       featureColor: "#4C97A8",
       featureLink: "/conditions/neurocognitive-disorders"
     },
@@ -141,79 +141,72 @@ const Home = () => {
     {
       featureIcon: Activity,
       featureTitle: "Epilepsy & Cerebral Palsy",
-      featureDescription: "Epilepsy requires medical management and safety protocols. Cerebral Palsy affects motor and cognitive functioning, needing specialized support tools and accessibility features.",
+      featureDescription: "Epilepsy requires medical management and safety protocols. Cerebral Palsy affects motor and cognitive functioning, needing specialized support tools and accessibility features. Both conditions require comprehensive care and therapeutic interventions.",
       featureColor: "#7C3AED",
       featureLink: "/conditions/epilepsy-cerebral-palsy"
     },
     {
       featureIcon: Wrench,
       featureTitle: "Traumatic Brain Injury",
-      featureDescription: "Traumatic brain injury results from head trauma causing nerve damage. Common causes include falls, accidents, sports injuries, and combat wounds. TBI affects cognitive, physical, and emotional functioning, requiring emergency care, rehabilitation, and long-term support.",
+      featureDescription: "Traumatic brain injury results from head trauma causing nerve damage. Common causes include falls, accidents, sports injuries, and combat wounds. TBI affects cognitive, physical, and emotional functioning, requiring emergency care and rehabilitation.",
       featureColor: "#178740",
       featureLink: "/conditions/traumatic-brain-injury"
     },
     {
       featureIcon: Brain,
       featureTitle: "Intellectual Disability",
-      featureDescription: "Lifelong neurodevelopmental condition affecting reasoning, learning, and problem-solving. Requires simplified interfaces, specialized support tools, and comprehensive educational accommodations for optimal development and independence.",
+      featureDescription: "Lifelong neurodevelopmental condition affecting reasoning, learning, and problem-solving. Requires simplified interfaces, specialized support tools, and comprehensive educational accommodations for optimal development and independence throughout life.",
       featureColor: "#DB2777",
       featureLink: "/conditions/intellectual-disability"
     },
     {
       featureIcon: MessageSquare,
       featureTitle: "Speech & Language Disorders",
-      featureDescription: "Includes apraxia, stuttering, and expressive/receptive language difficulties. Supports PriHub's text-to-speech, chatbot guidance, and communication tools for effective assistance and social integration.",
+      featureDescription: "Includes apraxia, stuttering, and expressive/receptive language difficulties. Supports PriHub's text-to-speech, chatbot guidance, and communication tools for effective assistance and social integration in daily life and educational settings.",
       featureColor: "#F97316",
       featureLink: "/conditions/speech-language-disorders"
     },
     {
       featureIcon: FileText,
       featureTitle: "Specific Learning Disorders",
-      featureDescription: "Dyslexia, Dyscalculia, Dysgraphia. Tailors educational resources, assistive technologies, and personalized teaching strategies for specific learning challenges and academic success.",
+      featureDescription: "Dyslexia, Dyscalculia, Dysgraphia. Tailors educational resources, assistive technologies, and personalized teaching strategies for specific learning challenges and academic success in school and professional environments.",
       featureColor: "#9333EA",
       featureLink: "/conditions/specific-learning-disorders"
     },
     {
       featureIcon: Target,
       featureTitle: "Executive Functioning Disorders",
-      featureDescription: "Difficulty with planning, organizing, time management, and decision-making. Integrates with PriHub reminders, notes, and task management tools for improved daily functioning and independence.",
+      featureDescription: "Difficulty with planning, organizing, time management, and decision-making. Integrates with PriHub reminders, notes, and task management tools for improved daily functioning and independence in personal and professional life.",
       featureColor: "#4F46E5",
       featureLink: "/conditions/executive-functioning-disorders"
     },
     {
       featureIcon: Heart,
       featureTitle: "Anxiety & Emotional Disorders",
-      featureDescription: "Anxiety, depression, or stress significantly impact memory, attention, and learning. Supports PriHub's chatbot guidance, emotional support, and mental wellness resources for comprehensive care.",
+      featureDescription: "Anxiety, depression, or stress significantly impact memory, attention, and learning. Supports PriHub's chatbot guidance, emotional support, and mental wellness resources for comprehensive care and improved quality of life.",
       featureColor: "#BE123C",
       featureLink: "/conditions/anxiety-emotional-disorders"
     },
     {
-      featureIcon: Brain,
-      featureTitle: "Memory Disorders",
-      featureDescription: "Memory disorders impair recall and cognitive function, including Alzheimer's, dementia, and amnesia. These conditions affect daily living, independence, and quality of life, requiring medical treatment, cognitive therapy, and caregiver support for optimal management.",
-      featureColor: "#142C52",
-      featureLink: "/conditions/memory-disorders"
-    },
-    {
       featureIcon: Users,
       featureTitle: "Social Communication Disorder",
-      featureDescription: "Affects pragmatic language use and social interaction skills. Complementary to autism spectrum; provides social support features and communication strategies for better integration.",
+      featureDescription: "Affects pragmatic language use and social interaction skills. Complementary to autism spectrum; provides social support features and communication strategies for better integration in social and educational environments throughout life.",
       featureColor: "#0891B2",
       featureLink: "/conditions/social-communication-disorder"
     }
   ];
 
-  const displayedFeatures = allFeatures.slice(currentFeatureIndex, currentFeatureIndex + 3);
+  const displayedFeatures = cognitiveFeatures.slice(currentFeatureIndex, currentFeatureIndex + 3);
 
   const handlePrevious = () => {
     setCurrentFeatureIndex((prev) => 
-      prev === 0 ? allFeatures.length - 3 : prev - 1
+      prev === 0 ? cognitiveFeatures.length - 3 : prev - 1
     );
   };
 
   const handleNext = () => {
     setCurrentFeatureIndex((prev) => 
-      prev === allFeatures.length - 3 ? 0 : prev + 1
+      prev === cognitiveFeatures.length - 3 ? 0 : prev + 1
     );
   };
 
@@ -498,17 +491,17 @@ const Home = () => {
           top: '-35px'
         }}
       >
-        <div className="max-w-4xl mx-auto text-center p-12" style={{ paddingTop: '100px' }}>
+        <div className="max-w-4xl mx-auto text-center p-12" style={{ paddingTop: '120px' }}>
           <div className="flex justify-center mb-6">
             <img 
               src="/short_logo.png" 
               alt="Prihub Logo" 
-              className="h-24 w-auto"
+              className="h-16 w-auto"
             />
           </div>
-          <h1 className="text-5xl font-bold mb-4" style={{color: '#071426'}}>Welcome to PriHub!</h1>
-          <p className="text-xl mb-4" style={{color: '#000000'}}>Support System for Cognitive Disabilities</p>
-          <p className="text-xl mb-8 font-bold">
+          <h1 className="text-4xl font-bold mb-4 transition-all duration-300 hover:scale-105 hover:text-[#16808D] cursor-pointer" style={{color: '#071426'}}>Welcome to PriHub!</h1>
+          <p className="text-xl mb-4 transition-all duration-300 hover:scale-105 hover:text-[#142C52] cursor-pointer" style={{color: '#000000'}}>Support System for Cognitive Disabilities</p>
+          <p className="text-xl mb-4 font-bold">
             <span 
               className={`tagline-animation transition-all duration-1000 ease-out ${
                 isVisible ? 'opacity-100 transform translate-x-0' : 'opacity-0 transform translate-x-4'
@@ -530,7 +523,6 @@ const Home = () => {
             >
               <Brain className="mr-2 h-5 w-5" />
               Explore Prihub
-              <ArrowRight className="ml-2 h-5 w-5" />
             </Link>
             <button className="flex items-center justify-center px-8 py-3 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white rounded-lg font-semibold hover:from-[#16808D] hover:to-[#142C52] transition-all transform hover:scale-105 shadow-lg">
               Get Support
@@ -546,7 +538,7 @@ const Home = () => {
           <span style={{color: '#16808D'}}>Platform</span>
           <span style={{color: '#000000'}}> Highlights</span>
         </h2>
-        <p className="text-gray-600 text-lg font-medium animate-pulse text-center mb-8">Advanced cognitive support features and accessibility tools for enhanced user experience </p>
+        <p className="text-gray-600 text-base font-medium animate-pulse text-center mb-8">Advanced cognitive support features and accessibility tools for enhanced user experience </p>
         
         {/* Carousel Container */}
         <div className="relative">
@@ -572,17 +564,17 @@ const Home = () => {
                 isDarkMode ? 'bg-gray-800' : 'bg-white'
               }`}>
                 <div className="flex justify-center mb-3">
-                  <highlight.highlightIcon className="h-14 w-14" style={{ color: highlight.highlightColor }} />
+                  <highlight.highlightIcon className="h-10 w-10" style={{ color: highlight.highlightColor }} />
                 </div>
-                <h3 className={`text-2xl font-semibold mb-3 transition-colors duration-300 ${
+                <h3 className={`text-lg font-semibold mb-2 transition-colors duration-300 ${
                   isDarkMode ? 'text-white' : 'text-black'
                 }`}>{highlight.highlightTitle}</h3>
-                <p className={`mb-4 text-base transition-colors duration-300 ${
+                <p className={`mb-4 text-sm transition-colors duration-300 ${
                   isDarkMode ? 'text-gray-300' : 'text-gray-600'
                 }`}>{highlight.highlightDescription}</p>
                 <div className="space-y-2">
                   {highlight.features.map((feature, featureIndex) => (
-                    <div key={featureIndex} className={`flex items-center justify-center text-sm transition-colors duration-300 ${
+                    <div key={featureIndex} className={`flex items-center justify-center text-xs transition-colors duration-300 ${
                       isDarkMode ? 'text-gray-400' : 'text-gray-500'
                     }`}>
                       <CheckCircle className="h-3 w-3 mr-2" style={{ color: highlight.highlightColor }} />
@@ -618,7 +610,7 @@ const Home = () => {
             <span style={{color: '#16808D'}}>Prihub</span>
             <span style={{color: '#000000'}}> at a glance</span>
           </h2>
-          <p className="text-gray-600 text-lg font-medium animate-pulse">Real-time cognitive disability support platform metrics and performance indicators</p>
+          <p className="text-gray-600 text-base font-medium animate-pulse">Real-time cognitive disability support platform metrics and performance indicators</p>
         </div>
         
         {/* Animated Single Line Grid */}
@@ -825,7 +817,7 @@ const Home = () => {
       <div className="bg-gradient-to-r from-[#16808D] to-[#142C52] rounded-lg shadow-lg p-8 text-center text-white">
         <div className="max-w-3xl mx-auto">
           <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Life?</h2>
-          <p className="text-xl mb-6 opacity-90">
+          <p className="text-base mb-6 opacity-90">
             Join thousands of individuals already experiencing the PriHub advantage for cognitive support through accessible technology, AI-powered assistance, and comprehensive disability resources
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
@@ -948,7 +940,7 @@ const Home = () => {
 
           {/* Carousel Indicators */}
           <div className="flex justify-center mt-6 space-x-2">
-            {Array.from({ length: Math.ceil(allFeatures.length / 3) }).map((_, index) => (
+            {Array.from({ length: Math.ceil(cognitiveFeatures.length / 3) }).map((_, index) => (
               <button
                 key={index}
                 onClick={() => setCurrentFeatureIndex(index * 3)}
@@ -1140,69 +1132,324 @@ const Home = () => {
       </div>
 
       {/* Trusted Communities Section */}
-      <div className="bg-white rounded-lg shadow-lg p-8">
-        <h2 className="text-3xl font-bold text-center mb-8" style={{color: '#071426'}}>
-          Trusted by Leading Communities
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-          {[
-            { communityName: "Green Valley Estates", partnerLogo: "/partner1.png" },
-            { communityName: "Sunset Apartments Complex", partnerLogo: "/partner2.png" },
-            { communityName: "Riverside Community Living", partnerLogo: "/partner3.png" },
-            { communityName: "Mountain View Residences", partnerLogo: "/partner4.png" },
-            { communityName: "Lakeside Gardens Society", partnerLogo: "/partner5.png" },
-            { communityName: "Urban Heights Community", partnerLogo: "/partner6.png" },
-            { communityName: "Coastal Living Properties", partnerLogo: "/partner7.png" },
-            { communityName: "Forest Park Homes Association", partnerLogo: "/partner8.png" }
-          ].map((communityPartner, index) => (
-            <div key={index} className="text-center">
-              <img 
-                src={communityPartner.partnerLogo} 
-                alt={communityPartner.communityName}
-                className="h-16 w-auto mx-auto mb-2 grayscale hover:grayscale-0 transition-all"
-              />
-              <p className="text-sm text-gray-600">{communityPartner.communityName}</p>
-            </div>
-          ))}
+      <div className="bg-gradient-to-r from-purple-100 via-blue-50 to-indigo-100 rounded-xl shadow-xl p-10 overflow-hidden">
+        <div className="text-center mb-8">
+          <h2 className="text-4xl font-bold mb-4">
+            <span style={{color: '#16808D'}}>Trusted By</span>
+            <span className="text-black"> Leading Communities</span>
+          </h2>
+          <p className="text-lg text-gray-600 max-w-4xl mx-auto whitespace-nowrap">
+            Join thousands of communities that rely on PriHub for seamless management and exceptional resident experiences.
+          </p>
         </div>
-      </div>
-
-      {/* Comprehensive FAQ Section */}
-      <div className="bg-gradient-to-r from-[#D4DBE9] to-[#E0F7FA] rounded-lg shadow-lg p-8">
-        <h2 className="text-3xl font-bold text-center mb-8" style={{color: '#071426'}}>
-          Frequently Asked Questions
-        </h2>
-        <div className="max-w-3xl mx-auto space-y-4">
-          {[
-            {
-              questionText: "How quickly can I set up PriHub for my community?",
-              answerText: "Most communities are fully operational within 24-48 hours. Our dedicated onboarding team guides you through every step of the setup process."
-            },
-            {
-              questionText: "Can I customize the platform for our specific community needs?",
-              answerText: "Absolutely! PriHub is highly customizable with custom modules, integrations, and workflows tailored specifically to your community's unique requirements."
-            },
-            {
-              questionText: "What kind of customer support do you provide?",
-              answerText: "We offer 24/7 email support for all plans, with phone support available for Professional and Enterprise plans for immediate assistance."
-            },
-            {
-              questionText: "How secure is our community data with PriHub?",
-              answerText: "Your data security is our top priority. We use bank-level encryption, conduct regular security audits, and comply with all data protection regulations."
-            },
-            {
-              questionText: "Can we migrate from our current management system?",
-              answerText: "Yes, we provide free migration services and comprehensive data import tools to ensure a seamless transition from your existing system."
-            }
-          ].map((faqItem, index) => (
-            <div key={index} className="bg-white rounded-lg p-6 shadow-md hover:shadow-lg transition-shadow">
-              <h3 className="text-lg font-semibold mb-3 flex items-center" style={{color: '#071426'}}>
-                <MessageSquare className="h-5 w-5 mr-2" style={{color: '#142C52'}} />
-                {faqItem.questionText}
-              </h3>
-              <p className="text-gray-700 leading-relaxed">{faqItem.answerText}</p>
+        
+        {/* Continuous Scrolling List */}
+        <div className="relative">
+          <div className="flex space-x-6 animate-scroll-x" style={{ width: 'max-content' }}>
+            {/* First set of communities */}
+            {[
+              { 
+                communityName: "Special Education Centers", 
+                description: "500+ Students",
+                stats: "98% Accessibility",
+                rating: "4.9",
+                years: "8+ Years",
+                image: "https://images.unsplash.com/photo-1574982386585-ce56553aebfa?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Cognitive Therapy Clinics", 
+                description: "300+ Patients",
+                stats: "95% Improvement",
+                rating: "4.8",
+                years: "6+ Years",
+                image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Assisted Living Facilities", 
+                description: "200+ Residents",
+                stats: "92% Independence",
+                rating: "4.7",
+                years: "5+ Years",
+                image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Neurodiversity Support Groups", 
+                description: "150+ Members",
+                stats: "96% Engagement",
+                rating: "4.9",
+                years: "7+ Years",
+                image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Rehabilitation Centers", 
+                description: "400+ Clients",
+                stats: "94% Recovery",
+                rating: "4.6",
+                years: "4+ Years",
+                image: "https://images.unsplash.com/photo-1551190822-a9333d879b1c?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Autism Support Networks", 
+                description: "600+ Families",
+                stats: "97% Progress",
+                rating: "4.8",
+                years: "9+ Years",
+                image: "https://images.unsplash.com/photo-1584999734482-03fc1b8b7b6a?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Memory Care Communities", 
+                description: "250+ Seniors",
+                stats: "93% Cognitive Health",
+                rating: "4.7",
+                years: "5+ Years",
+                image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Inclusive Education Schools", 
+                description: "180+ Students",
+                stats: "99% Success Rate",
+                rating: "4.9",
+                years: "6+ Years",
+                image: "https://images.unsplash.com/photo-1503676260788-f1bcd00f72c7?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Speech Therapy Centers", 
+                description: "350+ Clients",
+                stats: "91% Communication",
+                rating: "4.8",
+                years: "7+ Years",
+                image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Occupational Therapy Clinics", 
+                description: "280+ Patients",
+                stats: "94% Daily Living Skills",
+                rating: "4.7",
+                years: "5+ Years",
+                image: "https://images.unsplash.com/photo-1555421689-d68471e189f2?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "ADHD Support Communities", 
+                description: "420+ Members",
+                stats: "96% Focus Improvement",
+                rating: "4.8",
+                years: "6+ Years",
+                image: "https://images.unsplash.com/photo-1611095556553-792097274a58?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Dyslexia Learning Centers", 
+                description: "190+ Students",
+                stats: "93% Reading Progress",
+                rating: "4.6",
+                years: "4+ Years",
+                image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&h=300&fit=crop"
+              }
+            ].map((community, index) => (
+              <div key={`first-${index}`} className="flex-shrink-0 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-125 border border-gray-100 min-w-[320px] max-w-[320px] animate-fade-in">
+                {/* Community Image */}
+                <div className="relative h-48 overflow-hidden rounded-t-3xl">
+                  <img 
+                    src={community.image} 
+                    alt={community.communityName}
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                  <div className="absolute bottom-2 left-2 right-2">
+                    <h3 className="text-white font-bold text-lg drop-shadow-lg">
+                      {community.communityName}
+                    </h3>
+                  </div>
+                </div>
+                
+                {/* Community Info */}
+                <div className="p-4 rounded-b-3xl">
+                  <p className="text-sm text-gray-600 mb-3">
+                    {community.description}
+                  </p>
+                  
+                  {/* Stats Row */}
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center">
+                      <span className="text-yellow-500">⭐</span>
+                      <span className="text-sm font-semibold ml-1">{community.rating}</span>
+                    </div>
+                    <div className="text-xs text-gray-600">{community.years}</div>
+                  </div>
+                  
+                  {/* Performance Badge */}
+                  <div className="flex items-center justify-between">
+                    <span className="bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded-full">
+                      {community.stats}
+                    </span>
+                    <button className="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors">
+                      View Details →
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+            
+            {/* Duplicate set for seamless scrolling */}
+            {[
+              { 
+                communityName: "Special Education Centers", 
+                description: "500+ Students",
+                stats: "98% Accessibility",
+                rating: "4.9",
+                years: "8+ Years",
+                image: "https://images.unsplash.com/photo-1574982386585-ce56553aebfa?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Cognitive Therapy Clinics", 
+                description: "300+ Patients",
+                stats: "95% Improvement",
+                rating: "4.8",
+                years: "6+ Years",
+                image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Assisted Living Facilities", 
+                description: "200+ Residents",
+                stats: "92% Independence",
+                rating: "4.7",
+                years: "5+ Years",
+                image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Neurodiversity Support Groups", 
+                description: "150+ Members",
+                stats: "96% Engagement",
+                rating: "4.9",
+                years: "7+ Years",
+                image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Rehabilitation Centers", 
+                description: "400+ Clients",
+                stats: "94% Recovery",
+                rating: "4.6",
+                years: "4+ Years",
+                image: "https://images.unsplash.com/photo-1551190822-a9333d879b1c?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Autism Support Networks", 
+                description: "600+ Families",
+                stats: "97% Progress",
+                rating: "4.8",
+                years: "9+ Years",
+                image: "https://images.unsplash.com/photo-1584999734482-03fc1b8b7b6a?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Memory Care Communities", 
+                description: "250+ Seniors",
+                stats: "93% Cognitive Health",
+                rating: "4.7",
+                years: "5+ Years",
+                image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Inclusive Education Schools", 
+                description: "180+ Students",
+                stats: "99% Success Rate",
+                rating: "4.9",
+                years: "6+ Years",
+                image: "https://images.unsplash.com/photo-1503676260788-f1bcd00f72c7?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Speech Therapy Centers", 
+                description: "350+ Clients",
+                stats: "91% Communication",
+                rating: "4.8",
+                years: "7+ Years",
+                image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Occupational Therapy Clinics", 
+                description: "280+ Patients",
+                stats: "94% Daily Living Skills",
+                rating: "4.7",
+                years: "5+ Years",
+                image: "https://images.unsplash.com/photo-1555421689-d68471e189f2?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "ADHD Support Communities", 
+                description: "420+ Members",
+                stats: "96% Focus Improvement",
+                rating: "4.8",
+                years: "6+ Years",
+                image: "https://images.unsplash.com/photo-1611095556553-792097274a58?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Dyslexia Learning Centers", 
+                description: "190+ Students",
+                stats: "93% Reading Progress",
+                rating: "4.6",
+                years: "4+ Years",
+                image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=400&h=300&fit=crop"
+              }
+            ].map((community, index) => (
+              <div key={`second-${index}`} className="flex-shrink-0 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-125 border border-gray-100 min-w-[320px] max-w-[320px] animate-fade-in">
+                {/* Community Image */}
+                <div className="relative h-48 overflow-hidden rounded-t-3xl">
+                  <img 
+                    src={community.image} 
+                    alt={community.communityName}
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                  <div className="absolute bottom-2 left-2 right-2">
+                    <h3 className="text-white font-bold text-lg drop-shadow-lg">
+                      {community.communityName}
+                    </h3>
+                  </div>
+                </div>
+                
+                {/* Community Info */}
+                <div className="p-4 rounded-b-3xl">
+                  <p className="text-sm text-gray-600 mb-3">
+                    {community.description}
+                  </p>
+                  
+                  {/* Stats Row */}
+                  <div className="flex items-center justify-between mb-3">
+                    <div className="flex items-center">
+                      <span className="text-yellow-500">⭐</span>
+                      <span className="text-sm font-semibold ml-1">{community.rating}</span>
+                    </div>
+                    <div className="text-xs text-gray-600">{community.years}</div>
+                  </div>
+                  
+                  {/* Performance Badge */}
+                  <div className="flex items-center justify-between">
+                    <span className="bg-green-100 text-green-800 text-xs font-semibold px-2 py-1 rounded-full">
+                      {community.stats}
+                    </span>
+                    <button className="text-blue-600 hover:text-blue-800 text-sm font-medium transition-colors">
+                      View Details →
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+        
+        {/* Bottom Stats */}
+        <div className="text-center mt-8">
+          <div className="inline-flex items-center space-x-8 text-sm text-gray-600">
+            <div className="flex items-center space-x-2">
+              <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
+              <span>8+ Years of Trust</span>
             </div>
-          ))}
+            <div className="flex items-center space-x-2">
+              <div className="w-3 h-3 bg-blue-500 rounded-full animate-pulse"></div>
+              <span>1000+ Communities</span>
+            </div>
+            <div className="flex items-center space-x-2">
+              <div className="w-3 h-3 bg-purple-500 rounded-full animate-pulse"></div>
+              <span>50,000+ Residents</span>
+            </div>
+          </div>
         </div>
       </div>
 

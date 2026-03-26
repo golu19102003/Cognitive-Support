@@ -260,37 +260,37 @@ const RightAccessibilitySidebar = () => {
           {/* Reads Page Aloud */}
           <button
             onClick={() => setShowReadsAloudModal(true)}
-            className="w-12 h-12 bg-gradient-to-r from-[#142C52] to-[#16808D] hover:from-[#16808D] hover:to-[#142C52] rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg"
+            className="w-11 h-11 bg-gradient-to-r from-[#142C52] to-[#16808D] hover:from-[#16808D] hover:to-[#142C52] rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg"
             title="Reads Page Aloud"
           >
-            {isReading ? <Volume2 className="w-5 h-5 animate-pulse" /> : <Volume2 className="w-5 h-5" />}
+            {isReading ? <Volume2 className="w-4 h-4 animate-pulse" /> : <Volume2 className="w-4 h-4" />}
           </button>
 
           {/* Advanced Search */}
           <button
             onClick={() => setShowAdvancedSearchModal(true)}
-            className="w-12 h-12 bg-gradient-to-r from-[#142C52] to-[#16808D] hover:from-[#16808D] hover:to-[#142C52] rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg"
+            className="w-11 h-11 bg-gradient-to-r from-[#142C52] to-[#16808D] hover:from-[#16808D] hover:to-[#142C52] rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg"
             title="Advanced Search"
           >
-            <Search className="w-5 h-5" />
+            <Search className="w-4 h-4" />
           </button>
 
           {/* Language Selection */}
           <button
             onClick={() => setShowLanguageModal(true)}
-            className="w-12 h-12 bg-gradient-to-r from-[#142C52] to-[#16808D] hover:from-[#16808D] hover:to-[#142C52] rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg"
+            className="w-11 h-11 bg-gradient-to-r from-[#142C52] to-[#16808D] hover:from-[#16808D] hover:to-[#142C52] rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg"
             title="Change Language"
           >
-            <Languages className="w-5 h-5" />
+            <Languages className="w-7 h-7" />
           </button>
 
           {/* Medication Reminder */}
           <button
             onClick={handleSetMedicationReminder}
-            className="w-12 h-12 bg-gradient-to-r from-[#142C52] to-[#16808D] hover:from-[#16808D] hover:to-[#142C52] rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg"
+            className="w-11 h-11 bg-gradient-to-r from-[#142C52] to-[#16808D] hover:from-[#16808D] hover:to-[#142C52] rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg"
             title="Set Medication Reminder"
           >
-            <Pill className="w-5 h-5" />
+            <Pill className="w-4 h-4" />
           </button>
         </div>
       </div>
@@ -651,7 +651,7 @@ const RightAccessibilitySidebar = () => {
                 {/* Current Language Display */}
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                    <div className="w-8 h-8 bg-gradient-to-r from-[#142C52] to-[#16808D] rounded-full flex items-center justify-center text-white mr-3">
+                    <div className="w-7 h-7 bg-gradient-to-r from-[#142C52] to-[#16808D] rounded-full flex items-center justify-center text-white mr-3">
                       <Globe className="w-4 h-4" />
                     </div>
                     Current Language
@@ -677,7 +677,7 @@ const RightAccessibilitySidebar = () => {
                 {/* Quick Translations */}
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                    <div className="w-8 h-8 bg-gradient-to-r from-[#142C52] to-[#16808D] rounded-full flex items-center justify-center text-white mr-3">
+                    <div className="w-7 h-7 bg-gradient-to-r from-[#142C52] to-[#16808D] rounded-full flex items-center justify-center text-white mr-3">
                       <Languages className="w-4 h-4" />
                     </div>
                     Quick Translations
@@ -703,7 +703,7 @@ const RightAccessibilitySidebar = () => {
                 {/* Supported Languages */}
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
-                    <div className="w-8 h-8 bg-gradient-to-r from-[#142C52] to-[#16808D] rounded-full flex items-center justify-center text-white mr-3">
+                    <div className="w-7 h-7 bg-gradient-to-r from-[#142C52] to-[#16808D] rounded-full flex items-center justify-center text-white mr-3">
                       <Globe className="w-4 h-4" />
                     </div>
                     Supported Languages

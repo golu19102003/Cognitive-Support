@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 const Chatbot = () => {
   const navigate = useNavigate();
   const [chatExpanded, setChatExpanded] = useState(false);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [chatbotPosition, setChatbotPosition] = useState('top-[73%]');
   const [messages, setMessages] = useState([
     {
       text: "Hello 👋 Welcome to **PriHub**! I'm your AI assistant for cognitive disabilities support. I can help you understand cognitive disabilities, navigate the website, find resources, and provide guidance. How can I assist you today?",
@@ -86,6 +88,37 @@ const Chatbot = () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, [chatExpanded, showServiceMenu]);
+
+  // Scroll-based chatbot positioning
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      
+      // Same logic as scroll arrows
+      const showScrollTop = scrollY > 100;
+      const showScrollDown = scrollY < documentHeight - windowHeight - 100;
+
+      setScrollPosition(scrollY);
+
+      // Dynamic positioning based on scroll arrows visibility
+      if (showScrollTop && showScrollDown) {
+        // Both arrows visible - middle of page
+        setChatbotPosition('top-[73%]');
+      } else {
+        // Only one arrow visible - top or bottom of page
+        setChatbotPosition('top-[81%]');
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    handleScroll(); // Initial check
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     const messagesContainer = document.getElementById('chatbot-messages');
@@ -523,7 +556,7 @@ const Chatbot = () => {
       {}
       {!chatExpanded && (
         <motion.div
-          className="fixed top-[75%] right-[14px] cursor-pointer z-[998]"
+          className={`fixed ${chatbotPosition} right-[12px] cursor-pointer z-[998]`}
           onClick={toggleChat}
           whileHover={{ scale: 1.1, rotate: 5 }}
           whileTap={{ scale: 0.95 }}
@@ -537,7 +570,7 @@ const Chatbot = () => {
           }}
         >
           <div className={`relative bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-4 rounded-full shadow-2xl transition-all duration-300 font-semibold border-2 border-[#142C52] hover:border-[#16808D]`}>
-            <img src="/image.png" alt="PriHub" className="h-8 w-8" />
+            <img src="/image.png" alt="PriHub" className="h-7 w-7" />
             {}
             {messages.length > 1 && (
               <motion.div

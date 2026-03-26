@@ -6,7 +6,8 @@ import {
   Copy, Check, X, Menu, ArrowUp, MessageCircle, Heart,
   BarChart3, PieChart, Activity, Target, Timer, Settings,
   HelpCircle, FileText, Download, Upload, Filter, Search,
-  Plus, Minus, Edit, Trash2, Save, Refresh, Eye, EyeOff
+  Plus, Minus, Edit, Trash2, Save, Refresh, Eye, EyeOff,
+  ChevronLeft
 } from 'lucide-react';
 
 const Contact = () => {
@@ -25,6 +26,12 @@ const Contact = () => {
   const [submitCount, setSubmitCount] = useState(0);
   const [charCount, setCharCount] = useState(0);
   const [copied, setCopied] = useState('');
+  const [faqFilter, setFaqFilter] = useState('10');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [isAutoRotating, setIsAutoRotating] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [questionsPerPage] = useState(10);
   
   // Advanced state variables
   const [activeSection, setActiveSection] = useState('overview');
@@ -52,17 +59,41 @@ const Contact = () => {
 
   useEffect(() => {
     const checkDarkMode = () => {
-      const theme = localStorage.getItem('theme');
-      const darkMode = localStorage.getItem('darkMode');
-      const isDark = localStorage.getItem('isDarkMode');
-      
-      if (theme === 'dark' || darkMode === 'true' || isDark === 'true') {
-        setIsDarkMode(true);
-      }
+      setIsDarkMode(document.documentElement.classList.contains('dark'));
     };
     
     checkDarkMode();
     
+    const observer = new MutationObserver(checkDarkMode);
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class']
+    });
+    
+    // Listen for storage changes (for cross-tab theme sync)
+    const handleStorageChange = (e) => {
+      if (e.key === 'theme' || e.key === 'darkMode' || e.key === 'isDarkMode') {
+        checkDarkMode();
+      }
+    };
+    
+    // Listen for system theme changes
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const handleSystemThemeChange = () => checkDarkMode();
+    
+    // Set up all listeners
+    window.addEventListener('storage', handleStorageChange);
+    mediaQuery.addEventListener('change', handleSystemThemeChange);
+    
+    // Cleanup
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('storage', handleStorageChange);
+      mediaQuery.removeEventListener('change', handleSystemThemeChange);
+    };
+  }, []);
+
+  useEffect(() => {
     const interval = setInterval(() => {
       setSupportStats(prev => ({
         ...prev,
@@ -240,22 +271,595 @@ const Contact = () => {
   ];
 
   const faqItems = [
+    // Getting Started Category
     {
       category: 'Getting Started',
       question: 'How do I create an account?',
       answer: 'Click on the Sign Up button and follow the registration process. You\'ll need to provide basic information and verify your email.'
     },
     {
-      category: 'Support',
-      question: 'What support options are available?',
-      answer: 'We offer email support, live chat, and phone support. Premium users get priority assistance with faster response times.'
+      category: 'Getting Started',
+      question: 'What information do I need to register?',
+      answer: 'You\'ll need your full name, email address, phone number, and a secure password. Optional fields include organization and role.'
     },
+    {
+      category: 'Getting Started',
+      question: 'How long does the registration process take?',
+      answer: 'The basic registration takes about 2-3 minutes. Email verification may take a few minutes depending on your email provider.'
+    },
+    {
+      category: 'Getting Started',
+      question: 'Can I change my email after registration?',
+      answer: 'Yes, you can update your email address in your account settings. You\'ll need to verify the new email address.'
+    },
+    {
+      category: 'Getting Started',
+      question: 'Is there a mobile app for onboarding?',
+      answer: 'Yes, our mobile apps provide a streamlined onboarding experience with step-by-step guidance and tutorials.'
+    },
+    
+    // Customization Category
+    {
+      category: 'Customization',
+      question: 'Can PriHub be customized for our specific community needs?',
+      answer: 'Yes! PriHub is highly customizable with custom modules, integrations, and workflows tailored specifically to your community\'s unique requirements.'
+    },
+    {
+      category: 'Customization',
+      question: 'What customization options are available?',
+      answer: 'You can customize themes, layouts, workflows, forms, notifications, and integrations. We also offer white-label solutions.'
+    },
+    {
+      category: 'Customization',
+      question: 'Can we add custom fields to user profiles?',
+      answer: 'Yes, you can create unlimited custom fields with various data types including text, numbers, dates, dropdowns, and file attachments.'
+    },
+    {
+      category: 'Customization',
+      question: 'How do we create custom workflows?',
+      answer: 'Use our visual workflow builder to drag and drop steps, set conditions, and automate processes without coding knowledge.'
+    },
+    {
+      category: 'Customization',
+      question: 'Can we integrate our existing tools?',
+      answer: 'Absolutely! We support REST APIs, webhooks, and native integrations with popular tools like Slack, Teams, and Google Workspace.'
+    },
+    
+    // Support Category
+    {
+      category: 'Support',
+      question: 'What kind of customer support do you provide?',
+      answer: 'We offer 24/7 email support for all plans, with phone support available for Professional and Enterprise plans for immediate assistance.'
+    },
+    {
+      category: 'Support',
+      question: 'What are your support response times?',
+      answer: 'Email responses typically within 2 hours for priority issues and 24 hours for standard inquiries. Phone support is immediate during business hours.'
+    },
+    {
+      category: 'Support',
+      question: 'Do you provide training for administrators?',
+      answer: 'Yes, we offer comprehensive admin training including setup, configuration, user management, and advanced features.'
+    },
+    {
+      category: 'Support',
+      question: 'Is there a knowledge base or documentation?',
+      answer: 'Yes, we have extensive documentation, video tutorials, webinars, and a community forum for self-service support.'
+    },
+    {
+      category: 'Support',
+      question: 'Can we request custom features?',
+      answer: 'Enterprise clients can request custom features. We evaluate all requests and prioritize based on demand and feasibility.'
+    },
+    
+    // Security Category
+    {
+      category: 'Security',
+      question: 'How secure is our community data with PriHub?',
+      answer: 'Your data security is our top priority. We use bank-level encryption, conduct regular security audits, and comply with all data protection regulations.'
+    },
+    {
+      category: 'Security',
+      question: 'What encryption standards do you use?',
+      answer: 'We use AES-256 encryption for data at rest and TLS 1.3 for data in transit. All passwords are hashed with bcrypt.'
+    },
+    {
+      category: 'Security',
+      question: 'Do you perform regular security audits?',
+      answer: 'Yes, we conduct quarterly security audits, penetration testing, and comply with SOC 2 Type II and ISO 27001 standards.'
+    },
+    {
+      category: 'Security',
+      question: 'What compliance standards do you follow?',
+      answer: 'We comply with GDPR, CCPA, HIPAA, WCAG 2.1, and other major accessibility and data protection regulations globally.'
+    },
+    {
+      category: 'Security',
+      question: 'Can we export our data at any time?',
+      answer: 'Yes, you can export all your data in various formats including CSV, JSON, and XML at any time through your admin dashboard.'
+    },
+    
+    // Migration Category
+    {
+      category: 'Migration',
+      question: 'Can we migrate from our current management system?',
+      answer: 'Yes, we provide free migration services and comprehensive data import tools to ensure a seamless transition from your existing system.'
+    },
+    {
+      category: 'Migration',
+      question: 'What systems can you migrate from?',
+      answer: 'We support migration from most popular systems including Salesforce, HubSpot, Zoho, custom databases, spreadsheets, and more.'
+    },
+    {
+      category: 'Migration',
+      question: 'How long does migration typically take?',
+      answer: 'Migration time varies based on data volume and complexity. Small migrations (under 1,000 records) take 1-2 days, larger migrations may take 1-2 weeks.'
+    },
+    {
+      category: 'Migration',
+      question: 'Is data migration really free?',
+      answer: 'Yes, basic migration is free for Professional and Enterprise plans. Complex custom migrations may require additional consulting services.'
+    },
+    {
+      category: 'Migration',
+      question: 'What happens to our old system during migration?',
+      answer: 'We run parallel systems during migration to ensure no downtime. Your old system remains active until the migration is complete and verified.'
+    },
+    
+    // Features Category
     {
       category: 'Features',
       question: 'Can I customize the interface?',
       answer: 'Yes! You can adjust text size, color themes, and layout preferences to suit your specific needs and accessibility requirements.'
+    },
+    {
+      category: 'Features',
+      question: 'What accessibility features are available?',
+      answer: 'We offer screen reader support, keyboard navigation, high contrast modes, adjustable text sizes, and WCAG 2.1 AA compliance.'
+    },
+    {
+      category: 'Features',
+      question: 'Can we create custom reports?',
+      answer: 'Yes, our report builder allows you to create custom dashboards, charts, and reports with drag-and-drop functionality.'
+    },
+    {
+      category: 'Features',
+      question: 'Is there a mobile app?',
+      answer: 'Yes, we offer native mobile apps for both iOS and Android platforms with full feature parity to the web version.'
+    },
+    {
+      category: 'Features',
+      question: 'Can we automate repetitive tasks?',
+      answer: 'Yes, our automation engine allows you to create workflows, triggers, and scheduled tasks to automate routine processes.'
+    },
+    
+    // Pricing Category
+    {
+      category: 'Pricing',
+      question: 'What pricing plans are available?',
+      answer: 'We offer flexible pricing plans including Basic, Professional, and Enterprise tiers to accommodate different community sizes and needs.'
+    },
+    {
+      category: 'Pricing',
+      question: 'What does the Basic plan include?',
+      answer: 'Basic plan includes up to 100 users, core features, email support, and 5GB storage. Perfect for small communities.'
+    },
+    {
+      category: 'Pricing',
+      question: 'What are the Professional plan benefits?',
+      answer: 'Professional plan includes up to 1,000 users, advanced features, priority support, 50GB storage, and custom integrations.'
+    },
+    {
+      category: 'Pricing',
+      question: 'Is there a free trial available?',
+      answer: 'Yes, we offer a 14-day free trial for Professional and Enterprise plans with full feature access and no credit card required.'
+    },
+    {
+      category: 'Pricing',
+      question: 'Can we change plans anytime?',
+      answer: 'Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately and we\'ll prorate any differences.'
+    },
+    
+    // Integration Category
+    {
+      category: 'Integration',
+      question: 'What third-party integrations are supported?',
+      answer: 'PriHub integrates with popular tools like Slack, Microsoft Teams, Google Workspace, Zoom, Salesforce, and many more to streamline your workflow.'
+    },
+    {
+      category: 'Integration',
+      question: 'Do you have an API?',
+      answer: 'Yes, we provide a comprehensive REST API and GraphQL endpoints for custom integrations and automation workflows.'
+    },
+    {
+      category: 'Integration',
+      question: 'Can we build custom integrations?',
+      answer: 'Absolutely! Our API documentation and SDKs make it easy to build custom integrations. We also offer professional development services.'
+    },
+    {
+      category: 'Integration',
+      question: 'What about webhook support?',
+      answer: 'Yes, we support webhooks for real-time data synchronization and event-driven integrations with external systems.'
+    },
+    {
+      category: 'Integration',
+      question: 'Are there integration limits?',
+      answer: 'Basic plan supports up to 5 integrations, Professional up to 25, and Enterprise has unlimited integrations.'
+    },
+    
+    // Training Category
+    {
+      category: 'Training',
+      question: 'Do you provide training for new users?',
+      answer: 'Yes, we offer comprehensive training programs including video tutorials, documentation, and live training sessions for all plan levels.'
+    },
+    {
+      category: 'Training',
+      question: 'What training formats are available?',
+      answer: 'We offer self-paced online courses, live webinars, on-site training, and personalized coaching sessions.'
+    },
+    {
+      category: 'Training',
+      question: 'Is training included in the subscription?',
+      answer: 'Basic access to video tutorials is included. Live training and personalized coaching are available for Professional and Enterprise plans.'
+    },
+    {
+      category: 'Training',
+      question: 'Can we train multiple users at once?',
+      answer: 'Yes, we offer group training sessions and can create custom training programs for your organization.'
+    },
+    {
+      category: 'Training',
+      question: 'Are training materials available in multiple languages?',
+      answer: 'Currently, we offer training in English, Spanish, French, and German. More languages are being added regularly.'
+    },
+    
+    // Backup Category
+    {
+      category: 'Backup',
+      question: 'How is data backup handled?',
+      answer: 'We perform automated daily backups with point-in-time recovery options, ensuring your data is always safe and recoverable.'
+    },
+    {
+      category: 'Backup',
+      question: 'How often are backups performed?',
+      answer: 'Automated backups run daily at 2 AM UTC. We also perform incremental backups every 4 hours for critical data.'
+    },
+    {
+      category: 'Backup',
+      question: 'Can we restore data from specific dates?',
+      answer: 'Yes, we offer point-in-time recovery for up to 90 days. Enterprise plans can extend this to 365 days.'
+    },
+    {
+      category: 'Backup',
+      question: 'Are backups encrypted?',
+      answer: 'Yes, all backups are encrypted using the same AES-256 encryption standards as your live data.'
+    },
+    {
+      category: 'Backup',
+      question: 'Can we download our own backups?',
+      answer: 'Yes, you can download your data backups anytime through the admin dashboard or via API.'
+    },
+    
+    // API Category
+    {
+      category: 'API',
+      question: 'Is there an API available for custom development?',
+      answer: 'Yes, PriHub provides a comprehensive REST API and webhooks for custom integrations and automation workflows.'
+    },
+    {
+      category: 'API',
+      question: 'What API endpoints are available?',
+      answer: 'We offer full CRUD operations for all resources including users, content, reports, and administrative functions.'
+    },
+    {
+      category: 'API',
+      question: 'Are there API rate limits?',
+      answer: 'Basic plans have 1,000 requests per hour, Professional 10,000, and Enterprise unlimited with fair use policy.'
+    },
+    {
+      category: 'API',
+      question: 'Do you provide SDKs?',
+      answer: 'Yes, we offer official SDKs for JavaScript, Python, Ruby, PHP, Java, and .NET.'
+    },
+    {
+      category: 'API',
+      question: 'Is there a sandbox environment?',
+      answer: 'Yes, we provide a free sandbox environment for testing and development with sample data.'
+    },
+    
+    // Mobile Category
+    {
+      category: 'Mobile',
+      question: 'Is there a mobile app available?',
+      answer: 'Yes, we offer native mobile apps for both iOS and Android platforms with full feature parity to the web version.'
+    },
+    {
+      category: 'Mobile',
+      question: 'What features are available on mobile?',
+      answer: 'Mobile apps include all core features including messaging, notifications, content access, and administrative functions.'
+    },
+    {
+      category: 'Mobile',
+      question: 'Do mobile apps work offline?',
+      answer: 'Yes, mobile apps support offline mode with automatic sync when connectivity is restored.'
+    },
+    {
+      category: 'Mobile',
+      question: 'Are mobile apps secure?',
+      answer: 'Yes, mobile apps use biometric authentication, encryption, and follow mobile security best practices.'
+    },
+    {
+      category: 'Mobile',
+      question: 'Can we customize the mobile app?',
+      answer: 'Enterprise plans can get white-label mobile apps with custom branding and additional features.'
+    },
+    
+    // Compliance Category
+    {
+      category: 'Compliance',
+      question: 'What compliance standards do you follow?',
+      answer: 'We comply with GDPR, CCPA, WCAG 2.1, and other major accessibility and data protection regulations globally.'
+    },
+    {
+      category: 'Compliance',
+      question: 'Are you HIPAA compliant?',
+      answer: 'Yes, our Enterprise plan includes HIPAA compliance for healthcare organizations handling protected health information.'
+    },
+    {
+      category: 'Compliance',
+      question: 'What about accessibility compliance?',
+      answer: 'We meet WCAG 2.1 AA standards and are working towards AAA compliance. Our platform is designed for users with disabilities.'
+    },
+    {
+      category: 'Compliance',
+      question: 'Do you have data processing agreements?',
+      answer: 'Yes, we provide comprehensive DPAs for all enterprise customers and upon request for other plans.'
+    },
+    {
+      category: 'Compliance',
+      question: 'Are you SOC 2 certified?',
+      answer: 'Yes, we are SOC 2 Type II certified and undergo annual audits to maintain our compliance status.'
+    },
+    
+    // Performance Category
+    {
+      category: 'Performance',
+      question: 'What is your uptime guarantee?',
+      answer: 'We guarantee 99.9% uptime for all paid plans with proactive monitoring and instant failover systems.'
+    },
+    {
+      category: 'Performance',
+      question: 'How do you ensure high performance?',
+      answer: 'We use CDN, load balancing, caching, and optimized database queries to ensure fast response times globally.'
+    },
+    {
+      category: 'Performance',
+      question: 'What are your average response times?',
+      answer: 'API responses average under 200ms, page loads under 2 seconds, and database queries are optimized for speed.'
+    },
+    {
+      category: 'Performance',
+      question: 'Do you have performance monitoring?',
+      answer: 'Yes, we use advanced monitoring tools with real-time alerts and performance analytics.'
+    },
+    {
+      category: 'Performance',
+      question: 'Can we monitor our own performance metrics?',
+      answer: 'Yes, Enterprise customers get access to detailed performance analytics and custom monitoring dashboards.'
+    },
+    
+    // Scalability Category
+    {
+      category: 'Scalability',
+      question: 'Can the system grow with our community?',
+      answer: 'Absolutely! PriHub is built on scalable cloud infrastructure that can handle communities from 10 to 100,000+ members seamlessly.'
+    },
+    {
+      category: 'Scalability',
+      question: 'What is the maximum number of users?',
+      answer: 'Our Enterprise plan can handle unlimited users. We have customers with over 100,000 active users.'
+    },
+    {
+      category: 'Scalability',
+      question: 'How does scaling work?',
+      answer: 'We use auto-scaling infrastructure that automatically adjusts resources based on demand to maintain performance.'
+    },
+    {
+      category: 'Scalability',
+      question: 'Can we handle large file uploads?',
+      answer: 'Yes, we support files up to 10GB per file with enterprise-grade storage and CDN delivery.'
+    },
+    {
+      category: 'Scalability',
+      question: 'What about global scaling?',
+      answer: 'We have data centers worldwide with automatic geo-routing to ensure fast access for users regardless of location.'
+    },
+    
+    // Additional Categories for more questions
+    {
+      category: 'Account Management',
+      question: 'How do I reset my password?',
+      answer: 'Click the "Forgot Password" link on the login page. You\'ll receive an email with instructions to reset your password securely.'
+    },
+    {
+      category: 'Account Management',
+      question: 'Can I have multiple users on one account?',
+      answer: 'Yes, you can add multiple users to your organization account with different roles and permissions.'
+    },
+    {
+      category: 'Account Management',
+      question: 'How do I delete my account?',
+      answer: 'You can delete your account from the settings page. Please note this action is permanent and cannot be undone.'
+    },
+    {
+      category: 'Account Management',
+      question: 'Can I export my data before deleting?',
+      answer: 'Yes, we recommend exporting all your data before account deletion. You can do this from the data export section.'
+    },
+    {
+      category: 'Account Management',
+      question: 'What happens to my data when I delete my account?',
+      answer: 'Your data is permanently deleted within 30 days, except for information we\'re legally required to retain.'
     }
   ];
+
+  // Auto-rotation effect for FAQ questions
+  useEffect(() => {
+    if (!isAutoRotating || searchTerm) {
+      return; // Don't rotate if auto-rotation is disabled or if searching
+    }
+
+    const interval = setInterval(() => {
+      setCurrentQuestionIndex((prevIndex) => {
+        const maxIndex = Math.max(0, faqItems.length - 10); // Ensure we don't go beyond available questions
+        const nextIndex = (prevIndex + 1) % (maxIndex + 1);
+        return nextIndex;
+      });
+    }, 5000); // Rotate every 5 seconds
+
+    return () => clearInterval(interval);
+  }, [isAutoRotating, searchTerm, faqItems.length]);
+
+  // Filter FAQ items based on filter and search
+  const getFilteredFAQs = () => {
+    let filtered = faqItems;
+    
+    // Apply search filter
+    if (searchTerm) {
+      filtered = filtered.filter(item => 
+        item.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.answer.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.category.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      return filtered; // Return all search results without pagination
+    }
+    
+    // Apply pagination for non-search results
+    const indexOfLastQuestion = currentPage * questionsPerPage;
+    const indexOfFirstQuestion = indexOfLastQuestion - questionsPerPage;
+    filtered = filtered.slice(indexOfFirstQuestion, indexOfLastQuestion);
+    
+    return filtered;
+  };
+
+  // Calculate total pages
+  const getTotalPages = () => {
+    if (searchTerm) {
+      return Math.ceil(faqItems.filter(item => 
+        item.question.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.answer.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        item.category.toLowerCase().includes(searchTerm.toLowerCase())
+      ).length / questionsPerPage);
+    }
+    return Math.ceil(faqItems.length / questionsPerPage);
+  };
+
+  // Pagination handlers
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    setIsAutoRotating(false); // Stop auto-rotation when manually navigating
+  };
+
+  const handlePrevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+      setIsAutoRotating(false);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < getTotalPages()) {
+      setCurrentPage(currentPage + 1);
+      setIsAutoRotating(false);
+    }
+  };
+
+  // Get category colors
+  const getCategoryColors = (category) => {
+    const colors = {
+      'Getting Started': 'bg-blue-100 text-blue-700',
+      'Customization': 'bg-purple-100 text-purple-700',
+      'Support': 'bg-green-100 text-green-700',
+      'Security': 'bg-red-100 text-red-700',
+      'Migration': 'bg-orange-100 text-orange-700',
+      'Features': 'bg-indigo-100 text-indigo-700',
+      'Pricing': 'bg-yellow-100 text-yellow-700',
+      'Integration': 'bg-pink-100 text-pink-700',
+      'Training': 'bg-cyan-100 text-cyan-700',
+      'Backup': 'bg-teal-100 text-teal-700',
+      'API': 'bg-gray-100 text-gray-700',
+      'Mobile': 'bg-lime-100 text-lime-700',
+      'Compliance': 'bg-emerald-100 text-emerald-700',
+      'Performance': 'bg-amber-100 text-amber-700',
+      'Scalability': 'bg-violet-100 text-violet-700',
+      'Account Management': 'bg-rose-100 text-rose-700'
+    };
+    return colors[category] || 'bg-gray-100 text-gray-700';
+  };
+
+  // Get icon colors
+  const getIconColors = (index) => {
+    const colors = [
+      'bg-blue-100 text-blue-600',
+      'bg-purple-100 text-purple-600',
+      'bg-green-100 text-green-600',
+      'bg-red-100 text-red-600',
+      'bg-orange-100 text-orange-600',
+      'bg-indigo-100 text-indigo-600',
+      'bg-yellow-100 text-yellow-600',
+      'bg-pink-100 text-pink-600',
+      'bg-cyan-100 text-cyan-600',
+      'bg-teal-100 text-teal-600'
+    ];
+    return colors[index % colors.length];
+  };
+
+  // Get border colors
+  const getBorderColors = (index) => {
+    const colors = [
+      'border-blue-500 bg-blue-50',
+      'border-purple-500 bg-purple-50',
+      'border-green-500 bg-green-50',
+      'border-red-500 bg-red-50',
+      'border-orange-500 bg-orange-50',
+      'border-indigo-500 bg-indigo-50',
+      'border-yellow-500 bg-yellow-50',
+      'border-pink-500 bg-pink-50',
+      'border-cyan-500 bg-cyan-50',
+      'border-teal-500 bg-teal-50',
+      'border-gray-500 bg-gray-50',
+      'border-lime-500 bg-lime-50',
+      'border-emerald-500 bg-emerald-50',
+      'border-amber-500 bg-amber-50',
+      'border-violet-500 bg-violet-50',
+      'border-rose-500 bg-rose-50'
+    ];
+    return colors[index % colors.length];
+  };
+
+  // Get dark mode answer background colors
+  const getDarkModeAnswerColors = (index) => {
+    const colors = [
+      'border-blue-400 bg-blue-900/50',
+      'border-purple-400 bg-purple-900/50',
+      'border-green-400 bg-green-900/50',
+      'border-red-400 bg-red-900/50',
+      'border-orange-400 bg-orange-900/50',
+      'border-indigo-400 bg-indigo-900/50',
+      'border-yellow-400 bg-yellow-900/50',
+      'border-pink-400 bg-pink-900/50',
+      'border-cyan-400 bg-cyan-900/50',
+      'border-teal-400 bg-teal-900/50',
+      'border-gray-400 bg-gray-900/50',
+      'border-lime-400 bg-lime-900/50',
+      'border-emerald-400 bg-emerald-900/50',
+      'border-amber-400 bg-amber-900/50',
+      'border-violet-400 bg-violet-900/50',
+      'border-rose-400 bg-rose-900/50'
+    ];
+    return colors[index % colors.length];
+  };
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${isDarkMode ? 'bg-gray-900' : 'bg-gradient-to-br from-blue-50 via-white to-purple-50'}`}>
@@ -1010,8 +1614,80 @@ const Contact = () => {
               </div>
             </div>
             
+            {/* Search and Filter Controls */}
+            <div className="mb-8 space-y-4">
+              {/* Search Bar */}
+              <div className="relative max-w-2xl mx-auto">
+                <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`} />
+                <input
+                  type="text"
+                  placeholder="Search FAQ questions..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className={`w-full pl-10 pr-4 py-3 rounded-lg border ${isDarkMode ? 'bg-gray-800 border-gray-700 text-white' : 'bg-white border-gray-300 text-gray-900'} focus:outline-none focus:ring-2 focus:ring-blue-500`}
+                />
+              </div>
+              
+              {/* Filter Buttons */}
+              <div className="flex flex-wrap justify-center gap-2">
+                {['All', '10', '20', '50', '100'].map((filter) => (
+                  <button
+                    key={filter}
+                    onClick={() => setFaqFilter(filter)}
+                    className={`px-4 py-2 rounded-lg font-medium transition-all ${
+                      faqFilter === filter
+                        ? 'bg-blue-600 text-white shadow-lg transform scale-105'
+                        : isDarkMode
+                          ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                          : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
+                    }`}
+                  >
+                    {filter === 'All' ? 'All Questions' : `Top ${filter}`}
+                  </button>
+                ))}
+              </div>
+              
+              {/* Auto-Rotation Control */}
+              <div className="flex justify-center mt-4">
+                <button
+                  onClick={() => setIsAutoRotating(!isAutoRotating)}
+                  className={`px-4 py-2 rounded-lg font-medium transition-all flex items-center gap-2 ${
+                    isAutoRotating
+                      ? 'bg-green-600 text-white shadow-lg transform scale-105'
+                      : isDarkMode
+                        ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                        : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
+                  }`}
+                >
+                  {isAutoRotating ? (
+                    <>
+                      <div className="w-3 h-3 bg-white rounded-full animate-pulse"></div>
+                      Auto-Rotating ON
+                    </>
+                  ) : (
+                    <>
+                      <div className="w-3 h-3 bg-gray-400 rounded-full"></div>
+                      Auto-Rotating OFF
+                    </>
+                  )}
+                </button>
+              </div>
+              
+              {/* Results Count */}
+              <div className="text-center">
+                <p className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                  Showing {getFilteredFAQs().length} of {faqItems.length} questions
+                  {isAutoRotating && faqFilter !== 'All' && (
+                    <span className="ml-2">
+                      (Set {currentQuestionIndex + 1} of {Math.max(1, faqItems.length - parseInt(faqFilter) + 1)})
+                    </span>
+                  )}
+                </p>
+              </div>
+            </div>
+            
             <div className="space-y-4">
-              {faqItems.map((item, index) => (
+              {getFilteredFAQs().map((item, index) => (
                 <div
                   key={index}
                   className={`p-6 rounded-lg border transition-all duration-300 hover:shadow-xl hover:scale-[1.02] ${
@@ -1023,33 +1699,24 @@ const Contact = () => {
                   <div className="flex items-start justify-between">
                     <div className="flex-1">
                       <div className="flex items-center space-x-3 mb-3">
-                        <div className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                          item.category === 'Getting Started' 
-                            ? 'bg-blue-100 text-blue-700'
-                            : item.category === 'Support'
-                              ? 'bg-green-100 text-green-700'
-                              : 'bg-purple-100 text-purple-700'
-                        }`}>
+                        <div className={`px-3 py-1 rounded-full text-sm font-semibold ${getCategoryColors(item.category)}`}>
                           {item.category}
                         </div>
-                        <div className={`p-2 rounded-full ${
-                          index === 0 ? 'bg-blue-100 text-blue-600' :
-                          index === 1 ? 'bg-green-100 text-green-600' :
-                          'bg-purple-100 text-purple-600'
-                        }`}>
+                        <div className={`p-2 rounded-full ${getIconColors(index)}`}>
                           <HelpCircle className="h-4 w-4" />
                         </div>
                       </div>
-                      <h3 className={`text-xl font-bold mb-3 transition-colors duration-300 ${
+                      <h3 className={`text-xl font-bold mb-3 transition-colors duration-300 flex items-center gap-2 ${
                         isDarkMode ? 'text-white' : 'text-gray-900'
-                      }`}>{item.question}</h3>
+                      }`}>
+                        <HelpCircle className="h-5 w-5 text-blue-500" />
+                        {item.question}
+                      </h3>
                       <div className={`p-4 rounded-lg border-l-4 mb-3 ${
-                        index === 0 ? 'border-blue-500 bg-blue-50' :
-                        index === 1 ? 'border-green-500 bg-green-50' :
-                        'border-purple-500 bg-purple-50'
+                        isDarkMode ? getDarkModeAnswerColors(index) : getBorderColors(index)
                       }`}>
                         <p className={`leading-relaxed ${
-                          isDarkMode ? 'text-gray-300' : 'text-gray-700'
+                          isDarkMode ? 'text-gray-100' : 'text-gray-700'
                         }`}>{item.answer}</p>
                       </div>
                       <div className="flex items-center space-x-4 text-sm">
@@ -1071,6 +1738,89 @@ const Contact = () => {
                 </div>
               ))}
             </div>
+            
+            {/* Pagination Component */}
+            {!searchTerm && (
+              <div className="mt-8 flex flex-col items-center space-y-4">
+                {/* Page Numbers */}
+                <div className="flex items-center space-x-2">
+                  {/* Left Arrow */}
+                  <button
+                    onClick={handlePrevPage}
+                    disabled={currentPage === 1}
+                    className={`p-2 rounded-lg transition-all ${
+                      currentPage === 1
+                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                        : isDarkMode
+                          ? 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                          : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
+                    }`}
+                  >
+                    <ChevronLeft className="h-5 w-5" />
+                  </button>
+                  
+                  {/* Page Numbers */}
+                  <div className="flex space-x-1">
+                    {[...Array(getTotalPages())].map((_, index) => {
+                      const pageNumber = index + 1;
+                      const isCurrentPage = pageNumber === currentPage;
+                      const isNearCurrent = Math.abs(pageNumber - currentPage) <= 2;
+                      const isFirstOrLast = pageNumber === 1 || pageNumber === getTotalPages();
+                      
+                      // Show page if it's current, near current, or first/last
+                      if (isCurrentPage || isNearCurrent || isFirstOrLast || getTotalPages() <= 7) {
+                        return (
+                          <button
+                            key={pageNumber}
+                            onClick={() => handlePageChange(pageNumber)}
+                            className={`px-3 py-2 rounded-lg font-medium transition-all ${
+                              isCurrentPage
+                                ? 'bg-blue-600 text-white shadow-lg transform scale-105'
+                                : isDarkMode
+                                  ? 'bg-gray-800 text-gray-300 hover:bg-gray-700'
+                                  : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
+                            }`}
+                          >
+                            {pageNumber}
+                          </button>
+                        );
+                      }
+                      
+                      // Show ellipsis for hidden pages
+                      if (pageNumber === currentPage - 3 || pageNumber === currentPage + 3) {
+                        return (
+                          <span key={pageNumber} className={`px-2 py-2 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                            ...
+                          </span>
+                        );
+                      }
+                      
+                      return null;
+                    })}
+                  </div>
+                  
+                  {/* Right Arrow */}
+                  <button
+                    onClick={handleNextPage}
+                    disabled={currentPage === getTotalPages()}
+                    className={`p-2 rounded-lg transition-all ${
+                      currentPage === getTotalPages()
+                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                        : isDarkMode
+                          ? 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                          : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-300'
+                    }`}
+                  >
+                    <ChevronRight className="h-5 w-5" />
+                  </button>
+                </div>
+                
+                {/* Page Info */}
+                <div className={`text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                  Page {currentPage} of {getTotalPages()} • {getFilteredFAQs().length} questions
+                </div>
+              </div>
+            )}
             
             <div className={`mt-8 p-6 rounded-lg border text-center ${
               isDarkMode 
