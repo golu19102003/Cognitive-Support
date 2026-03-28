@@ -556,7 +556,7 @@ const Chatbot = () => {
       {}
       {!chatExpanded && (
         <motion.div
-          className={`fixed ${chatbotPosition} right-[12px] cursor-pointer z-[998]`}
+          className={`fixed ${chatbotPosition} right-2 cursor-pointer z-[998]`}
           onClick={toggleChat}
           whileHover={{ scale: 1.1, rotate: 5 }}
           whileTap={{ scale: 0.95 }}

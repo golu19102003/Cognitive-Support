@@ -219,12 +219,12 @@ const Translate = () => {
     <>
       <div id="google_translate_element" style={{ position: 'absolute', top: '-9999px', left: '-9999px', width: '1px', height: '1px' }}></div>
       
-      <div className="fixed top-[73%] left-4 z-[99999] language-selector-container">
+      <div className="fixed left-2 bottom-2 z-[99999] language-selector-container">
         <AnimatePresence>
           {isOpen && (
             <motion.div 
               ref={languageMenuRef}
-              className="bg-white rounded-2xl shadow-2xl absolute bottom-full mb-4 p-2 border border-gray-100 z-[99999]"
+              className="bg-white rounded-2xl shadow-2xl absolute bottom-full mb-1 p-2 border border-gray-100 z-[99999]"
               initial={{ opacity: 0, y: 20, scale: 0.9 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 10, scale: 0.95 }}

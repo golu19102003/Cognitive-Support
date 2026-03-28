@@ -106,7 +106,7 @@ const Home = () => {
     {
       featureIcon: Users,
       featureTitle: "Autism Spectrum",
-      featureDescription: "Autism Spectrum Disorder affects social communication, behavior, and sensory processing. Individuals experience unique challenges with social interaction, communication patterns, and repetitive behaviors, requiring personalized support and understanding.",
+      featureDescription: "Autism Spectrum Disorder affects social communication, behavior, and sensory processing. Individuals experience unique challenges with social interaction, communication patterns, and repetitive behaviors, requiring personalized support.",
       featureColor: "#1B9AAA",
       featureLink: "/conditions/autism"
     },
@@ -488,7 +488,8 @@ const Home = () => {
           right: '50%',
           marginLeft: '-50vw',
           marginRight: '-50vw',
-          top: '-35px'
+          top: '-35px',
+          marginBottom: '-16px'
         }}
       >
         <div className="max-w-4xl mx-auto text-center p-12" style={{ paddingTop: '120px' }}>
@@ -533,34 +534,34 @@ const Home = () => {
       </div>
 
       {/* Platform Highlights Section */}
-      <div className="bg-white rounded-lg shadow-lg p-8">
-        <h2 className="text-3xl font-bold text-center mb-2">
+      <div className="bg-white rounded-lg shadow-lg p-4">
+        <h2 className="text-3xl font-bold text-center mb-1">
           <span style={{color: '#16808D'}}>Platform</span>
           <span style={{color: '#000000'}}> Highlights</span>
         </h2>
-        <p className="text-gray-600 text-base font-medium animate-pulse text-center mb-8">Advanced cognitive support features and accessibility tools for enhanced user experience </p>
+        <p className="text-gray-600 text-base font-medium animate-pulse text-center mb-2">Advanced cognitive support features and accessibility tools for enhanced user experience</p>
         
         {/* Carousel Container */}
         <div className="relative">
           {/* Navigation Arrows */}
           <button
             onClick={() => setCurrentHighlightIndex((prev) => prev === 0 ? platformHighlights.length - 3 : prev - 3)}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-6 z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
+            className="absolute left-1 top-[35%] transform -translate-y-[35%] z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
           
           <button
             onClick={() => setCurrentHighlightIndex((prev) => (prev + 3) % platformHighlights.length)}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-6 z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
+            className="absolute right-1 top-1/3 transform -translate-y-1/3 z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
 
           {/* Features Grid - Show only 3 at a time */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch mx-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch mx-16">
             {platformHighlights.slice(currentHighlightIndex, currentHighlightIndex + 3).map((highlight, index) => (
-              <div key={index} className={`rounded-lg shadow-lg p-4 text-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer ${
+              <div key={index} className={`rounded-lg shadow-lg p-3 text-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer ${
                 isDarkMode ? 'bg-gray-800' : 'bg-white'
               }`}>
                 <div className="flex justify-center mb-3">
@@ -592,25 +593,40 @@ const Home = () => {
               <button
                 key={index}
                 onClick={() => setCurrentHighlightIndex(index * 3)}
-                className={`w-2 h-2 rounded-full transition-colors ${
+                className={`${
                   Math.floor(currentHighlightIndex / 3) === index
-                    ? 'bg-[#142C52]'
+                    ? 'w-6 h-2 animate-pulse'
+                    : 'w-2 h-2'
+                } rounded-full transition-all duration-300 ${
+                  Math.floor(currentHighlightIndex / 3) === index
+                    ? 'bg-[#16808D]'
                     : 'bg-gray-300'
                 }`}
               />
             ))}
           </div>
+          
+          {/* Additional Design Element - 3 Dots with Lines on Both Sides */}
+          <div className="flex justify-center items-center mt-6">
+            <div className="h-0.5 bg-gradient-to-l from-[#142C52] via-[#16808D] to-transparent w-32"></div>
+            <div className="flex space-x-2 mx-4">
+              <div className="w-2 h-2 bg-[#16808D] rounded-full animate-pulse"></div>
+              <div className="w-2 h-2 bg-[#0C4A50] rounded-full animate-bounce"></div>
+              <div className="w-2 h-2 bg-[#178740] rounded-full animate-pulse"></div>
+            </div>
+            <div className="h-0.5 bg-gradient-to-r from-[#142C52] via-[#16808D] to-transparent w-32"></div>
+          </div>
         </div>
       </div>
 
       {/* Enhanced PriHub at a Glance Section */}
-      <div className="bg-gradient-to-r from-[#E0F7FA] to-[#D4DBE9] rounded-lg shadow-lg p-8 overflow-hidden">
-        <div className="text-center mb-8">
-          <h2 className="text-3xl font-bold mb-2">
+      <div className="bg-gradient-to-r from-[#E0F7FA] to-[#D4DBE9] rounded-lg shadow-lg p-6 overflow-hidden">
+        <div className="text-center mb-1">
+          <h2 className="text-3xl font-bold mb-1">
             <span style={{color: '#16808D'}}>Prihub</span>
             <span style={{color: '#000000'}}> at a glance</span>
           </h2>
-          <p className="text-gray-600 text-base font-medium animate-pulse">Real-time cognitive disability support platform metrics and performance indicators</p>
+          <p className="text-gray-600 text-base font-medium animate-pulse text-center mb-4">Real-time community insights and comprehensive support metrics for enhanced cognitive care management</p>
         </div>
         
         {/* Animated Single Line Grid */}
@@ -622,7 +638,7 @@ const Home = () => {
               const TrendIcon = trend.icon;
               
               return (
-                <div key={`first-${index}`} className="flex-shrink-0 bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-125 border border-gray-100 animate-fade-in">
+                <div key={`first-${index}`} className="flex-shrink-0 bg-white rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-125 border border-gray-200 animate-fade-in">
                   <div className="flex flex-col items-center text-center min-w-[180px]">
                     <div className="flex justify-center mb-3">
                       <div className="p-4 rounded-full bg-gradient-to-br from-gray-50 to-gray-100 shadow-md animate-pulse-slow">
@@ -668,7 +684,7 @@ const Home = () => {
               const TrendIcon = trend.icon;
               
               return (
-                <div key={`second-${index}`} className="flex-shrink-0 bg-white rounded-xl p-6 shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-125 border border-gray-100 animate-fade-in">
+                <div key={`second-${index}`} className="flex-shrink-0 bg-white rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-125 border border-gray-200 animate-fade-in">
                   <div className="flex flex-col items-center text-center min-w-[180px]">
                     <div className="flex justify-center mb-3">
                       <div className="p-4 rounded-full bg-gradient-to-br from-gray-50 to-gray-100 shadow-md animate-pulse-slow">
@@ -840,12 +856,12 @@ const Home = () => {
       </div>
 
       {/* Enhanced Features Showcase */}
-      <div className="bg-white rounded-lg shadow-lg p-8">
-        <h2 className="text-3xl font-bold text-center mb-4">
+      <div className="bg-white rounded-lg shadow-lg p-8 text-center mb-1">
+        <h2 className="text-3xl font-bold text-center mb-1">
           <span style={{color: '#16808D'}}>Explore</span>
           <span style={{color: '#000000'}}> Cognitive Conditions</span>
         </h2>
-        <p className="text-center text-gray-600 mb-8 max-w-3xl mx-auto">
+        <p className="text-center text-gray-600 mb-2 max-w-3xl mx-auto">
           Comprehensive support for 15+ cognitive conditions with specialized AI-powered features, accessibility tools, and personalized assistance for enhanced quality of life and independence.
         </p>
         
@@ -854,20 +870,20 @@ const Home = () => {
           {/* Navigation Arrows */}
           <button
             onClick={handlePrevious}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-6 z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
+            className="absolute left-1 top-[40%] transform -translate-y-[40%] z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
           
           <button
             onClick={handleNext}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-6 z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
+            className="absolute right-1 top-[40%] transform -translate-y-[40%] z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
 
           {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch mx-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch mx-16">
             {displayedFeatures.map((featureDetail, index) => (
               <Link
                 key={index}
@@ -876,7 +892,7 @@ const Home = () => {
                 onClick={() => window.scrollTo(0, 0)}
               >
                 <div 
-                  className={`group relative rounded-lg p-6 shadow-md hover:shadow-blue-200 transition-all duration-300 transform hover:scale-105 cursor-pointer border h-full flex flex-col ${
+                  className={`group relative rounded-lg p-3 shadow-md hover:shadow-blue-200 transition-all duration-300 transform hover:scale-105 cursor-pointer border h-full flex flex-col ${
                     isDarkMode 
                       ? 'bg-gradient-to-br from-gray-800 to-gray-900 border-gray-700' 
                       : 'bg-gradient-to-br from-gray-50 to-white border-gray-100'
@@ -944,18 +960,33 @@ const Home = () => {
               <button
                 key={index}
                 onClick={() => setCurrentFeatureIndex(index * 3)}
-                className={`w-2 h-2 rounded-full transition-colors ${
+                className={`${
                   Math.floor(currentFeatureIndex / 3) === index
-                    ? 'bg-[#142C52]'
+                    ? 'w-6 h-2 animate-pulse'
+                    : 'w-2 h-2'
+                } rounded-full transition-all duration-300 ${
+                  Math.floor(currentFeatureIndex / 3) === index
+                    ? 'bg-[#16808D]'
                     : 'bg-gray-300'
                 }`}
               />
             ))}
           </div>
+          
+          {/* Additional Design Element - 3 Dots with Lines on Both Sides */}
+          <div className="flex justify-center items-center mt-6 mb-[-2]">
+            <div className="h-0.5 bg-gradient-to-l from-[#142C52] via-[#16808D] to-transparent w-32"></div>
+            <div className="flex space-x-2 mx-4">
+              <div className="w-2 h-2 bg-[#16808D] rounded-full animate-pulse"></div>
+              <div className="w-2 h-2 bg-[#0C4A50] rounded-full animate-bounce"></div>
+              <div className="w-2 h-2 bg-[#178740] rounded-full animate-pulse"></div>
+            </div>
+            <div className="h-0.5 bg-gradient-to-r from-[#142C52] via-[#16808D] to-transparent w-32"></div>
+          </div>
         </div>
         
         {/* Additional Features CTA */}
-        <div className="mt-8 text-center">
+        <div className="mt-4 text-center">
           <p className="text-gray-600 mb-4">
             Discover all 15+ cognitive conditions and specialized support features
           </p>
@@ -972,18 +1003,18 @@ const Home = () => {
       </div>
 
       {/* How PriHub Works Section */}
-      <div className="bg-gradient-to-br from-[#E0F7FA] to-[#D4DBE9] rounded-lg shadow-lg p-8">
-        <h2 className="text-3xl font-bold text-center mb-2">
+      <div className="bg-gradient-to-br from-[#E0F7FA] to-[#D4DBE9] rounded-lg shadow-lg p-8 text-center mb-1">
+        <h2 className="text-3xl font-bold text-center mb-1">
           <span style={{color: '#16808D'}}>Advanced PriHub</span>
           <span style={{color: '#000000'}}> Cognitive Support System</span>
         </h2>
-        <p className="text-gray-600 text-lg font-medium animate-pulse text-center mb-4">Revolutionary AI-powered platform with comprehensive disability support features and personalized cognitive assistance</p>
-        <div className="grid grid-cols-4 gap-4 max-w-9xl mx-auto">
+        <p className="text-gray-600 text-base font-medium animate-pulse text-center mb-2">Revolutionary AI-powered platform with comprehensive disability support features and personalized cognitive assistance</p>
+        <div className="grid grid-cols-4 gap-3 max-w-9xl mx-auto">
           {[
             {
               stepNumber: 1,
-              stepTitle: "Intelligent Account Setup",
-              stepDescription: "AI-guided accessibility-first registration with biometric authentication and adaptive interface configuration",
+              stepTitle: "Intelligent Account Setup Process",
+              stepDescription: "AI-guided accessibility-first registration with biometric authentication and adaptive interface configuration for seamless onboarding.",
               stepIcon: Users,
               stepColor: isDarkMode ? "#60A5FA" : "#142C52"
             },
@@ -1003,8 +1034,8 @@ const Home = () => {
             },
             {
               stepNumber: 4,
-              stepTitle: "Smart Task Management",
-              stepDescription: "AI-driven task scheduling with cognitive load balancing, priority optimization, and automated reminders",
+              stepTitle: "Smart Task Management System",
+              stepDescription: "AI-driven task scheduling with cognitive load balancing, priority optimization, and automated reminders productivity daily living support.",
               stepIcon: Target,
               stepColor: "#142C52"
             }
@@ -1036,109 +1067,15 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Support Plans Section */}
-      <div className="bg-gradient-to-br from-[#E0F7FA] to-[#D4DBE9] rounded-lg shadow-lg p-8">
-        <h2 className="text-3xl font-bold text-center mb-8" style={{color: '#071426'}}>
-          Choose Your Support Plan
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-          {[
-            {
-              planName: "Basic",
-              monthlyPrice: "Free",
-              billingPeriod: "forever",
-              planFeatures: [
-                "Essential accessibility features",
-                "Basic AI chatbot support",
-                "Task management (up to 10 tasks)",
-                "Community support access"
-              ],
-              primaryColor: "#142C52",
-              isPopular: false
-            },
-            {
-              planName: "Premium",
-              monthlyPrice: "$19",
-              billingPeriod: "month",
-              planFeatures: [
-                "Full accessibility customization",
-                "Advanced AI assistant",
-                "Unlimited tasks and reminders",
-                "Priority caregiver access",
-                "Progress tracking analytics"
-              ],
-              primaryColor: "#178740",
-              isPopular: true
-            },
-            {
-              planName: "Professional",
-              monthlyPrice: "$49",
-              billingPeriod: "month",
-              planFeatures: [
-                "All premium features included",
-                "Multiple user profiles",
-                "Custom accessibility configurations",
-                "Dedicated support specialist",
-                "Integration with assistive devices"
-              ],
-              primaryColor: "#1B9AAA",
-              isPopular: false
-            }
-          ].map((pricingPlan) => (
-            <div 
-              key={pricingPlan.planName}
-              className={`bg-white rounded-lg p-6 shadow-lg hover:shadow-xl transition-all transform hover:scale-105 ${
-                pricingPlan.isPopular ? 'ring-2' : ''
-              }`}
-              style={{ 
-                borderColor: pricingPlan.isPopular ? pricingPlan.primaryColor : 'transparent',
-                borderWidth: pricingPlan.isPopular ? '2px' : '0px'
-              }}
-            >
-              {pricingPlan.isPopular && (
-                <div 
-                  className="text-center text-sm font-semibold mb-2 px-3 py-1 rounded-full"
-                  style={{ backgroundColor: pricingPlan.primaryColor, color: 'white' }}
-                >
-                  MOST POPULAR CHOICE
-                </div>
-              )}
-              <div className="text-center mb-4">
-                <div className="text-4xl font-bold" style={{color: pricingPlan.primaryColor}}>
-                  {pricingPlan.monthlyPrice}
-                </div>
-                <div className="text-gray-600">per {pricingPlan.billingPeriod}</div>
-              </div>
-              <ul className="space-y-3 mb-6">
-                {pricingPlan.planFeatures.map((featureItem, featureIndex) => (
-                  <li key={featureIndex} className="flex items-center">
-                    <CheckCircle className="h-5 w-5 mr-2" style={{color: pricingPlan.primaryColor}} />
-                    <span className="text-gray-700">{featureItem}</span>
-                  </li>
-                ))}
-              </ul>
-              <button 
-                className="w-full py-3 rounded-lg font-semibold transition-all hover:scale-105"
-                style={{ 
-                  backgroundColor: pricingPlan.primaryColor,
-                  color: 'white'
-                }}
-              >
-                Get Started Today
-              </button>
-            </div>
-          ))}
-        </div>
-      </div>
-
+      
       {/* Trusted Communities Section */}
       <div className="bg-gradient-to-r from-purple-100 via-blue-50 to-indigo-100 rounded-xl shadow-xl p-10 overflow-hidden">
-        <div className="text-center mb-8">
-          <h2 className="text-4xl font-bold mb-4">
+        <div className="text-center mb-1">
+          <h2 className="text-3xl font-bold mb-1">
             <span style={{color: '#16808D'}}>Trusted By</span>
             <span className="text-black"> Leading Communities</span>
           </h2>
-          <p className="text-lg text-gray-600 max-w-4xl mx-auto whitespace-nowrap">
+          <p className="text-gray-600 text-base font-medium animate-pulse text-center mb-2 max-w-4xl mx-auto whitespace-nowrap">
             Join thousands of communities that rely on PriHub for seamless management and exceptional resident experiences.
           </p>
         </div>
@@ -1496,6 +1433,332 @@ const Home = () => {
                 Visit Support Center →
               </Link>
             </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Our Valuable Partners Section */}
+      <div className="bg-gradient-to-r from-green-100 via-emerald-50 to-teal-100 rounded-xl shadow-xl p-10 overflow-hidden">
+        <div className="text-center mb-1">
+          <h2 className="text-3xl font-bold mb-1">
+            <span style={{color: '#16808D'}}>Our Valuable</span>
+            <span className="text-black"> Partners</span>
+          </h2>
+          <p className="text-gray-600 text-base font-medium animate-pulse text-center mb-2 max-w-4xl mx-auto whitespace-nowrap">
+            Collaborating with industry leaders and innovators to deliver comprehensive cognitive support solutions.
+          </p>
+        </div>
+        
+        {/* Continuous Scrolling List */}
+        <div className="relative">
+          <div className="flex space-x-6 animate-scroll-x" style={{ width: 'max-content' }}>
+            {/* First set of partners */}
+            {[
+              { 
+                communityName: "AI Technology Providers", 
+                description: "50+ Solutions",
+                stats: "98% Integration",
+                rating: "4.9",
+                years: "10+ Years",
+                image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Healthcare Institutions", 
+                description: "200+ Hospitals",
+                stats: "95% Patient Care",
+                rating: "4.8",
+                years: "8+ Years",
+                image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Educational Organizations", 
+                description: "150+ Schools",
+                stats: "92% Learning Outcomes",
+                rating: "4.7",
+                years: "6+ Years",
+                image: "https://images.unsplash.com/photo-1503676260788-f1bcd00f72c7?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Accessibility Standards Bodies", 
+                description: "30+ Organizations",
+                stats: "99% Compliance",
+                rating: "4.9",
+                years: "12+ Years",
+                image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Research Institutions", 
+                description: "80+ Universities",
+                stats: "94% Innovation",
+                rating: "4.8",
+                years: "7+ Years",
+                image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Non-Profit Organizations", 
+                description: "120+ NGOs",
+                stats: "96% Community Impact",
+                rating: "4.7",
+                years: "9+ Years",
+                image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Government Agencies", 
+                description: "25+ Departments",
+                stats: "93% Policy Support",
+                rating: "4.6",
+                years: "5+ Years",
+                image: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Assistive Tech Companies", 
+                description: "60+ Vendors",
+                stats: "97% Device Compatibility",
+                rating: "4.8",
+                years: "8+ Years",
+                image: "https://images.unsplash.com/photo-1551190822-a9333d879b2c?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Mental Health Providers", 
+                description: "180+ Clinics",
+                stats: "91% Wellness Support",
+                rating: "4.7",
+                years: "6+ Years",
+                image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Disability Advocacy Groups", 
+                description: "90+ Associations",
+                stats: "95% Inclusion Success",
+                rating: "4.9",
+                years: "11+ Years",
+                image: "https://images.unsplash.com/photo-1611095556553-792097274a58?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Software Development Partners", 
+                description: "40+ Companies",
+                stats: "98% Platform Integration",
+                rating: "4.8",
+                years: "7+ Years",
+                image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Training & Certification Bodies", 
+                description: "35+ Centers",
+                stats: "94% Skill Development",
+                rating: "4.6",
+                years: "4+ Years",
+                image: "https://images.unsplash.com/photo-1515378791036-0646a3e77ba8?w=400&h=300&fit=crop"
+              }
+            ].map((partner, index) => (
+              <div key={`first-${index}`} className="flex-shrink-0 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-125 border border-gray-100 min-w-[320px] max-w-[320px] animate-fade-in">
+                {/* Partner Image */}
+                <div className="relative h-48 overflow-hidden rounded-t-3xl">
+                  <img 
+                    src={partner.image} 
+                    alt={partner.communityName}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                  <div className="absolute top-4 right-4">
+                    <div className="flex items-center space-x-1 bg-white/20 backdrop-blur-sm px-2 py-1 rounded-full">
+                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                      <span className="text-white text-xs font-medium">Active</span>
+                    </div>
+                  </div>
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <h3 className="text-white font-bold text-lg mb-2">{partner.communityName}</h3>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <Clock className="h-4 w-4 text-white" />
+                        <span className="text-white text-sm font-medium">{partner.years} Partnership</span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                        <span className="text-white text-sm font-medium">{partner.rating}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Partner Content */}
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center space-x-2">
+                      <Users className="h-5 w-5 text-[#16808D]" />
+                      <span className="text-gray-600 font-medium">{partner.description}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <TrendingUp className="h-4 w-4 text-green-500" />
+                      <span className="text-sm text-gray-600">Success Rate</span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="inline-flex items-center px-3 py-1 bg-[#E0F7FA] rounded-full text-sm flex-shrink-0">
+                      <span className="font-semibold text-[#16808D]">{partner.stats}</span>
+                    </div>
+                    <button className="text-[#16808D] hover:text-[#142C52] font-medium text-sm transition-colors flex-shrink-0 ml-2">
+                      Learn More →
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+            
+            {/* Duplicate set for seamless scrolling */}
+            {[
+              { 
+                communityName: "AI Technology Providers", 
+                description: "50+ Solutions",
+                stats: "98% Integration",
+                rating: "4.9",
+                years: "10+ Years",
+                image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Healthcare Institutions", 
+                description: "200+ Hospitals",
+                stats: "95% Patient Care",
+                rating: "4.8",
+                years: "8+ Years",
+                image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Educational Organizations", 
+                description: "150+ Schools",
+                stats: "92% Learning Outcomes",
+                rating: "4.7",
+                years: "6+ Years",
+                image: "https://images.unsplash.com/photo-1503676260788-f1bcd00f72c7?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Accessibility Standards Bodies", 
+                description: "30+ Organizations",
+                stats: "99% Compliance",
+                rating: "4.9",
+                years: "12+ Years",
+                image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Research Institutions", 
+                description: "80+ Universities",
+                stats: "94% Innovation",
+                rating: "4.8",
+                years: "7+ Years",
+                image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Non-Profit Organizations", 
+                description: "120+ NGOs",
+                stats: "96% Community Impact",
+                rating: "4.7",
+                years: "9+ Years",
+                image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Government Agencies", 
+                description: "25+ Departments",
+                stats: "93% Policy Support",
+                rating: "4.6",
+                years: "5+ Years",
+                image: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Assistive Tech Companies", 
+                description: "60+ Vendors",
+                stats: "97% Device Compatibility",
+                rating: "4.8",
+                years: "8+ Years",
+                image: "https://images.unsplash.com/photo-1551190822-a9333d879b2c?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Mental Health Providers", 
+                description: "180+ Clinics",
+                stats: "91% Wellness Support",
+                rating: "4.7",
+                years: "6+ Years",
+                image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Disability Advocacy Groups", 
+                description: "90+ Associations",
+                stats: "95% Inclusion Success",
+                rating: "4.9",
+                years: "11+ Years",
+                image: "https://images.unsplash.com/photo-1611095556553-792097274a58?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Software Development Partners", 
+                description: "40+ Companies",
+                stats: "98% Platform Integration",
+                rating: "4.8",
+                years: "7+ Years",
+                image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=300&fit=crop"
+              },
+              { 
+                communityName: "Training & Certification Bodies", 
+                description: "35+ Centers",
+                stats: "94% Skill Development",
+                rating: "4.6",
+                years: "4+ Years",
+                image: "https://images.unsplash.com/photo-1515378791036-0646a3e77ba8?w=400&h=300&fit=crop"
+              }
+            ].map((partner, index) => (
+              <div key={`second-${index}`} className="flex-shrink-0 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-125 border border-gray-100 min-w-[320px] max-w-[320px] animate-fade-in">
+                {/* Partner Image */}
+                <div className="relative h-48 overflow-hidden rounded-t-3xl">
+                  <img 
+                    src={partner.image} 
+                    alt={partner.communityName}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                  <div className="absolute top-4 right-4">
+                    <div className="flex items-center space-x-1 bg-white/20 backdrop-blur-sm px-2 py-1 rounded-full">
+                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                      <span className="text-white text-xs font-medium">Active</span>
+                    </div>
+                  </div>
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <h3 className="text-white font-bold text-lg mb-2">{partner.communityName}</h3>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <Clock className="h-4 w-4 text-white" />
+                        <span className="text-white text-sm font-medium">{partner.years} Partnership</span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                        <span className="text-white text-sm font-medium">{partner.rating}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Partner Content */}
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center space-x-2">
+                      <Users className="h-5 w-5 text-[#16808D]" />
+                      <span className="text-gray-600 font-medium">{partner.description}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <TrendingUp className="h-4 w-4 text-green-500" />
+                      <span className="text-sm text-gray-600">Success Rate</span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="inline-flex items-center px-3 py-1 bg-[#E0F7FA] rounded-full text-sm flex-shrink-0">
+                      <span className="font-semibold text-[#16808D]">{partner.stats}</span>
+                    </div>
+                    <button className="text-[#16808D] hover:text-[#142C52] font-medium text-sm transition-colors flex-shrink-0 ml-2">
+                      Learn More →
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

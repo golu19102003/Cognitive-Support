@@ -255,7 +255,7 @@ const RightAccessibilitySidebar = () => {
   return (
     <>
       {/* Right Sidebar */}
-      <div className="accessibility-sidebar fixed right-2 top-[45%] -translate-y-1/2 z-[9998] bg-white rounded-2xl p-3 shadow-2xl border border-gray-200" style={{ position: 'fixed', zIndex: 9998, right: '8px', top: '45%', transform: 'translateY(-50%)', visibility: 'visible', opacity: 1 }}>
+      <div className="accessibility-sidebar fixed right-2 top-[54%] -translate-y-1/2 z-[9998] bg-white rounded-2xl p-2 shadow-2xl border border-gray-200" style={{ position: 'fixed', zIndex: 9998, right: '6px', top: '54%', transform: 'translateY(-50%)', visibility: 'visible', opacity: 1 }}>
         <div className="flex flex-col space-y-2">
           {/* Reads Page Aloud */}
           <button

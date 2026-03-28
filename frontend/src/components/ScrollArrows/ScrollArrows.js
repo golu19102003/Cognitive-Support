@@ -36,7 +36,7 @@ const ScrollArrows = () => {
   };
 
   return (
-    <div className="fixed right-5 bottom-2 flex flex-col space-y-2 z-50">
+    <div className="fixed right-4 bottom-2 flex flex-col space-y-2 z-50">
       {/* Scroll to Top Button */}
       {showScrollTop && (
         <button

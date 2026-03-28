@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Moon, Sun, Type, Square, MessageSquare, FileText, X, Contrast, Target, Eye, Settings, Timer, Play, Pause, RotateCcw, Award, Brain, Zap, Volume2, CheckCircle, AlertCircle, StickyNote, PenTool, BookOpen, Edit, Phone } from 'lucide-react';
+import { Moon, Sun, Type, Square, MessageSquare, FileText, X, Contrast, Target, Eye, Settings, Timer, Play, Pause, RotateCcw, Award, Brain, Zap, Volume2, CheckCircle, AlertCircle, StickyNote, PenTool, BookOpen, Edit, Phone, Minus, Plus } from 'lucide-react';
 
 const AccessibilitySidebar = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -503,6 +503,14 @@ const AccessibilitySidebar = () => {
     }
   }, []);
 
+  // Load text size setting
+  useEffect(() => {
+    const savedTextSize = localStorage.getItem('textSize');
+    if (savedTextSize) {
+      document.documentElement.style.fontSize = savedTextSize + 'px';
+    }
+  }, []);
+
   // Load simplify text setting
   useEffect(() => {
     const savedSimplifyText = localStorage.getItem('simplifyText');
@@ -602,7 +610,7 @@ const AccessibilitySidebar = () => {
   return (
     <>
       {/* Accessibility Sidebar */}
-      <div className="accessibility-sidebar fixed left-2 top-[45%] -translate-y-1/2 z-[9998] bg-white rounded-2xl p-3 shadow-2xl border border-gray-200" style={{ position: 'fixed', zIndex: 9998, left: '8px', top: '45%', transform: 'translateY(-50%)', visibility: 'visible', opacity: 1 }}>
+      <div className="accessibility-sidebar fixed left-2 top-[54%] -translate-y-1/2 z-[9998] bg-white rounded-2xl p-2 shadow-2xl border border-gray-200" style={{ position: 'fixed', zIndex: 9998, left: '6px', top: '54%', transform: 'translateY(-50%)', visibility: 'visible', opacity: 1 }}>
         <div className="flex flex-col space-y-2">
           {/* General Settings */}
           <button
@@ -773,6 +781,61 @@ const AccessibilitySidebar = () => {
                     </button>
                   </div>
                 </div>
+
+                {/* Text Size Controls */}
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-3">Text Size</h3>
+                  <div className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                    <div className="flex items-center">
+                      <div className="w-10 h-10 bg-gradient-to-r from-[#142C52] to-[#16808D] rounded-full flex items-center justify-center text-white mr-3">
+                        <Type className="w-4 h-4" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-gray-900">Increase or decrease text size</p>
+                        <p className="text-sm text-gray-600">Change text size for entire website</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <button
+                        onClick={() => {
+                          const currentSize = parseInt(localStorage.getItem('textSize')) || 16;
+                          const newSize = Math.max(12, currentSize - 2);
+                          localStorage.setItem('textSize', newSize);
+                          document.documentElement.style.fontSize = newSize + 'px';
+                          showNotification('📉 Text size decreased');
+                        }}
+                        className="w-10 h-10 bg-gradient-to-r from-[#142C52] to-[#16808D] hover:from-[#16808D] hover:to-[#142C52] rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg"
+                        title="Decrease Text Size"
+                      >
+                        <Minus className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => {
+                          localStorage.setItem('textSize', 16);
+                          document.documentElement.style.fontSize = '16px';
+                          showNotification('📏 Text size reset to default');
+                        }}
+                        className="w-10 h-10 bg-gray-400 hover:bg-gray-500 rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg"
+                        title="Reset Text Size"
+                      >
+                        <Type className="w-4 h-4" />
+                      </button>
+                      <button
+                        onClick={() => {
+                          const currentSize = parseInt(localStorage.getItem('textSize')) || 16;
+                          const newSize = Math.min(24, currentSize + 2);
+                          localStorage.setItem('textSize', newSize);
+                          document.documentElement.style.fontSize = newSize + 'px';
+                          showNotification('📈 Text size increased');
+                        }}
+                        className="w-10 h-10 bg-gradient-to-r from-[#142C52] to-[#16808D] hover:from-[#16808D] hover:to-[#142C52] rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg"
+                        title="Increase Text Size"
+                      >
+                        <Plus className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -940,14 +1003,14 @@ const AccessibilitySidebar = () => {
       )}
 
       {/* 24*7 Crisis Support Button */}
-      <div className="fixed left-2 top-[95%] -translate-y-1/2 z-[9999]" style={{ position: 'fixed', zIndex: 9999, left: '8px', top: '95%', transform: 'translateY(-50%)', visibility: 'visible', opacity: 1 }}>
+      <div className="fixed left-2 top-[84%] -translate-y-1/2 z-[9999]" style={{ position: 'fixed', zIndex: 9999, left: '8px', top: '84%', transform: 'translateY(-50%)', visibility: 'visible', opacity: 1 }}>
         <button
           onClick={() => {
             // Handle crisis support - could open modal, make phone call, or redirect
             window.open('tel:911', '_blank'); // Emergency number
             showNotification('🚨 Crisis support activated - Emergency services contacted!');
           }}
-          className="w-12 h-12 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg animate-pulse"
+          className="w-14 h-14 bg-red-600 hover:bg-red-700 rounded-full flex items-center justify-center text-white font-semibold transition-all transform hover:scale-105 shadow-lg animate-pulse"
           title="24*7 Crisis Support - Emergency"
         >
           <Phone className="w-5 h-5" />
