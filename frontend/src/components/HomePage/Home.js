@@ -14,84 +14,96 @@ const Home = () => {
             description: "Leading educational institutions providing specialized learning environments for students with diverse cognitive needs, utilizing adaptive technologies and personalized teaching methodologies.",
             units: "500+ Centers",
             residents: "10,000+ Students",
-            partnerLogo: "https://images.unsplash.com/photo-1574982386585-ce56553aebfa?w=600&h=400&fit=crop"
+            partnerLogo: "https://images.unsplash.com/photo-1574982386585-ce56553aebfa?w=600&h=400&fit=crop",
+            tags: ["Specialized Learning", "Adaptive Tech", "Personalized Education"]
         },
         {
             communityName: "Cognitive Therapy Clinics",
             description: "Advanced healthcare facilities offering evidence-based cognitive rehabilitation programs with cutting-edge therapeutic interventions and progressive treatment approaches.",
             units: "300+ Clinics",
             residents: "25,000+ Patients",
-            partnerLogo: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop"
+            partnerLogo: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop",
+            tags: ["Evidence-Based", "Advanced Therapy", "Progressive Treatment"]
         },
         {
             communityName: "Assisted Living Facilities",
             description: "Comprehensive residential communities providing specialized care and support for individuals requiring assistance with daily living activities and cognitive support.",
             units: "200+ Facilities",
             residents: "8,000+ Residents",
-            partnerLogo: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=400&fit=crop"
+            partnerLogo: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=400&fit=crop",
+            tags: ["24/7 Care", "Daily Support", "Residential Living"]
         },
         {
             communityName: "Neurodiversity Support Groups",
             description: "Inclusive community organizations dedicated to supporting neurodiverse individuals through peer support, advocacy, and specialized resource programs.",
             units: "150+ Groups",
             residents: "12,000+ Members",
-            partnerLogo: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop"
+            partnerLogo: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop",
+            tags: ["Peer Support", "Advocacy", "Inclusive Programs"]
         },
         {
             communityName: "Rehabilitation Centers",
             description: "Specialized facilities providing comprehensive rehabilitation services combining traditional therapy with innovative cognitive enhancement technologies.",
             units: "400+ Centers",
             residents: "15,000+ Clients",
-            partnerLogo: "https://images.unsplash.com/photo-1551190822-a9333d879b1c?w=600&h=400&fit=crop"
+            partnerLogo: "https://images.unsplash.com/photo-1551190822-a9333d879b1c?w=600&h=400&fit=crop",
+            tags: ["Traditional Therapy", "Cognitive Tech", "Comprehensive Care"]
         },
         {
             communityName: "Autism Support Networks",
             description: "Dedicated organizations providing comprehensive support services for individuals with autism and their families through specialized programs and community resources.",
             units: "600+ Networks",
             residents: "18,000+ Families",
-            partnerLogo: "https://images.unsplash.com/photo-1584999734482-03fc1b8b7b6a?w=600&h=400&fit=crop"
+            partnerLogo: "https://images.unsplash.com/photo-1584999734482-03fc1b8b7b6a?w=600&h=400&fit=crop",
+            tags: ["Family Support", "Specialized Programs", "Community Resources"]
         },
         {
             communityName: "Memory Care Communities",
             description: "Specialized residential communities focused on providing exceptional care and cognitive support for individuals with memory impairments and dementia.",
             units: "250+ Communities",
             residents: "20,000+ Seniors",
-            partnerLogo: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=400&fit=crop"
+            partnerLogo: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=400&fit=crop",
+            tags: ["Memory Support", "Dementia Care", "Specialized Residence"]
         },
         {
             communityName: "Inclusive Education Schools",
             description: "Progressive educational institutions implementing inclusive learning environments with adaptive technologies and specialized support for diverse learning needs.",
             units: "180+ Schools",
             residents: "15,000+ Students",
-            partnerLogo: "https://images.unsplash.com/photo-1503676260788-f1bcd00f72c7?w=600&h=400&fit=crop"
+            partnerLogo: "https://images.unsplash.com/photo-1503676260788-f1bcd00f72c7?w=600&h=400&fit=crop",
+            tags: ["Inclusive Learning", "Adaptive Tech", "Diverse Support"]
         },
         {
             communityName: "Speech Therapy Centers",
             description: "Professional facilities offering comprehensive speech and language therapy services using evidence-based techniques and advanced therapeutic technologies.",
             units: "350+ Centers",
             residents: "22,000+ Clients",
-            partnerLogo: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop"
+            partnerLogo: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop",
+            tags: ["Language Therapy", "Evidence-Based", "Advanced Tech"]
         },
         {
             communityName: "Occupational Therapy Clinics",
             description: "Specialized clinics providing occupational therapy services focused on enhancing daily living skills and cognitive functional independence.",
             units: "280+ Clinics",
             residents: "16,000+ Patients",
-            partnerLogo: "https://images.unsplash.com/photo-1555421689-d68471e189f2?w=600&h=400&fit=crop"
+            partnerLogo: "https://images.unsplash.com/photo-1555421689-d68471e189f2?w=600&h=400&fit=crop",
+            tags: ["Daily Skills", "Functional Independence", "Specialized OT"]
         },
         {
             communityName: "ADHD Support Communities",
             description: "Supportive communities offering specialized resources, coaching, and therapeutic interventions for individuals with ADHD and their families.",
             units: "420+ Communities",
             residents: "25,000+ Members",
-            partnerLogo: "https://images.unsplash.com/photo-1611095556553-792097274a58?w=600&h=400&fit=crop"
+            partnerLogo: "https://images.unsplash.com/photo-1611095556553-792097274a58?w=600&h=400&fit=crop",
+            tags: ["ADHD Coaching", "Family Resources", "Therapeutic Support"]
         },
         {
             communityName: "Dyslexia Learning Centers",
             description: "Specialized educational centers providing targeted support and innovative learning strategies for individuals with dyslexia and reading difficulties.",
             units: "190+ Centers",
             residents: "8,000+ Students",
-            partnerLogo: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=400&fit=crop"
+            partnerLogo: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=400&fit=crop",
+            tags: ["Reading Support", "Innovative Learning", "Targeted Strategies"]
         }
     ];
     
@@ -827,7 +839,7 @@ PriHub - Empowering Cognitive Excellence
               const TrendIcon = trend.icon;
               
               return (
-                <div key={`first-${index}`} className="flex-shrink-0 bg-white rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-125 border border-gray-200 animate-fade-in">
+                <div key={`first-${index}`} className="flex-shrink-0 bg-white rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-110 border border-gray-200 animate-fade-in">
                   <div className="flex flex-col items-center text-center min-w-[180px]">
                     <div className="flex justify-center mb-3">
                       <div className="p-4 rounded-full bg-gradient-to-br from-gray-50 to-gray-100 shadow-md animate-pulse-slow">
@@ -873,7 +885,7 @@ PriHub - Empowering Cognitive Excellence
               const TrendIcon = trend.icon;
               
               return (
-                <div key={`second-${index}`} className="flex-shrink-0 bg-white rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-125 border border-gray-200 animate-fade-in">
+                <div key={`second-${index}`} className="flex-shrink-0 bg-white rounded-xl p-6 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:scale-110 border border-gray-200 animate-fade-in">
                   <div className="flex flex-col items-center text-center min-w-[180px]">
                     <div className="flex justify-center mb-3">
                       <div className="p-4 rounded-full bg-gradient-to-br from-gray-50 to-gray-100 shadow-md animate-pulse-slow">
@@ -1013,7 +1025,7 @@ PriHub - Empowering Cognitive Excellence
         .animate-scroll-x > div:hover {
           backdrop-filter: blur(0px);
           -webkit-backdrop-filter: blur(0px);
-          transform: scale(1.1) translateZ(10px);
+          transform: scale(1.10) translateZ(10px);
           z-index: 10;
         }
       `}</style>
@@ -1059,14 +1071,14 @@ PriHub - Empowering Cognitive Excellence
           {/* Navigation Arrows */}
           <button
             onClick={handlePrevious}
-            className="absolute left-1 top-[40%] transform -translate-y-[40%] z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
+            className="absolute -left-2 top-[40%] transform -translate-y-[40%] z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
           
           <button
             onClick={handleNext}
-            className="absolute right-1 top-[40%] transform -translate-y-[40%] z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
+            className="absolute -right-2 top-[40%] transform -translate-y-[40%] z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
@@ -1198,7 +1210,7 @@ PriHub - Empowering Cognitive Excellence
           <span style={{color: '#000000'}}> Cognitive Support System</span>
         </h2>
         <p className="text-gray-600 text-base font-medium animate-pulse text-center mb-2">Revolutionary AI-powered platform with comprehensive disability support features and personalized cognitive assistance</p>
-        <div className="grid grid-cols-4 gap-3 max-w-9xl mx-auto">
+        <div className="grid grid-cols-4 gap-6 max-w-9xl mx-auto">
           {[
             {
               stepNumber: 1,
@@ -1229,7 +1241,7 @@ PriHub - Empowering Cognitive Excellence
               stepColor: "#142C52"
             }
           ].map((processStep) => (
-            <div key={processStep.stepNumber} className={`rounded-lg p-4 shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 ${
+            <div key={processStep.stepNumber} className={`rounded-lg p-2 shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 ${
               isDarkMode ? 'bg-gray-800' : 'bg-white'
             }`}>
               <div className="flex flex-col items-center text-center">
@@ -1264,7 +1276,7 @@ PriHub - Empowering Cognitive Excellence
             <span style={{color: '#16808D'}}>Trusted by</span>
             <span className="text-black"> Leading Communities</span>
           </h2>
-          <p className="text-gray-600 text-base font-medium animate-pulse text-center mb-4 max-w-4xl mx-auto whitespace-nowrap">
+          <p className="text-gray-600 text-base font-medium animate-pulse text-center mb-0 max-w-4xl mx-auto whitespace-nowrap">
             Join thousands of communities that rely on PriHub for seamless management and exceptional resident experiences.
           </p>
         </div>
@@ -1274,19 +1286,19 @@ PriHub - Empowering Cognitive Excellence
           {/* Left Arrow */}
           <button
             onClick={handlePrevCommunity}
-            className="absolute left-0 top-1/2 transform -translate-y-1/2 -translate-x-2 lg:-translate-x-3 z-10 bg-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border-2 border-gray-200 hover:bg-[#16808D] hover:border-[#16808D] group"
+            className="absolute -left-2 top-[40%] transform -translate-y-[40%] z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
             aria-label="Previous community"
           >
-            <ChevronLeft className="h-6 w-6 text-gray-600 group-hover:text-white transition-colors" />
+            <ChevronLeft className="h-5 w-5" />
           </button>
 
           {/* Right Arrow */}
           <button
             onClick={handleNextCommunity}
-            className="absolute right-0 top-1/2 transform -translate-y-1/2 translate-x-2 lg:translate-x-3 z-10 bg-white rounded-full p-4 shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border-2 border-gray-200 hover:bg-[#16808D] hover:border-[#16808D] group"
+            className="absolute -right-2 top-[40%] transform -translate-y-[40%] z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
             aria-label="Next community"
           >
-            <ChevronRight className="h-6 w-6 text-gray-600 group-hover:text-white transition-colors" />
+            <ChevronRight className="h-5 w-5" />
           </button>
 
           {/* Community Display */}
@@ -1312,16 +1324,24 @@ PriHub - Empowering Cognitive Excellence
                 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-4">
-                  <div className="inline-flex items-center px-3 py-1 bg-[#E0F7FA] rounded-full text-sm">
-                    <span className="font-semibold text-[#16808D]">Certified</span>
-                  </div>
-                  <div className="inline-flex items-center px-3 py-1 bg-green-50 rounded-full text-sm">
-                    <CheckCircle className="h-3 w-3 text-green-500 mr-1" />
-                    <span className="text-green-700 text-xs font-medium">Premium</span>
-                  </div>
-                  <div className="inline-flex items-center px-3 py-1 bg-blue-50 rounded-full text-sm">
-                    <Award className="h-3 w-3 text-blue-500 mr-1" />
-                    <span className="text-blue-700 text-xs font-medium">Verified</span>
+                  {communityPartners[currentCommunityIndex].tags.map((tag, index) => {
+                    const tagColors = [
+                      { bg: "bg-[#E0F7FA]", text: "text-[#16808D]" },
+                      { bg: "bg-green-50", text: "text-green-700" },
+                      { bg: "bg-blue-50", text: "text-blue-700" },
+                      { bg: "bg-purple-50", text: "text-purple-700" },
+                      { bg: "bg-orange-50", text: "text-orange-700" }
+                    ];
+                    const color = tagColors[index % tagColors.length];
+                    return (
+                      <div key={index} className={`inline-flex items-center px-3 py-1 ${color.bg} rounded-full text-sm`}>
+                        <span className={`font-semibold ${color.text} text-xs`}>{tag}</span>
+                      </div>
+                    );
+                  })}
+                  <div className="inline-flex items-center px-3 py-1 bg-red-50 rounded-full text-sm">
+                    <Award className="h-3 w-3 text-red-500 mr-1" />
+                    <span className="text-red-700 text-xs font-medium">Verified</span>
                   </div>
                 </div>
                 
@@ -1405,13 +1425,13 @@ PriHub - Empowering Cognitive Excellence
 
       
       {/* Our Valuable Partners Section */}
-      <div className="bg-gradient-to-r from-blue-100 via-sky-50 to-cyan-100 rounded-xl shadow-xl p-10 overflow-hidden">
+      <div className="bg-gradient-to-r from-blue-100 via-sky-50 to-cyan-100 rounded-xl shadow-xl p-10 overflow-hidden mb-1">
         <div className="text-center mb-1">
           <h2 className="text-3xl font-bold mb-1">
             <span style={{color: '#16808D'}}>Our Valuable</span>
             <span className="text-black"> Partners</span>
           </h2>
-          <p className="text-gray-600 text-base font-medium animate-pulse text-center mb-4 max-w-4xl mx-auto whitespace-nowrap">
+          <p className="text-gray-600 text-base font-medium animate-pulse text-center mb-6 max-w-4xl mx-auto whitespace-nowrap">
             Collaborating with industry leaders and innovators to deliver comprehensive cognitive support solutions.
           </p>
         </div>
@@ -1419,7 +1439,7 @@ PriHub - Empowering Cognitive Excellence
         {/* Continuous Scrolling List */}
         <div className="relative">
           <div className="flex space-x-6 animate-scroll-x" style={{ width: 'max-content' }}>
-            {/* First set of partners */}
+            {/* Partners for seamless scrolling */}
             {[
               { 
                 communityName: "AI Technology Providers", 
@@ -1514,7 +1534,7 @@ PriHub - Empowering Cognitive Excellence
               { 
                 communityName: "Software Development Partners", 
                 description: "40+ Companies",
-                stats: "98% Platform Integration",
+                stats: "98% Platform Sync",
                 rating: "4.8",
                 years: "7+ Years",
                 image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=300&fit=crop",
@@ -1528,9 +1548,54 @@ PriHub - Empowering Cognitive Excellence
                 years: "4+ Years",
                 image: "https://images.unsplash.com/photo-1515378791036-0646a3e77ba8?w=400&h=300&fit=crop",
                 growthMetric: "Career Advancement"
+              },
+              { 
+                communityName: "Cloud Service Providers", 
+                description: "20+ Platforms",
+                stats: "99% Uptime",
+                rating: "4.8",
+                years: "6+ Years",
+                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=300&fit=crop",
+                growthMetric: "Cloud Growth"
+              },
+              { 
+                communityName: "Security Solutions", 
+                description: "45+ Vendors",
+                stats: "98% Data Protection",
+                rating: "4.9",
+                years: "8+ Years",
+                image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop",
+                growthMetric: "Security Enhancement"
+              },
+              { 
+                communityName: "Mobile App Developers", 
+                description: "80+ Teams",
+                stats: "96% App Performance",
+                rating: "4.7",
+                years: "5+ Years",
+                image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=300&fit=crop",
+                growthMetric: "Mobile Innovation"
+              },
+              { 
+                communityName: "Data Analytics Firms", 
+                description: "55+ Companies",
+                stats: "94% Insight Accuracy",
+                rating: "4.8",
+                years: "7+ Years",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+                growthMetric: "Data Intelligence"
+              },
+              { 
+                communityName: "IoT Solution Providers", 
+                description: "30+ Specialists",
+                stats: "97% Device Sync",
+                rating: "4.6",
+                years: "4+ Years",
+                image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
+                growthMetric: "IoT Expansion"
               }
             ].map((partner, index) => (
-              <div key={`first-${index}`} className="flex-shrink-0 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-125 border border-gray-100 min-w-[320px] max-w-[320px] animate-fade-in">
+              <div key={`partner-${index}`} className="flex-shrink-0 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-110 border border-gray-100 min-w-[320px] max-w-[320px] animate-fade-in">
                 {/* Partner Image */}
                 <div className="relative h-48 overflow-hidden rounded-t-3xl">
                   <img 
@@ -1603,8 +1668,255 @@ PriHub - Empowering Cognitive Excellence
                       <span className="text-xs text-gray-500">Expert Team</span>
                     </div>
                     <div className="flex items-center space-x-1">
-                      <Shield className="h-3 w-3 text-purple-500" />
-                      <span className="text-xs text-gray-600">Verified</span>
+                      <Shield className="h-3 w-3 text-red-500" />
+                      <span className="text-xs text-red-600">Verified</span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <button className="text-[#16808D] hover:text-[#142C52] font-medium text-xs transition-colors">
+                      Learn More →
+                    </button>
+                    <div className="flex items-center space-x-2">
+                      <Heart className="h-3 w-3 text-red-500 hover:text-red-600 cursor-pointer transition-colors" />
+                      <Share2 className="h-3 w-3 text-gray-500 hover:text-gray-600 cursor-pointer transition-colors" onClick={() => handleShare(partner.communityName)} />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            ))}
+            
+            {/* Duplicate set for seamless scrolling */}
+            {[
+              { 
+                communityName: "AI Technology Providers", 
+                description: "50+ Solutions",
+                stats: "98% Integration",
+                rating: "4.9",
+                years: "10+ Years",
+                image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=300&fit=crop",
+                growthMetric: "AI Advancement"
+              },
+              { 
+                communityName: "Healthcare Institutions", 
+                description: "200+ Hospitals",
+                stats: "95% Patient Care",
+                rating: "4.8",
+                years: "8+ Years",
+                image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop",
+                growthMetric: "Health Progress"
+              },
+              { 
+                communityName: "Educational Organizations", 
+                description: "150+ Schools",
+                stats: "92% Learning Success",
+                rating: "4.7",
+                years: "6+ Years",
+                image: "https://images.unsplash.com/photo-1503676260788-f1bcd00f72c7?w=400&h=300&fit=crop",
+                growthMetric: "Knowledge Growth"
+              },
+              { 
+                communityName: "Accessibility Standards Bodies", 
+                description: "30+ Organizations",
+                stats: "99% Compliance",
+                rating: "4.9",
+                years: "12+ Years",
+                image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=400&h=300&fit=crop",
+                growthMetric: "Access Expansion"
+              },
+              { 
+                communityName: "Research Institutions", 
+                description: "80+ Universities",
+                stats: "94% Innovation",
+                rating: "4.8",
+                years: "7+ Years",
+                image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop",
+                growthMetric: "Research Impact"
+              },
+              { 
+                communityName: "Non-Profit Organizations", 
+                description: "120+ NGOs",
+                stats: "96% Social Impact",
+                rating: "4.7",
+                years: "9+ Years",
+                image: "https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=400&h=300&fit=crop",
+                growthMetric: "Social Growth"
+              },
+              { 
+                communityName: "Government Agencies", 
+                description: "25+ Departments",
+                stats: "93% Policy Support",
+                rating: "4.6",
+                years: "5+ Years",
+                image: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=400&h=300&fit=crop",
+                growthMetric: "Policy Development"
+              },
+              { 
+                communityName: "Assistive Tech Companies", 
+                description: "60+ Vendors",
+                stats: "97% Device Support",
+                rating: "4.8",
+                years: "8+ Years",
+                image: "https://images.unsplash.com/photo-1551190822-a9333d879b2c?w=400&h=300&fit=crop",
+                growthMetric: "Tech Innovation"
+              },
+              { 
+                communityName: "Mental Health Providers", 
+                description: "180+ Clinics",
+                stats: "91% Wellness Support",
+                rating: "4.7",
+                years: "6+ Years",
+                image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+                growthMetric: "Wellness Improvement"
+              },
+              { 
+                communityName: "Disability Advocacy Groups", 
+                description: "90+ Associations",
+                stats: "95% Inclusion Success",
+                rating: "4.9",
+                years: "11+ Years",
+                image: "https://images.unsplash.com/photo-1611095556553-792097274a58?w=400&h=300&fit=crop",
+                growthMetric: "Inclusion Progress"
+              },
+              { 
+                communityName: "Software Development Partners", 
+                description: "40+ Companies",
+                stats: "98% Platform Sync",
+                rating: "4.8",
+                years: "7+ Years",
+                image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=300&fit=crop",
+                growthMetric: "Digital Growth"
+              },
+              { 
+                communityName: "Training & Certification Bodies", 
+                description: "35+ Centers",
+                stats: "94% Skill Development",
+                rating: "4.6",
+                years: "4+ Years",
+                image: "https://images.unsplash.com/photo-1515378791036-0646a3e77ba8?w=400&h=300&fit=crop",
+                growthMetric: "Career Advancement"
+              },
+              { 
+                communityName: "Cloud Service Providers", 
+                description: "20+ Platforms",
+                stats: "99% Uptime",
+                rating: "4.8",
+                years: "6+ Years",
+                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=300&fit=crop",
+                growthMetric: "Cloud Growth"
+              },
+              { 
+                communityName: "Security Solutions", 
+                description: "45+ Vendors",
+                stats: "98% Data Protection",
+                rating: "4.9",
+                years: "8+ Years",
+                image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=400&h=300&fit=crop",
+                growthMetric: "Security Enhancement"
+              },
+              { 
+                communityName: "Mobile App Developers", 
+                description: "80+ Teams",
+                stats: "96% App Performance",
+                rating: "4.7",
+                years: "5+ Years",
+                image: "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?w=400&h=300&fit=crop",
+                growthMetric: "Mobile Innovation"
+              },
+              { 
+                communityName: "Data Analytics Firms", 
+                description: "55+ Companies",
+                stats: "94% Insight Accuracy",
+                rating: "4.8",
+                years: "7+ Years",
+                image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop",
+                growthMetric: "Data Intelligence"
+              },
+              { 
+                communityName: "IoT Solution Providers", 
+                description: "30+ Specialists",
+                stats: "97% Device Sync",
+                rating: "4.6",
+                years: "4+ Years",
+                image: "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=300&fit=crop",
+                growthMetric: "IoT Expansion"
+              }
+            ].map((partner, index) => (
+              <div key={`second-${index}`} className="flex-shrink-0 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-110 border border-gray-100 min-w-[320px] max-w-[320px] animate-fade-in">
+                {/* Partner Image */}
+                <div className="relative h-48 overflow-hidden rounded-t-3xl">
+                  <img 
+                    src={partner.image} 
+                    alt={partner.communityName}
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                  <div className="absolute top-4 right-4">
+                    <div className="flex items-center space-x-1 bg-white/20 backdrop-blur-sm px-2 py-1 rounded-full">
+                      <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
+                      <span className="text-white text-xs font-medium">Active</span>
+                    </div>
+                  </div>
+                  <div className="absolute bottom-4 left-4 right-4">
+                    <h3 className="text-white font-bold text-lg mb-2">{partner.communityName}</h3>
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center space-x-2">
+                        <Clock className="h-4 w-4 text-white" />
+                        <span className="text-white text-sm font-medium">{partner.years} Partnership</span>
+                      </div>
+                      <div className="flex items-center space-x-1">
+                        <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                        <span className="text-white text-sm font-medium">{partner.rating}</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Partner Content */}
+                <div className="p-6">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center space-x-2">
+                      <Users className="h-4 w-4 text-[#16808D]" />
+                      <span className="text-gray-600 text-sm font-medium">{partner.description}</span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <TrendingUp className="h-3 w-3 text-green-500" />
+                      <span className="text-xs text-gray-600">{partner.growthMetric}</span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center gap-1 mb-4">
+                    <div className="inline-flex items-center px-1 py-0.5 bg-[#E0F7FA] rounded-full">
+                      <span className="font-semibold text-[#16808D] text-xs">{partner.stats}</span>
+                    </div>
+                    <div className="inline-flex items-center px-1 py-0.5 bg-green-50 rounded-full">
+                      <CheckCircle className="h-2 w-2 text-green-500 mr-0.5" />
+                      <span className="text-green-700 text-xs">Certified</span>
+                    </div>
+                    <div className="inline-flex items-center px-1 py-0.5 bg-blue-50 rounded-full">
+                      <Award className="h-2 w-2 text-blue-500 mr-0.5" />
+                      <span className="text-blue-700 text-xs">Premium</span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center space-x-2">
+                      <div className="flex -space-x-1">
+                        <div className="w-5 h-5 bg-purple-500 rounded-full border-2 border-white flex items-center justify-center">
+                          <span className="text-white text-xs">A+</span>
+                        </div>
+                        <div className="w-5 h-5 bg-blue-500 rounded-full border-2 border-white flex items-center justify-center">
+                          <span className="text-white text-xs">B+</span>
+                        </div>
+                        <div className="w-5 h-5 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
+                          <span className="text-white text-xs">C+</span>
+                        </div>
+                      </div>
+                      <span className="text-xs text-gray-500">Expert Team</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <Shield className="h-3 w-3 text-red-500" />
+                      <span className="text-xs text-red-600">Verified</span>
                     </div>
                   </div>
                   
