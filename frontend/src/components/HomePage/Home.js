@@ -1,9 +1,71 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, ArrowRight, Shield, Zap, Building, Users, DollarSign, MessageSquare, Calendar, Bell, Wrench, Brain, BookOpen, Target, Heart, Activity, FileText, Clock, AlertTriangle, TrendingUp, CheckCircle, Star, Award, Mail, Phone } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight, Shield, Zap, Building, Users, DollarSign, MessageSquare, Calendar, Bell, Wrench, Brain, BookOpen, Target, Heart, Activity, FileText, Clock, AlertTriangle, TrendingUp, CheckCircle, Star, Award, Mail, Phone, Share2 } from 'lucide-react';
 
 const Home = () => {
     const [isDarkMode, setIsDarkMode] = useState(false);
+    
+    // Share functionality
+    const handleShare = (partnerName) => {
+        const subject = encodeURIComponent(`Amazing Partnership Opportunity with ${partnerName} - PriHub Cognitive Support Platform`);
+        const body = encodeURIComponent(`Hello,
+
+I wanted to share an incredible partnership opportunity I found on PriHub - a comprehensive cognitive support platform.
+
+🌟 **Partner Details:**
+• Partner: ${partnerName}
+• Platform: PriHub Cognitive Support System
+• Industry: Healthcare & Cognitive Technology Solutions
+
+🚀 **About PriHub:**
+PriHub is a cutting-edge cognitive support platform dedicated to enhancing the quality of life for individuals with cognitive challenges through innovative technology solutions.
+
+✨ **Key Features:**
+• AI-powered cognitive assessments
+• Personalized support programs
+• Real-time monitoring and analytics
+• Community engagement tools
+• Professional healthcare integration
+• 24/7 support availability
+
+🎯 **Impact & Reach:**
+• 1000+ communities served
+• 50,000+ residents supported
+• 98% integration success rate
+• Award-winning platform
+• Certified by leading healthcare organizations
+
+🔗 **Visit Us:**
+• Website: https://prihub-cognitive-support.com
+• Live Demo: https://prihub-cognitive-support.com/demo
+• Documentation: https://prihub-cognitive-support.com/docs
+
+💼 **Partnership Benefits:**
+• Access to cutting-edge cognitive technology
+• Revenue sharing opportunities
+• Professional development resources
+• Community impact initiatives
+• Premium support and training
+
+This partnership represents a unique opportunity to be part of the cognitive healthcare revolution while making a meaningful difference in people's lives.
+
+Would love to discuss this further with you!
+
+Best regards,
+[Your Name]
+[Your Contact Information]
+
+---
+PriHub - Empowering Cognitive Excellence
+🌐 https://prihub-cognitive-support.com
+📧 support@prihub.com
+📞 1-800-PRIHUB`);
+        
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=&su=${subject}&body=${body}`;
+        
+        // Simple and reliable Gmail open
+        window.open(gmailUrl, '_blank', 'width=800,height=600');
+    };
     
     // Check for theme preference
     useEffect(() => {
@@ -1075,7 +1137,7 @@ const Home = () => {
             <span style={{color: '#16808D'}}>Trusted By</span>
             <span className="text-black"> Leading Communities</span>
           </h2>
-          <p className="text-gray-600 text-base font-medium animate-pulse text-center mb-2 max-w-4xl mx-auto whitespace-nowrap">
+          <p className="text-gray-600 text-base font-medium animate-pulse text-center mb-4 max-w-4xl mx-auto whitespace-nowrap">
             Join thousands of communities that rely on PriHub for seamless management and exceptional resident experiences.
           </p>
         </div>
@@ -1390,53 +1452,7 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Contact Information Section */}
-      <div className="bg-white rounded-lg shadow-lg p-8">
-        <h2 className="text-3xl font-bold text-center mb-8" style={{color: '#071426'}}>
-          Get in Touch With Our Team
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-          <div>
-            <h3 className="text-xl font-semibold mb-4" style={{color: '#142C52'}}>
-              Contact Information
-            </h3>
-            <div className="space-y-4">
-              <div className="flex items-center">
-                <Mail className="h-5 w-5 mr-3" style={{color: '#142C52'}} />
-                <span className="text-gray-700">support@society360.com</span>
-              </div>
-              <div className="flex items-center">
-                <Phone className="h-5 w-5 mr-3" style={{color: '#142C52'}} />
-                <span className="text-gray-700">1-800-SOCIETY</span>
-              </div>
-              <div className="flex items-center">
-                <Clock className="h-5 w-5 mr-3" style={{color: '#142C52'}} />
-                <span className="text-gray-700">24/7 Support Available</span>
-              </div>
-            </div>
-          </div>
-          <div>
-            <h3 className="text-xl font-semibold mb-4" style={{color: '#142C52'}}>
-              Quick Access Links
-            </h3>
-            <div className="space-y-3">
-              <Link to="/demo" className="block text-blue-600 hover:text-blue-800 transition-colors">
-                Request a Live Demo →
-              </Link>
-              <Link to="/pricing" className="block text-blue-600 hover:text-blue-800 transition-colors">
-                View Detailed Pricing Plans →
-              </Link>
-              <Link to="/documentation" className="block text-blue-600 hover:text-blue-800 transition-colors">
-                Read Complete Documentation →
-              </Link>
-              <Link to="/support" className="block text-blue-600 hover:text-blue-800 transition-colors">
-                Visit Support Center →
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
-
+      
       {/* Our Valuable Partners Section */}
       <div className="bg-gradient-to-r from-green-100 via-emerald-50 to-teal-100 rounded-xl shadow-xl p-10 overflow-hidden">
         <div className="text-center mb-1">
@@ -1444,7 +1460,7 @@ const Home = () => {
             <span style={{color: '#16808D'}}>Our Valuable</span>
             <span className="text-black"> Partners</span>
           </h2>
-          <p className="text-gray-600 text-base font-medium animate-pulse text-center mb-2 max-w-4xl mx-auto whitespace-nowrap">
+          <p className="text-gray-600 text-base font-medium animate-pulse text-center mb-4 max-w-4xl mx-auto whitespace-nowrap">
             Collaborating with industry leaders and innovators to deliver comprehensive cognitive support solutions.
           </p>
         </div>
@@ -1594,13 +1610,49 @@ const Home = () => {
                     </div>
                   </div>
                   
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="inline-flex items-center px-3 py-1 bg-[#E0F7FA] rounded-full text-sm flex-shrink-0">
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <div className="inline-flex items-center px-3 py-1 bg-[#E0F7FA] rounded-full text-sm">
                       <span className="font-semibold text-[#16808D]">{partner.stats}</span>
                     </div>
-                    <button className="text-[#16808D] hover:text-[#142C52] font-medium text-sm transition-colors flex-shrink-0 ml-2">
+                    <div className="inline-flex items-center px-3 py-1 bg-green-50 rounded-full text-sm">
+                      <CheckCircle className="h-3 w-3 text-green-500 mr-1" />
+                      <span className="text-green-700 text-xs font-medium">Certified</span>
+                    </div>
+                    <div className="inline-flex items-center px-3 py-1 bg-blue-50 rounded-full text-sm">
+                      <Award className="h-3 w-3 text-blue-500 mr-1" />
+                      <span className="text-blue-700 text-xs font-medium">Premium</span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center space-x-2">
+                      <div className="flex -space-x-1">
+                        <div className="w-6 h-6 bg-purple-500 rounded-full border-2 border-white flex items-center justify-center">
+                          <span className="text-white text-xs">A+</span>
+                        </div>
+                        <div className="w-6 h-6 bg-blue-500 rounded-full border-2 border-white flex items-center justify-center">
+                          <span className="text-white text-xs">B+</span>
+                        </div>
+                        <div className="w-6 h-6 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
+                          <span className="text-white text-xs">C+</span>
+                        </div>
+                      </div>
+                      <span className="text-xs text-gray-500">Expert Team</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <Shield className="h-4 w-4 text-purple-500" />
+                      <span className="text-xs text-gray-600">Verified</span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <button className="text-[#16808D] hover:text-[#142C52] font-medium text-sm transition-colors">
                       Learn More →
                     </button>
+                    <div className="flex items-center space-x-2">
+                      <Heart className="h-4 w-4 text-red-500 hover:text-red-600 cursor-pointer transition-colors" />
+                      <Share2 className="h-4 w-4 text-gray-500 hover:text-gray-600 cursor-pointer transition-colors" onClick={() => handleShare(partner.communityName)} />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1748,13 +1800,49 @@ const Home = () => {
                     </div>
                   </div>
                   
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="inline-flex items-center px-3 py-1 bg-[#E0F7FA] rounded-full text-sm flex-shrink-0">
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    <div className="inline-flex items-center px-3 py-1 bg-[#E0F7FA] rounded-full text-sm">
                       <span className="font-semibold text-[#16808D]">{partner.stats}</span>
                     </div>
-                    <button className="text-[#16808D] hover:text-[#142C52] font-medium text-sm transition-colors flex-shrink-0 ml-2">
+                    <div className="inline-flex items-center px-3 py-1 bg-green-50 rounded-full text-sm">
+                      <CheckCircle className="h-3 w-3 text-green-500 mr-1" />
+                      <span className="text-green-700 text-xs font-medium">Certified</span>
+                    </div>
+                    <div className="inline-flex items-center px-3 py-1 bg-blue-50 rounded-full text-sm">
+                      <Award className="h-3 w-3 text-blue-500 mr-1" />
+                      <span className="text-blue-700 text-xs font-medium">Premium</span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center space-x-2">
+                      <div className="flex -space-x-1">
+                        <div className="w-6 h-6 bg-purple-500 rounded-full border-2 border-white flex items-center justify-center">
+                          <span className="text-white text-xs">A+</span>
+                        </div>
+                        <div className="w-6 h-6 bg-blue-500 rounded-full border-2 border-white flex items-center justify-center">
+                          <span className="text-white text-xs">B+</span>
+                        </div>
+                        <div className="w-6 h-6 bg-green-500 rounded-full border-2 border-white flex items-center justify-center">
+                          <span className="text-white text-xs">C+</span>
+                        </div>
+                      </div>
+                      <span className="text-xs text-gray-500">Expert Team</span>
+                    </div>
+                    <div className="flex items-center space-x-1">
+                      <Shield className="h-4 w-4 text-purple-500" />
+                      <span className="text-xs text-gray-600">Verified</span>
+                    </div>
+                  </div>
+                  
+                  <div className="flex items-center justify-between">
+                    <button className="text-[#16808D] hover:text-[#142C52] font-medium text-sm transition-colors">
                       Learn More →
                     </button>
+                    <div className="flex items-center space-x-2">
+                      <Heart className="h-4 w-4 text-red-500 hover:text-red-600 cursor-pointer transition-colors" />
+                      <Share2 className="h-4 w-4 text-gray-500 hover:text-gray-600 cursor-pointer transition-colors" onClick={() => handleShare(partner.communityName)} />
+                    </div>
                   </div>
                 </div>
               </div>
