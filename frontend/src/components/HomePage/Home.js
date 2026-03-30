@@ -14,7 +14,7 @@ const Home = () => {
             description: "Leading educational institutions providing specialized learning environments for students with diverse cognitive needs, utilizing adaptive technologies and personalized teaching methodologies.",
             units: "500+ Centers",
             residents: "10,000+ Students",
-            partnerLogo: "https://images.unsplash.com/photo-1574982386585-ce56553aebfa?w=600&h=400&fit=crop",
+            partnerLogo: "/SpecialEducation.jpg",
             tags: ["Specialized Learning", "Adaptive Tech", "Personalized Education"]
         },
         {
@@ -22,7 +22,7 @@ const Home = () => {
             description: "Advanced healthcare facilities offering evidence-based cognitive rehabilitation programs with cutting-edge therapeutic interventions and progressive treatment approaches.",
             units: "300+ Clinics",
             residents: "25,000+ Patients",
-            partnerLogo: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop",
+            partnerLogo: "/CognitiveBehaviour.webp",
             tags: ["Evidence-Based", "Advanced Therapy", "Progressive Treatment"]
         },
         {
@@ -38,7 +38,7 @@ const Home = () => {
             description: "Inclusive community organizations dedicated to supporting neurodiverse individuals through peer support, advocacy, and specialized resource programs.",
             units: "150+ Groups",
             residents: "12,000+ Members",
-            partnerLogo: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=400&fit=crop",
+            partnerLogo: "/NeuroSupportGroups.jpg",
             tags: ["Peer Support", "Advocacy", "Inclusive Programs"]
         },
         {
@@ -46,7 +46,7 @@ const Home = () => {
             description: "Specialized facilities providing comprehensive rehabilitation services combining traditional therapy with innovative cognitive enhancement technologies.",
             units: "400+ Centers",
             residents: "15,000+ Clients",
-            partnerLogo: "https://images.unsplash.com/photo-1551190822-a9333d879b1c?w=600&h=400&fit=crop",
+            partnerLogo: "/NeuroRehabilitationServices.webp",
             tags: ["Traditional Therapy", "Cognitive Tech", "Comprehensive Care"]
         },
         {
@@ -54,7 +54,7 @@ const Home = () => {
             description: "Dedicated organizations providing comprehensive support services for individuals with autism and their families through specialized programs and community resources.",
             units: "600+ Networks",
             residents: "18,000+ Families",
-            partnerLogo: "https://images.unsplash.com/photo-1584999734482-03fc1b8b7b6a?w=600&h=400&fit=crop",
+            partnerLogo: "/AutismSupport.webp",
             tags: ["Family Support", "Specialized Programs", "Community Resources"]
         },
         {
@@ -62,7 +62,7 @@ const Home = () => {
             description: "Specialized residential communities focused on providing exceptional care and cognitive support for individuals with memory impairments and dementia.",
             units: "250+ Communities",
             residents: "20,000+ Seniors",
-            partnerLogo: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&h=400&fit=crop",
+            partnerLogo: "/MemoryCare.webp",
             tags: ["Memory Support", "Dementia Care", "Specialized Residence"]
         },
         {
@@ -70,7 +70,7 @@ const Home = () => {
             description: "Progressive educational institutions implementing inclusive learning environments with adaptive technologies and specialized support for diverse learning needs.",
             units: "180+ Schools",
             residents: "15,000+ Students",
-            partnerLogo: "https://images.unsplash.com/photo-1503676260788-f1bcd00f72c7?w=600&h=400&fit=crop",
+            partnerLogo: "/InclusiveEducationSchools.jpeg",
             tags: ["Inclusive Learning", "Adaptive Tech", "Diverse Support"]
         },
         {
@@ -78,7 +78,7 @@ const Home = () => {
             description: "Professional facilities offering comprehensive speech and language therapy services using evidence-based techniques and advanced therapeutic technologies.",
             units: "350+ Centers",
             residents: "22,000+ Clients",
-            partnerLogo: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop",
+            partnerLogo: "/SpeechTherapyCenters.png",
             tags: ["Language Therapy", "Evidence-Based", "Advanced Tech"]
         },
         {
@@ -86,7 +86,7 @@ const Home = () => {
             description: "Specialized clinics providing occupational therapy services focused on enhancing daily living skills and cognitive functional independence.",
             units: "280+ Clinics",
             residents: "16,000+ Patients",
-            partnerLogo: "https://images.unsplash.com/photo-1555421689-d68471e189f2?w=600&h=400&fit=crop",
+            partnerLogo: "/OccupationalTherapyClinics.jpg",
             tags: ["Daily Skills", "Functional Independence", "Specialized OT"]
         },
         {
@@ -94,7 +94,7 @@ const Home = () => {
             description: "Supportive communities offering specialized resources, coaching, and therapeutic interventions for individuals with ADHD and their families.",
             units: "420+ Communities",
             residents: "25,000+ Members",
-            partnerLogo: "https://images.unsplash.com/photo-1611095556553-792097274a58?w=600&h=400&fit=crop",
+            partnerLogo: "/ADHDSupportCommunities.jpg",
             tags: ["ADHD Coaching", "Family Resources", "Therapeutic Support"]
         },
         {
@@ -102,8 +102,72 @@ const Home = () => {
             description: "Specialized educational centers providing targeted support and innovative learning strategies for individuals with dyslexia and reading difficulties.",
             units: "190+ Centers",
             residents: "8,000+ Students",
-            partnerLogo: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=600&h=400&fit=crop",
+            partnerLogo: "/DyslexiaLearningCenters.jpg",
             tags: ["Reading Support", "Innovative Learning", "Targeted Strategies"]
+        },
+        {
+            communityName: "Mental Health Clinics",
+            description: "Comprehensive mental health facilities providing psychiatric care, counseling, and therapeutic interventions for various cognitive and emotional conditions.",
+            units: "450+ Clinics",
+            residents: "30,000+ Patients",
+            partnerLogo: "/MentalHealthClinics.jpg",
+            tags: ["Psychiatric Care", "Counseling", "Therapeutic Interventions"]
+        },
+        {
+            communityName: "Developmental Disability Centers",
+            description: "Specialized centers offering comprehensive support services for individuals with developmental disabilities and their families.",
+            units: "320+ Centers",
+            residents: "18,000+ Individuals",
+            partnerLogo: "/DevelopmentDisabilities.jpg",
+            tags: ["Developmental Support", "Family Services", "Comprehensive Care"]
+        },
+        {
+            communityName: "Learning Disability Schools",
+            description: "Educational institutions specifically designed to support students with various learning disabilities through specialized curricula and teaching methods.",
+            units: "240+ Schools",
+            residents: "12,000+ Students",
+            partnerLogo: "/Learningdisability.png",
+            tags: ["Specialized Curriculum", "Adaptive Teaching", "Learning Support"]
+        },
+        {
+            communityName: "Behavioral Therapy Centers",
+            description: "Professional facilities offering applied behavior analysis and behavioral therapy services for individuals with behavioral challenges and developmental disorders.",
+            units: "380+ Centers",
+            residents: "22,000+ Clients",
+            partnerLogo: "/BehavioralTherapyCenters.jpg",
+            tags: ["ABA Therapy", "Behavioral Support", "Developmental Disorders"]
+        },
+        {
+            communityName: "Sensory Integration Clinics",
+            description: "Specialized clinics providing sensory integration therapy and treatments for individuals with sensory processing disorders and related conditions.",
+            units: "160+ Clinics",
+            residents: "9,000+ Patients",
+            partnerLogo: "/SensoryIntegrationClinics.jpg",
+            tags: ["Sensory Therapy", "Processing Disorders", "Integrated Treatment"]
+        },
+        {
+            communityName: "Social Skills Groups",
+            description: "Community-focused groups providing social skills training and development programs for individuals with social communication challenges.",
+            units: "290+ Groups",
+            residents: "14,000+ Members",
+            partnerLogo: "/SocialSkillsGroups.webp",
+            tags: ["Social Training", "Communication Skills", "Group Programs"]
+        },
+        {
+            communityName: "Cognitive Assessment Centers",
+            description: "Professional facilities offering comprehensive cognitive and neuropsychological assessments for diagnosis and treatment planning.",
+            units: "140+ Centers",
+            residents: "11,000+ Assessments",
+            partnerLogo: "/CognitiveAssessmentCenters.jpg",
+            tags: ["Neuropsychological Testing", "Cognitive Assessment", "Diagnostic Services"]
+        },
+        {
+            communityName: "Executive Function Coaching Centers",
+            description: "Specialized coaching centers providing executive function training, ADHD coaching, and cognitive skill development for improved daily functioning.",
+            units: "220+ Centers",
+            residents: "13,000+ Clients",
+            partnerLogo: "/ExecutiveFunctionCoachingCenters.webp",
+            tags: ["Executive Coaching", "ADHD Support", "Cognitive Skills"]
         }
     ];
     
@@ -1019,7 +1083,7 @@ PriHub - Empowering Cognitive Excellence
         .animate-scroll-x > div {
           backdrop-filter: blur(0px);
           -webkit-backdrop-filter: blur(0px);
-          transition: all 0.3s ease;
+          transition: all 0.5s ease;
         }
         
         .animate-scroll-x > div:hover {
