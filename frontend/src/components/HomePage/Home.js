@@ -1,11 +1,171 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, ArrowRight, Shield, Zap, Building, Users, DollarSign, MessageSquare, Calendar, Bell, Wrench, Brain, BookOpen, Target, Heart, Activity, FileText, Clock, AlertTriangle, TrendingUp, CheckCircle, Star, Award, Mail, Phone, Share2 } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight, Shield, Zap, Building, Users, DollarSign, MessageSquare, Calendar, Bell, Wrench, Brain, BookOpen, Target, Heart, Activity, FileText, Clock, AlertTriangle, TrendingUp, CheckCircle, Star, Award, Mail, Phone, Share2, ThumbsUp, Flag } from 'lucide-react';
 
 const Home = () => {
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [currentCommunityIndex, setCurrentCommunityIndex] = useState(0);
     const [isCommunityAutoPlaying, setIsCommunityAutoPlaying] = useState(true);
+    const [currentReviewIndex, setCurrentReviewIndex] = useState(0);
+    const [isReviewAutoPlaying, setIsReviewAutoPlaying] = useState(true);
+    
+    // Customer reviews data
+    const customerReviews = [
+        {
+            name: "Sarah Johnson",
+            role: "Parent of Autistic Child",
+            rating: 5,
+            title: "Life-Changing Platform",
+            review: "This platform has been a game-changer for our family. The resources and support community helped us understand and better support our child's needs. We've seen remarkable progress in just a few months.",
+            date: "2 weeks ago",
+            avatar: "/sarah.jpg",
+            helpful: 45,
+            tags: ["Family Support", "Autism Resources", "Progress Tracking"]
+        },
+        {
+            name: "Michael Chen",
+            role: "Website User",
+            rating: 5,
+            title: "Amazing Resource",
+            review: "I found this platform while searching for cognitive support tools. The user-friendly interface and comprehensive resources made it easy to find exactly what I needed. Highly recommend!",
+            date: "1 month ago",
+            avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face",
+            helpful: 38,
+            tags: ["User Friendly", "Comprehensive", "Easy to Use"]
+        },
+        {
+            name: "Emily Rodriguez",
+            role: "Regular User",
+            rating: 5,
+            title: "Best Decision Ever",
+            review: "Signing up for this platform was the best decision I made. The daily exercises and progress tracking have helped me stay focused and organized. I feel more confident than ever!",
+            date: "3 weeks ago",
+            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop&crop=face",
+            helpful: 52,
+            tags: ["Daily Exercises", "Progress Tracking", "Confidence Building"]
+        },
+        {
+            name: "James Thompson",
+            role: "Website Member",
+            rating: 4,
+            title: "Finally Found Help",
+            review: "After struggling for many long years, I finally found a platform that truly understands my needs. The tools and community support have been invaluable. I wish I had found this much sooner!",
+            date: "2 months ago",
+            avatar: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop&crop=face",
+            helpful: 29,
+            tags: ["Community Support", "Life Changing", "Highly Recommended"]
+        },
+        {
+            name: "Lisa Park",
+            role: "Platform User",
+            rating: 5,
+            title: "Outstanding Experience",
+            review: "The platform exceeded all my expectations. The interactive features and personalized approach made a huge difference in my daily life. Absolutely worth it!",
+            date: "1 month ago",
+            avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=400&h=400&fit=crop&crop=face",
+            helpful: 41,
+            tags: ["Interactive Features", "Personalized", "Great Value"]
+        },
+        {
+            name: "David Williams",
+            role: "Website Subscriber",
+            rating: 5,
+            title: "Transformative Tool",
+            review: "This platform transformed how I approach daily challenges. The cognitive exercises and supportive community have been game-changers. Can't imagine life without it now!",
+            date: "3 weeks ago",
+            avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop&crop=face",
+            helpful: 33,
+            tags: ["Cognitive Exercises", "Supportive Community", "Life Improvement"]
+        },
+        {
+            name: "Jennifer Martinez",
+            role: "Regular Visitor",
+            rating: 5,
+            title: "User-Friendly Platform",
+            review: "I'm not tech-savvy at all, but this platform is so incredibly easy to use! The guided tutorials and very helpful support team made everything simple. Love using it every single day!",
+            date: "2 weeks ago",
+            avatar: "/jennifer.webp",
+            helpful: 47,
+            tags: ["Easy to Use", "Great Support", "Daily Use"]
+        },
+        {
+            name: "Robert Anderson",
+            role: "Website User",
+            rating: 4,
+            title: "Helped Me Grow",
+            review: "Using this platform has helped me grow both personally and professionally. The tools are extremely practical and the results are very real. Very satisfied with my entire experience!",
+            date: "1 month ago",
+            avatar: "/robert.jpg",
+            helpful: 38,
+            tags: ["Personal Growth", "Professional Development", "Real Results"]
+        },
+        {
+            name: "Amanda Foster",
+            role: "Platform Member",
+            rating: 5,
+            title: "Exceeded Expectations",
+            review: "I didn't expect such truly amazing results! The platform delivers on all its promises and so much more. The community is incredibly supportive and the resources are absolutely top-notch.",
+            date: "4 weeks ago",
+            avatar: "/amanda.jpg",
+            helpful: 52,
+            tags: ["Exceeded Expectations", "Top Quality", "Supportive Community"]
+        },
+        {
+            name: "Thomas Wright",
+            role: "Daily User",
+            rating: 5,
+            title: "Part of My Routine",
+            review: "This platform has become an essential part of my daily routine. The exercises and tracking features keep me motivated and focused. Best investment in myself!",
+            date: "2 months ago",
+            avatar: "/thomas.jpg",
+            helpful: 41,
+            tags: ["Daily Routine", "Motivation", "Self Investment"]
+        },
+        {
+            name: "Rachel Green",
+            role: "Website User",
+            rating: 5,
+            title: "Life-Changing Experience",
+            review: "This platform has completely changed my life! The tools and resources helped me overcome challenges I thought were truly impossible. So grateful for this amazing supportive community!",
+            date: "3 weeks ago",
+            avatar: "/rachel.webp",
+            helpful: 44,
+            tags: ["Life Changing", "Overcoming Challenges", "Grateful"]
+        },
+        {
+            name: "Daniel Kim",
+            role: "Platform Subscriber",
+            rating: 4,
+            title: "Worth Every Penny",
+            review: "The subscription fee is worth every penny! The value I've received is incredible. The features and support are unmatched. I've tried many platforms but nothing compares to the comprehensive tools.",
+            date: "1 month ago",
+            avatar: "/daniel.jpg",
+            helpful: 36,
+            tags: ["Great Value", "Worth Investment", "Premium Features"]
+        },
+        {
+            name: "Sophie Turner",
+            role: "Regular User",
+            rating: 5,
+            title: "Amazing Community",
+            review: "The community here is absolutely amazing! Everyone is so incredibly supportive and truly understanding. I've made real deep connections and found genuine helpful support. Highly recommend!",
+            date: "5 weeks ago",
+            avatar: "/sophie.jpg",
+            helpful: 58,
+            tags: ["Amazing Community", "Supportive", "Real Connections"]
+        },
+        {
+            name: "Alex Johnson",
+            role: "Website Visitor",
+            rating: 5,
+            title: "Found My Solution",
+            review: "I tried so many platforms before finally finding this one. Finally, a solution that actually truly works! The personalized approach and amazing results speak for themselves.",
+            date: "2 weeks ago",
+            avatar: "/alex.jpg",
+            helpful: 35,
+            tags: ["Effective Solution", "Personalized", "Proven Results"]
+        }
+    ];
     
     // Community carousel data
     const communityPartners = [
@@ -186,6 +346,20 @@ const Home = () => {
         );
     };
 
+    const handlePrevReview = () => {
+        setIsReviewAutoPlaying(false);
+        setCurrentReviewIndex((prevIndex) => 
+            prevIndex === 0 ? customerReviews.length - 1 : prevIndex - 1
+        );
+    };
+
+    const handleNextReview = () => {
+        setIsReviewAutoPlaying(false);
+        setCurrentReviewIndex((prevIndex) => 
+            prevIndex === customerReviews.length - 1 ? 0 : prevIndex + 1
+        );
+    };
+
     // Auto-play functionality
     useEffect(() => {
         if (!isCommunityAutoPlaying) return;
@@ -207,6 +381,28 @@ const Home = () => {
 
         return () => clearTimeout(timer);
     }, [currentCommunityIndex]);
+
+    // Review auto-play functionality
+    useEffect(() => {
+        if (!isReviewAutoPlaying) return;
+        
+        const interval = setInterval(() => {
+            setCurrentReviewIndex((prevIndex) => 
+                prevIndex === customerReviews.length - 1 ? 0 : prevIndex + 1
+            );
+        }, 5000); // Change every 5 seconds
+
+        return () => clearInterval(interval);
+    }, [isReviewAutoPlaying, customerReviews.length]);
+
+    // Reset review auto-play when user interacts
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsReviewAutoPlaying(true);
+        }, 10000); // Resume auto-play after 10 seconds of inactivity
+
+        return () => clearTimeout(timer);
+    }, [currentReviewIndex]);
     
     // Share functionality
     const handleShare = (partnerName) => {
@@ -1511,7 +1707,7 @@ PriHub - Empowering Cognitive Excellence
                 stats: "98% Integration",
                 rating: "4.9",
                 years: "10+ Years",
-                image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=300&fit=crop",
+                image: "/AITechnologyProviders.png",
                 growthMetric: "AI Advancement"
               },
               { 
@@ -1520,7 +1716,7 @@ PriHub - Empowering Cognitive Excellence
                 stats: "95% Patient Care",
                 rating: "4.8",
                 years: "8+ Years",
-                image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop",
+                image: "/HealthcareInstitutions.webp",
                 growthMetric: "Health Progress"
               },
               { 
@@ -1529,7 +1725,7 @@ PriHub - Empowering Cognitive Excellence
                 stats: "92% Learning Success",
                 rating: "4.7",
                 years: "6+ Years",
-                image: "https://images.unsplash.com/photo-1503676260788-f1bcd00f72c7?w=400&h=300&fit=crop",
+                image: "/EducationalOrganizations.avif",
                 growthMetric: "Knowledge Growth"
               },
               { 
@@ -1547,7 +1743,7 @@ PriHub - Empowering Cognitive Excellence
                 stats: "94% Innovation",
                 rating: "4.8",
                 years: "7+ Years",
-                image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop",
+                image: "/ResearchInstitutions.webp",
                 growthMetric: "Research Impact"
               },
               { 
@@ -1565,7 +1761,7 @@ PriHub - Empowering Cognitive Excellence
                 stats: "93% Policy Support",
                 rating: "4.6",
                 years: "5+ Years",
-                image: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=400&h=300&fit=crop",
+                image: "/GovernmentAgencies.jpg",
                 growthMetric: "Policy Development"
               },
               { 
@@ -1574,7 +1770,7 @@ PriHub - Empowering Cognitive Excellence
                 stats: "97% Device Support",
                 rating: "4.8",
                 years: "8+ Years",
-                image: "https://images.unsplash.com/photo-1551190822-a9333d879b2c?w=400&h=300&fit=crop",
+                image: "/AssistiveTechnology.jpg",
                 growthMetric: "Tech Innovation"
               },
               { 
@@ -1583,7 +1779,7 @@ PriHub - Empowering Cognitive Excellence
                 stats: "91% Wellness Support",
                 rating: "4.7",
                 years: "6+ Years",
-                image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+                image: "/MentalHealthProviders.jpg",
                 growthMetric: "Wellness Improvement"
               },
               { 
@@ -1592,7 +1788,7 @@ PriHub - Empowering Cognitive Excellence
                 stats: "95% Inclusion Success",
                 rating: "4.9",
                 years: "11+ Years",
-                image: "https://images.unsplash.com/photo-1611095556553-792097274a58?w=400&h=300&fit=crop",
+                image: "/DisabilityAdvocacyGroups.jpg",
                 growthMetric: "Inclusion Progress"
               },
               { 
@@ -1601,7 +1797,7 @@ PriHub - Empowering Cognitive Excellence
                 stats: "98% Platform Sync",
                 rating: "4.8",
                 years: "7+ Years",
-                image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=300&fit=crop",
+                image: "/SoftwareDevelopmentPartners.png",
                 growthMetric: "Digital Growth"
               },
               { 
@@ -1610,7 +1806,7 @@ PriHub - Empowering Cognitive Excellence
                 stats: "94% Skill Development",
                 rating: "4.6",
                 years: "4+ Years",
-                image: "https://images.unsplash.com/photo-1515378791036-0646a3e77ba8?w=400&h=300&fit=crop",
+                image: "/TrainingCertificationBodies.jpg",
                 growthMetric: "Career Advancement"
               },
               { 
@@ -1619,7 +1815,7 @@ PriHub - Empowering Cognitive Excellence
                 stats: "99% Uptime",
                 rating: "4.8",
                 years: "6+ Years",
-                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=300&fit=crop",
+                image: "/CloudServiceProviders.jpg",
                 growthMetric: "Cloud Growth"
               },
               { 
@@ -1758,7 +1954,7 @@ PriHub - Empowering Cognitive Excellence
                 stats: "98% Integration",
                 rating: "4.9",
                 years: "10+ Years",
-                image: "https://images.unsplash.com/photo-1531297484001-80022131f5a1?w=400&h=300&fit=crop",
+                image: "/AITechnologyProviders.png",
                 growthMetric: "AI Advancement"
               },
               { 
@@ -1767,7 +1963,7 @@ PriHub - Empowering Cognitive Excellence
                 stats: "95% Patient Care",
                 rating: "4.8",
                 years: "8+ Years",
-                image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=400&h=300&fit=crop",
+                image: "/HealthcareInstitutions.webp",
                 growthMetric: "Health Progress"
               },
               { 
@@ -1776,7 +1972,7 @@ PriHub - Empowering Cognitive Excellence
                 stats: "92% Learning Success",
                 rating: "4.7",
                 years: "6+ Years",
-                image: "https://images.unsplash.com/photo-1503676260788-f1bcd00f72c7?w=400&h=300&fit=crop",
+                image: "/EducationalOrganizations.avif",
                 growthMetric: "Knowledge Growth"
               },
               { 
@@ -1794,7 +1990,7 @@ PriHub - Empowering Cognitive Excellence
                 stats: "94% Innovation",
                 rating: "4.8",
                 years: "7+ Years",
-                image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=400&h=300&fit=crop",
+                image: "/ResearchInstitutions.webp",
                 growthMetric: "Research Impact"
               },
               { 
@@ -1812,7 +2008,7 @@ PriHub - Empowering Cognitive Excellence
                 stats: "93% Policy Support",
                 rating: "4.6",
                 years: "5+ Years",
-                image: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?w=400&h=300&fit=crop",
+                image: "/GovernmentAgencies.jpg",
                 growthMetric: "Policy Development"
               },
               { 
@@ -1821,7 +2017,7 @@ PriHub - Empowering Cognitive Excellence
                 stats: "97% Device Support",
                 rating: "4.8",
                 years: "8+ Years",
-                image: "https://images.unsplash.com/photo-1551190822-a9333d879b2c?w=400&h=300&fit=crop",
+                image: "/AssistiveTechnology.jpg",
                 growthMetric: "Tech Innovation"
               },
               { 
@@ -1830,7 +2026,7 @@ PriHub - Empowering Cognitive Excellence
                 stats: "91% Wellness Support",
                 rating: "4.7",
                 years: "6+ Years",
-                image: "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=400&h=300&fit=crop",
+                image: "/MentalHealthProviders.jpg",
                 growthMetric: "Wellness Improvement"
               },
               { 
@@ -1839,7 +2035,7 @@ PriHub - Empowering Cognitive Excellence
                 stats: "95% Inclusion Success",
                 rating: "4.9",
                 years: "11+ Years",
-                image: "https://images.unsplash.com/photo-1611095556553-792097274a58?w=400&h=300&fit=crop",
+                image: "/DisabilityAdvocacyGroups.jpg",
                 growthMetric: "Inclusion Progress"
               },
               { 
@@ -1848,7 +2044,7 @@ PriHub - Empowering Cognitive Excellence
                 stats: "98% Platform Sync",
                 rating: "4.8",
                 years: "7+ Years",
-                image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=400&h=300&fit=crop",
+                image: "/SoftwareDevelopmentPartners.png",
                 growthMetric: "Digital Growth"
               },
               { 
@@ -1857,7 +2053,7 @@ PriHub - Empowering Cognitive Excellence
                 stats: "94% Skill Development",
                 rating: "4.6",
                 years: "4+ Years",
-                image: "https://images.unsplash.com/photo-1515378791036-0646a3e77ba8?w=400&h=300&fit=crop",
+                image: "/TrainingCertificationBodies.jpg",
                 growthMetric: "Career Advancement"
               },
               { 
@@ -1866,7 +2062,7 @@ PriHub - Empowering Cognitive Excellence
                 stats: "99% Uptime",
                 rating: "4.8",
                 years: "6+ Years",
-                image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=300&fit=crop",
+                image: "/CloudServiceProviders.jpg",
                 growthMetric: "Cloud Growth"
               },
               { 
@@ -1996,6 +2192,169 @@ PriHub - Empowering Cognitive Excellence
                 </div>
               </div>
             ))}
+          </div>
+        </div>
+      </div>
+      
+      {/* Customer Feedback Section */}
+      <div className="py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Section Header */}
+          <div className="text-center mb-1">
+            <h2 className="text-3xl font-bold mb-1">
+              <span style={{color: '#16808D'}}>What Our</span>
+              <span className="text-black"> Community Says</span>
+            </h2>
+            <p className="text-gray-600 text-base font-medium animate-pulse text-center mb-0 max-w-4xl mx-auto whitespace-nowrap">
+              Real feedback from real people who have transformed their cognitive support journey with our platform.
+            </p>
+          </div>
+          
+          {/* Feedback Carousel */}
+          <div className="relative max-w-6xl mx-auto px-6 lg:px-8">
+            {/* Left Arrow */}
+            <button
+              onClick={handlePrevReview}
+              className="absolute -left-2 top-[40%] transform -translate-y-[40%] z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
+              aria-label="Previous review"
+            >
+              <ChevronLeft className="h-5 w-5" />
+            </button>
+
+            {/* Right Arrow */}
+            <button
+              onClick={handleNextReview}
+              className="absolute -right-2 top-[40%] transform -translate-y-[40%] z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
+              aria-label="Next review"
+            >
+              <ChevronRight className="h-5 w-5" />
+            </button>
+
+            {/* Review Display */}
+            <div className="flex items-center justify-center p-4">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 items-center max-w-5xl mx-auto">
+                {/* User Avatar/Image Column */}
+                <div className="order-2 lg:order-1">
+                  <div className="w-full h-56 lg:h-72 flex items-center justify-center relative">
+                    <div className="text-center max-w-full relative">
+                      <div className="rounded-full flex items-center justify-center mx-auto mb-4 overflow-hidden" style={{width: '260px', height: '260px'}}>
+                        <img 
+                          src={customerReviews[currentReviewIndex].avatar} 
+                          alt={customerReviews[currentReviewIndex].name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="absolute" style={{bottom: '130px', right: '0px', transform: 'translateY(50%)'}}>
+                        <div className="w-14 h-14 bg-gradient-to-br from-[#16808D] to-[#142C52] rounded-full flex items-center justify-center">
+                          <span className="text-white text-sm font-bold">
+                            {customerReviews[currentReviewIndex].name.split(' ').map(n => n[0]).join('')}
+                          </span>
+                        </div>
+                      </div>
+                      <div className="text-gray-800 text-xl font-semibold truncate px-2">{customerReviews[currentReviewIndex].name}</div>
+                      <div className="text-gray-600 text-sm truncate px-2">{customerReviews[currentReviewIndex].role}</div>
+                    </div>
+                  </div>
+                </div>
+                
+                {/* Content Column */}
+                <div className="order-1 lg:order-2 text-center lg:text-left">
+                  {/* Star Rating */}
+                  <div className="flex items-center space-x-1 mb-4">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <Star 
+                        key={star} 
+                        className={`h-4 w-4 ${star <= customerReviews[currentReviewIndex].rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}`}
+                      />
+                    ))}
+                    <span className="ml-2 text-sm text-gray-600">{customerReviews[currentReviewIndex].rating}.0</span>
+                  </div>
+                  
+                  <h3 className="text-xl font-bold text-gray-900 mb-4">
+                    "{customerReviews[currentReviewIndex].title}"
+                  </h3>
+                  <p className="text-gray-600 mb-6 leading-relaxed max-w-2xl">
+                    {customerReviews[currentReviewIndex].review}
+                  </p>
+                  
+                  {/* Tags/Features */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {customerReviews[currentReviewIndex].tags.map((tag, index) => {
+                      const tagColors = [
+                        { bg: "bg-[#E0F7FA]", text: "text-[#16808D]" },
+                        { bg: "bg-green-50", text: "text-green-700" },
+                        { bg: "bg-blue-50", text: "text-blue-700" },
+                        { bg: "bg-purple-50", text: "text-purple-700" }
+                      ];
+                      const color = tagColors[index % tagColors.length];
+                      return (
+                        <span key={index} className={`${color.bg} ${color.text} px-3 py-1 rounded-full text-sm font-medium`}>
+                          {tag}
+                        </span>
+                      );
+                    })}
+                  </div>
+                  
+                  {/* Review Stats */}
+                  <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-4">
+                    <div className="flex items-center bg-gray-50 px-4 py-3 rounded-lg">
+                      <Calendar className="h-5 w-5 mr-2" style={{ color: '#16808D' }} />
+                      <span className="font-medium">{customerReviews[currentReviewIndex].date}</span>
+                    </div>
+                    <div className="flex items-center bg-gray-50 px-4 py-3 rounded-lg">
+                      <ThumbsUp className="h-5 w-5 mr-2" style={{ color: '#1B9AAA' }} />
+                      <span className="font-medium">{customerReviews[currentReviewIndex].helpful} Helpful</span>
+                    </div>
+                  </div>
+                  
+                  {/* Action Labels */}
+                  <div className="flex items-center justify-between">
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <span className="text-[#16808D] hover:text-[#142C52] font-medium text-sm transition-colors cursor-pointer">
+                        Read Full Review →
+                      </span>
+                      <span className="text-[#16808D] hover:text-[#142C52] font-medium text-sm transition-colors cursor-pointer">
+                        View Profile →
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Review Indicators */}
+          <div className="flex justify-center mt-6 space-x-2">
+            {customerReviews.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  setCurrentReviewIndex(index);
+                  setIsReviewAutoPlaying(false);
+                }}
+                className={`transition-all duration-300 ${
+                  index === currentReviewIndex 
+                    ? 'w-8 h-2 bg-[#16808D] rounded-full' 
+                    : 'w-2 h-2 bg-gray-300 rounded-full hover:bg-gray-400'
+                }`}
+                aria-label={`Go to review ${index + 1}`}
+              />
+            ))}
+          </div>
+
+          {/* Additional Info */}
+          <div className="mt-4 text-center">
+            <p className="text-gray-600 mb-4">
+              Join {customerReviews.length}+ satisfied users sharing their success stories
+            </p>
+            <Link
+              to="/contact"
+              className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white rounded-lg font-semibold hover:from-[#16808D] hover:to-[#142C52] transition-all transform hover:scale-105 shadow-lg"
+            >
+              <MessageSquare className="mr-2 h-5 w-5" />
+              Share Your Own Experience
+              <ChevronRight className="ml-2 h-5 w-5" />
+            </Link>
           </div>
         </div>
       </div>
