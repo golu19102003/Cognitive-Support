@@ -1435,7 +1435,7 @@ PriHub - Empowering Cognitive Excellence
           </div>
           
           {/* Additional Design Element - 3 Dots with Lines on Both Sides */}
-          <div className="flex justify-center items-center mt-6 mb-[-2]">
+          <div className="flex justify-center items-center mt-6">
             <div className="h-0.5 bg-gradient-to-l from-[#142C52] via-[#16808D] to-transparent w-32"></div>
             <div className="flex space-x-2 mx-4">
               <div className="w-2 h-2 bg-[#16808D] rounded-full animate-pulse"></div>
@@ -1546,7 +1546,7 @@ PriHub - Empowering Cognitive Excellence
           {/* Left Arrow */}
           <button
             onClick={handlePrevCommunity}
-            className="absolute -left-2 top-[40%] transform -translate-y-[40%] z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
+            className="absolute -left-2 top-[45%] transform -translate-y-[45%] z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
             aria-label="Previous community"
           >
             <ChevronLeft className="h-5 w-5" />
@@ -1555,7 +1555,7 @@ PriHub - Empowering Cognitive Excellence
           {/* Right Arrow */}
           <button
             onClick={handleNextCommunity}
-            className="absolute -right-2 top-[40%] transform -translate-y-[40%] z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
+            className="absolute -right-2 top-[45%] transform -translate-y-[45%] z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
             aria-label="Next community"
           >
             <ChevronRight className="h-5 w-5" />
@@ -1644,9 +1644,9 @@ PriHub - Empowering Cognitive Excellence
                 setIsCommunityAutoPlaying(false);
                 setCurrentCommunityIndex(index);
               }}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
                 currentCommunityIndex === index
-                  ? 'bg-[#142C52] w-8'
+                  ? 'bg-[#16808D] w-6'
                   : 'bg-gray-300 hover:bg-gray-400'
               }`}
               aria-label={`Go to community ${index + 1}`}
@@ -1654,17 +1654,15 @@ PriHub - Empowering Cognitive Excellence
           ))}
         </div>
         
-        {/* Middle Connecting Element */}
-        <div className="flex items-center justify-center mt-6">
-          <div className="flex items-center space-x-4">
-            <div className="h-0.5 bg-gradient-to-r from-transparent to-[#16808D] w-32"></div>
-            <div className="flex space-x-2">
-              <div className="w-2 h-2 bg-[#16808D] rounded-full animate-pulse"></div>
-              <div className="w-2 h-2 bg-[#1B9AAA] rounded-full animate-pulse delay-75"></div>
-              <div className="w-2 h-2 bg-[#142C52] rounded-full animate-pulse delay-150"></div>
-            </div>
-            <div className="h-0.5 bg-gradient-to-r from-[#16808D] to-transparent w-32"></div>
+        {/* 3 Dots with Lines on Both Sides */}
+        <div className="flex justify-center items-center mt-6 mb-[-2]">
+          <div className="h-0.5 bg-gradient-to-l from-[#142C52] via-[#16808D] to-transparent w-32"></div>
+          <div className="flex space-x-2 mx-4">
+            <div className="w-2 h-2 bg-[#16808D] rounded-full animate-pulse"></div>
+            <div className="w-2 h-2 bg-[#0C4A50] rounded-full animate-bounce"></div>
+            <div className="w-2 h-2 bg-[#178740] rounded-full animate-pulse"></div>
           </div>
+          <div className="h-0.5 bg-gradient-to-r from-[#142C52] via-[#16808D] to-transparent w-32"></div>
         </div>
         
         {/* Additional Info */}
@@ -2197,8 +2195,11 @@ PriHub - Empowering Cognitive Excellence
       </div>
       
       {/* Customer Feedback Section */}
-      <div className="py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="py-12 relative">
+        {/* Plain White Background */}
+        <div className="absolute inset-0 bg-white">
+        </div>
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Section Header */}
           <div className="text-center mb-1">
             <h2 className="text-3xl font-bold mb-1">
@@ -2215,7 +2216,7 @@ PriHub - Empowering Cognitive Excellence
             {/* Left Arrow */}
             <button
               onClick={handlePrevReview}
-              className="absolute -left-2 top-[40%] transform -translate-y-[40%] z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
+              className="absolute -left-2 top-[50%] transform -translate-y-[50%] z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
               aria-label="Previous review"
             >
               <ChevronLeft className="h-5 w-5" />
@@ -2224,7 +2225,7 @@ PriHub - Empowering Cognitive Excellence
             {/* Right Arrow */}
             <button
               onClick={handleNextReview}
-              className="absolute -right-2 top-[40%] transform -translate-y-[40%] z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
+              className="absolute -right-2 top-[50%] transform -translate-y-[50%] z-10 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white hover:from-[#16808D] hover:to-[#142C52] p-3 rounded-full shadow-lg transition-all duration-300 hover:scale-110 font-semibold"
               aria-label="Next review"
             >
               <ChevronRight className="h-5 w-5" />
@@ -2309,7 +2310,7 @@ PriHub - Empowering Cognitive Excellence
                   
                   {/* Action Labels */}
                   <div className="flex items-center justify-between">
-                    <div className="flex flex-col sm:flex-row gap-3">
+                    <div className="flex flex-col sm:flex-row gap-[80px]">
                       <span className="text-[#16808D] hover:text-[#142C52] font-medium text-sm transition-colors cursor-pointer">
                         Read Full Review →
                       </span>
@@ -2324,22 +2325,39 @@ PriHub - Empowering Cognitive Excellence
           </div>
 
           {/* Review Indicators */}
-          <div className="flex justify-center mt-6 space-x-2">
-            {customerReviews.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  setCurrentReviewIndex(index);
-                  setIsReviewAutoPlaying(false);
-                }}
-                className={`transition-all duration-300 ${
-                  index === currentReviewIndex 
-                    ? 'w-8 h-2 bg-[#16808D] rounded-full' 
-                    : 'w-2 h-2 bg-gray-300 rounded-full hover:bg-gray-400'
-                }`}
-                aria-label={`Go to review ${index + 1}`}
-              />
-            ))}
+          <div className="flex justify-center items-center mt-6">
+            {/* Dots Container */}
+            <div className="flex flex-col items-center">
+              {/* Top Dots Container */}
+              <div className="flex space-x-2 mb-6">
+                {customerReviews.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      setCurrentReviewIndex(index);
+                      setIsReviewAutoPlaying(false);
+                    }}
+                    className={`transition-all duration-300 ${
+                      index === currentReviewIndex 
+                        ? 'w-6 h-2 bg-[#16808D] rounded-full' 
+                        : 'w-2 h-2 bg-gray-300 rounded-full hover:bg-gray-400'
+                    }`}
+                    aria-label={`Go to review ${index + 1}`}
+                  />
+                ))}
+              </div>
+              
+              {/* Bottom Decorative Dots with Lines */}
+              <div className="flex justify-center items-center">
+                <div className="h-0.5 bg-gradient-to-l from-[#142C52] via-[#16808D] to-transparent w-32"></div>
+                <div className="flex space-x-2 mx-4">
+                  <div className="w-2 h-2 bg-[#16808D] rounded-full animate-pulse"></div>
+                  <div className="w-2 h-2 bg-[#0C4A50] rounded-full animate-bounce"></div>
+                  <div className="w-2 h-2 bg-[#178740] rounded-full animate-pulse"></div>
+                </div>
+                <div className="h-0.5 bg-gradient-to-r from-[#142C52] via-[#16808D] to-transparent w-32"></div>
+              </div>
+            </div>
           </div>
 
           {/* Additional Info */}

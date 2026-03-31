@@ -247,7 +247,11 @@ const MainLayout = ({ children }) => {
         {children}
       </main>
 
-      <footer className="bg-white text-gray-800 mt-auto">
+      <footer className={`mt-auto transition-colors duration-300 ${
+        isDarkMode 
+          ? 'bg-[#1a3a52] text-white' 
+          : 'bg-gradient-to-r from-[#1b4256] to-[#277890] text-white'
+      }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-12">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
             <div className="flex flex-col h-full">
@@ -259,14 +263,14 @@ const MainLayout = ({ children }) => {
                 />
                 <div>
                   <h3 className={`text-lg font-bold leading-tight mb-1 transition-colors duration-300 ${
-                    isDarkMode ? 'text-white' : ''
-                  }`} style={{color: isDarkMode ? '#ffffff' : '#16808D'}}>Support System</h3>
+                    isDarkMode ? 'text-white' : 'text-white'
+                  }`}>Support System</h3>
                   <h4 className={`text-xs font-medium leading-tight transition-colors duration-300 ${
                     isDarkMode ? 'text-gray-300' : ''
-                  }`} style={{color: isDarkMode ? '#d1d5db' : '#020509'}}>For Cognitive Disabilities</h4>
+                  }`} style={{color: isDarkMode ? '#d1d5db' : '#4db5c5'}}>For Cognitive Disabilities</h4>
                 </div>
               </div>
-              <p className="text-gray-600 mb-4" style={{fontSize: '13px'}}>
+              <p className="text-white/90 mb-4" style={{fontSize: '13px'}}>
                 Smart Support Management System powered by Cognitive Disabilities platform, providing accessibility solutions and personalized assistance through AI technology and adaptive interfaces.
               </p>
               <div className="flex space-x-4">
@@ -313,25 +317,25 @@ const MainLayout = ({ children }) => {
               </div>
               <div className="grid grid-cols-3 gap-8 text-sm">
                 <div className="space-y-3">
-                  <h4 className="font-semibold text-xs uppercase tracking-wider text-gray-500 mb-4 text-center">Main</h4>
+                  <h4 className="font-semibold text-xs uppercase tracking-wider text-white/70 mb-4 text-center">Main</h4>
                   <div className="text-center space-y-3">
-                    <Link to="/" className={`block transition-colors ${isDarkMode ? 'text-gray-400 hover:text-[#4C97A8]' : 'text-gray-600 hover:text-[#4C97A8]'} hover:translate-x-1 transform duration-200`} onClick={() => window.scrollTo(0, 0)} style={{fontSize: '13px'}}>Home</Link>
-                    <Link to="/about" className={`block transition-colors ${isDarkMode ? 'text-gray-400 hover:text-[#4C97A8]' : 'text-gray-600 hover:text-[#4C97A8]'} hover:translate-x-1 transform duration-200`} onClick={() => window.scrollTo(0, 0)} style={{fontSize: '13px'}}>About</Link>
+                    <Link to="/" className={`block transition-colors text-white/90 hover:text-white ${isDarkMode ? '' : ''} hover:translate-x-1 transform duration-200`} onClick={() => window.scrollTo(0, 0)} style={{fontSize: '13px'}}>Home</Link>
+                    <Link to="/about" className={`block transition-colors text-white/90 hover:text-white ${isDarkMode ? '' : ''} hover:translate-x-1 transform duration-200`} onClick={() => window.scrollTo(0, 0)} style={{fontSize: '13px'}}>About</Link>
                   </div>
                 </div>
                 <div className="space-y-3">
-                  <h4 className="font-semibold text-xs uppercase tracking-wider text-gray-500 mb-4 text-center">Services</h4>
+                  <h4 className="font-semibold text-xs uppercase tracking-wider text-white/70 mb-4 text-center">Services</h4>
                   <div className="text-center space-y-3">
-                    <Link to="/conditions" className={`block transition-colors ${isDarkMode ? 'text-gray-400 hover:text-[#4C97A8]' : 'text-gray-600 hover:text-[#4C97A8]'} hover:translate-x-1 transform duration-200`} onClick={() => window.scrollTo(0, 0)} style={{fontSize: '13px'}}>Conditions</Link>
-                    <Link to="/resources" className={`block transition-colors ${isDarkMode ? 'text-gray-400 hover:text-[#4C97A8]' : 'text-gray-600 hover:text-[#4C97A8]'} hover:translate-x-1 transform duration-200`} onClick={() => window.scrollTo(0, 0)} style={{fontSize: '13px'}}>Resources</Link>
-                    <Link to="/advanced-features" className={`block transition-colors ${isDarkMode ? 'text-gray-400 hover:text-[#4C97A8]' : 'text-gray-600 hover:text-[#4C97A8]'} hover:translate-x-1 transform duration-200`} onClick={() => window.scrollTo(0, 0)} style={{fontSize: '13px'}}>Advanced Features</Link>
+                    <Link to="/conditions" className={`block transition-colors text-white/90 hover:text-white ${isDarkMode ? '' : ''} hover:translate-x-1 transform duration-200`} onClick={() => window.scrollTo(0, 0)} style={{fontSize: '13px'}}>Conditions</Link>
+                    <Link to="/resources" className={`block transition-colors text-white/90 hover:text-white ${isDarkMode ? '' : ''} hover:translate-x-1 transform duration-200`} onClick={() => window.scrollTo(0, 0)} style={{fontSize: '13px'}}>Resources</Link>
+                    <Link to="/advanced-features" className={`block transition-colors text-white/90 hover:text-white ${isDarkMode ? '' : ''} hover:translate-x-1 transform duration-200`} onClick={() => window.scrollTo(0, 0)} style={{fontSize: '13px'}}>Advanced Features</Link>
                   </div>
                 </div>
                 <div className="space-y-3">
-                  <h4 className="font-semibold text-xs uppercase tracking-wider text-gray-500 mb-4 text-center">Account</h4>
+                  <h4 className="font-semibold text-xs uppercase tracking-wider text-white/70 mb-4 text-center">Account</h4>
                   <div className="text-center space-y-3">
-                    <Link to="/signin" className={`block transition-colors ${isDarkMode ? 'text-gray-400 hover:text-[#4C97A8]' : 'text-gray-600 hover:text-[#4C97A8]'} hover:translate-x-1 transform duration-200`} onClick={() => window.scrollTo(0, 0)} style={{fontSize: '13px'}}>Sign In</Link>
-                    <Link to="/contact" className={`block transition-colors ${isDarkMode ? 'text-gray-400 hover:text-[#4C97A8]' : 'text-gray-600 hover:text-[#4C97A8]'} hover:translate-x-1 transform duration-200`} onClick={() => window.scrollTo(0, 0)} style={{fontSize: '13px'}}>Contact</Link>
+                    <Link to="/signin" className={`block transition-colors text-white/90 hover:text-white ${isDarkMode ? '' : ''} hover:translate-x-1 transform duration-200`} onClick={() => window.scrollTo(0, 0)} style={{fontSize: '13px'}}>Sign In</Link>
+                    <Link to="/contact" className={`block transition-colors text-white/90 hover:text-white ${isDarkMode ? '' : ''} hover:translate-x-1 transform duration-200`} onClick={() => window.scrollTo(0, 0)} style={{fontSize: '13px'}}>Contact</Link>
                   </div>
                 </div>
               </div>
@@ -341,7 +345,7 @@ const MainLayout = ({ children }) => {
               <h3 className={`text-lg font-bold mb-4 transition-colors duration-300 ${
                 isDarkMode ? 'text-white' : ''
               }`} style={{color: isDarkMode ? '#ffffff' : '#01181F'}}>Contact Info</h3>
-              <div className="space-y-2 text-gray-600">
+              <div className="space-y-2 text-white/90">
                 <div className="flex items-center space-x-2">
                   <MapPin className="h-4 w-4 text-[#16808D] hover:text-[#142C52] transition-colors" />
                   <span style={{fontSize: '13px'}}>Jaipur, Rajasthan</span>
@@ -362,15 +366,15 @@ const MainLayout = ({ children }) => {
             </div>
           </div>
 
-          <div className="border-t border-gray-200 mt-8 pt-8">
+          <div className="border-t border-white/20 mt-8 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center">
-              <div className="text-sm text-gray-600 flex-1 text-center ml-80">
+              <div className="text-sm text-white/90 flex-1 text-center ml-80">
                 <p>&copy; 2026 Support System. All rights reserved.</p>
               </div>
               <div className="flex space-x-6 mt-4 md:mt-0">
-                <Link to="/privacy" className="text-sm text-gray-600 hover:text-[#4C97A8] transition-colors" onClick={() => window.scrollTo(0, 0)}>Privacy & Policy</Link>
-                <Link to="/terms" className="text-sm text-gray-600 hover:text-[#4C97A8] transition-colors" onClick={() => window.scrollTo(0, 0)}>Terms of Service</Link>
-                <Link to="/help" className="text-sm text-gray-600 hover:text-[#4C97A8] transition-colors" onClick={() => window.scrollTo(0, 0)}>Support</Link>
+                <Link to="/privacy" className="text-sm text-white/90 hover:text-white transition-colors" onClick={() => window.scrollTo(0, 0)}>Privacy & Policy</Link>
+                <Link to="/terms" className="text-sm text-white/90 hover:text-white transition-colors" onClick={() => window.scrollTo(0, 0)}>Terms of Service</Link>
+                <Link to="/help" className="text-sm text-white/90 hover:text-white transition-colors" onClick={() => window.scrollTo(0, 0)}>Support</Link>
               </div>
             </div>
           </div>
