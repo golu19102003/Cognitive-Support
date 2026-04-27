@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, ArrowRight, Shield, Zap, Building, Users, DollarSign, MessageSquare, Calendar, Bell, Wrench, Brain, BookOpen, Target, Heart, Activity, FileText, Clock, AlertTriangle, TrendingUp, CheckCircle, Star, Award, Mail, Phone, Share2, ThumbsUp, Flag } from 'lucide-react';
+import { ChevronLeft, ChevronRight, ArrowRight, Shield, Zap, Building, Users, DollarSign, MessageSquare, Calendar, Bell, Wrench, Brain, BookOpen, Target, Heart, Activity, FileText, Clock, AlertTriangle, TrendingUp, CheckCircle, Star, Award, Mail, Phone, Share2, ThumbsUp, Flag, X, MapPin, Globe, User } from 'lucide-react';
 
 const Home = () => {
     const [isDarkMode, setIsDarkMode] = useState(false);
@@ -8,7 +8,287 @@ const Home = () => {
     const [isCommunityAutoPlaying, setIsCommunityAutoPlaying] = useState(true);
     const [currentReviewIndex, setCurrentReviewIndex] = useState(0);
     const [isReviewAutoPlaying, setIsReviewAutoPlaying] = useState(true);
+    const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false);
+    const [isCommunityModalOpen, setIsCommunityModalOpen] = useState(false);
+    const [formData, setFormData] = useState({
+        communityName: '',
+        contactPerson: '',
+        email: '',
+        phone: '',
+        address: '',
+        website: '',
+        communityType: '',
+        organizationSize: '',
+        yearsEstablished: '',
+        serviceArea: '',
+        primaryServices: '',
+        primaryFocus: '',
+        units: '',
+        residents: '',
+        description: '',
+        tags: ''
+    });
+    const [communityFormData, setCommunityFormData] = useState({
+        name: '',
+        email: '',
+        phone: '',
+        age: '',
+        occupation: '',
+        experienceTitle: '',
+        experience: '',
+        rating: 5,
+        tags: '',
+        consent: false
+    });
+    const [uploadedImage, setUploadedImage] = useState(null);
+    const [imagePreview, setImagePreview] = useState(null);
+    const [openDropdown, setOpenDropdown] = useState(null);
+    const [dropdownPositions, setDropdownPositions] = useState({});
     
+    // State for storing submitted data
+    const [submittedPartners, setSubmittedPartners] = useState([]);
+    const [submittedReviews, setSubmittedReviews] = useState([]);
+    
+    // State for storing shuffled arrays
+    const [shuffledPartners, setShuffledPartners] = useState([]);
+    const [shuffledReviews, setShuffledReviews] = useState([]);
+
+    // Database simulation functions
+    const saveToDatabase = (collection, data) => {
+        // Simulate database save using localStorage
+        const existingData = JSON.parse(localStorage.getItem(collection) || '[]');
+        const newData = [...existingData, { ...data, id: Date.now(), timestamp: new Date().toISOString() }];
+        localStorage.setItem(collection, JSON.stringify(newData));
+        return newData;
+    };
+
+    const getFromDatabase = (collection) => {
+        // Simulate database get using localStorage
+        return JSON.parse(localStorage.getItem(collection) || '[]');
+    };
+
+    // Load saved data on component mount
+    useEffect(() => {
+        setSubmittedPartners(getFromDatabase('communityPartners'));
+        setSubmittedReviews(getFromDatabase('communityReviews'));
+    }, []);
+
+    
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (openDropdown && !event.target.closest('.dropdown-container')) {
+                setOpenDropdown(null);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [openDropdown]);
+
+    // Close modal when clicking outside
+    useEffect(() => {
+        const handleModalClickOutside = (event) => {
+            // Close Partner Modal if open and click is outside modal content
+            if (isPartnerModalOpen && !event.target.closest('.modal-content')) {
+                setIsPartnerModalOpen(false);
+            }
+            // Close Community Modal if open and click is outside modal content
+            if (isCommunityModalOpen && !event.target.closest('.modal-content')) {
+                setIsCommunityModalOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleModalClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleModalClickOutside);
+        };
+    }, [isPartnerModalOpen, isCommunityModalOpen]);
+
+    // Form handlers
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
+    const handleCommunityInputChange = (e) => {
+        const { name, value, type, checked } = e.target;
+        setCommunityFormData(prev => ({
+            ...prev,
+            [name]: type === 'checkbox' ? checked : value
+        }));
+    };
+
+    const handleImageUpload = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setUploadedImage(file);
+            const reader = new FileReader();
+            reader.onloadend = () => {
+                setImagePreview(reader.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    };
+
+    const handleImageEdit = () => {
+        document.getElementById('image-upload').click();
+    };
+
+    const handleImageRemove = () => {
+        setUploadedImage(null);
+        setImagePreview(null);
+    };
+
+    const toggleDropdown = (dropdownName, event) => {
+        if (openDropdown === dropdownName) {
+            setOpenDropdown(null);
+        } else {
+            setOpenDropdown(dropdownName);
+            // Calculate dropdown position
+            const buttonRect = event.currentTarget.getBoundingClientRect();
+            const spaceBelow = window.innerHeight - buttonRect.bottom;
+            const spaceAbove = buttonRect.top;
+            const dropdownHeight = 160; // max-h-40 = 160px
+            
+            let position = 'down';
+            if (spaceBelow < dropdownHeight && spaceAbove > dropdownHeight) {
+                position = 'up';
+            }
+            
+            setDropdownPositions(prev => ({
+                ...prev,
+                [dropdownName]: position
+            }));
+        }
+    };
+
+    const handleDropdownSelect = (name, value) => {
+        setFormData(prev => ({ ...prev, [name]: value }));
+        setOpenDropdown(null);
+    };
+
+    const handlePartnerClick = (partnerName) => {
+        // Map partner names to their respective routes
+        const partnerRoutes = {
+            "AI Technology Providers": "/partners/ai-technology-providers",
+            "Healthcare Institutions": "/partners/healthcare-institutions",
+            "Educational Organizations": "/partners/educational-organizations",
+            "Accessibility Standards Bodies": "/partners/accessibility-standards-bodies",
+            "Research Institutions": "/partners/research-institutions",
+            "Non-Profit Organizations": "/partners/non-profit-organizations",
+            "Government Agencies": "/partners/government-agencies",
+            "Assistive Tech Companies": "/partners/assistive-tech-companies",
+            "Mental Health Providers": "/partners/mental-health-providers",
+            "Disability Advocacy Groups": "/partners/disability-advocacy-groups",
+            "Software Development Partners": "/partners/software-development-partners",
+            "Training & Certification Bodies": "/partners/training-certification-bodies",
+            "Cloud Service Providers": "/partners/cloud-service-providers",
+            "Security Solutions": "/partners/security-solutions",
+            "Mobile App Developers": "/partners/mobile-app-developers",
+            "Data Analytics Firms": "/partners/data-analytics-firms",
+            "IoT Solution Providers": "/partners/iot-solution-providers"
+        };
+
+        const route = partnerRoutes[partnerName];
+        if (route) {
+            window.location.href = route;
+        } else {
+            // Fallback to Google search if route not found
+            const searchQuery = encodeURIComponent(`${partnerName} cognitive disability support services`);
+            const googleSearchUrl = `https://www.google.com/search?q=${searchQuery}`;
+            window.open(googleSearchUrl, '_blank');
+        }
+    };
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        console.log('Partner Application Submitted:', formData);
+        
+        // Prepare partner data for database
+        const partnerData = {
+            ...formData,
+            logo: imagePreview || `https://picsum.photos/seed/${formData.communityName}/400/400.jpg`,
+            status: 'pending',
+            submittedAt: new Date().toISOString()
+        };
+        
+        // Save to database
+        const savedPartners = saveToDatabase('communityPartners', partnerData);
+        setSubmittedPartners(savedPartners);
+        setCurrentCommunityIndex(0); // Reset to show new content
+        
+        // Handle form submission here
+        alert('Thank you for your interest! We will contact you soon.');
+        setIsPartnerModalOpen(false);
+        setFormData({
+            communityName: '',
+            contactPerson: '',
+            email: '',
+            phone: '',
+            address: '',
+            website: '',
+            communityType: '',
+            organizationSize: '',
+            yearsEstablished: '',
+            serviceArea: '',
+            primaryServices: '',
+            primaryFocus: '',
+            units: '',
+            residents: '',
+            description: '',
+            tags: ''
+        });
+        setUploadedImage(null);
+        setImagePreview(null);
+    };
+
+    const handleCommunitySubmit = (e) => {
+        e.preventDefault();
+        console.log('Community Experience Submitted:', communityFormData);
+        
+        // Prepare review data for database
+        const reviewData = {
+            ...communityFormData,
+            avatar: imagePreview || `https://picsum.photos/seed/${communityFormData.name}/400/400.jpg`,
+            date: "Just now",
+            helpful: 0,
+            role: communityFormData.occupation || "Community Member",
+            review: communityFormData.experience,
+            title: communityFormData.experienceTitle,
+            status: 'approved',
+            submittedAt: new Date().toISOString()
+        };
+        
+        // Save to database
+        const savedReviews = saveToDatabase('communityReviews', reviewData);
+        setSubmittedReviews(savedReviews);
+        setCurrentReviewIndex(0); // Reset to show new content
+        
+        // Handle form submission here
+        alert('Thank you for sharing your experience! Your story will inspire others.');
+        setIsCommunityModalOpen(false);
+        setCommunityFormData({
+            name: '',
+            email: '',
+            phone: '',
+            age: '',
+            occupation: '',
+            experienceTitle: '',
+            experience: '',
+            rating: 5,
+            tags: '',
+            consent: false
+        });
+        setUploadedImage(null);
+        setImagePreview(null);
+    };
+
     // Customer reviews data
     const customerReviews = [
         {
@@ -331,49 +611,79 @@ const Home = () => {
         }
     ];
     
+    // Update shuffled arrays when data changes
+    useEffect(() => {
+        const approvedSubmittedPartners = submittedPartners.filter(partner => partner.status === 'approved' || partner.status === 'pending');
+        const allPartners = [...communityPartners, ...approvedSubmittedPartners];
+        setShuffledPartners(allPartners.sort(() => Math.random() - 0.5));
+    }, [submittedPartners]);
+
+    useEffect(() => {
+        const approvedSubmittedReviews = submittedReviews.filter(review => review.status === 'approved');
+        const allReviews = [...customerReviews, ...approvedSubmittedReviews];
+        setShuffledReviews(allReviews.sort(() => Math.random() - 0.5));
+    }, [submittedReviews]);
+
+    // Get current data arrays (now using stable shuffled arrays)
+    const currentPartners = shuffledPartners.length > 0 ? shuffledPartners : communityPartners;
+    const currentReviews = shuffledReviews.length > 0 ? shuffledReviews : customerReviews;
+    
     // Community carousel functions
     const handleNextCommunity = () => {
         setIsCommunityAutoPlaying(false);
         setCurrentCommunityIndex((prevIndex) => 
-            prevIndex === communityPartners.length - 1 ? 0 : prevIndex + 1
+            prevIndex === currentPartners.length - 1 ? 0 : prevIndex + 1
         );
     };
     
     const handlePrevCommunity = () => {
         setIsCommunityAutoPlaying(false);
         setCurrentCommunityIndex((prevIndex) => 
-            prevIndex === 0 ? communityPartners.length - 1 : prevIndex - 1
+            prevIndex === 0 ? currentPartners.length - 1 : prevIndex - 1
         );
     };
 
     const handlePrevReview = () => {
         setIsReviewAutoPlaying(false);
         setCurrentReviewIndex((prevIndex) => 
-            prevIndex === 0 ? customerReviews.length - 1 : prevIndex - 1
+            prevIndex === 0 ? currentReviews.length - 1 : prevIndex - 1
         );
     };
 
     const handleNextReview = () => {
         setIsReviewAutoPlaying(false);
         setCurrentReviewIndex((prevIndex) => 
-            prevIndex === customerReviews.length - 1 ? 0 : prevIndex + 1
+            prevIndex === currentReviews.length - 1 ? 0 : prevIndex + 1
         );
     };
 
-    // Auto-play functionality
+    // Auto-play functionality for community carousel
     useEffect(() => {
         if (!isCommunityAutoPlaying) return;
         
         const interval = setInterval(() => {
             setCurrentCommunityIndex((prevIndex) => 
-                prevIndex === communityPartners.length - 1 ? 0 : prevIndex + 1
+                prevIndex === currentPartners.length - 1 ? 0 : prevIndex + 1
             );
         }, 4000); // Change every 4 seconds
 
         return () => clearInterval(interval);
-    }, [isCommunityAutoPlaying, communityPartners.length]);
+    }, [isCommunityAutoPlaying, currentPartners.length]);
 
-    // Reset auto-play when user interacts
+    // Auto-play functionality for reviews
+    useEffect(() => {
+        if (!isReviewAutoPlaying) return;
+        
+        const interval = setInterval(() => {
+            setCurrentReviewIndex((prevIndex) => 
+                prevIndex === currentReviews.length - 1 ? 0 : prevIndex + 1
+            );
+        }, 5000); // Change every 5 seconds
+
+        return () => clearInterval(interval);
+    }, [isReviewAutoPlaying, currentReviews.length]);
+
+    // Reset community auto-play when user interacts
     useEffect(() => {
         const timer = setTimeout(() => {
             setIsCommunityAutoPlaying(true);
@@ -381,19 +691,6 @@ const Home = () => {
 
         return () => clearTimeout(timer);
     }, [currentCommunityIndex]);
-
-    // Review auto-play functionality
-    useEffect(() => {
-        if (!isReviewAutoPlaying) return;
-        
-        const interval = setInterval(() => {
-            setCurrentReviewIndex((prevIndex) => 
-                prevIndex === customerReviews.length - 1 ? 0 : prevIndex + 1
-            );
-        }, 5000); // Change every 5 seconds
-
-        return () => clearInterval(interval);
-    }, [isReviewAutoPlaying, customerReviews.length]);
 
     // Reset review auto-play when user interacts
     useEffect(() => {
@@ -403,69 +700,7 @@ const Home = () => {
 
         return () => clearTimeout(timer);
     }, [currentReviewIndex]);
-    
-    // Share functionality
-    const handleShare = (partnerName) => {
-        const subject = encodeURIComponent(`Amazing Partnership Opportunity with ${partnerName} - PriHub Cognitive Support Platform`);
-        const body = encodeURIComponent(`Hello,
 
-I wanted to share an incredible partnership opportunity I found on PriHub - a comprehensive cognitive support platform.
-
-🌟 **Partner Details:**
-• Partner: ${partnerName}
-• Platform: PriHub Cognitive Support System
-• Industry: Healthcare & Cognitive Technology Solutions
-
-🚀 **About PriHub:**
-PriHub is a cutting-edge cognitive support platform dedicated to enhancing the quality of life for individuals with cognitive challenges through innovative technology solutions.
-
-✨ **Key Features:**
-• AI-powered cognitive assessments
-• Personalized support programs
-• Real-time monitoring and analytics
-• Community engagement tools
-• Professional healthcare integration
-• 24/7 support availability
-
-🎯 **Impact & Reach:**
-• 1000+ communities served
-• 50,000+ residents supported
-• 98% integration success rate
-• Award-winning platform
-• Certified by leading healthcare organizations
-
-🔗 **Visit Us:**
-• Website: https://prihub-cognitive-support.com
-• Live Demo: https://prihub-cognitive-support.com/demo
-• Documentation: https://prihub-cognitive-support.com/docs
-
-💼 **Partnership Benefits:**
-• Access to cutting-edge cognitive technology
-• Revenue sharing opportunities
-• Professional development resources
-• Community impact initiatives
-• Premium support and training
-
-This partnership represents a unique opportunity to be part of the cognitive healthcare revolution while making a meaningful difference in people's lives.
-
-Would love to discuss this further with you!
-
-Best regards,
-[Your Name]
-[Your Contact Information]
-
----
-PriHub - Empowering Cognitive Excellence
-🌐 https://prihub-cognitive-support.com
-📧 support@prihub.com
-📞 1-800-PRIHUB`);
-        
-        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=&su=${subject}&body=${body}`;
-        
-        // Simple and reliable Gmail open
-        window.open(gmailUrl, '_blank', 'width=800,height=600');
-    };
-    
     // Check for theme preference
     useEffect(() => {
         const checkTheme = () => {
@@ -980,16 +1215,19 @@ PriHub - Empowering Cognitive Excellence
           
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
-              to="/conditions"
+              to="/dashboard"
               className="flex items-center justify-center px-8 py-3 bg-white text-[#1B9AAA] rounded-lg font-semibold hover:bg-gradient-to-r hover:from-[#142C52] hover:to-[#16808D] hover:text-white transition-all transform hover:scale-105 shadow-lg"
             >
               <Brain className="mr-2 h-5 w-5" />
               Explore Prihub
             </Link>
-            <button className="flex items-center justify-center px-8 py-3 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white rounded-lg font-semibold hover:from-[#16808D] hover:to-[#142C52] transition-all transform hover:scale-105 shadow-lg">
+            <Link
+              to="/signin"
+              className="flex items-center justify-center px-8 py-3 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white rounded-lg font-semibold hover:from-[#16808D] hover:to-[#142C52] transition-all transform hover:scale-105 shadow-lg"
+            >
               Get Support
               <Users className="ml-2 h-5 w-5" />
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -1003,7 +1241,7 @@ PriHub - Empowering Cognitive Excellence
         <p className="text-gray-600 text-base font-medium animate-pulse text-center mb-2">Advanced cognitive support features and accessibility tools for enhanced user experience</p>
         
         {/* Carousel Container */}
-        <div className="relative">
+        <div className="relative dropdown-container">
           {/* Navigation Arrows */}
           <button
             onClick={() => setCurrentHighlightIndex((prev) => prev === 0 ? platformHighlights.length - 3 : prev - 3)}
@@ -1327,7 +1565,7 @@ PriHub - Empowering Cognitive Excellence
         </p>
         
         {/* Carousel Container */}
-        <div className="relative">
+        <div className="relative dropdown-container">
           {/* Navigation Arrows */}
           <button
             onClick={handlePrevious}
@@ -1567,8 +1805,8 @@ PriHub - Empowering Cognitive Excellence
               {/* Image Column */}
               <div className="order-2 lg:order-1">
                 <img 
-                  src={communityPartners[currentCommunityIndex].partnerLogo} 
-                  alt={communityPartners[currentCommunityIndex].communityName}
+                  src={currentPartners[currentCommunityIndex].partnerLogo || currentPartners[currentCommunityIndex].logo} 
+                  alt={currentPartners[currentCommunityIndex].communityName}
                   className="w-full h-56 lg:h-72 rounded-xl shadow-xl hover:shadow-2xl transition-all duration-300 object-cover"
                 />
               </div>
@@ -1576,15 +1814,15 @@ PriHub - Empowering Cognitive Excellence
               {/* Content Column */}
               <div className="order-1 lg:order-2 text-center lg:text-left">
                 <h3 className="text-xl font-bold text-gray-900 mb-4">
-                  {communityPartners[currentCommunityIndex].communityName}
+                  {currentPartners[currentCommunityIndex].communityName}
                 </h3>
                 <p className="text-gray-600 mb-6 leading-relaxed max-w-2xl">
-                  {communityPartners[currentCommunityIndex].description}
+                  {currentPartners[currentCommunityIndex].description}
                 </p>
                 
                 {/* Tags */}
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {communityPartners[currentCommunityIndex].tags.map((tag, index) => {
+                  {currentPartners[currentCommunityIndex].tags.map((tag, index) => {
                     const tagColors = [
                       { bg: "bg-[#E0F7FA]", text: "text-[#16808D]" },
                       { bg: "bg-green-50", text: "text-green-700" },
@@ -1608,11 +1846,11 @@ PriHub - Empowering Cognitive Excellence
                 <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-4">
                   <div className="flex items-center bg-gray-50 px-4 py-3 rounded-lg">
                     <Building className="h-5 w-5 mr-2" style={{ color: '#16808D' }} />
-                    <span className="font-medium">{communityPartners[currentCommunityIndex].units}</span>
+                    <span className="font-medium">{currentPartners[currentCommunityIndex].units}</span>
                   </div>
                   <div className="flex items-center bg-gray-50 px-4 py-3 rounded-lg">
                     <Users className="h-5 w-5 mr-2" style={{ color: '#1B9AAA' }} />
-                    <span className="font-medium">{communityPartners[currentCommunityIndex].residents}</span>
+                    <span className="font-medium">{currentPartners[currentCommunityIndex].residents}</span>
                   </div>
                 </div>
                 
@@ -1637,7 +1875,7 @@ PriHub - Empowering Cognitive Excellence
 
         {/* Community Indicators */}
         <div className="flex justify-center mt-6 space-x-2">
-          {communityPartners.map((_, index) => (
+          {currentPartners.map((_, index) => (
             <button
               key={index}
               onClick={() => {
@@ -1668,16 +1906,16 @@ PriHub - Empowering Cognitive Excellence
         {/* Additional Info */}
         <div className="mt-4 text-center">
           <p className="text-gray-600 mb-4">
-            Discover all {communityPartners.length}+ communities already experiencing the PriHub advantage
+            Discover all {currentPartners.length}+ communities already experiencing the PriHub advantage
           </p>
-          <Link
-            to="/contact"
+          <button
+            onClick={() => setIsPartnerModalOpen(true)}
             className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white rounded-lg font-semibold hover:from-[#16808D] hover:to-[#142C52] transition-all transform hover:scale-105 shadow-lg"
           >
             <Building className="mr-2 h-5 w-5" />
             Become a Partner Community
             <ChevronRight className="ml-2 h-5 w-5" />
-          </Link>
+          </button>
         </div>
       </div>
 
@@ -1695,7 +1933,7 @@ PriHub - Empowering Cognitive Excellence
         </div>
         
         {/* Continuous Scrolling List */}
-        <div className="relative">
+        <div className="relative dropdown-container">
           <div className="flex space-x-6 animate-scroll-x" style={{ width: 'max-content' }}>
             {/* Partners for seamless scrolling */}
             {[
@@ -1853,7 +2091,7 @@ PriHub - Empowering Cognitive Excellence
                 growthMetric: "IoT Expansion"
               }
             ].map((partner, index) => (
-              <div key={`partner-${index}`} className="flex-shrink-0 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-110 border border-gray-100 min-w-[320px] max-w-[320px] animate-fade-in">
+              <div key={`partner-${index}`} className="flex-shrink-0 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-110 border border-gray-100 min-w-[320px] max-w-[320px] animate-fade-in cursor-pointer" onClick={() => handlePartnerClick(partner.communityName)}>
                 {/* Partner Image */}
                 <div className="relative h-48 overflow-hidden rounded-t-3xl">
                   <img 
@@ -1938,6 +2176,7 @@ PriHub - Empowering Cognitive Excellence
                     <div className="flex items-center space-x-2">
                       <Heart className="h-3 w-3 text-red-500 hover:text-red-600 cursor-pointer transition-colors" />
                       <Share2 className="h-3 w-3 text-gray-500 hover:text-gray-600 cursor-pointer transition-colors" onClick={() => handleShare(partner.communityName)} />
+                      <button className="text-[#16808D] hover:text-[#142C52] font-medium text-xs transition-colors" onClick={() => handlePartnerSearch(partner.communityName)}>Search on Google</button>
                     </div>
                   </div>
                 </div>
@@ -2100,7 +2339,7 @@ PriHub - Empowering Cognitive Excellence
                 growthMetric: "IoT Expansion"
               }
             ].map((partner, index) => (
-              <div key={`second-${index}`} className="flex-shrink-0 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-110 border border-gray-100 min-w-[320px] max-w-[320px] animate-fade-in">
+              <div key={`second-${index}`} className="flex-shrink-0 bg-white rounded-3xl shadow-lg hover:shadow-2xl transition-all duration-500 transform hover:scale-110 border border-gray-100 min-w-[320px] max-w-[320px] animate-fade-in cursor-pointer" onClick={() => handlePartnerClick(partner.communityName)}>
                 {/* Partner Image */}
                 <div className="relative h-48 overflow-hidden rounded-t-3xl">
                   <img 
@@ -2240,20 +2479,20 @@ PriHub - Empowering Cognitive Excellence
                     <div className="text-center max-w-full relative">
                       <div className="rounded-full flex items-center justify-center mx-auto mb-4 overflow-hidden" style={{width: '260px', height: '260px'}}>
                         <img 
-                          src={customerReviews[currentReviewIndex].avatar} 
-                          alt={customerReviews[currentReviewIndex].name}
+                          src={currentReviews[currentReviewIndex].avatar} 
+                          alt={currentReviews[currentReviewIndex].name}
                           className="w-full h-full object-cover"
                         />
                       </div>
                       <div className="absolute" style={{bottom: '130px', right: '0px', transform: 'translateY(50%)'}}>
                         <div className="w-14 h-14 bg-gradient-to-br from-[#16808D] to-[#142C52] rounded-full flex items-center justify-center">
                           <span className="text-white text-sm font-bold">
-                            {customerReviews[currentReviewIndex].name.split(' ').map(n => n[0]).join('')}
+                            {currentReviews[currentReviewIndex].name.split(' ').map(n => n[0]).join('')}
                           </span>
                         </div>
                       </div>
-                      <div className="text-gray-800 text-xl font-semibold truncate px-2">{customerReviews[currentReviewIndex].name}</div>
-                      <div className="text-gray-600 text-sm truncate px-2">{customerReviews[currentReviewIndex].role}</div>
+                      <div className="text-gray-800 text-xl font-semibold truncate px-2">{currentReviews[currentReviewIndex].name}</div>
+                      <div className="text-gray-600 text-sm truncate px-2">{currentReviews[currentReviewIndex].role}</div>
                     </div>
                   </div>
                 </div>
@@ -2265,22 +2504,22 @@ PriHub - Empowering Cognitive Excellence
                     {[1, 2, 3, 4, 5].map((star) => (
                       <Star 
                         key={star} 
-                        className={`h-4 w-4 ${star <= customerReviews[currentReviewIndex].rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}`}
+                        className={`h-4 w-4 ${star <= currentReviews[currentReviewIndex].rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}`}
                       />
                     ))}
-                    <span className="ml-2 text-sm text-gray-600">{customerReviews[currentReviewIndex].rating}.0</span>
+                    <span className="ml-2 text-sm text-gray-600">{currentReviews[currentReviewIndex].rating}.0</span>
                   </div>
                   
                   <h3 className="text-xl font-bold text-gray-900 mb-4">
-                    "{customerReviews[currentReviewIndex].title}"
+                    "{currentReviews[currentReviewIndex].title}"
                   </h3>
                   <p className="text-gray-600 mb-6 leading-relaxed max-w-2xl">
-                    {customerReviews[currentReviewIndex].review}
+                    {currentReviews[currentReviewIndex].review}
                   </p>
                   
                   {/* Tags/Features */}
                   <div className="flex flex-wrap gap-2 mb-4">
-                    {customerReviews[currentReviewIndex].tags.map((tag, index) => {
+                    {currentReviews[currentReviewIndex].tags.map((tag, index) => {
                       const tagColors = [
                         { bg: "bg-[#E0F7FA]", text: "text-[#16808D]" },
                         { bg: "bg-green-50", text: "text-green-700" },
@@ -2300,11 +2539,11 @@ PriHub - Empowering Cognitive Excellence
                   <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-4">
                     <div className="flex items-center bg-gray-50 px-4 py-3 rounded-lg">
                       <Calendar className="h-5 w-5 mr-2" style={{ color: '#16808D' }} />
-                      <span className="font-medium">{customerReviews[currentReviewIndex].date}</span>
+                      <span className="font-medium">{currentReviews[currentReviewIndex].date}</span>
                     </div>
                     <div className="flex items-center bg-gray-50 px-4 py-3 rounded-lg">
                       <ThumbsUp className="h-5 w-5 mr-2" style={{ color: '#1B9AAA' }} />
-                      <span className="font-medium">{customerReviews[currentReviewIndex].helpful} Helpful</span>
+                      <span className="font-medium">{currentReviews[currentReviewIndex].helpful} Helpful</span>
                     </div>
                   </div>
                   
@@ -2330,7 +2569,7 @@ PriHub - Empowering Cognitive Excellence
             <div className="flex flex-col items-center">
               {/* Top Dots Container */}
               <div className="flex space-x-2 mb-6">
-                {customerReviews.map((_, index) => (
+                {currentReviews.map((_, index) => (
                   <button
                     key={index}
                     onClick={() => {
@@ -2363,19 +2602,951 @@ PriHub - Empowering Cognitive Excellence
           {/* Additional Info */}
           <div className="mt-4 text-center">
             <p className="text-gray-600 mb-4">
-              Join {customerReviews.length}+ satisfied users sharing their success stories
+              Join {currentReviews.length}+ satisfied users sharing their success stories
             </p>
-            <Link
-              to="/contact"
+            <button
+              onClick={() => setIsCommunityModalOpen(true)}
               className="inline-flex items-center px-6 py-3 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white rounded-lg font-semibold hover:from-[#16808D] hover:to-[#142C52] transition-all transform hover:scale-105 shadow-lg"
             >
               <MessageSquare className="mr-2 h-5 w-5" />
               Share Your Own Experience
               <ChevronRight className="ml-2 h-5 w-5" />
-            </Link>
+            </button>
           </div>
         </div>
       </div>
+
+      {/* Community Partner Application Modal */}
+      {isPartnerModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 modal-backdrop">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] flex flex-col modal-content">
+            {/* Modal Header */}
+            <div className="bg-white p-6 rounded-t-2xl flex-shrink-0">
+              <div className="relative mb-4">
+                <button
+                  onClick={() => setIsPartnerModalOpen(false)}
+                  className="absolute top-2 -right-1 text-gray-400 hover:text-gray-600 transition-colors flex-shrink-0"
+                >
+                  <X className="h-6 w-6" />
+                </button>
+                <div className="text-justify">
+                  <div className="flex items-start justify-start gap-3">
+                    <div className="w-14 h-14 bg-gradient-to-r from-[#142C52] to-[#16808D] rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                      <Users className="h-8 w-8 text-white" />
+                    </div>
+                    <div>
+                      <h2 className="text-2xl font-bold text-gray-900 mb-0.5">Community Partner Application</h2>
+                      <p className="text-gray-600">Join our trusted network of leading communities</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Circular Image Upload Section */}
+              <div className="flex justify-center items-center gap-6">
+                <div className="relative dropdown-container">
+                  <div className="w-24 h-24 rounded-full bg-gray-100 border-2 border-dashed border-gray-300 overflow-hidden relative">
+                    {imagePreview ? (
+                      <img 
+                        src={imagePreview} 
+                        alt="Community logo" 
+                        className="w-full h-full rounded-full object-cover"
+                        style={{ 
+                          imageRendering: 'crisp-edges',
+                          transform: 'scale(1.1)'
+                        }}
+                      />
+                    ) : (
+                      <div className="text-center mt-3">
+                        <User className="h-8 w-8 text-gray-400 mx-auto mb-1" />
+                        <span className="text-xs text-gray-500">Upload Image</span>
+                      </div>
+                    )}
+                  </div>
+                  
+                  {/* Bottom Right Controls */}
+                  <div className="absolute -bottom-2 -right-2">
+                    <input
+                      id="image-upload"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="hidden"
+                    />
+                    {imagePreview ? (
+                      <div className="flex gap-1">
+                        <label
+                          htmlFor="image-upload"
+                          className="w-7 h-7 bg-white hover:bg-gray-100 text-gray-700 rounded-full flex items-center justify-center shadow-lg transition-all duration-200 cursor-pointer"
+                          title="Change image"
+                        >
+                          <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                          </svg>
+                        </label>
+                        <button
+                          type="button"
+                          onClick={handleImageRemove}
+                          className="w-7 h-7 bg-white hover:bg-red-50 text-red-600 rounded-full flex items-center justify-center shadow-lg transition-all duration-200"
+                          title="Remove image"
+                        >
+                          <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                          </svg>
+                        </button>
+                      </div>
+                    ) : (
+                      <label
+                        htmlFor="image-upload"
+                        className="w-8 h-8 bg-gradient-to-r from-[#142C52] to-[#16808D] hover:from-[#16808D] hover:to-[#142C52] text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-200 cursor-pointer"
+                        title="Upload image"
+                      >
+                        <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                      </label>
+                    )}
+                  </div>
+                </div>
+                
+                {/* Upload Instructions */}
+                <div className="text-left">
+                  <p className="text-sm text-gray-600 font-medium">
+                    Upload Logo
+                  </p>
+                  <p className="text-xs text-gray-500">
+                    Supported formats: JPG, PNG, JPEG
+                  </p>
+                  <p className="text-xs text-gray-500">
+                    Maximum size: 2MB
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Body */}
+            <div className="flex-1 overflow-y-auto" style={{ scrollbarGutter: 'stable' }}>
+              <div className="p-8 pb-4 pr-6 flex-1" style={{ marginRight: '-8px' }}>
+                <form onSubmit={handleSubmit} className="space-y-6">
+                {/* Community Information Grid */}
+                <div className="grid grid-cols-1 gap-6">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      <Building className="inline h-4 w-4 mr-1" />
+                      Community Name *
+                    </label>
+                    <input
+                      type="text"
+                      name="communityName"
+                      value={formData.communityName}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16808D] focus:border-transparent"
+                      placeholder="Enter your community name"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      <User className="inline h-4 w-4 mr-1" />
+                      Contact Person *
+                    </label>
+                    <input
+                      type="text"
+                      name="contactPerson"
+                      value={formData.contactPerson}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16808D] focus:border-transparent"
+                      placeholder="Full name of contact person"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      <Mail className="inline h-4 w-4 mr-1" />
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={formData.email}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16808D] focus:border-transparent"
+                      placeholder="contact@community.com"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      <Phone className="inline h-4 w-4 mr-1" />
+                      Phone Number *
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16808D] focus:border-transparent"
+                      placeholder="+1 (555) 123-4567"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      <Globe className="inline h-4 w-4 mr-1" />
+                      Website
+                    </label>
+                    <input
+                      type="url"
+                      name="website"
+                      value={formData.website}
+                      onChange={handleInputChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16808D] focus:border-transparent"
+                      placeholder="https://www.communitywebsite.com"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      Community Type *
+                    </label>
+                    <div className="relative dropdown-container">
+                      <button
+                        type="button"
+                        onClick={(e) => toggleDropdown('communityType', e)}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16808D] focus:border-transparent text-left bg-white flex justify-between items-center"
+                      >
+                        <span className={formData.communityType ? 'text-gray-900' : 'text-gray-500'}>
+                          {formData.communityType ? 
+                            formData.communityType.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase()) : 
+                            'Select community type'
+                          }
+                        </span>
+                        <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+                      
+                      {openDropdown === 'communityType' && (
+                        <div className={`absolute z-50 w-full bg-white border border-gray-300 rounded-lg shadow-lg max-h-40 overflow-y-auto ${
+                          dropdownPositions.communityType === 'up' ? 'bottom-full mb-1' : 'top-full mt-1'
+                        }`}>
+                          {[
+                            { value: '', label: 'Select community type', name: 'communityType' },
+                            { value: 'special-education', label: 'Special Education Center', name: 'communityType' },
+                            { value: 'cognitive-therapy', label: 'Cognitive Therapy Clinic', name: 'communityType' },
+                            { value: 'assisted-living', label: 'Assisted Living Facility', name: 'communityType' },
+                            { value: 'neurodiversity', label: 'Neurodiversity Support Group', name: 'communityType' },
+                            { value: 'rehabilitation', label: 'Rehabilitation Center', name: 'communityType' },
+                            { value: 'autism-support', label: 'Autism Support Network', name: 'communityType' },
+                            { value: 'memory-care', label: 'Memory Care Community', name: 'communityType' },
+                            { value: 'inclusive-education', label: 'Inclusive Education School', name: 'communityType' },
+                            { value: 'speech-therapy', label: 'Speech Therapy Center', name: 'communityType' },
+                            { value: 'occupational-therapy', label: 'Occupational Therapy Clinic', name: 'communityType' },
+                            { value: 'adhd-support', label: 'ADHD Support Community', name: 'communityType' },
+                            { value: 'dyslexia-center', label: 'Dyslexia Learning Center', name: 'communityType' },
+                            { value: 'mental-health', label: 'Mental Health Clinic', name: 'communityType' },
+                            { value: 'developmental-disability', label: 'Developmental Disability Center', name: 'communityType' },
+                            { value: 'learning-disability', label: 'Learning Disability School', name: 'communityType' },
+                            { value: 'behavioral-therapy', label: 'Behavioral Therapy Center', name: 'communityType' },
+                            { value: 'sensory-integration', label: 'Sensory Integration Clinic', name: 'communityType' },
+                            { value: 'social-skills', label: 'Social Skills Group', name: 'communityType' }
+                          ].map((option) => (
+                            <button
+                              key={option.value}
+                              type="button"
+                              onClick={() => handleDropdownSelect('communityType', option.value)}
+                              className={`w-full px-4 py-2 text-left text-gray-900 ${
+                                formData.communityType === option.value ? 'bg-[#16808D] text-white hover:bg-[#16808D]' : 'hover:bg-gray-100'
+                              }`}
+                            >
+                              {option.label}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Additional Information Dropdowns */}
+                <div className="grid grid-cols-1 gap-6">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      <Building className="inline h-4 w-4 mr-1" />
+                      Organization Size *
+                    </label>
+                    <div className="relative dropdown-container">
+                      <button
+                        type="button"
+                        onClick={(e) => toggleDropdown('organizationSize', e)}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16808D] focus:border-transparent text-left bg-white flex justify-between items-center"
+                      >
+                        <span className={formData.organizationSize ? 'text-gray-900' : 'text-gray-500'}>
+                          {formData.organizationSize ? 
+                            formData.organizationSize.charAt(0).toUpperCase() + formData.organizationSize.slice(1) : 
+                            'Select organization size'
+                          }
+                        </span>
+                        <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+                      
+                      {openDropdown === 'organizationSize' && (
+                        <div className={`absolute z-50 w-full bg-white border border-gray-300 rounded-lg shadow-lg max-h-40 overflow-y-auto ${
+                          dropdownPositions.organizationSize === 'up' ? 'bottom-full mb-1' : 'top-full mt-1'
+                        }`}>
+                          {[
+                            { value: '', label: 'Select organization size', name: 'organizationSize' },
+                            { value: 'small', label: 'Small (1-50 employees)', name: 'organizationSize' },
+                            { value: 'medium', label: 'Medium (51-200 employees)', name: 'organizationSize' },
+                            { value: 'large', label: 'Large (201-500 employees)', name: 'organizationSize' },
+                            { value: 'enterprise', label: 'Enterprise (500+ employees)', name: 'organizationSize' }
+                          ].map((option) => (
+                            <button
+                              key={option.value}
+                              type="button"
+                              onClick={() => handleDropdownSelect('organizationSize', option.value)}
+                              className={`w-full px-4 py-2 text-left text-gray-900 ${
+                                formData.organizationSize === option.value ? 'bg-[#16808D] text-white hover:bg-[#16808D]' : 'hover:bg-gray-100'
+                              }`}
+                            >
+                              {option.label}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      <Calendar className="inline h-4 w-4 mr-1" />
+                      Years Established *
+                    </label>
+                    <div className="relative dropdown-container">
+                      <button
+                        type="button"
+                        onClick={(e) => toggleDropdown('yearsEstablished', e)}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16808D] focus:border-transparent text-left bg-white flex justify-between items-center"
+                      >
+                        <span className={formData.yearsEstablished ? 'text-gray-900' : 'text-gray-500'}>
+                          {formData.yearsEstablished || 'Select years established'}
+                        </span>
+                        <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+                      
+                      {openDropdown === 'yearsEstablished' && (
+                        <div className={`absolute z-50 w-full bg-white border border-gray-300 rounded-lg shadow-lg max-h-40 overflow-y-auto ${
+                          dropdownPositions.yearsEstablished === 'up' ? 'bottom-full mb-1' : 'top-full mt-1'
+                        }`}>
+                          {[
+                            { value: '', label: 'Select years established', name: 'yearsEstablished' },
+                            { value: '0-2', label: '0-2 years', name: 'yearsEstablished' },
+                            { value: '3-5', label: '3-5 years', name: 'yearsEstablished' },
+                            { value: '6-10', label: '6-10 years', name: 'yearsEstablished' },
+                            { value: '11-20', label: '11-20 years', name: 'yearsEstablished' },
+                            { value: '20+', label: '20+ years', name: 'yearsEstablished' }
+                          ].map((option) => (
+                            <button
+                              key={option.value}
+                              type="button"
+                              onClick={() => handleDropdownSelect('yearsEstablished', option.value)}
+                              className={`w-full px-4 py-2 text-left text-gray-900 ${
+                                formData.yearsEstablished === option.value ? 'bg-[#16808D] text-white hover:bg-[#16808D]' : 'hover:bg-gray-100'
+                              }`}
+                            >
+                              {option.label}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      <Target className="inline h-4 w-4 mr-1" />
+                      Service Area *
+                    </label>
+                    <div className="relative dropdown-container">
+                      <button
+                        type="button"
+                        onClick={(e) => toggleDropdown('serviceArea', e)}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16808D] focus:border-transparent text-left bg-white flex justify-between items-center"
+                      >
+                        <span className={formData.serviceArea ? 'text-gray-900' : 'text-gray-500'}>
+                          {formData.serviceArea ? 
+                            formData.serviceArea.charAt(0).toUpperCase() + formData.serviceArea.slice(1) : 
+                            'Select service area'
+                          }
+                        </span>
+                        <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+                      
+                      {openDropdown === 'serviceArea' && (
+                        <div className={`absolute z-50 w-full bg-white border border-gray-300 rounded-lg shadow-lg max-h-40 overflow-y-auto ${
+                          dropdownPositions.serviceArea === 'up' ? 'bottom-full mb-1' : 'top-full mt-1'
+                        }`}>
+                          {[
+                            { value: '', label: 'Select service area', name: 'serviceArea' },
+                            { value: 'local', label: 'Local (City/Region)', name: 'serviceArea' },
+                            { value: 'state', label: 'State-wide', name: 'serviceArea' },
+                            { value: 'national', label: 'National', name: 'serviceArea' },
+                            { value: 'international', label: 'International', name: 'serviceArea' }
+                          ].map((option) => (
+                            <button
+                              key={option.value}
+                              type="button"
+                              onClick={() => handleDropdownSelect('serviceArea', option.value)}
+                              className={`w-full px-4 py-2 text-left text-gray-900 ${
+                                formData.serviceArea === option.value ? 'bg-[#16808D] text-white hover:bg-[#16808D]' : 'hover:bg-gray-100'
+                              }`}
+                            >
+                              {option.label}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Address */}
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <MapPin className="inline h-4 w-4 mr-1" />
+                    Address *
+                  </label>
+                  <input
+                    type="text"
+                    name="address"
+                    value={formData.address}
+                    onChange={handleInputChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16808D] focus:border-transparent"
+                    placeholder="Full address of your community"
+                  />
+                </div>
+
+                {/* Services and Focus Areas Dropdowns */}
+                <div className="grid grid-cols-1 gap-6">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      <Heart className="inline h-4 w-4 mr-1" />
+                      Primary Services Offered *
+                    </label>
+                    <div className="relative dropdown-container">
+                      <button
+                        type="button"
+                        onClick={(e) => toggleDropdown('primaryServices', e)}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16808D] focus:border-transparent text-left bg-white flex justify-between items-center"
+                      >
+                        <span className={formData.primaryServices ? 'text-gray-900' : 'text-gray-500'}>
+                          {formData.primaryServices ? 
+                            formData.primaryServices.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase()) : 
+                            'Select primary services'
+                          }
+                        </span>
+                        <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+                      
+                      {openDropdown === 'primaryServices' && (
+                        <div className={`absolute z-50 w-full bg-white border border-gray-300 rounded-lg shadow-lg max-h-40 overflow-y-auto ${
+                          dropdownPositions.primaryServices === 'up' ? 'bottom-full mb-1' : 'top-full mt-1'
+                        }`}>
+                          {[
+                            { value: '', label: 'Select primary services', name: 'primaryServices' },
+                            { value: 'educational-support', label: 'Educational Support', name: 'primaryServices' },
+                            { value: 'therapy-services', label: 'Therapy Services', name: 'primaryServices' },
+                            { value: 'residential-care', label: 'Residential Care', name: 'primaryServices' },
+                            { value: 'behavioral-intervention', label: 'Behavioral Intervention', name: 'primaryServices' },
+                            { value: 'speech-therapy', label: 'Speech Therapy', name: 'primaryServices' },
+                            { value: 'occupational-therapy', label: 'Occupational Therapy', name: 'primaryServices' },
+                            { value: 'mental-health', label: 'Mental Health Services', name: 'primaryServices' },
+                            { value: 'family-support', label: 'Family Support', name: 'primaryServices' },
+                            { value: 'vocational-training', label: 'Vocational Training', name: 'primaryServices' },
+                            { value: 'social-skills', label: 'Social Skills Development', name: 'primaryServices' }
+                          ].map((option) => (
+                            <button
+                              key={option.value}
+                              type="button"
+                              onClick={() => handleDropdownSelect('primaryServices', option.value)}
+                              className={`w-full px-4 py-2 text-left text-gray-900 ${
+                                formData.primaryServices === option.value ? 'bg-[#16808D] text-white hover:bg-[#16808D]' : 'hover:bg-gray-100'
+                              }`}
+                            >
+                              {option.label}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      <Brain className="inline h-4 w-4 mr-1" />
+                      Primary Focus Area *
+                    </label>
+                    <div className="relative dropdown-container">
+                      <button
+                        type="button"
+                        onClick={(e) => toggleDropdown('primaryFocus', e)}
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16808D] focus:border-transparent text-left bg-white flex justify-between items-center"
+                      >
+                        <span className={formData.primaryFocus ? 'text-gray-900' : 'text-gray-500'}>
+                          {formData.primaryFocus ? 
+                            formData.primaryFocus.replace('-', ' ').replace(/\b\w/g, l => l.toUpperCase()) : 
+                            'Select primary focus area'
+                          }
+                        </span>
+                        <svg className="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                      </button>
+                      
+                      {openDropdown === 'primaryFocus' && (
+                        <div className={`absolute z-50 w-full bg-white border border-gray-300 rounded-lg shadow-lg max-h-40 overflow-y-auto ${
+                          dropdownPositions.primaryFocus === 'up' ? 'bottom-full mb-1' : 'top-full mt-1'
+                        }`}>
+                          {[
+                            { value: '', label: 'Select primary focus area', name: 'primaryFocus' },
+                            { value: 'autism', label: 'Autism Spectrum Disorders', name: 'primaryFocus' },
+                            { value: 'adhd', label: 'ADHD/Attention Disorders', name: 'primaryFocus' },
+                            { value: 'learning-disabilities', label: 'Learning Disabilities', name: 'primaryFocus' },
+                            { value: 'developmental-disabilities', label: 'Developmental Disabilities', name: 'primaryFocus' },
+                            { value: 'cognitive-disabilities', label: 'Cognitive Disabilities', name: 'primaryFocus' },
+                            { value: 'mental-health', label: 'Mental Health Conditions', name: 'primaryFocus' },
+                            { value: 'sensory-processing', label: 'Sensory Processing Disorders', name: 'primaryFocus' },
+                            { value: 'speech-language', label: 'Speech & Language Disorders', name: 'primaryFocus' },
+                            { value: 'memory-care', label: 'Memory Care & Dementia', name: 'primaryFocus' },
+                            { value: 'multiple-disabilities', label: 'Multiple Disabilities', name: 'primaryFocus' }
+                          ].map((option) => (
+                            <button
+                              key={option.value}
+                              type="button"
+                              onClick={() => handleDropdownSelect('primaryFocus', option.value)}
+                              className={`w-full px-4 py-2 text-left text-gray-900 ${
+                                formData.primaryFocus === option.value ? 'bg-[#16808D] text-white hover:bg-[#16808D]' : 'hover:bg-gray-100'
+                              }`}
+                            >
+                              {option.label}
+                            </button>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Community Stats Grid */}
+                <div className="grid grid-cols-1 gap-6">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      <Building className="inline h-4 w-4 mr-1" />
+                      Units/Facilities Count *
+                    </label>
+                    <input
+                      type="text"
+                      name="units"
+                      value={formData.units}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16808D] focus:border-transparent"
+                      placeholder="e.g., 500+ Centers, 300+ Clinics"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      <Users className="inline h-4 w-4 mr-1" />
+                      People Served *
+                    </label>
+                    <input
+                      type="text"
+                      name="residents"
+                      value={formData.residents}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16808D] focus:border-transparent"
+                      placeholder="e.g., 10,000+ Students, 25,000+ Patients"
+                    />
+                  </div>
+                </div>
+
+                {/* Description */}
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <FileText className="inline h-4 w-4 mr-1" />
+                    Community Description *
+                  </label>
+                  <textarea
+                    name="description"
+                    value={formData.description}
+                    onChange={handleInputChange}
+                    required
+                    rows="4"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16808D] focus:border-transparent"
+                    placeholder="Tell us about your community, mission, and the services you provide..."
+                  />
+                </div>
+
+                {/* Tags and Logo Grid */}
+                <div className="grid grid-cols-1 gap-6">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      <Target className="inline h-4 w-4 mr-1" />
+                      Community Tags *
+                    </label>
+                    <input
+                      type="text"
+                      name="tags"
+                      value={formData.tags}
+                      onChange={handleInputChange}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16808D] focus:border-transparent"
+                      placeholder="e.g., Specialized Learning, Adaptive Tech, Personalized Education"
+                    />
+                    <p className="text-xs text-gray-500 mt-1">Separate multiple tags with commas</p>
+                  </div>
+
+                                  </div>
+
+                {/* Submit Buttons */}
+                <div className="flex flex-col sm:flex-row gap-4 justify-end pt-6 border-t">
+                  <button
+                    type="button"
+                    onClick={() => setIsPartnerModalOpen(false)}
+                    className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-6 py-3 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white rounded-lg hover:from-[#16808D] hover:to-[#142C52] transition-all transform hover:scale-105 shadow-lg"
+                  >
+                    Submit Application
+                    <ChevronRight className="ml-2 h-5 w-5 inline" />
+                  </button>
+                </div>
+              </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Community Experience Sharing Modal */}
+      {isCommunityModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4 modal-backdrop">
+          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[90vh] flex flex-col modal-content">
+            {/* Modal Header */}
+            <div className="bg-white p-6 rounded-t-2xl flex-shrink-0">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 bg-gradient-to-r from-[#142C52] to-[#16808D] rounded-lg flex items-center justify-center">
+                    <MessageSquare className="h-6 w-6 text-white" />
+                  </div>
+                  <div>
+                    <h2 className="text-2xl font-bold text-gray-900">Share Your Experience</h2>
+                    <p className="text-gray-600 mt-1">Inspire others with your journey</p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setIsCommunityModalOpen(false)}
+                  className="text-gray-400 hover:text-gray-600 transition-colors"
+                >
+                  <X className="h-6 w-6" />
+                </button>
+              </div>
+            </div>
+
+            {/* Circular Profile Image Upload Section */}
+              <div className="flex justify-center items-center gap-6 pb-4">
+                <div className="relative dropdown-container">
+                  <div className="w-24 h-24 rounded-full bg-gray-100 border-2 border-dashed border-gray-300 overflow-hidden relative">
+                    {imagePreview ? (
+                      <img 
+                        src={imagePreview} 
+                        alt="Profile picture" 
+                        className="w-full h-full rounded-full object-cover"
+                        style={{ 
+                          imageRendering: 'crisp-edges',
+                          transform: 'scale(1.1)'
+                        }}
+                      />
+                    ) : (
+                      <div className="text-center mt-3">
+                        <User className="h-8 w-8 text-gray-400 mx-auto mb-1" />
+                        <span className="text-xs text-gray-500">Profile Image</span>
+                      </div>
+                    )}
+                  </div>
+                  
+                  {/* Bottom Right Controls */}
+                  <div className="absolute -bottom-2 -right-2">
+                    <input
+                      id="community-image-upload"
+                      type="file"
+                      accept="image/*"
+                      onChange={handleImageUpload}
+                      className="hidden"
+                    />
+                    {imagePreview ? (
+                      <div className="flex gap-1">
+                        <label
+                          htmlFor="community-image-upload"
+                          className="w-7 h-7 bg-white hover:bg-gray-100 text-gray-700 rounded-full flex items-center justify-center shadow-lg transition-all duration-200 cursor-pointer"
+                          title="Change image"
+                        >
+                          <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                          </svg>
+                        </label>
+                        <button
+                          type="button"
+                          onClick={handleImageRemove}
+                          className="w-7 h-7 bg-white hover:bg-red-50 text-red-600 rounded-full flex items-center justify-center shadow-lg transition-all duration-200"
+                          title="Remove image"
+                        >
+                          <svg className="h-3 w-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                          </svg>
+                        </button>
+                      </div>
+                    ) : (
+                      <label
+                        htmlFor="community-image-upload"
+                        className="w-8 h-8 bg-gradient-to-r from-[#142C52] to-[#16808D] hover:from-[#16808D] hover:to-[#142C52] text-white rounded-full flex items-center justify-center shadow-lg transition-all duration-200 cursor-pointer"
+                        title="Upload image"
+                      >
+                        <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 4v16m8-8H4" />
+                        </svg>
+                      </label>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+            {/* Modal Content */}
+            <div className="flex-1 overflow-y-auto p-6">
+              <form onSubmit={handleCommunitySubmit} className="space-y-6">
+                {/* Personal Information */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      <User className="inline h-4 w-4 mr-1" />
+                      Full Name *
+                    </label>
+                    <input
+                      type="text"
+                      name="name"
+                      value={communityFormData.name}
+                      onChange={handleCommunityInputChange}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16808D] focus:border-transparent"
+                      placeholder="John Doe"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      <Mail className="inline h-4 w-4 mr-1" />
+                      Email Address *
+                    </label>
+                    <input
+                      type="email"
+                      name="email"
+                      value={communityFormData.email}
+                      onChange={handleCommunityInputChange}
+                      required
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16808D] focus:border-transparent"
+                      placeholder="john@example.com"
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      <Phone className="inline h-4 w-4 mr-1" />
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={communityFormData.phone}
+                      onChange={handleCommunityInputChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16808D] focus:border-transparent"
+                      placeholder="+1 (555) 123-4567"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-semibold text-gray-700 mb-2">
+                      <Calendar className="inline h-4 w-4 mr-1" />
+                      Age
+                    </label>
+                    <input
+                      type="number"
+                      name="age"
+                      value={communityFormData.age}
+                      onChange={handleCommunityInputChange}
+                      min="18"
+                      max="100"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16808D] focus:border-transparent"
+                      placeholder="25"
+                    />
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <Building className="inline h-4 w-4 mr-1" />
+                    Occupation
+                  </label>
+                  <input
+                    type="text"
+                    name="occupation"
+                    value={communityFormData.occupation}
+                    onChange={handleCommunityInputChange}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16808D] focus:border-transparent"
+                    placeholder="Teacher, Software Engineer, Student, etc."
+                  />
+                </div>
+
+                {/* Experience Details */}
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <Star className="inline h-4 w-4 mr-1" />
+                    Experience Title *
+                  </label>
+                  <input
+                    type="text"
+                    name="experienceTitle"
+                    value={communityFormData.experienceTitle}
+                    onChange={handleCommunityInputChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16808D] focus:border-transparent"
+                    placeholder="Life-Changing Platform, Amazing Resource, etc."
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <MessageSquare className="inline h-4 w-4 mr-1" />
+                    Your Experience *
+                  </label>
+                  <textarea
+                    name="experience"
+                    value={communityFormData.experience}
+                    onChange={handleCommunityInputChange}
+                    required
+                    rows="6"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16808D] focus:border-transparent"
+                    placeholder="Share your story about how the platform helped you. What challenges did you face? What improvements did you see? How has it impacted your life?"
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Minimum 50 characters</p>
+                </div>
+
+                {/* Rating */}
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <Star className="inline h-4 w-4 mr-1" />
+                    Overall Rating *
+                  </label>
+                  <div className="flex items-center space-x-2">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                      <button
+                        key={star}
+                        type="button"
+                        onClick={() => setCommunityFormData(prev => ({ ...prev, rating: star }))}
+                        className="transition-colors"
+                      >
+                        <Star
+                          className={`h-8 w-8 ${
+                            star <= communityFormData.rating
+                              ? 'text-yellow-400 fill-current'
+                              : 'text-gray-300 hover:text-yellow-300'
+                          }`}
+                        />
+                      </button>
+                    ))}
+                    <span className="ml-2 text-sm text-gray-600">
+                      {communityFormData.rating}.0 stars
+                    </span>
+                  </div>
+                </div>
+
+                {/* Tags */}
+                <div>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    <Target className="inline h-4 w-4 mr-1" />
+                    Tags *
+                  </label>
+                  <input
+                    type="text"
+                    name="tags"
+                    value={communityFormData.tags}
+                    onChange={handleCommunityInputChange}
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#16808D] focus:border-transparent"
+                    placeholder="User Friendly, Life Changing, Great Support, etc."
+                  />
+                  <p className="text-xs text-gray-500 mt-1">Separate multiple tags with commas</p>
+                </div>
+
+                {/* Consent */}
+                <div>
+                  <label className="flex items-start space-x-3">
+                    <input
+                      type="checkbox"
+                      name="consent"
+                      checked={communityFormData.consent}
+                      onChange={handleCommunityInputChange}
+                      required
+                      className="mt-1 h-4 w-4 text-[#16808D] border-gray-300 rounded focus:ring-[#16808D]"
+                    />
+                    <span className="text-sm text-gray-600">
+                      I consent to sharing my experience publicly on the platform. I understand that my name and story may be displayed to help and inspire others in the community.
+                    </span>
+                  </label>
+                </div>
+
+                {/* Submit Buttons */}
+                <div className="flex flex-col sm:flex-row gap-4 justify-end pt-6 border-t">
+                  <button
+                    type="button"
+                    onClick={() => setIsCommunityModalOpen(false)}
+                    className="px-6 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="px-6 py-3 bg-gradient-to-r from-[#142C52] to-[#16808D] text-white rounded-lg hover:from-[#16808D] hover:to-[#142C52] transition-all transform hover:scale-105 shadow-lg"
+                  >
+                    Share Experience
+                    <ChevronRight className="ml-2 h-5 w-5 inline" />
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

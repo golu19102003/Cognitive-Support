@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { 
   BookOpen, HelpCircle, Play, Bot, Target, Users, Calendar, 
   MessageSquare, GraduationCap, Heart, School, Users2, Headphones,
@@ -9,6 +10,7 @@ import {
 } from 'lucide-react';
 
 const Resources = () => {
+  const navigate = useNavigate();
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
@@ -893,7 +895,10 @@ const Resources = () => {
                   </div>
 
                   {/* Action Button */}
-                  <button className={`w-full py-3 rounded-lg font-medium transition-all flex items-center justify-center gap-2 bg-gradient-to-r ${resource.color} text-white hover:shadow-lg transform hover:scale-105`}>
+                  <button 
+                    onClick={() => resource.title === 'User Guide' ? navigate('/resources/user-guide') : null}
+                    className={`w-full py-3 rounded-lg font-medium transition-all flex items-center justify-center gap-2 bg-gradient-to-r ${resource.color} text-white hover:shadow-lg transform hover:scale-105`}
+                  >
                     {resource.action}
                     <ArrowRight className="h-4 w-4" />
                   </button>

@@ -593,7 +593,7 @@ const Chatbot = () => {
         {chatExpanded && (
           <motion.div
             id="chatbot-container"
-            className={`fixed top-16 right-0 ${darkMode ? 'bg-gray-900' : 'bg-white'} rounded-lg shadow-2xl flex flex-col border-2 z-10`}
+            className={`fixed top-16 right-0 ${darkMode ? 'bg-gray-900' : 'bg-white'} rounded-lg shadow-2xl flex flex-col border-2 z-[9999]`}
             style={{width: `${chatbotWidth}px`, height: `${chatbotHeight}px`, borderColor: '#0C4A50'}}
             initial={{ opacity: 0, scale: 0.8, y: 50 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
