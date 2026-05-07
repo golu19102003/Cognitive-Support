@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Moon, Sun, Type, Square, MessageSquare, FileText, X, Contrast, Target, Eye, Settings, Timer, Play, Pause, RotateCcw, Award, Brain, Zap, Volume2, CheckCircle, AlertCircle, StickyNote, PenTool, BookOpen, Edit, Phone, Minus, Plus } from 'lucide-react';
+import { useAccessibility } from '../../contexts/AccessibilityContext';
 
 const AccessibilitySidebar = () => {
+  const { registerAccessibilityFunctions } = useAccessibility();
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [isDyslexiaFont, setIsDyslexiaFont] = useState(false);
   const [isSimplifiedText, setIsSimplifiedText] = useState(false);
@@ -519,6 +521,32 @@ const AccessibilitySidebar = () => {
       document.documentElement.classList.add('simplify-text');
     }
   }, []);
+
+  // Register accessibility functions with context
+  useEffect(() => {
+    registerAccessibilityFunctions({
+      openGeneralSettings: () => setShowGeneralSettingsModal(true),
+      openQuickNotes: () => setShowQuickNotesModal(true),
+      openFocusMode: () => setShowFocusMode(true),
+      openEyeTracking: () => setShowEyeTracking(true),
+      openAISettings: () => {
+        setShowGeneralSettingsModal(true);
+        showNotification('🤖 AI Assistant settings opened');
+      },
+      openMultilingualSettings: () => {
+        setShowGeneralSettingsModal(true);
+        showNotification('🌍 Multilingual settings opened');
+      },
+      openTextToSpeechSettings: () => {
+        setShowGeneralSettingsModal(true);
+        showNotification('🔊 Text-to-Speech settings opened');
+      },
+      openVoiceAssistantSettings: () => {
+        setShowGeneralSettingsModal(true);
+        showNotification('🎤 Voice Assistant settings opened');
+      }
+    });
+  }, [registerAccessibilityFunctions]);
 
   const toggleTheme = () => {
     setIsDarkMode(!isDarkMode);

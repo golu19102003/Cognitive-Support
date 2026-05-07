@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Building, UserPlus, Eye, EyeOff, Mail, Lock, User, Home, Phone } from 'lucide-react';
+import { signUpWithEmail } from '../../firebase';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -40,11 +41,46 @@ const Register = () => {
     }
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      console.log('🔐 Starting Firebase registration...');
+      console.log('📧 Email:', formData.email);
+      console.log('👤 Name:', `${formData.firstName} ${formData.lastName}`);
       
-      console.log('Registration attempt:', formData);
-      navigate('/login');
+      // Validate input
+      if (!formData.email || !formData.password || !formData.firstName || !formData.lastName) {
+        setError('Please fill all required fields.');
+        return;
+      }
+      
+      // Combine first and last name
+      const fullName = `${formData.firstName} ${formData.lastName}`;
+      
+      // Use real Firebase registration
+      console.log('🔄 Attempting Firebase registration...');
+      
+      const result = await signUpWithEmail(formData.email, formData.password, fullName);
+      
+      if (result.success) {
+        console.log('✅ Firebase registration successful');
+        console.log('👤 Firebase user:', result.user);
+        
+        // Store user data in localStorage (simple approach)
+        localStorage.setItem('user', JSON.stringify({
+          id: result.user.uid,
+          name: result.user.displayName || fullName,
+          email: result.user.email,
+          photoURL: result.user.photoURL || '',
+          authProvider: 'email'
+        }));
+        
+        console.log('🎉 Registration successful, redirecting to dashboard...');
+        navigate('/dashboard');
+      } else {
+        console.error('🔥 Firebase registration error:', result.error);
+        setError(result.error || 'Registration failed. Please try again.');
+      }
+      
     } catch (err) {
+      console.error('🔥 Registration error:', err);
       setError('Registration failed. Please try again.');
     } finally {
       setIsLoading(false);

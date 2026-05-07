@@ -75,41 +75,15 @@ const Resources = () => {
   }, [isDragging, dragStart]);
 
   const categories = [
-    { id: 'guides', name: 'Guides', icon: FileText, color: '#6D28D9' },
-    { id: 'tools', name: 'Tools', icon: Wrench, color: 'purple' },
     { id: 'support', name: 'Support', icon: Headphones, color: 'red' },
     { id: 'community', name: 'Community', icon: Users, color: 'green' },
-    { id: 'education', name: 'Education', icon: GraduationCap, color: '#EA580C' }
+    { id: 'education', name: 'Education', icon: GraduationCap, color: '#EA580C' },
+    { id: 'training', name: 'Training', icon: Target, color: 'purple' }
   ];
 
   const resources = [
     {
       id: 1,
-      title: 'User Guide',
-      description: 'Complete step-by-step guide explaining how to use PriHub features like accessibility tools, chatbot assistance, reminders, and community support.',
-      category: 'guides',
-      icon: BookOpen,
-      color: 'from-blue-800 to-blue-900',
-      features: ['Step-by-step tutorials', 'Visual guides', 'Accessibility features', 'Community support', 'Expert assistance'],
-      rating: 4.8,
-      downloads: '12.5K',
-      action: 'Read More',
-      badge: 'Popular'
-    },
-    {
-      id: 2,
-      title: 'FAQ',
-      description: 'Frequently asked questions related to accessibility features, therapy support, AI tools, and platform usage with comprehensive detailed answers.',
-      category: 'guides',
-      icon: HelpCircle,
-      color: 'from-emerald-700 to-emerald-800',
-      features: ['Common questions', 'Quick answers', 'Troubleshooting', 'Platform usage', 'Expert guidance'],
-      rating: 4.6,
-      downloads: '8.2K',
-      action: 'View FAQ'
-    },
-    {
-      id: 4,
       title: 'Therapy Sessions',
       description: 'Access comprehensive online therapy programs including cognitive therapy, mental wellness programs, and guided therapy sessions.',
       category: 'support',
@@ -121,12 +95,12 @@ const Resources = () => {
       action: 'Book Session'
     },
     {
-      id: 3,
+      id: 2,
       title: 'Video Tutorials',
       description: 'Comprehensive visual tutorials explaining how to use screen reader tools, reminders, AI chatbot, and accessibility settings effectively with examples.',
-      category: 'guides',
+      category: 'training',
       icon: Play,
-      color: 'from-orange-700 to-orange-800',
+      color: 'from-indigo-600 to-indigo-700',
       features: ['Video guides', 'Screen reader tutorials', 'AI assistant demos', 'Accessibility settings', 'Interactive learning'],
       rating: 4.9,
       downloads: '15.3K',
@@ -134,44 +108,7 @@ const Resources = () => {
       badge: 'Featured'
     },
     {
-      id: 5,
-      title: 'Gamification Cognitive Training',
-      description: 'Neuroplasticity-based cognitive training using gamified exercises to strengthen neural pathways enhance mental performance adaptive challenges.',
-      category: 'tools',
-      icon: Target,
-      color: 'from-rose-600 to-rose-700',
-      features: ['Memory games', 'Focus training', 'Cognitive exercises', 'Progress tracking', 'Adaptive challenges'],
-      rating: 4.8,
-      downloads: '11.2K',
-      action: 'Start Training'
-    },
-    {
-      id: 6,
-      title: 'One-to-One Counselling',
-      description: 'Users can easily search therapists and specialists by condition and PIN code to book personalized secure online counselling sessions.',
-      category: 'support',
-      icon: Phone,
-      color: 'from-teal-700 to-teal-800',
-      features: ['Therapist search', 'PIN code filter', 'Secure sessions', 'Personalized counseling', 'Professional help'],
-      rating: 4.9,
-      downloads: '6.7K',
-      action: 'Find a Counselor'
-    },
-    {
-      id: 7,
-      title: 'AI Smart Assistant',
-      description: 'An AI-powered intelligent chatbot that helps users navigate the platform, answer questions, and provide personalized accessibility guidance.',
-      category: 'tools',
-      icon: Bot,
-      color: 'from-indigo-700 to-indigo-800',
-      features: ['24/7 availability', 'Personalized guidance', 'Accessibility help', 'Platform navigation', 'Smart assistance'],
-      rating: 4.7,
-      downloads: '9.8K',
-      action: 'Try AI Assistant',
-      badge: 'New'
-    },
-    {
-      id: 8,
+      id: 3,
       title: 'Support Groups',
       description: 'Join supportive peer communities for ADHD, autism, dementia, and other conditions to share valuable experiences and receive support.',
       category: 'community',
@@ -183,7 +120,32 @@ const Resources = () => {
       action: 'Join Group'
     },
     {
-      id: 9,
+      id: 4,
+      title: 'Gamification Cognitive Training',
+      description: 'Neuroplasticity-based cognitive training using gamified exercises to strengthen neural pathways enhance mental performance adaptive challenges.',
+      category: 'training',
+      icon: Target,
+      color: 'from-purple-600 to-purple-700',
+      features: ['Memory games', 'Focus training', 'Cognitive exercises', 'Progress tracking', 'Adaptive challenges'],
+      rating: 4.8,
+      downloads: '11.2K',
+      action: 'Start Training',
+      badge: 'Featured'
+    },
+    {
+      id: 5,
+      title: 'One-to-One Counselling',
+      description: 'Users can easily search therapists and specialists by condition and PIN code to book personalized secure online counselling sessions.',
+      category: 'support',
+      icon: Phone,
+      color: 'from-teal-700 to-teal-800',
+      features: ['Therapist search', 'PIN code filter', 'Secure sessions', 'Personalized counseling', 'Professional help'],
+      rating: 4.9,
+      downloads: '6.7K',
+      action: 'Find a Counselor'
+    },
+    {
+      id: 6,
       title: 'Educational Support',
       description: 'Comprehensive learning resources, personalized study assistance, and simplified educational content for people with cognitive challenges.',
       category: 'education',
@@ -195,7 +157,7 @@ const Resources = () => {
       action: 'Explore Resources'
     },
     {
-      id: 11,
+      id: 7,
       title: 'Academic Collaboration Network',
       description: 'Partnership with schools, colleges, and training centers promoting inclusive learning environments through adaptive technologies and support.',
       category: 'education',
@@ -207,7 +169,7 @@ const Resources = () => {
       action: 'Learn More'
     },
     {
-      id: 10,
+      id: 8,
       title: 'NGO Partnerships',
       description: 'Collaboration with dedicated NGOs working in disability support to provide verified resources, awareness programs, and assistance.',
       category: 'community',
@@ -219,7 +181,7 @@ const Resources = () => {
       action: 'View Partners'
     },
     {
-      id: 12,
+      id: 9,
       title: 'Community Forum',
       description: 'A supportive discussion space where users, caregivers, and experts can share valuable experiences, helpful advice, and resources.',
       category: 'community',
@@ -231,8 +193,8 @@ const Resources = () => {
       action: 'Join Forum'
     },
     {
-      id: 13,
-      title: 'Support Center',
+      id: 10,
+      title: '24/7 Support Center',
       description: 'Direct immediate assistance from the dedicated PriHub support team for technical help or accessibility issues and questions with guidance.',
       category: 'support',
       icon: Headphones,
@@ -244,94 +206,7 @@ const Resources = () => {
       badge: '24/7'
     },
     {
-      id: 14,
-      title: 'Accessibility Tools Hub',
-      description: 'Collection comprehensive accessible tools like text-to-speech, speech-to-text, high-contrast mode, dyslexia fonts, and advanced screen readers.',
-      category: 'tools',
-      icon: Wrench,
-      color: 'from-pink-800 to-pink-900',
-      features: ['Text-to-speech', 'Speech-to-text', 'High contrast', 'Screen readers', 'Customizable settings'],
-      rating: 4.8,
-      downloads: '13.7K',
-      action: 'Explore Tools',
-      badge: 'Essential'
-    },
-    {
-      id: 15,
-      title: 'API Documentation',
-      description: 'Comprehensive technical documentation with practical guides and detailed code examples for integrating PriHub accessibility services.',
-      category: 'tools',
-      icon: Code,
-      color: 'from-zinc-700 to-zinc-800',
-      features: ['Developer docs', 'API integration', 'Technical guides', 'Code examples', 'Implementation support'],
-      rating: 4.5,
-      downloads: '3.2K',
-      action: 'View Docs'
-    },
-    {
-      id: 16,
-      title: 'Screen Reader Integration',
-      description: 'Complete comprehensive screen reader compatibility guide with JAWS, NVDA, and VoiceOver for seamless navigation experience.',
-      category: 'tools',
-      icon: Eye,
-      color: 'from-teal-500 to-teal-600',
-      features: ['Comprehensive support', 'Visual impairments', 'Braille integration', 'Audio descriptions', 'Visual accessibility', 'Navigation shortcuts', 'Screen reader setup'],
-      rating: 4.9,
-      downloads: '18.7K',
-      action: 'Setup Guide',
-      badge: 'Essential'
-    },
-    {
-      id: 17,
-      title: 'Visual Accessibility Suite',
-      description: 'Comprehensive advanced visual impairment tools including high contrast modes, magnification, and color blindness support features adaptive settings.',
-      category: 'tools',
-      icon: Monitor,
-      color: 'from-amber-700 to-amber-800',
-      features: ['High contrast', 'Screen magnifier', 'Color blind mode', 'Font adjustment', 'Visual enhancements'],
-      rating: 4.8,
-      downloads: '14.2K',
-      action: 'Configure Tools'
-    },
-    {
-      id: 18,
-      title: 'Cognitive Navigation Assistant',
-      description: 'AI-powered intelligent navigation assistant that simplifies complex interfaces and provides personalized step-by-step guidance.',
-      category: 'tools',
-      icon: Brain,
-      color: 'from-blue-900 to-blue-950',
-      features: ['Simplified interface', 'Step-by-step help', 'Cognitive shortcuts', 'Memory aids', 'Smart navigation'],
-      rating: 4.7,
-      downloads: '11.5K',
-      action: 'Start Assistant',
-      badge: 'AI Powered'
-    },
-    {
-      id: 19,
-      title: 'Accessibility Testing Tools',
-      description: 'Professional comprehensive accessibility testing suite for WCAG compliance validation and detailed cognitive load assessment with automated checks.',
-      category: 'tools',
-      icon: Shield,
-      color: 'from-lime-700 to-lime-800',
-      features: ['WCAG testing', 'Cognitive load analysis', 'Accessibility audit', 'Compliance reports', 'Automated checks'],
-      rating: 4.6,
-      downloads: '7.8K',
-      action: 'Run Tests'
-    },
-    {
-      id: 20,
-      title: 'Inclusive Design Guidelines',
-      description: 'Comprehensive design principles and proven best practices for creating accessible digital experiences with practical implementation examples.',
-      category: 'guides',
-      icon: BookOpen,
-      color: 'from-stone-700 to-stone-800',
-      features: ['Design principles', 'Best practices', 'Implementation guide', 'Case studies', 'Design patterns'],
-      rating: 4.8,
-      downloads: '9.3K',
-      action: 'View Guidelines'
-    },
-    {
-      id: 21,
+      id: 11,
       title: 'Community Support Network',
       description: 'Dedicated supportive community for users with cognitive and visual impairments to share valuable experiences and build meaningful connections.',
       category: 'community',
@@ -344,92 +219,7 @@ const Resources = () => {
       badge: 'Active'
     },
     {
-      id: 22,
-      title: 'Accessibility Training Programs',
-      description: 'Professional comprehensive training programs for developers and designers on modern accessibility best practices with hands-on workshops.',
-      category: 'education',
-      icon: GraduationCap,
-      color: 'from-red-700 to-red-800',
-      features: ['Professional training', 'Hands-on workshops', 'Best practices', 'Accessibility standards', 'Certification programs'],
-      rating: 4.7,
-      downloads: '8.1K',
-      action: 'Enroll Now'
-    },
-    {
-      id: 29,
-      title: 'Accessibility Research Hub',
-      description: 'Latest cutting-edge research and developments in cognitive and visual accessibility technologies and proven best practices for inclusive design.',
-      category: 'education',
-      icon: FileText,
-      color: 'from-blue-800 to-blue-900',
-      features: ['Research papers', 'Case studies', 'Technology trends', 'Best practices'],
-      rating: 4.6,
-      downloads: '7.4K',
-      action: 'Explore Research'
-    },
-    {
-      id: 23,
-      title: 'Assistive Technology Hub',
-      description: 'Centralized comprehensive hub for assistive technologies, device compatibility testing, and detailed integration guides with expert support.',
-      category: 'tools',
-      icon: Wrench,
-      color: 'from-cyan-500 to-cyan-600',
-      features: ['Device compatibility', 'Integration guides', 'Setup tutorials', 'Troubleshooting', 'Technical support'],
-      rating: 4.6,
-      downloads: '12.3K',
-      action: 'Explore Hub'
-    },
-    {
-      id: 24,
-      title: 'Cognitive Accessibility Resources',
-      description: 'Specialized comprehensive resources for cognitive accessibility including advanced memory aids, attention tools, and focus enhancement techniques.',
-      category: 'education',
-      icon: Target,
-      color: 'from-rose-500 to-rose-600',
-      features: ['Memory aids', 'Attention tools', 'Focus techniques', 'Cognitive strategies'],
-      rating: 4.8,
-      downloads: '10.7K',
-      action: 'Access Resources'
-    },
-    {
-      id: 25,
-      title: 'Visual Impairment Support',
-      description: 'Comprehensive specialized support resources for visual impairments including advanced braille integration and rich audio descriptions.',
-      category: 'support',
-      icon: Eye,
-      color: 'from-yellow-500 to-yellow-600',
-      features: ['Braille support', 'Audio descriptions', 'Visual aids', 'Navigation help'],
-      rating: 4.9,
-      downloads: '13.8K',
-      action: 'Get Support',
-      badge: '24/7'
-    },
-    {
-      id: 26,
-      title: 'Accessibility Compliance Suite',
-      description: 'Complete comprehensive compliance tools for ADA, Section 508, and international accessibility standards with automated testing and detailed.',
-      category: 'tools',
-      icon: Shield,
-      color: 'from-green-700 to-green-800',
-      features: ['ADA compliance', 'Section 508', 'International standards', 'Audit reports'],
-      rating: 4.5,
-      downloads: '6.9K',
-      action: 'Check Compliance'
-    },
-    {
-      id: 27,
-      title: 'Inclusive Communication Tools',
-      description: 'Adaptive intelligent communication tools designed for users with cognitive and visual impairments including simplified accessible messaging.',
-      category: 'tools',
-      icon: MessageSquare,
-      color: 'from-purple-700 to-purple-800',
-      features: ['Simplified messaging', 'Voice commands', 'Visual indicators', 'Communication aids'],
-      rating: 4.7,
-      downloads: '11.1K',
-      action: 'Try Tools'
-    },
-    {
-      id: 28,
+      id: 12,
       title: 'Digital Inclusion Platform',
       description: 'Platform-wide comprehensive digital inclusion features ensuring equal access for users with disabilities through adaptive technologies.',
       category: 'community',
@@ -441,19 +231,7 @@ const Resources = () => {
       action: 'Join Platform',
       badge: 'Featured'
     },
-    {
-      id: 30,
-      title: 'Community Engagement Tools',
-      description: 'Interactive adaptive tools designed to increase meaningful engagement and active participation for users with cognitive challenges support.',
-      category: 'community',
-      icon: Heart,
-      color: 'from-rose-700 to-rose-800',
-      features: ['Engagement analytics', 'Participation tools', 'Community building', 'Social features'],
-      rating: 4.7,
-      downloads: '9.8K',
-      action: 'Engage Now'
-    }
-  ];
+      ];
 
   const downloads = [
     {
@@ -513,8 +291,8 @@ const Resources = () => {
   ];
 
   const filteredResources = resources.filter(resource => {
-    const matchesSearch = resource.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         resource.description.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = (resource.title && resource.title.toLowerCase().includes(searchTerm.toLowerCase())) ||
+                         (resource.description && resource.description.toLowerCase().includes(searchTerm.toLowerCase()));
     const matchesCategory = activeSection === 'all' || resource.category === activeSection;
     return matchesSearch && matchesCategory;
   });
@@ -623,7 +401,7 @@ const Resources = () => {
           </div>
 
           {/* Second Row: Categories */}
-          <div className="grid grid-cols-6 gap-4">
+          <div className="grid grid-cols-5 gap-4">
             {/* All Resources Category */}
             <div 
               onClick={() => setActiveSection('all')}
@@ -688,58 +466,8 @@ const Resources = () => {
             </div>
           )}
 
-          {activeSection === 'guides' && (
-            <div className="text-center py-12 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-blue-500/10 animate-pulse"></div>
-              <div className="relative z-10">
-                <FileText className="h-16 w-16 text-purple-600 mx-auto mb-4 animate-bounce" style={{ color: '#6D28D9' }} />
-                <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                  <span style={{ color: '#6D28D9' }}>Comprehensive Guides</span>
-                </h2>
-                <p className="text-lg max-w-3xl mx-auto italic leading-relaxed mb-4">
-                  Detailed step-by-step guides and comprehensive documentation for navigating accessibility features, using assistive technologies, and implementing inclusive design practices. We provide comprehensive instructions with detailed visual examples and expert recommendations.
-                </p>
-                <div className="flex flex-wrap justify-center gap-4">
-                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-purple-900/50 text-purple-300 border border-purple-700' : 'bg-purple-100 text-purple-700 border border-purple-200'}`}>
-                    User Manuals
-                  </div>
-                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-blue-900/50 text-blue-300 border border-blue-700' : 'bg-blue-100 text-blue-700 border border-blue-200'}`}>
-                    Video Tutorials
-                  </div>
-                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-green-900/50 text-green-300 border border-green-700' : 'bg-green-100 text-green-700 border border-green-200'}`}>
-                    FAQ Resources
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {activeSection === 'tools' && (
-            <div className="text-center py-12 relative overflow-hidden">
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-pink-500/10 animate-pulse"></div>
-              <div className="relative z-10">
-                <Wrench className="h-16 w-16 text-purple-600 mx-auto mb-4 animate-bounce" style={{ color: 'purple' }} />
-                <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                  <span style={{ color: 'purple' }}>Accessibility Tools</span>
-                </h2>
-                <p className="text-lg max-w-3xl mx-auto italic leading-relaxed mb-4">
-                  Advanced assistive technology tools and cutting-edge software solutions designed to enhance accessibility for users with cognitive and visual impairments. We offer powerful screen readers, text-to-speech, magnification tools, and advanced cognitive navigation aids for everyone.
-                </p>
-                <div className="flex flex-wrap justify-center gap-4">
-                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-purple-900/50 text-purple-300 border border-purple-700' : 'bg-purple-100 text-purple-700 border border-purple-200'}`}>
-                    Screen Readers
-                  </div>
-                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-pink-900/50 text-pink-300 border border-pink-700' : 'bg-pink-100 text-pink-700 border border-pink-200'}`}>
-                    Text-to-Speech
-                  </div>
-                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-blue-900/50 text-blue-300 border border-blue-700' : 'bg-blue-100 text-blue-700 border border-blue-200'}`}>
-                    Cognitive Aids
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
+          
+          
           {activeSection === 'support' && (
             <div className="text-center py-12 relative overflow-hidden">
               <div className="absolute inset-0 bg-gradient-to-r from-red-500/10 to-orange-500/10 animate-pulse"></div>
@@ -817,9 +545,180 @@ const Resources = () => {
               </div>
             </div>
           )}
+
+          {activeSection === 'training' && (
+            <div className="text-center py-12 relative overflow-hidden">
+              <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 to-indigo-500/10 animate-pulse"></div>
+              <div className="relative z-10">
+                <Target className="h-16 w-16 text-purple-600 mx-auto mb-4 animate-bounce" style={{ color: 'purple' }} />
+                <h2 className="text-3xl font-bold mb-4 bg-gradient-to-r from-purple-600 to-indigo-600 bg-clip-text text-transparent">
+                  <span style={{ color: 'purple' }}>Interactive Training</span>
+                </h2>
+                <p className="text-lg max-w-3xl mx-auto italic leading-relaxed mb-4">
+                  Engaging interactive training programs and cognitive exercises designed to enhance mental performance, memory, focus, and overall cognitive abilities. We provide gamified learning experiences, adaptive challenges, and progress tracking for optimal skill development.
+                </p>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-purple-900/50 text-purple-300 border border-purple-700' : 'bg-purple-100 text-purple-700 border border-purple-200'}`}>
+                    Cognitive Training
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-indigo-900/50 text-indigo-300 border border-indigo-700' : 'bg-indigo-100 text-indigo-700 border border-indigo-200'}`}>
+                    Video Learning
+                  </div>
+                  <div className={`px-4 py-2 rounded-full text-sm font-medium ${isDarkMode ? 'bg-violet-900/50 text-violet-300 border border-violet-700' : 'bg-violet-100 text-violet-700 border border-violet-200'}`}>
+                    Skill Building
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
-        
+        {/* Accessibility Grid Section */}
+        <div className="mb-12">
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center mb-4">
+              <Shield className="h-8 w-8 text-purple-600 mr-3" />
+              <h2 className="text-3xl font-bold text-gray-900 dark:text-white">Accessibility Hub</h2>
+            </div>
+            <p className="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+              Comprehensive accessibility tools and resources designed to support users with diverse needs
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            
+            {/* Screen Reader Integration */}
+            <div className="bg-gradient-to-br from-teal-50 to-blue-50 dark:from-teal-900/20 dark:to-blue-900/20 rounded-xl p-6 border border-teal-200 dark:border-teal-700 hover:shadow-lg transition-all duration-300">
+              <div className="flex items-center mb-4">
+                <div className="p-2 bg-teal-600 rounded-lg mr-3">
+                  <Eye className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 dark:text-white">Screen Reader Integration</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Visual support</p>
+                </div>
+              </div>
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
+                Complete compatibility with JAWS, NVDA, and VoiceOver for seamless navigation.
+              </p>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-1">
+                  <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">4.9</span>
+                </div>
+                <span className="text-sm text-gray-600 dark:text-gray-400">18.7K</span>
+              </div>
+              <a href="https://www.freedomscientific.com/products/software/jaws" target="_blank" rel="noopener noreferrer" className="w-full mt-4 px-4 py-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 transition-colors font-medium inline-block text-center">
+                Setup Guide
+              </a>
+            </div>
+
+            {/* Visual Accessibility Suite */}
+            <div className="bg-gradient-to-br from-amber-50 to-orange-50 dark:from-amber-900/20 dark:to-orange-900/20 rounded-xl p-6 border border-amber-200 dark:border-amber-700 hover:shadow-lg transition-all duration-300">
+              <div className="flex items-center mb-4">
+                <div className="p-2 bg-amber-600 rounded-lg mr-3">
+                  <Monitor className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 dark:text-white">Visual Accessibility Suite</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Visual enhancements</p>
+                </div>
+              </div>
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
+                Advanced visual impairment tools with high contrast modes and color blindness support.
+              </p>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-1">
+                  <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">4.8</span>
+                </div>
+                <span className="text-sm text-gray-600 dark:text-gray-400">14.2K</span>
+              </div>
+              <a href="https://support.microsoft.com/en-us/windows/change-color-contrast-in-windows" target="_blank" rel="noopener noreferrer" className="w-full mt-4 px-4 py-2 bg-amber-600 text-white rounded-lg hover:bg-amber-700 transition-colors font-medium inline-block text-center">
+                Configure Tools
+              </a>
+            </div>
+
+            {/* Accessibility Testing Tools */}
+            <div className="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 rounded-xl p-6 border border-green-200 dark:border-green-700 hover:shadow-lg transition-all duration-300">
+              <div className="flex items-center mb-4">
+                <div className="p-2 bg-green-600 rounded-lg mr-3">
+                  <Shield className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 dark:text-white">Accessibility Testing Tools</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Compliance testing</p>
+                </div>
+              </div>
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
+                Professional WCAG compliance testing and cognitive load assessment tools.
+              </p>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-1">
+                  <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">4.6</span>
+                </div>
+                <span className="text-sm text-gray-600 dark:text-gray-400">7.8K</span>
+              </div>
+              <a href="https://wave.webaim.org" target="_blank" rel="noopener noreferrer" className="w-full mt-4 px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors font-medium inline-block text-center">
+                Run Tests
+              </a>
+            </div>
+
+            {/* Accessibility Compliance Suite */}
+            <div className="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-xl p-6 border border-blue-200 dark:border-blue-700 hover:shadow-lg transition-all duration-300">
+              <div className="flex items-center mb-4">
+                <div className="p-2 bg-blue-600 rounded-lg mr-3">
+                  <Shield className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 dark:text-white">Accessibility Compliance Suite</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Standards compliance</p>
+                </div>
+              </div>
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
+                Complete ADA, Section 508, and international accessibility standards compliance.
+              </p>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-1">
+                  <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">4.5</span>
+                </div>
+                <span className="text-sm text-gray-600 dark:text-gray-400">6.9K</span>
+              </div>
+              <a href="https://www.ada.gov/resources/web-guidance" target="_blank" rel="noopener noreferrer" className="w-full mt-4 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium inline-block text-center">
+                Check Compliance
+              </a>
+            </div>
+
+            {/* Cognitive Accessibility Resources */}
+            <div className="bg-gradient-to-br from-rose-50 to-pink-50 dark:from-rose-900/20 dark:to-pink-900/20 rounded-xl p-6 border border-rose-200 dark:border-rose-700 hover:shadow-lg transition-all duration-300">
+              <div className="flex items-center mb-4">
+                <div className="p-2 bg-rose-600 rounded-lg mr-3">
+                  <Target className="h-6 w-6 text-white" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-gray-900 dark:text-white">Cognitive Accessibility</h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Cognitive support</p>
+                </div>
+              </div>
+              <p className="text-sm text-gray-700 dark:text-gray-300 mb-4">
+                Specialized resources for cognitive accessibility including memory aids and focus tools.
+              </p>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-1">
+                  <Star className="h-4 w-4 text-yellow-400 fill-current" />
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">4.8</span>
+                </div>
+                <span className="text-sm text-gray-600 dark:text-gray-400">10.7K</span>
+              </div>
+              <a href="https://www.understood.org" target="_blank" rel="noopener noreferrer" className="w-full mt-4 px-4 py-2 bg-rose-600 text-white rounded-lg hover:bg-rose-700 transition-colors font-medium inline-block text-center">
+                Access Resources
+              </a>
+            </div>
+          </div>
+        </div>
+
         {/* Resources Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
           {filteredResources.map((resource) => {
@@ -896,7 +795,23 @@ const Resources = () => {
 
                   {/* Action Button */}
                   <button 
-                    onClick={() => resource.title === 'User Guide' ? navigate('/resources/user-guide') : null}
+                    onClick={() => {
+                      const routes = {
+                        'Therapy Sessions': '/resources/therapy-sessions',
+                        'Video Tutorials': '/resources/video-tutorials',
+                        'Support Groups': '/resources/support-groups',
+                        'Gamification Cognitive Training': '/resources/gamification-training',
+                        'One-to-One Counselling': '/resources/one-to-one-counselling',
+                        'Educational Support': '/resources/educational-support',
+                        'Academic Collaboration Network': '/resources/academic-collaboration',
+                        'NGO Partnerships': '/resources/ngo-partnerships',
+                        'Community Forum': '/resources/community-forum',
+                        '24/7 Support Center': '/resources/support-center-247',
+                        'Community Support Network': '/resources/community-support-network',
+                        'Digital Inclusion Platform': '/resources/digital-inclusion-platform'
+                      };
+                      navigate(routes[resource.title] || '/resources');
+                    }}
                     className={`w-full py-3 rounded-lg font-medium transition-all flex items-center justify-center gap-2 bg-gradient-to-r ${resource.color} text-white hover:shadow-lg transform hover:scale-105`}
                   >
                     {resource.action}

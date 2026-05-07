@@ -1258,7 +1258,7 @@ const Home = () => {
           </button>
 
           {/* Features Grid - Show only 3 at a time */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch mx-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 items-stretch mx-4 sm:mx-8 md:mx-16" style={{ gap: isDarkMode ? '1rem' : undefined }}>
             {platformHighlights.slice(currentHighlightIndex, currentHighlightIndex + 3).map((highlight, index) => (
               <div key={index} className={`rounded-lg shadow-lg p-3 text-center hover:shadow-xl transition-all duration-300 transform hover:scale-105 cursor-pointer ${
                 isDarkMode ? 'bg-gray-800' : 'bg-white'
@@ -1582,7 +1582,7 @@ const Home = () => {
           </button>
 
           {/* Features Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 items-stretch mx-16">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 items-stretch mx-4 sm:mx-8 md:mx-16" style={{ gap: isDarkMode ? '1rem' : undefined }}>
             {displayedFeatures.map((featureDetail, index) => (
               <Link
                 key={index}
@@ -1708,7 +1708,7 @@ const Home = () => {
           <span style={{color: '#000000'}}> Cognitive Support System</span>
         </h2>
         <p className="text-gray-600 text-base font-medium animate-pulse text-center mb-2">Revolutionary AI-powered platform with comprehensive disability support features and personalized cognitive assistance</p>
-        <div className="grid grid-cols-4 gap-6 max-w-9xl mx-auto">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6 lg:gap-8 max-w-9xl mx-auto" style={{ gap: isDarkMode ? '1rem' : undefined }}>
           {[
             {
               stepNumber: 1,
@@ -1801,7 +1801,7 @@ const Home = () => {
 
           {/* Community Display */}
           <div className="flex items-center justify-center p-4">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-center max-w-5xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 items-center max-w-5xl mx-auto" style={{ gap: isDarkMode ? '1rem' : undefined }}>
               {/* Image Column */}
               <div className="order-2 lg:order-1">
                 <img 
@@ -2472,7 +2472,7 @@ const Home = () => {
 
             {/* Review Display */}
             <div className="flex items-center justify-center p-4">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 items-center max-w-5xl mx-auto">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-0 sm:gap-4 lg:gap-8 items-center max-w-5xl mx-auto" style={{ gap: isDarkMode ? '1rem' : undefined }}>
                 {/* User Avatar/Image Column */}
                 <div className="order-2 lg:order-1">
                   <div className="w-full h-56 lg:h-72 flex items-center justify-center relative">

@@ -310,7 +310,7 @@ const About = () => {
                 Cognitive disabilities encompass a spectrum of neurological conditions affecting information processing, memory systems, and executive functions. 
                 Understanding these cognitive patterns through advanced neuroscience enables us to create personalized, adaptive support systems that enhance cognitive accessibility and promote neurodiversity inclusion.
               </p>
-              <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8" style={{ gap: isDarkMode ? '1rem' : undefined }}>
                 <div className="group relative bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-800/30 dark:to-cyan-800/30 rounded-xl p-4 border border-blue-200 dark:border-blue-700 transition-all duration-300 hover:shadow-lg hover:scale-[1.02]">
                   <div className="flex items-start space-x-4">
                     <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full flex items-center justify-center flex-shrink-0 group-hover:animate-pulse">
@@ -1023,7 +1023,7 @@ const About = () => {
                 isDarkMode ? 'text-white' : 'text-gray-900'
               }`}>Our Guiding Principles</h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8" style={{ gap: isDarkMode ? '1rem' : undefined }}>
               <div className="border-l-4 border-red-500 pl-4 transition-all duration-300 hover:border-red-600 hover:shadow-md hover:transform hover:translate-x-1 group">
                 <h3 className={`text-lg font-semibold mb-2 transition-colors duration-300 group-hover:text-red-600 ${
                   isDarkMode ? 'text-white' : 'text-gray-900'
@@ -1276,7 +1276,7 @@ const About = () => {
                 isDarkMode ? 'text-white' : 'text-gray-900'
               }`}>Our Technology Ecosystem</h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8" style={{ gap: isDarkMode ? '1rem' : undefined }}>
               <div className="border-l-4 border-blue-500 pl-4 transition-all duration-300 hover:border-blue-600 hover:shadow-md hover:transform hover:translate-x-1 group">
                 <h3 className={`text-lg font-semibold mb-2 transition-colors duration-300 group-hover:text-blue-600 ${
                   isDarkMode ? 'text-white' : 'text-gray-900'
@@ -1404,7 +1404,7 @@ const About = () => {
                 isDarkMode ? 'text-white' : 'text-gray-900'
               }`}>Revolutionary Technology Roadmap</h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8" style={{ gap: isDarkMode ? '1rem' : undefined }}>
               <div className="group relative bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-blue-900/20 dark:to-cyan-900/20 rounded-lg border border-blue-200 dark:border-blue-700 p-6 transition-all duration-300 hover:shadow-xl hover:scale-105 cursor-pointer">
                 <div className="absolute top-2 right-2 w-12 h-12 bg-blue-600 rounded-full flex items-center justify-center group-hover:animate-bounce">
                   <span className="text-white font-bold">Q1</span>
@@ -1579,7 +1579,7 @@ const About = () => {
                 isDarkMode ? 'text-white' : 'text-gray-900'
               }`}>Our Team Structure</h2>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-6 lg:gap-8" style={{ gap: isDarkMode ? '1rem' : undefined }}>
               <div className="border-l-4 border-green-500 pl-4 transition-all duration-300 hover:border-green-600 hover:shadow-md hover:transform hover:translate-x-1 group">
                 <h3 className={`text-lg font-semibold mb-2 transition-colors duration-300 group-hover:text-green-600 ${
                   isDarkMode ? 'text-white' : 'text-gray-900'

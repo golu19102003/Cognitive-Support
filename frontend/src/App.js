@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import MainLayout from './components/Layout/MainLayout';
 import HomePage from './components/HomePage/Home';
 import AboutPage from './components/AboutPage/About';
@@ -32,11 +32,28 @@ import CerebralPalsyEpilepsy from './components/Conditions/CerebralPalsyEpilepsy
 import AllFeatures from './components/AllFeatures/AllFeatures';
 import ResourcesPage from './components/ResourcesPage/Resources';
 import UserGuide from './components/ResourcesPage/UserGuide';
+import TherapySessions from './components/ResourcesPage/TherapySessions';
+import VideoTutorials from './components/ResourcesPage/VideoTutorials';
+import SupportGroups from './components/ResourcesPage/SupportGroups';
+import GamificationTraining from './components/ResourcesPage/GamificationTraining';
+import OneToOneCounselling from './components/ResourcesPage/OneToOneCounselling';
+import EducationalSupport from './components/ResourcesPage/EducationalSupport';
+import AcademicCollaboration from './components/ResourcesPage/AcademicCollaboration';
+import NGOPartnerships from './components/ResourcesPage/NGOPartnerships';
+import CommunityForum from './components/ResourcesPage/CommunityForum';
+import SupportCenter247 from './components/ResourcesPage/SupportCenter247';
+import CommunitySupportNetwork from './components/ResourcesPage/CommunitySupportNetwork';
+import DigitalInclusionPlatform from './components/ResourcesPage/DigitalInclusionPlatform';
 import FocusMode from './components/Gamification/FocusMode';
 import EyeTrackingNavigation from './components/EyeTracking/EyeTrackingNavigation';
 import MultilingualSupport from './components/Multilingual/MultilingualSupport';
 import { MultilingualProvider } from './components/Multilingual/MultilingualSupport';
 import FeaturesPage from './components/FeaturesPage/FeaturesPage';
+import AdvancedFeatures from './components/AdvancedFeatures/AdvancedFeatures';
+import AISmartAssistant from './components/AdvancedFeatures/AISmartAssistant';
+import APIDocumentation from './components/AdvancedFeatures/APIDocumentation';
+import InclusiveDesignGuidelines from './components/AdvancedFeatures/InclusiveDesignGuidelines';
+import CommunityEngagementTools from './components/AdvancedFeatures/CommunityEngagementTools';
 import AITechnologyProviders from './components/Partners/AITechnologyProviders';
 import HealthcareInstitutions from './components/Partners/HealthcareInstitutions';
 import EducationalOrganizations from './components/Partners/EducationalOrganizations';
@@ -110,6 +127,23 @@ function App() {
             <Route path="/all-features" element={<AllFeatures />} />
             <Route path="/resources" element={<ResourcesPage />} />
             <Route path="/resources/user-guide" element={<UserGuide />} />
+            <Route path="/resources/therapy-sessions" element={<TherapySessions />} />
+            <Route path="/resources/video-tutorials" element={<VideoTutorials />} />
+            <Route path="/resources/support-groups" element={<SupportGroups />} />
+            <Route path="/resources/gamification-training" element={<GamificationTraining />} />
+            <Route path="/resources/one-to-one-counselling" element={<OneToOneCounselling />} />
+            <Route path="/resources/educational-support" element={<EducationalSupport />} />
+            <Route path="/resources/academic-collaboration" element={<AcademicCollaboration />} />
+            <Route path="/resources/ngo-partnerships" element={<NGOPartnerships />} />
+            <Route path="/resources/community-forum" element={<CommunityForum />} />
+            <Route path="/resources/support-center-247" element={<SupportCenter247 />} />
+            <Route path="/resources/community-support-network" element={<CommunitySupportNetwork />} />
+            <Route path="/resources/digital-inclusion-platform" element={<DigitalInclusionPlatform />} />
+            <Route path="/advanced-features" element={<AdvancedFeatures />} />
+            <Route path="/advanced-features/ai-smart-assistant" element={<AISmartAssistant />} />
+            <Route path="/advanced-features/api-documentation" element={<APIDocumentation />} />
+            <Route path="/advanced-features/inclusive-design-guidelines" element={<InclusiveDesignGuidelines />} />
+            <Route path="/advanced-features/community-engagement-tools" element={<CommunityEngagementTools />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/signup" element={<Register />} />
             <Route path="/forgotpassword" element={<ForgotPassword />} />

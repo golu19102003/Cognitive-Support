@@ -1,8 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Volume2, Search, Zap, Brain, Eye, Mic, Keyboard, Mouse, Monitor, Headphones, Globe, Calendar, Clock, Bell, Bookmark, Share2, Download, Upload, Filter, SortAsc, Grid, List, ChevronDown, X, BookOpen, FileText, Image, Video, Music, Map, Compass, Navigation, Palette, Brush, Eraser, Scissors, Copy, Clipboard, Save, RefreshCw, RotateCcw, ZoomIn, ZoomOut, Maximize, Minimize, Move, Pin, Lock, Unlock, EyeOff, Volume1, VolumeX, Wifi, WifiOff, Battery, BatteryLow, BatteryFull, Cpu, HardDrive, Usb, Bluetooth, Smartphone, Tablet, Laptop, Tv, Radio, Speaker, Camera, CameraOff, VideoOff, Phone, PhoneOff, Mail, MailOpen, Send, MessageCircle, MessageSquare, User, Users, UserPlus, UserMinus, UserCheck, UserX, Crown, Shield, Award, Medal, Trophy, Star, Heart, ThumbsUp, ThumbsDown, AlertCircle, AlertTriangle, Info, HelpCircle, CheckCircle, XCircle, Loader, MoreVertical, MoreHorizontal, Menu, Home, ArrowLeft, ArrowRight, ArrowUp, ArrowDown, ChevronLeft, ChevronRight, ChevronUp, SkipBack, SkipForward, Rewind, FastForward, Play, Pause, Square, Circle, Triangle, Hexagon, Pentagon, Octagon, Diamond, Target, Type, Hand, Link, Pill, Languages, Moon, Sun, Contrast } from 'lucide-react';
 import MedicationReminder from '../MedicationReminder/MedicationReminder';
+import { useAccessibility } from '../../contexts/AccessibilityContext';
 
 const RightAccessibilitySidebar = () => {
+  const { registerAccessibilityFunctions } = useAccessibility();
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [showReadsAloudModal, setShowReadsAloudModal] = useState(false);
   const [showAdvancedSearchModal, setShowAdvancedSearchModal] = useState(false);
@@ -85,6 +87,15 @@ const RightAccessibilitySidebar = () => {
       document.documentElement.classList.add('simplify-text');
     }
   }, []);
+
+  // Register RightAccessibilitySidebar functions with context
+  useEffect(() => {
+    registerAccessibilityFunctions({
+      openTextToSpeechSettings: () => setShowReadsAloudModal(true),
+      openVoiceAssistantSettings: () => setShowReadsAloudModal(true),
+      openReadPageAloud: () => setShowReadsAloudModal(true)
+    });
+  }, [registerAccessibilityFunctions]);
 
   const languages = [
     { code: 'en', name: 'English', nativeName: 'English', flag: '🇺🇸' },

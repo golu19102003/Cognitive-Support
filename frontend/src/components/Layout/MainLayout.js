@@ -8,7 +8,10 @@ import Notifications from '../Notifications/Notifications';
 import AccessibilitySidebar from '../AccessibilitySidebar/AccessibilitySidebar';
 import RightAccessibilitySidebar from '../AccessibilitySidebar/RightAccessibilitySidebar';
 import { NotificationsProvider } from '../../contexts/NotificationsContext';
-const MainLayout = ({ children }) => {
+import { AccessibilityProvider, useAccessibility } from '../../contexts/AccessibilityContext';
+
+const MainLayoutContent = ({ children }) => {
+  const { triggerAccessibilityFeature } = useAccessibility();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const location = useLocation();
@@ -65,8 +68,7 @@ const MainLayout = ({ children }) => {
   const isActiveLink = (path) => location.pathname === path;
 
   return (
-    <NotificationsProvider>
-      <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50">
       <nav className={`fixed top-0 left-0 right-0 z-50 backdrop-blur-sm transition-colors duration-300 ${
         isDarkMode 
           ? 'bg-black/75' 
@@ -177,8 +179,6 @@ const MainLayout = ({ children }) => {
                   </Link>
                 );
               })}
-              
-              <Notifications />
             </div>
 
             <div className="md:hidden flex items-center">
@@ -250,7 +250,7 @@ const MainLayout = ({ children }) => {
       <footer className={`mt-auto transition-colors duration-300 ${
         isDarkMode 
           ? 'bg-[#1a3a52] text-white' 
-          : 'bg-gradient-to-r from-[#1b4256] to-[#277890] text-white'
+          : 'bg-[#1b4256] text-white'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 py-12">
           <div className="grid grid-cols-1 md:grid-cols-5 gap-6 items-start">
@@ -332,7 +332,7 @@ const MainLayout = ({ children }) => {
                 </Link>
                 <Link to="/advanced-features" className={`flex items-center transition-colors text-white/80 hover:text-white hover:translate-x-1 transform duration-200`} onClick={() => window.scrollTo(0, 0)}>
                   <ChevronRight className="h-3 w-3 mr-1" />
-                  Features
+                  Services
                 </Link>
                 <Link to="/contact" className={`flex items-center transition-colors text-white/80 hover:text-white hover:translate-x-1 transform duration-200`} onClick={() => window.scrollTo(0, 0)}>
                   <ChevronRight className="h-3 w-3 mr-1" />
@@ -347,30 +347,45 @@ const MainLayout = ({ children }) => {
                 isDarkMode ? 'text-white' : 'text-white'
               }`} style={{color: isDarkMode ? '#ffffff' : '#ffffff'}}>Services</h3>
               <div className="space-y-2 text-sm">
-                <Link to="/advanced-features" className={`flex items-center transition-colors text-white/80 hover:text-white hover:translate-x-1 transform duration-200`} onClick={() => window.scrollTo(0, 0)}>
+                <Link to="/ai-smart-assistant" className={`flex items-center transition-colors text-white/80 hover:text-white hover:translate-x-1 transform duration-200 text-left w-full`} onClick={() => window.scrollTo(0, 0)}>
                   <Brain className="h-3 w-3 mr-2" />
                   AI Assistant
                 </Link>
-                <Link to="/gamification/focus-mode" className={`flex items-center transition-colors text-white/80 hover:text-white hover:translate-x-1 transform duration-200`} onClick={() => window.scrollTo(0, 0)}>
+                <button 
+                  onClick={() => triggerAccessibilityFeature('focus-mode')}
+                  className={`flex items-center transition-colors text-white/80 hover:text-white hover:translate-x-1 transform duration-200 text-left w-full`}
+                >
                   <Target className="h-3 w-3 mr-2" />
                   Focus Mode
-                </Link>
-                <Link to="/eye-tracking" className={`flex items-center transition-colors text-white/80 hover:text-white hover:translate-x-1 transform duration-200`} onClick={() => window.scrollTo(0, 0)}>
+                </button>
+                <button 
+                  onClick={() => triggerAccessibilityFeature('eye-tracking')}
+                  className={`flex items-center transition-colors text-white/80 hover:text-white hover:translate-x-1 transform duration-200 text-left w-full`}
+                >
                   <Eye className="h-3 w-3 mr-2" />
                   Eye Tracking
-                </Link>
-                <Link to="/multilingual" className={`flex items-center transition-colors text-white/80 hover:text-white hover:translate-x-1 transform duration-200`} onClick={() => window.scrollTo(0, 0)}>
+                </button>
+                <button 
+                  onClick={() => triggerAccessibilityFeature('multilingual')}
+                  className={`flex items-center transition-colors text-white/80 hover:text-white hover:translate-x-1 transform duration-200 text-left w-full`}
+                >
                   <Languages className="h-3 w-3 mr-2" />
                   Multilingual
-                </Link>
-                <Link to="/text-to-speech" className={`flex items-center transition-colors text-white/80 hover:text-white hover:translate-x-1 transform duration-200`} onClick={() => window.scrollTo(0, 0)}>
+                </button>
+                <button 
+                  onClick={() => triggerAccessibilityFeature('text-to-speech')}
+                  className={`flex items-center transition-colors text-white/80 hover:text-white hover:translate-x-1 transform duration-200 text-left w-full`}
+                >
                   <MessageSquare className="h-3 w-3 mr-2" />
                   Text to Speech
-                </Link>
-                <Link to="/voice-assistant" className={`flex items-center transition-colors text-white/80 hover:text-white hover:translate-x-1 transform duration-200`} onClick={() => window.scrollTo(0, 0)}>
+                </button>
+                <button 
+                  onClick={() => triggerAccessibilityFeature('voice-assistant')}
+                  className={`flex items-center transition-colors text-white/80 hover:text-white hover:translate-x-1 transform duration-200 text-left w-full`}
+                >
                   <Phone className="h-3 w-3 mr-2" />
                   Voice Assistant
-                </Link>
+                </button>
               </div>
             </div>
 
@@ -475,6 +490,18 @@ const MainLayout = ({ children }) => {
       <AccessibilitySidebar />
       <RightAccessibilitySidebar />
     </div>
+  );
+};
+
+// Main component wrapper with providers
+const MainLayout = ({ children }) => {
+  return (
+    <NotificationsProvider>
+      <AccessibilityProvider>
+        <MainLayoutContent>
+          {children}
+        </MainLayoutContent>
+      </AccessibilityProvider>
     </NotificationsProvider>
   );
 };

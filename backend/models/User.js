@@ -2,6 +2,28 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 
 const userSchema = new mongoose.Schema({
+  firebaseUid: {
+    type: String,
+    unique: true,
+    sparse: true
+  },
+  authProvider: {
+    type: String,
+    enum: ['email', 'google', 'twitter', 'github'],
+    default: 'email'
+  },
+  photoURL: {
+    type: String,
+    default: ''
+  },
+  emailVerified: {
+    type: Boolean,
+    default: false
+  },
+  linkedProviders: [{
+    type: String,
+    enum: ['email', 'google', 'twitter', 'github']
+  }],
   name: {
     type: String,
     required: [true, 'Please provide your name'],
@@ -20,13 +42,15 @@ const userSchema = new mongoose.Schema({
   },
   password: {
     type: String,
-    required: [true, 'Please provide a password'],
+    required: function() {
+      return !this.firebaseUid; // Password required only if not Firebase user
+    },
     minlength: [6, 'Password must be at least 6 characters'],
     select: false
   },
   role: {
     type: String,
-    enum: ['user', 'admin', 'therapist', 'caregiver'],
+    enum: ['user', 'admin', 'therapist', 'caregiver', 'resident'],
     default: 'user'
   },
   profile: {
@@ -107,10 +131,6 @@ const userSchema = new mongoose.Schema({
   isActive: {
     type: Boolean,
     default: true
-  },
-  emailVerified: {
-    type: Boolean,
-    default: false
   },
   createdAt: {
     type: Date,

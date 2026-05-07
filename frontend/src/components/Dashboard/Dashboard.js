@@ -4,14 +4,247 @@ import { Home, User, Settings, Bell, Search, Menu, X, TrendingUp, Users, Calenda
 
 const Dashboard = () => {
   const navigate = useNavigate();
+  
+  // Logout function
+  const handleLogout = async () => {
+    try {
+      // Clear Firebase authentication
+      const { auth } = await import('../../firebase');
+      if (auth) {
+        await auth.signOut();
+      }
+      
+      // Clear localStorage
+      localStorage.removeItem('user');
+      localStorage.removeItem('token');
+      localStorage.removeItem('userRole');
+      localStorage.removeItem('joinDate');
+      
+      // Update authentication state
+      setIsAuthenticated(false);
+      setCurrentUser(null);
+      
+      // Update user data to guest
+      setUserData(prev => ({
+        ...prev,
+        name: 'Guest User',
+        email: 'guest@example.com',
+        role: 'Guest',
+        joinDate: 'Not logged in',
+        lastLogin: 'Not logged in',
+        profileCompletion: 0,
+        photoURL: ''
+      }));
+      
+      // Show notification
+      if (window.showNotification) {
+        window.showNotification('Logged out successfully', 'success');
+      }
+      
+      // Navigate to login page
+      navigate('/login');
+    } catch (error) {
+      console.error('Logout error:', error);
+      // Still update state even if Firebase logout fails
+      setIsAuthenticated(false);
+      setCurrentUser(null);
+      navigate('/login');
+    }
+  };
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [activeSection, setActiveSection] = useState('overview');
   const [searchQuery, setSearchQuery] = useState('');
-  const [notifications, setNotifications] = useState(5);
+  const [notifications, setNotifications] = useState([
+    {
+      id: 1,
+      type: 'achievement',
+      title: 'Achievement Unlocked!',
+      message: 'You completed your first cognitive assessment',
+      time: '2 hours ago',
+      read: false,
+      icon: '🏆',
+      color: 'text-yellow-600'
+    },
+    {
+      id: 2,
+      type: 'reminder',
+      title: 'Medication Reminder',
+      message: 'Time for your daily medication',
+      time: '3 hours ago',
+      read: false,
+      icon: '💊',
+      color: 'text-blue-600'
+    },
+    {
+      id: 3,
+      type: 'community',
+      title: 'New Community Post',
+      message: 'Sarah shared a helpful resource',
+      time: '5 hours ago',
+      read: true,
+      icon: '👥',
+      color: 'text-green-600'
+    },
+    {
+      id: 4,
+      type: 'appointment',
+      title: 'Appointment Reminder',
+      message: 'Therapy session tomorrow at 2 PM',
+      time: '1 day ago',
+      read: true,
+      icon: '📅',
+      color: 'text-purple-600'
+    },
+    {
+      id: 5,
+      type: 'system',
+      title: 'Profile Updated',
+      message: 'Your accessibility preferences have been saved',
+      time: '2 days ago',
+      read: true,
+      icon: '⚙️',
+      color: 'text-gray-600'
+    }
+  ]);
   const [messages, setMessages] = useState(3);
+  const [showNotifications, setShowNotifications] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [showSuggestions, setShowSuggestions] = useState(false);
+  const [showProfileDropdown, setShowProfileDropdown] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [currentUser, setCurrentUser] = useState(null);
+
+  // Check authentication state on component mount
+  useEffect(() => {
+    const checkAuthState = async () => {
+      try {
+        const { auth } = await import('../../firebase');
+        const user = localStorage.getItem('user');
+        
+        if (auth && auth.currentUser) {
+          // Firebase user is logged in
+          setIsAuthenticated(true);
+          setCurrentUser(auth.currentUser);
+        } else if (user) {
+          // User data exists in localStorage (backend auth)
+          setIsAuthenticated(true);
+          setCurrentUser(JSON.parse(user));
+        } else {
+          // No user found - guest user
+          setIsAuthenticated(false);
+          setCurrentUser(null);
+        }
+      } catch (error) {
+        console.error('Auth state check error:', error);
+        setIsAuthenticated(false);
+        setCurrentUser(null);
+      }
+    };
+
+    checkAuthState();
+
+    // Listen for auth state changes
+    const listenForAuthChanges = async () => {
+      try {
+        const { auth } = await import('../../firebase');
+        if (auth) {
+          const unsubscribe = auth.onAuthStateChanged((user) => {
+            if (user) {
+              setIsAuthenticated(true);
+              setCurrentUser(user);
+            } else {
+              setIsAuthenticated(false);
+              setCurrentUser(null);
+            }
+          });
+          return unsubscribe;
+        }
+      } catch (error) {
+        console.error('Auth listener error:', error);
+      }
+    };
+
+    listenForAuthChanges();
+  }, []);
+
+  // Update userData when authentication state changes
+  useEffect(() => {
+    if (isAuthenticated && currentUser) {
+      console.log('🔄 Updating userData with Firebase user:', currentUser);
+      setUserData(prev => ({
+        ...prev,
+        name: currentUser.displayName || currentUser.name || localStorage.getItem('userName') || 'User',
+        email: currentUser.email || localStorage.getItem('userEmail') || 'user@example.com',
+        role: localStorage.getItem('userRole') || 'User',
+        joinDate: localStorage.getItem('joinDate') || new Date().toISOString().split('T')[0],
+        lastLogin: new Date().toLocaleString(),
+        profileCompletion: 85,
+        photoURL: currentUser.photoURL || '',
+        preferences: {
+          language: localStorage.getItem('language') || 'English',
+          theme: localStorage.getItem('theme') || 'light',
+          notifications: localStorage.getItem('notifications') === 'true',
+          emailAlerts: localStorage.getItem('emailAlerts') === 'true',
+          profileVisibility: localStorage.getItem('profileVisibility') || 'Everyone',
+          activityStatus: localStorage.getItem('activityStatus') === 'true'
+        }
+      }));
+    } else {
+      console.log('🔄 Resetting userData to guest state');
+      setUserData(prev => ({
+        ...prev,
+        name: 'Guest User',
+        email: 'guest@example.com',
+        role: 'Guest',
+        joinDate: 'Not logged in',
+        lastLogin: 'Not logged in',
+        profileCompletion: 0,
+        photoURL: ''
+      }));
+    }
+  }, [isAuthenticated, currentUser]);
+
+  // Notification management functions
+  const markNotificationAsRead = (id) => {
+    setNotifications(prev => 
+      prev.map(notif => 
+        notif.id === id ? { ...notif, read: true } : notif
+      )
+    );
+  };
+
+  const markAllNotificationsAsRead = () => {
+    setNotifications(prev => 
+      prev.map(notif => ({ ...notif, read: true }))
+    );
+  };
+
+  const getUnreadCount = () => {
+    return notifications.filter(notif => !notif.read).length;
+  };
+
+  const addNotification = (newNotification) => {
+    setNotifications(prev => [newNotification, ...prev]);
+  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (showProfileDropdown && !event.target.closest('.profile-dropdown')) {
+        setShowProfileDropdown(false);
+      }
+      if (showNotifications && !event.target.closest('.notification-dropdown')) {
+        setShowNotifications(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showProfileDropdown, showNotifications]);
 
   // Function to get initials from user name
   const getInitials = (name) => {
@@ -171,12 +404,18 @@ const Dashboard = () => {
   });
   
   const [userData, setUserData] = useState({
-    name: localStorage.getItem('userName') || 'John Doe',
-    email: localStorage.getItem('userEmail') || 'john.doe@example.com',
-    role: localStorage.getItem('userRole') || 'User',
-    joinDate: localStorage.getItem('joinDate') || '2024-01-15',
-    lastLogin: new Date().toLocaleString(),
-    profileCompletion: 85,
+    name: isAuthenticated && currentUser ? 
+      (currentUser.displayName || currentUser.name || localStorage.getItem('userName') || 'User') : 'Guest User',
+    email: isAuthenticated && currentUser ? 
+      (currentUser.email || localStorage.getItem('userEmail') || 'guest@example.com') : 'guest@example.com',
+    role: isAuthenticated && currentUser ? 
+      (localStorage.getItem('userRole') || 'User') : 'Guest',
+    joinDate: isAuthenticated ? 
+      (localStorage.getItem('joinDate') || new Date().toISOString().split('T')[0]) : 'Not logged in',
+    lastLogin: isAuthenticated ? new Date().toLocaleString() : 'Not logged in',
+    profileCompletion: isAuthenticated ? 85 : 0,
+    photoURL: isAuthenticated && currentUser ? 
+      (currentUser.photoURL || '') : '',
     preferences: {
       language: localStorage.getItem('language') || 'English',
       theme: localStorage.getItem('theme') || 'light',
@@ -1887,9 +2126,9 @@ For questions or concerns, contact our support team at support@prihub.com
       </div>
 
       {/* Stats Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 sm:gap-6 lg:gap-8" style={{ gap: darkMode ? '1rem' : undefined }}>
         {stats.map((stat, index) => (
-          <div key={index} className={`${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-lg shadow-sm border ${darkMode ? 'border-gray-700' : 'border-gray-200'} p-4 hover:shadow-md transition-shadow`}>
+        <div className={`p-4 sm:p-6 lg:p-8 ${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-lg shadow-sm border ${darkMode ? 'border-gray-700' : 'border-gray-200'} hover:shadow-md transition-shadow`}>
             <div className="flex items-center justify-between mb-3">
               <div className={`p-2 rounded-lg ${stat.bgColor}`}>
                 <stat.icon className={`h-5 w-5 ${stat.color}`} />
@@ -1910,7 +2149,7 @@ For questions or concerns, contact our support team at support@prihub.com
       {/* Quick Actions */}
       <div>
         <h2 className={`text-xl font-semibold ${darkMode ? 'text-white' : 'text-gray-900'} mb-4`}>Quick Actions</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-4 sm:gap-6 lg:gap-8" style={{ gap: darkMode ? '1rem' : undefined }}>
           {quickActions.map((action, index) => (
             <button
               key={index}
@@ -1952,7 +2191,7 @@ For questions or concerns, contact our support team at support@prihub.com
       </div>
 
       {/* Recent Activities & Upcoming Events */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8" style={{ gap: darkMode ? '1rem' : undefined }}>
         {/* Recent Activities */}
         <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-lg shadow-sm border ${darkMode ? 'border-gray-700' : 'border-gray-200'} p-6`}>
           <div className="flex items-center justify-between mb-4">
@@ -2040,13 +2279,24 @@ For questions or concerns, contact our support team at support@prihub.com
         
         <div className="flex items-center space-x-6 mb-8">
           <div className="w-24 h-24 bg-gradient-to-r from-[#142C52] to-[#16808D] rounded-full flex items-center justify-center">
-            {userData.avatar ? (
-              <img src={userData.avatar} alt="Profile" className="w-full h-full rounded-full object-cover" />
-            ) : (
-              <span className="text-white text-2xl font-bold">
-                {userData.name ? getInitials(userData.name) : 'U'}
-              </span>
-            )}
+            {userData.photoURL ? (
+              <img 
+                src={userData.photoURL} 
+                alt="Profile" 
+                className="w-full h-full rounded-full object-cover"
+                onError={(e) => {
+                  console.log('🖼️ Image load error, falling back to initials');
+                  e.target.style.display = 'none';
+                  e.target.nextSibling.style.display = 'flex';
+                }}
+                onLoad={() => {
+                  console.log('🖼️ Profile image loaded successfully:', userData.photoURL);
+                }}
+              />
+            ) : null}
+            <span className="text-white text-2xl font-bold" style={{ display: userData.photoURL ? 'none' : 'flex' }}>
+              {userData.name ? getInitials(userData.name) : 'U'}
+            </span>
           </div>
           <div>
             <h3 className={`text-xl font-semibold ${darkMode ? 'text-white' : 'text-gray-900'}`}>{userData.name}</h3>
@@ -2167,7 +2417,7 @@ For questions or concerns, contact our support team at support@prihub.com
       <div className={`${darkMode ? 'bg-gray-800' : 'bg-white'} rounded-lg shadow-sm border ${darkMode ? 'border-gray-700' : 'border-gray-200'} p-6`}>
         <h2 className={`text-2xl font-bold ${darkMode ? 'text-white' : 'text-gray-900'} mb-6`}>Activities</h2>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8" style={{ gap: darkMode ? '1rem' : undefined }}>
           <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-blue-50'} border ${darkMode ? 'border-blue-600' : 'border-blue-200'}`}>
             <div className="flex items-center justify-between mb-3">
               <Brain className="h-8 w-8 text-blue-600" />
@@ -2238,7 +2488,7 @@ For questions or concerns, contact our support team at support@prihub.com
           </button>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8" style={{ gap: darkMode ? '1rem' : undefined }}>
           <div className={`p-4 rounded-lg ${darkMode ? 'bg-gray-700' : 'bg-white'} border ${darkMode ? 'border-gray-600' : 'border-gray-200'} hover:shadow-md transition-shadow cursor-pointer`}
                onClick={() => handleNavigation('/resources')}>
             <div className="flex items-center justify-between mb-3">
@@ -2998,25 +3248,138 @@ For questions or concerns, contact our support team at support@prihub.com
               </div>
 
               <div className="flex items-center space-x-4 ml-6">
-                <button className="relative p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors">
-                  <Bell className="h-5 w-5" />
-                  {notifications > 0 && (
-                    <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
+                <div className="relative">
+                  <button 
+                    onClick={() => setShowNotifications(!showNotifications)}
+                    className="relative p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+                  >
+                    <Bell className="h-5 w-5" />
+                    {getUnreadCount() > 0 && (
+                      <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">
+                        {getUnreadCount()}
+                      </span>
+                    )}
+                  </button>
+                  
+                  {/* Notifications Dropdown */}
+                  {showNotifications && (
+                    <div className="notification-dropdown absolute top-12 right-0 bg-white border border-gray-200 rounded-lg shadow-lg z-50 w-80 max-h-96 overflow-hidden">
+                      <div className="p-4 border-b border-gray-200">
+                        <div className="flex items-center justify-between">
+                          <h3 className="text-sm font-semibold text-gray-900">Notifications</h3>
+                          <button 
+                            onClick={markAllNotificationsAsRead}
+                            className="text-xs text-blue-600 hover:text-blue-800"
+                          >
+                            Mark all as read
+                          </button>
+                        </div>
+                      </div>
+                      
+                      <div className="max-h-64 overflow-y-auto">
+                        {notifications.length > 0 ? (
+                          notifications.map((notification) => (
+                            <div 
+                              key={notification.id}
+                              className={`p-4 border-b border-gray-100 hover:bg-gray-50 cursor-pointer transition-colors ${
+                                !notification.read ? 'bg-blue-50' : ''
+                              }`}
+                              onClick={() => markNotificationAsRead(notification.id)}
+                            >
+                              <div className="flex items-start space-x-3">
+                                <span className={`text-lg ${notification.color}`}>
+                                  {notification.icon}
+                                </span>
+                                <div className="flex-1 min-w-0">
+                                  <p className={`text-sm font-medium text-gray-900 ${
+                                    !notification.read ? 'font-semibold' : ''
+                                  }`}>
+                                    {notification.title}
+                                  </p>
+                                  <p className="text-sm text-gray-600 truncate">
+                                    {notification.message}
+                                  </p>
+                                  <p className="text-xs text-gray-500 mt-1">
+                                    {notification.time}
+                                  </p>
+                                </div>
+                                {!notification.read && (
+                                  <div className="w-2 h-2 bg-blue-600 rounded-full mt-2"></div>
+                                )}
+                              </div>
+                            </div>
+                          ))
+                        ) : (
+                          <div className="p-4 text-center text-gray-500">
+                            <p className="text-sm">No notifications</p>
+                          </div>
+                        )}
+                      </div>
+                      
+                      <div className="p-3 border-t border-gray-200">
+                        <button className="w-full text-center text-sm text-blue-600 hover:text-blue-800 font-medium">
+                          View all notifications
+                        </button>
+                      </div>
+                    </div>
                   )}
-                </button>
+                </div>
                 <div className="flex items-center space-x-3">
                   <div className="text-right">
                     <p className="text-sm font-medium text-gray-900">{userData.name}</p>
                     <p className="text-xs text-gray-500">{userData.role}</p>
                   </div>
-                  <div className="w-10 h-10 bg-gradient-to-r from-[#142C52] to-[#16808D] rounded-full flex items-center justify-center">
-                    <span className="text-white text-sm font-bold">
-                      {userData.avatar ? (
-                        <img src={userData.avatar} alt="Profile" className="w-full h-full rounded-full object-cover" />
-                      ) : (
-                        getInitials(userData.name)
-                      )}
-                    </span>
+                  <div className="relative">
+                    <button 
+                      onClick={() => setShowProfileDropdown(!showProfileDropdown)}
+                      className="w-10 h-10 bg-gradient-to-r from-[#142C52] to-[#16808D] rounded-full flex items-center justify-center hover:shadow-lg transition-shadow"
+                    >
+                      <span className="text-white text-sm font-bold">
+                        {userData.photoURL ? (
+                          <img 
+                            src={userData.photoURL} 
+                            alt="Profile" 
+                            className="w-full h-full rounded-full object-cover"
+                            onError={(e) => {
+                              console.log('🖼️ Header image load error, falling back to initials');
+                              e.target.style.display = 'none';
+                              e.target.nextSibling.style.display = 'flex';
+                            }}
+                            onLoad={() => {
+                              console.log('🖼️ Header profile image loaded successfully:', userData.photoURL);
+                            }}
+                          />
+                        ) : null}
+                        <span className="text-white text-sm font-bold" style={{ display: userData.photoURL ? 'none' : 'flex' }}>
+                          {getInitials(userData.name)}
+                        </span>
+                      </span>
+                    </button>
+                    
+                    {/* Profile Dropdown Menu */}
+                    {showProfileDropdown && (
+                      <div className="profile-dropdown absolute top-12 right-0 bg-white border border-gray-200 rounded-lg shadow-lg z-50 w-48 py-2">
+                        <div className="px-4 py-2 hover:bg-gray-50 cursor-pointer transition-colors" onClick={() => navigate('/dashboard/profile')}>
+                          <div className="flex items-center space-x-2">
+                            <User className="h-4 w-4 text-gray-600" />
+                            <span className="text-gray-900">View Profile</span>
+                          </div>
+                        </div>
+                        <div className="px-4 py-2 hover:bg-gray-50 cursor-pointer transition-colors" onClick={() => navigate('/dashboard/settings')}>
+                          <div className="flex items-center space-x-2">
+                            <Settings className="h-4 w-4 text-gray-600" />
+                            <span className="text-gray-900">Account Settings</span>
+                          </div>
+                        </div>
+                        <div className="border-t border-gray-200 mt-2 pt-2"></div>
+                        <div className="px-4 py-2 hover:bg-red-50 cursor-pointer transition-colors" onClick={handleLogout}>
+                          <div className="flex items-center space-x-2">
+                            <LogOut className="h-4 w-4 text-red-600" />
+                            <span className="text-red-600 font-medium">Logout</span>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>

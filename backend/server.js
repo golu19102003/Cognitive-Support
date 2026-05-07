@@ -8,6 +8,7 @@ dotenv.config();
 
 // Import routes
 const authRoutes = require('./routes/auth');
+const firebaseAuthRoutes = require('./routes/firebase-auth');
 const userRoutes = require('./routes/users');
 const contactRoutes = require('./routes/contact');
 const resourcesRoutes = require('./routes/resources');
@@ -41,6 +42,7 @@ app.get('/api/health', (req, res) => {
 
 // Routes
 app.use('/api/auth', authRoutes);
+app.use('/api/firebase-auth', firebaseAuthRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/contact', contactRoutes);
 app.use('/api/resources', resourcesRoutes);
